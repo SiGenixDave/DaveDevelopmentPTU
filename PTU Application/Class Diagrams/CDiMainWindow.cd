@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Struct Name="Common.Communication.CommunicationSetting_t">
+    <Position X="14" Y="1.5" Width="4.5" />
+    <TypeIdentifier />
+    <ShowAsAssociation>
+      <Field Name="Port" />
+      <Field Name="SerialCommunicationParameters" />
+      <Field Name="Protocol" />
+    </ShowAsAssociation>
+  </Struct>
+  <Struct Name="Common.Communication.Port_t">
+    <Position X="9.75" Y="4.75" Width="2" />
+    <TypeIdentifier />
+    <ShowAsAssociation>
+      <Field Name="Type" />
+    </ShowAsAssociation>
+  </Struct>
+  <Struct Name="Common.Communication.SerialCommunicationParameters_t">
+    <Position X="15.75" Y="4.25" Width="2.5" />
+    <TypeIdentifier />
+    <ShowAsAssociation>
+      <Field Name="BaudRate" />
+      <Field Name="BitsPerCharacter" />
+      <Field Name="Parity" />
+      <Field Name="StopBits" />
+    </ShowAsAssociation>
+  </Struct>
+  <Interface Name="Common.IMainWindow">
+    <Position X="0.5" Y="0.5" Width="4.5" />
+    <AssociationLine Name="CommunicationInterface" Type="Common.Communication.ICommunicationParent" FixedToPoint="true">
+      <Path>
+        <Point X="5" Y="1.688" />
+        <Point X="6.75" Y="1.688" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.102" Y="0.152" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier />
+    <ShowAsAssociation>
+      <Property Name="Mode" />
+      <Property Name="CommunicationInterface" />
+    </ShowAsAssociation>
+  </Interface>
+  <Interface Name="Common.Communication.ICommunicationParent">
+    <Position X="6.75" Y="1.25" Width="5.75" />
+    <TypeIdentifier />
+    <ShowAsAssociation>
+      <Property Name="CommunicationSetting" />
+    </ShowAsAssociation>
+  </Interface>
+  <Enum Name="Common.Mode">
+    <Position X="6.75" Y="6" Width="1.5" />
+    <TypeIdentifier />
+  </Enum>
+  <Enum Name="Common.Communication.Baud" Collapsed="true">
+    <Position X="14" Y="5.5" Width="1.5" />
+    <TypeIdentifier />
+  </Enum>
+  <Enum Name="Common.Communication.BitsPerCharacter" Collapsed="true">
+    <Position X="14" Y="6.25" Width="1.5" />
+    <TypeIdentifier />
+  </Enum>
+  <Enum Name="Common.Communication.Parity" Collapsed="true">
+    <Position X="14" Y="7" Width="1.5" />
+    <TypeIdentifier />
+  </Enum>
+  <Enum Name="Common.Communication.StopBits" Collapsed="true">
+    <Position X="14" Y="7.75" Width="1.5" />
+    <TypeIdentifier />
+  </Enum>
+  <Enum Name="Common.Communication.PortType">
+    <Position X="10" Y="6.75" Width="1.5" />
+    <TypeIdentifier />
+  </Enum>
+  <Enum Name="Common.Communication.Protocol">
+    <Position X="19.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier />
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

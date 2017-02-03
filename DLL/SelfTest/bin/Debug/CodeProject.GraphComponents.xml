@@ -1,0 +1,1934 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CodeProject.GraphComponents</name>
+    </assembly>
+    <members>
+        <member name="T:CodeProject.GraphComponents.GridStyles">
+            <summary>
+            Style in which the gridlines appear on the graph.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.GridStyles.None">
+            <summary>
+            No Grid.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.GridStyles.Horizontal">
+            <summary>
+            Horizontal lines only.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.GridStyles.Vertical">
+            <summary>
+            Vertical lines only.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.GridStyles.Grid">
+            <summary>
+            Grid lines.
+            </summary>
+        </member>
+        <member name="T:CodeProject.GraphComponents.Orientation">
+            <summary>
+            Orientation of the bar on the <c>BarGraph</c>.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.Orientation.Vertical">
+            <summary>
+            Vertical.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.Orientation.Horizontal">
+            <summary>
+            Horizontal.
+            </summary>
+        </member>
+        <member name="T:CodeProject.GraphComponents.Graduation">
+            <summary>
+            The location where the graduations must appear.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.Graduation.None">
+            <summary>
+            No graduations.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.Graduation.Center">
+            <summary>
+            Centre.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.Graduation.Edge1">
+            <summary>
+            Edge 1.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.Graduation.Edge2">
+            <summary>
+            Edge 2.
+            </summary>
+        </member>
+        <member name="T:CodeProject.GraphComponents.TextAlignment">
+            <summary>
+            Style in which the bar's values are to be displayed on the bar.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.TextAlignment.AbsoluteCenter">
+            <summary>
+            Absolute centre.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.TextAlignment.BarValueCenter">
+            <summary>
+            Bar value centre.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.TextAlignment.Smart">
+            <summary>
+            Use smart positioning.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.TextAlignment.None">
+            <summary>
+            None.
+            </summary>
+        </member>
+        <member name="T:CodeProject.GraphComponents.TimeAxisStyle">
+            <summary>
+            Style in which the time axis value is to be shown.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.TimeAxisStyle.Millisecond">
+            <summary>
+            Shows the time in milliseconds relative to the start of the plot eg. 10, 20, ..., 50000.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.TimeAxisStyle.MillisecondWithUnitDisplay">
+            <summary>
+            Shows the time in milliseconds relative to the start of the plot, with the 'ms' suffix eg. 10ms, 20ms, ..., 50000ms.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.TimeAxisStyle.Second">
+            <summary>
+            Shows the time in seconds relative to the start of the plot eg. 10, 20, ..., 50000.
+            </summary>		
+        </member>
+        <member name="F:CodeProject.GraphComponents.TimeAxisStyle.SecondWithUnitDisplay">
+            <summary>
+            Shows the time in seconds relative to the start of the plot, with the 's' suffix eg. 10s, 20s, ..., 50000s.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.TimeAxisStyle.Smart">
+            <summary>
+            Shows the time in the most appropriate format relative to the start of the plot.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.TimeAxisStyle.Absolute">
+            <summary>
+            Shows the absolute time in the format HH:MM:SS.xx e.g. 01:24:37.67. Used when displaying historic data.
+            </summary>
+        </member>
+        <member name="T:CodeProject.GraphComponents.Plotter">
+            <summary>
+            A user control to plot the value (y) of a variable against time (t).
+            </summary>
+        </member>
+        <member name="T:CodeProject.GraphComponents.Graph">
+            <summary>
+            The base class for graphs. Provides the basic framework of a graph.
+            </summary>
+        </member>
+        <member name="T:CodeProject.GraphComponents.IGraphElement">
+            <summary>
+            Defines the drawing constraint that all graph types must implement.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.Graph.components">
+            <summary> 
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:CodeProject.GraphComponents.Graph.Finalize">
+            <summary>
+            Destructor / Finalizer. Because Dispose() calls the GC.SuppressFinalize() method, this method is called by the garbage collection process only
+            if the consumer of the object doesn't call the Dispose() method, as it should.
+            </summary>
+        </member>
+        <member name="M:CodeProject.GraphComponents.Graph.Dispose">
+            <summary>
+            Public implementation of the IDisposable.Dispose method. Called by the consumer of the object in order to free unmanaged resources
+            deterministically.
+            </summary>
+        </member>
+        <member name="M:CodeProject.GraphComponents.Graph.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources that are currently being used.
+            </summary>
+            <param name="disposing">True, if the managed resources should be disposed of; otherwise, false.</param>
+        </member>
+        <member name="F:CodeProject.GraphComponents.Graph.m_IsDisposed">
+            <summary>
+            Flag to ensure that the Dispose method is only called once.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.Graph.m_GraphArea">
+            <summary>
+            The area of the rectangle that is bounded by the 2 axes. This is the area of the graph without any margins.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.Graph.m_GraphAreaColor">
+            <summary>
+            The color of the GraphArea.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.Graph.m_Gridlines">
+            <summary>
+            The style of the gridlines.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.Graph.m_GridlineColor">
+            <summary>
+            The color of the gridlines.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.Graph.m_Transparency">
+            <summary>
+            The amount of transparency in the bar. Values range from 0 to 255, 0 is fully transparent, 255 is opaque.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.Graph.m_GraduationsX">
+            <summary>
+            The number of graduations on the X axis.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.Graph.m_GraduationsY">
+            <summary>
+            The number of graduations on the Y axis.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.Graph.m_XAxisColor">
+            <summary>
+            Color of the X axis.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.Graph.m_YAxisColor">
+            <summary>
+            Color of the Y axis.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.Graph.m_ValueFormat">
+            <summary>
+            The .NET style of format for displaying the value. Eg. {0:F}, {0:E} etc.
+            </summary>
+        </member>
+        <member name="M:CodeProject.GraphComponents.Graph.Cleanup(System.Boolean)">
+            <summary>
+            Clean up the resources used by the user control.
+            </summary>
+            <param name="disposing">True, to release both managed and unmanaged resources; false to release only unmanaged resources.</param>
+        </member>
+        <member name="M:CodeProject.GraphComponents.Graph.RefreshDisplay">
+            <summary>
+            Refreshes the display by updating the control. This is the refresh method used during runtime and in the designer.
+            </summary>
+        </member>
+        <member name="M:CodeProject.GraphComponents.Graph.Draw(System.Drawing.Graphics)">
+            <summary>
+            Draw the graph component. This method is overridden in the derived class. 
+            </summary>
+            <param name="graphics"></param>
+        </member>
+        <member name="P:CodeProject.GraphComponents.Graph.IsDisposed">
+            <summary>
+            Gets or sets the flag which indicates whether the Dispose() method has been called. True, indicates that the Dispose() method has been called; otherwise, 
+            false.
+            </summary>
+        </member>
+        <member name="P:CodeProject.GraphComponents.Graph.ValueFormat">
+            <summary>
+            Gets or sets the .NET style of format for displaying the value and axis. Eg. {0:F}, {0:E} etc.
+            </summary>
+        </member>
+        <member name="P:CodeProject.GraphComponents.Graph.XAxisColor">
+            <summary>
+            Gets or sets the color of the X axis.
+            </summary>
+        </member>
+        <member name="P:CodeProject.GraphComponents.Graph.YAxisColor">
+            <summary>
+            Gets or sets the color of the Y axis.
+            </summary>
+        </member>
+        <member name="P:CodeProject.GraphComponents.Graph.Transparency">
+            <summary>
+            Gets or sets the amount of transparency in the bar. Values range from 0 to 255, 0 is fully transparent, 255 is opaque.
+            </summary>
+        </member>
+        <member name="P:CodeProject.GraphComponents.Graph.GridlineColor">
+            <summary>
+            Gets or sets the color of the gridlines.
+            </summary>
+        </member>
+        <member name="P:CodeProject.GraphComponents.Graph.GraphAreaColor">
+            <summary>
+            Gets or sets the color of the graph's area.
+            </summary>
+        </member>
+        <member name="P:CodeProject.GraphComponents.Graph.Gridlines">
+            <summary>
+            Gets or sets the style of the gridlines.
+            </summary>
+        </member>
+        <member name="P:CodeProject.GraphComponents.Graph.GraduationsX">
+            <summary>
+            Gets or sets the number of graduations on the X axis.
+            </summary>
+        </member>
+        <member name="P:CodeProject.GraphComponents.Graph.GraduationsY">
+            <summary>
+            Gets or sets the number of graduations on the Y axis.
+            </summary>
+        </member>
+        <member name="P:CodeProject.GraphComponents.Graph.GraphArea">
+            <summary>
+            Gets or sets the area of the rectangle that is bounded by the 2 axes i.e. the area of the graph without any margins.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.Plotter.FormatStringNumeric">
+            <summary>
+            The .NET format string used to display a value in numeric format. Value: "{0}".
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.Plotter.FormatStringHex">
+            <summary>
+            The format string used to display a value in hexadecimal format e.g. 0F0A. Value: "0x{0:X}".
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.Plotter.CS">
+            <summary>
+            Centisecond (cs) represented as a number of milliseconds. Value: 100.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.Plotter.Second">
+            <summary>
+            Second represented as a number of milliseconds. Value: 1,000.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.Plotter.Minute">
+            <summary>
+            Minute represented as a number of milliseconds. value: 60,000.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.Plotter.Hour">
+            <summary>
+            Hour represented as a number of milliseconds. Value: 3,600,000.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.Plotter.Day">
+            <summary>
+            Day represented as a number of milliseconds. Value: 86,400,000
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.Plotter.CursorResolution">
+            <summary>
+            The maximum resolution, in ms, for the cursor position associated with the XYText display. Value: 10
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.Plotter.CursorResolutionHalf">
+            <summary>
+            Half the maximum resolution, in ms, for the cursor position associated with the XYText display. Value: CursorResolution/2.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.Plotter.FindYLowerLimitAsMultiple">
+            <summary>
+            Used to specify the lower limit, as a multiple of the <c>DataInterval</c>, of the search associated with the FindY() method. This method is used to find
+            the Y value corresponding to the specified time value, however, as the method uses iterative procedures a lower limit must be specified to terminate
+            the search in case no corresponding value exists. Value: 3 data intervals. Value: 3.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.Plotter.DefaultPlotIntervalMs">
+            <summary>
+            The default plot interval, in ms. Value: 50.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.Plotter.DefaultDataIntervalMs">
+            <summary>
+            The default data interval for historic plots. Value: 50.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.Plotter.FindYResolution">
+            <summary>
+            The resolution, in ms, associated with the FixdY method i.e. the value by which the search is decremented every pass. Value: 10.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.Plotter.TripLineWidth">
+            <summary>
+            The width of the vertical line drawn to represent the time of the trip. Value: 2.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.Plotter.TransparencyXYText">
+            <summary>
+            The transparency of the XYText. Value: 130.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.Plotter.GraduationBorder">
+            <summary>
+            The required border around the X axis text between graduations. Value: 10.0F.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.Plotter.SelectedAreaBorder">
+            <summary>
+            The selected area border. Value: 2.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.Plotter.XAxisBorder">
+            <summary>
+            The X axis border. Value: 6.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.Plotter.StatusMessageBorder">
+            <summary>
+            The border value for the status message. Value: 6.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.Plotter.components">
+            <summary> 
+            Required Designer Variable.
+            </summary>
+        </member>
+        <member name="M:CodeProject.GraphComponents.Plotter.InitializeComponent">
+            <summary> 
+            Required method for Designer support - do not modify the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.Plotter.m_HScrollBar">
+            <summary>
+            Reference to the HScrollBar control.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.Plotter.m_ContextMenuStrip">
+            <summary>
+            Object reference to the context menu associated with the plotter.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.Plotter.m_SelectedControlList">
+            <summary>
+            A generic list of the selected user controls.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.Plotter.m_MultiCursor">
+            <summary>
+            A static flag to control whether: (true) the cursors for all visible plots are displayed or (false) only the cursor associated with the selected control 
+            is displayed.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.Plotter.m_InvalidData">
+            <summary>
+            A flag that indicates whether the data associated with the current plot is invalid. True, if the data is invalid; otherwise, false.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.Plotter.m_MouseHoverCoordinates">
+            <summary>
+            The coordinates of the mouse when it is hovering over the plotter.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.Plotter.m_IsFaultLog">
+            <summary>
+            A flag to indicate whether the data corresponds to fault log data. True, if the data corresponds to a fault log; otherwise, false.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.Plotter.m_UseHexFormat">
+            <summary>
+            A flag to indicate whether the value is to be displayed in hexadecimal format. True, if the value is to be displayed in hexadecimal format; otherwise, false.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.Plotter.m_XRangeSelection">
+            <summary>
+            A record of the selected new start and stop times for adjusting the time span of the display. 
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.Plotter.m_XRange">
+            <summary>
+            The default range, as a TimeSpan, to use for the X axis.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.Plotter.m_PlotIntervalMs">
+            <summary>
+            The interval, in ms, between successive plot updates.
+            </summary>
+            <remarks>This variable is associated with live data plots.</remarks>
+        </member>
+        <member name="F:CodeProject.GraphComponents.Plotter.m_TotalTimeElapsed">
+            <summary>
+            The total time elapsed, in ms, since plotting began.
+            </summary>
+            <remarks>This variable is associated with live data plots.</remarks>
+        </member>
+        <member name="F:CodeProject.GraphComponents.Plotter.m_DataIntervalMs">
+            <summary>
+            The interval,in ms, between successive data entries saved in the channel reference.
+            </summary>
+            <remarks>This is associated with historic data display.</remarks>
+        </member>
+        <member name="F:CodeProject.GraphComponents.Plotter.m_ActiveChannelIndex">
+            <summary>
+            The index of the currently active channel.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.Plotter.m_Gridline">
+            <summary>
+            Used to draw the gridline.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.Plotter.m_AxisLineXandY">
+            <summary>
+            Used to draw the x and y axis line.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.Plotter.m_LeftDisplayLimit">
+            <summary>
+            The time value, in ms since the start of the plot, associated with the left edge of the plotter.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.Plotter.m_RightDisplayLimit">
+            <summary>
+            The time value, in ms since the start of the plot, associated with the left edge of the plotter.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.Plotter.m_PointsToRemove">
+            <summary>
+            The number of points to remove from the left side as we go on scrolling. If the scroll bar is at the complete left, the number of points to remove is 0. 
+            If it is at the complete right, then m_PointsToRemove is m_TotalPointsToRemove.	 
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.Plotter.m_TotalPointsToRemove">
+            <summary>
+            The number of points to remove from the left as the plotter continues scrolling.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.Plotter.m_CurrentState">
+            <summary>
+            The current state of the plotter.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.Plotter.m_GraphAreaNormalColor">
+            <summary>
+            The default color of the GraphArea.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.Plotter.m_TripTime">
+            <summary>
+            The actual time of trip, if the data corresponds to a fault log.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.Plotter.m_StartTime">
+            <summary>
+            The start time of the recorded data. Only used in Stop Mode.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.Plotter.m_AnalogueIOType">
+            <summary>
+            Defines the type of plot i.e. Single Analogue, Triple Analogue, defaults to TripleAnalogue.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.Plotter.m_GraphAreaSelectedColor">
+            <summary>
+            The GraphArea colour to be used when the component is selected.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.Plotter.m_CrossHairColor">
+            <summary>
+            The color of the vertical cross hair line used to show the position of the cursor.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.Plotter.m_GraphMarginLeft">
+            <summary>
+            The left side margin width of the graph.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.Plotter.m_GraphMarginTop">
+            <summary>
+            The upper margin width of the graph.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.Plotter.m_GraphMarginRight">
+            <summary>
+            The right side margin width of the graph.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.Plotter.m_GraphMarginBottom">
+            <summary>
+            The lower margin width of the graph. In stopped/pause mode a scroll bar appears if the graphs dont fit, so take the scroll bar height into account.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.Plotter.m_ChannelCollection">
+            <summary>
+            The collection that contains all the individual channels.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.Plotter.m_PlotterPenPosition">
+            <summary>
+            The position from where the plotter's pen is displayed.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.Plotter.m_TimeDisplayStyle">
+            <summary>
+            The format in which the values on the time axis are to be shown.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.Plotter.m_MouseDownCoordinates">
+            <summary>
+            Coordinates of the mouse when the MouseDown event occurs.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.Plotter.m_MouseUpCoordinates">
+            <summary>
+            Coordinates of the mouse when the MouseUp event occurs.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.Plotter.m_InitialPlotIntervalMs">
+            <summary>
+            Initial plot rate. This is required as the user can change the plot rate during the plotting.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.Plotter.m_StoppedLeftDisplayLimit">
+            <summary>
+            The time value on the left edge of the plotter when the plotter was stopped.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.Plotter.m_CompressedMode">
+            <summary>
+            A flag that indicates whether the compressed mode is active. True, indicates that the plotter is showing the graphs in compressed format; otherwise, false.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.Plotter.m_SavedXRange">
+            <summary>
+            The previously stored x range. This is used while toggling the compressedMode.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.Plotter.m_SavedLeftDisplayLimit">
+            <summary>
+            The previously stored leftDisplayLimit. This is used while toggling the compressedMode.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.Plotter.m_SavedPointsToRemove">
+            <summary>
+            The previously stored pointsToRemove. This is used while toggling the compressedMode.
+            </summary>
+        </member>
+        <member name="M:CodeProject.GraphComponents.Plotter.#ctor">
+            <summary>
+            Creates and initializes a new plotter component.
+            </summary>
+        </member>
+        <member name="M:CodeProject.GraphComponents.Plotter.Cleanup(System.Boolean)">
+            <summary>
+            Clean up the resources used by the user control.
+            </summary>
+            <param name="disposing">True, to release both managed and unmanaged resources; false to release only unmanaged resources.</param>
+        </member>
+        <member name="M:CodeProject.GraphComponents.Plotter.OnPaint(System.Windows.Forms.PaintEventArgs)">
+            <summary>
+            Event handler for the <c>Paint</c> event.
+            </summary>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:CodeProject.GraphComponents.Plotter.Plotter_Leave(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the <c>Leave</c> event. Update the <c>PlotterRangeSelection</c> static structure and trigger a <c>StartTimeChanged</c> event.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:CodeProject.GraphComponents.Plotter.Plotter_GotFocus(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the <c>GotFocus</c> event. Update the <c>PlotterRangeSelection</c> static structure and trigger a <c>StartTimeChanged</c> event.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:CodeProject.GraphComponents.Plotter.Plotter_MouseLeave(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the MouseLeave event. Tidies up the XY text box and cross hairs. If the multi cursor property is asserted this event handler will 
+            raise the <c>MultiCursorMouseMove</c> event.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:CodeProject.GraphComponents.Plotter.Plotter_MouseMove(System.Object,System.Windows.Forms.MouseEventArgs)">
+            <summary>
+            Event handler for the <c>MouseMove</c> event. When the mouse pointer moves over the control the coordinates are captured and are used to display the 
+            coordinate text box in stop mode. If the multi cursor property is asserted this event handler will raise the <c>MultiCursorMouseMove</c> event.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:CodeProject.GraphComponents.Plotter.Plotter_MultiCursorMouseMove(System.Object,System.Windows.Forms.MouseEventArgs)">
+            <summary>
+            Event handler for the <c>MultiCursorMouseMove</c> event. If the <c>Visible</c> property is asserted, sets the mouse hover coordinates to the 
+            values passed by the event arguments and then refreshes the display.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:CodeProject.GraphComponents.Plotter.Plotter_MouseDown(System.Object,System.Windows.Forms.MouseEventArgs)">
+            <summary>
+            Event handler for the MouseDown event.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:CodeProject.GraphComponents.Plotter.Plotter_MouseUp(System.Object,System.Windows.Forms.MouseEventArgs)">
+            <summary>
+            Event handler for the MouseUp event.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:CodeProject.GraphComponents.Plotter.m_ToolStripMenuItemZoom_Click(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the context menu 'Zoom' menu option.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:CodeProject.GraphComponents.Plotter.m_ToolStripMenuItemNewTimeSpan_Click(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the context menu 'Select New TimeSpan' menu option.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:CodeProject.GraphComponents.Plotter.m_ToolStripMenuItemResetTimeSpan_Click(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the context menu 'Reset TimeSpan' menu option.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:CodeProject.GraphComponents.Plotter.m_ToolStripMenuItemCancel_Click(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the context menu 'Cancel' menu option.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:CodeProject.GraphComponents.Plotter.m_ToolStripMenuItemNextChannel_Click(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the context menu 'Next Channel' menu option.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:CodeProject.GraphComponents.Plotter.m_ToolStripMenuItemPreviousChannel_Click(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the context menu 'Previous Channel' menu option.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:CodeProject.GraphComponents.Plotter.m_ToolStripMenuItemResetAxis_Click(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the context menu 'Reset Axis' menu option.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:CodeProject.GraphComponents.Plotter.m_HScrollBar_Scroll(System.Object,System.Windows.Forms.ScrollEventArgs)">
+            <summary>
+            Set the scroll position and the number of points to remove from the LHS of the display.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:CodeProject.GraphComponents.Plotter.Draw(System.Drawing.Graphics)">
+            <summary>
+            The main drawing routine.
+            </summary>
+            <param name="graphics">Reference to the The GDI+ drawing surface.</param>
+        </member>
+        <member name="M:CodeProject.GraphComponents.Plotter.DrawXYText(System.Drawing.Graphics)">
+            <summary>
+            Draw the X and Y coordinates for the active channel.
+            </summary>
+            <remarks>The plotter must be in stop mode and the mouse hover coordinates must be within the graph area.</remarks>
+            <param name="graphics">Reference to the GDI+ drawing surface.</param>
+        </member>
+        <member name="M:CodeProject.GraphComponents.Plotter.DrawTripTime(System.Drawing.Graphics)">
+            <summary>
+            Draw a vertical line to represent the time of the actual trip.
+            </summary>
+            <remarks>Only relevant if the plot is a fault log and the plotter is in stop mode.</remarks>
+            <param name="graphics">Reference to the GDI+ drawing surface.</param>
+        </member>
+        <member name="M:CodeProject.GraphComponents.Plotter.DrawSelectedArea(System.Drawing.Graphics)">
+            <summary>
+            Draw the selected area.
+            </summary>
+            <remarks>The plotter must be in stop mode.</remarks>
+            <param name="graphics">Reference to the GDI+ drawing surface.</param>
+        </member>
+        <member name="M:CodeProject.GraphComponents.Plotter.DrawCrossHair(System.Drawing.Graphics)">
+            <summary>
+            Draw the cross hair vertical line.
+            </summary>
+            <remarks>The plotter must be in stop mode and the mouse hover coordinates must be within the graph area.</remarks>
+            <param name="graphics">Reference to the GDI+ drawing surface.</param>
+        </member>
+        <member name="M:CodeProject.GraphComponents.Plotter.DrawXAxisValues(System.Drawing.Graphics)">
+            <summary>
+            Draw the x axis values for the currently selected channel.
+            </summary>
+            <param name="graphics">Reference to the GDI+ drawing surface.</param>
+        </member>
+        <member name="M:CodeProject.GraphComponents.Plotter.DrawYAxisValues(System.Drawing.Graphics)">
+            <summary>
+            Draw the y axis value for the currently selected channel
+            </summary>
+            <remarks>
+            To display the digital state on the Logic Analyser, the number of Y graduations is set to 3 and the Max and Min values are set to (float) 3.0 and 0.0 
+            respectively. The true state of the digital is represented by setting the channel value to 2.0 and the false state is represented by setting the 
+            channel value to 1.0. These values are then mapped to display 1 and 0 respectively.
+            </remarks>
+            <param name="graphics">Reference to the GDI+ drawing surface.</param>
+        </member>
+        <member name="M:CodeProject.GraphComponents.Plotter.AddToPointsListArray(CodeProject.GraphComponents.Channel)">
+            <summary>
+            Create a jagged array of ArrayLists containing the points to be plotted for each block of data.
+            </summary>
+            <param name="channel">The channel reference.</param>
+            <returns>An array of ArrayLists containing the points to be plotted for each block.</returns>
+        </member>
+        <member name="M:CodeProject.GraphComponents.Plotter.PlotPointsListArray(System.Drawing.Graphics,System.Boolean,CodeProject.GraphComponents.Channel,System.Collections.ArrayList[])">
+            <summary>
+            Plot the points contained within the specified ArrayList[]. Each element of ArrayList[] contains a continuous set of points to be plotted. 
+            If there are no gaps in the data to be plotted the array will contain a single element.
+            </summary>
+            <param name="graphics">Reference to the The GDI+ drawing surface.</param>
+            <param name="activeChannel">True, if the specified channel is the active channel; otherwise false.</param>
+            <param name="channel">The channel reference.</param>
+            <param name="pointsList">An array of ArrayLists where each element of the array contains the points to be plotted for each continuous block of data.</param>
+        </member>
+        <member name="M:CodeProject.GraphComponents.Plotter.YAxisPlus">
+            <summary>
+            Increase the active channel Y axis values by 5%.
+            </summary>
+        </member>
+        <member name="M:CodeProject.GraphComponents.Plotter.YAxisMinus">
+            <summary>
+            Lower the active channel Y axis values by 5%.
+            </summary>
+        </member>
+        <member name="M:CodeProject.GraphComponents.Plotter.PreviousChannel">
+            <summary>
+            Change to the previous channel. Just like a remote control channel changer for a TV.
+            </summary>
+        </member>
+        <member name="M:CodeProject.GraphComponents.Plotter.NextChannel">
+            <summary>
+            Change to the next channel. Just like a remote control channel changer for a TV.
+            </summary>
+        </member>
+        <member name="M:CodeProject.GraphComponents.Plotter.UpdateDisplay">
+            <summary>
+            Update the graph display. This method is called when all plot values have been set and the values are to be displayed.
+            </summary>		
+        </member>
+        <member name="M:CodeProject.GraphComponents.Plotter.Start">
+            <summary>
+            Start plotting.
+            </summary>
+        </member>
+        <member name="M:CodeProject.GraphComponents.Plotter.Stop">
+            <summary>
+            Stop plotting. The user can now view the graphs.
+            </summary>
+        </member>
+        <member name="M:CodeProject.GraphComponents.Plotter.Reset">
+            <summary>
+            Reset the plotter. Erases the graphs and gets ready to start the whole plotting process again. To start once again, call Start ()
+            after calling Reset ().
+            </summary>
+        </member>
+        <member name="M:CodeProject.GraphComponents.Plotter.GetFormatForTime(System.Int64)">
+            <summary>
+            Get a string representation of the time to be displayed on the X axis depending upon the TimeAxisStyle property.
+            </summary>
+            <param name="timeInMillisecond">The time, in ms, relative to the start of the plot.</param>
+            <returns>A string representation of the specified time.</returns>
+        </member>
+        <member name="M:CodeProject.GraphComponents.Plotter.GetCoordinateTextRect(System.Drawing.SizeF)">
+            <summary>
+            Get the coordinates of the coordinate text box that is used to display the current value of the active channel graph on the plotter.
+            </summary>
+            <param name="stringSize"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CodeProject.GraphComponents.Plotter.GetPixelFromValue(CodeProject.GraphComponents.Channel,System.Int32,System.Single)">
+            <summary>
+            Convert the PointF.X and PoinF.Y values (time and engineering value) for a particular channel into the relative pixel values for the GraphArea.
+            </summary>
+            <remarks>
+            GraphArea.Top, GraphArea.Left corresponds to the pixel coordinates 0,0.
+            </remarks>
+            <param name="channel">The channel reference.</param>
+            <param name="xInValue">The PointF.X value i.e. time, in ms, since the start of the plot.</param>
+            <param name="yInValue">The PointF.Y value i.e. engineering value.</param>
+            <returns>The pixel coordinates.</returns>
+        </member>
+        <member name="M:CodeProject.GraphComponents.Plotter.GetValueFromPixel(CodeProject.GraphComponents.Channel,System.Int32,System.Int32)">
+            <summary>
+            Convert the specified pixel position into the corresponding PointF.X (time, in ms, since the start of the plot) and PointF.Y 
+            (engineering value) for the specified channel. Used when the mouse coordinates need to be converted to real values.
+            </summary>
+            <remarks>
+            GraphArea.Top, GraphArea.Left corresponds to the pixel coordinates 0,0.
+            </remarks>
+            <param name="channel">The channel reference.</param>
+            <param name="xInPixel">The X pixel value.</param>
+            <param name="yInPixel">The Y pixel value.</param>
+            <returns>A PointF value containing the converted time, in ms, from the start of the plot and the corresponding engineering value.</returns>
+        </member>
+        <member name="M:CodeProject.GraphComponents.Plotter.FindY(System.Int64,CodeProject.GraphComponents.Channel)">
+            <summary>
+            Find the engineering value corresponding to the specified time. If an entry corresponding to the specified time does not exist, the value corresponding to 
+            the nearest valid time entry which is greater than the specified time is returned.   
+            </summary>
+            <param name="timeInMs">The time, in ms, from the start of the plot.</param>
+            <param name="channel">The channel reference that is currently being plotted.</param>
+            <returns>The engineering value corresponding to the specified time or, if this does not exist, the value corresponding to the nearest valid time entry which 
+            is greater than the specified time. If no entry for the specified time exists and there are no valid time entries that are greater than the specified time 
+            Float.NaN is returned.</returns>
+        </member>
+        <member name="M:CodeProject.GraphComponents.Plotter.CalculateGraphArea">
+            <summary>
+            Calculate the graph area.
+            </summary>
+        </member>
+        <member name="M:CodeProject.GraphComponents.Plotter.OnStartTimeChanged(System.Object,System.EventArgs)">
+            <summary>
+            Raise a StartTimeChanged event. 
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="eventArgs">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:CodeProject.GraphComponents.Plotter.OnStopTimeChanged(System.Object,System.EventArgs)">
+            <summary>
+            Raise a StopTimeChanged event. 
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="eventArgs">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:CodeProject.GraphComponents.Plotter.OnPlotterStateChanged(System.Object,CodeProject.GraphComponents.PlotterEventArgs)">
+            <summary>
+            Raise the PlotterStateChanged event.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="plotterEventArgs">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:CodeProject.GraphComponents.Plotter.OnMultiCursorMouseMove(System.Object,System.Windows.Forms.MouseEventArgs)">
+            <summary>
+            Raise the <c>MultiCursorMouseMove</c> event.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="mouseEventArgs">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="E:CodeProject.GraphComponents.Plotter.StartTimeChanged">
+            <summary>
+            Raised when the user selects a new start time for the plot.
+            </summary>
+        </member>
+        <member name="E:CodeProject.GraphComponents.Plotter.StopTimeChanged">
+            <summary>
+            Raised when the user selects a new stop time for the plot.
+            </summary>
+        </member>
+        <member name="E:CodeProject.GraphComponents.Plotter.PlotterStateChanged">
+            <summary>
+            Raised whenever a parameter of the plotter has changed.
+            </summary>
+        </member>
+        <member name="E:CodeProject.GraphComponents.Plotter.MultiCursorMouseMove">
+            <summary>
+            Occurs whenever the mouse pointer is moved over the component and the property that controls whether all visible cursors are displayed is asserted.
+            </summary>
+        </member>
+        <member name="P:CodeProject.GraphComponents.Plotter.CurrentRangeSelection">
+            <summary>
+            Gets or sets the current status of the range selection process.
+            </summary>
+        </member>
+        <member name="P:CodeProject.GraphComponents.Plotter.StartTime">
+            <summary>
+            Gets or sets the start time of the plot.
+            </summary>
+        </member>
+        <member name="P:CodeProject.GraphComponents.Plotter.IsFaultLog">
+            <summary>
+            Gets or sets whether the plot corresponds to fault log data. True, represents fault log data; otherwise false. 
+            </summary>
+        </member>
+        <member name="P:CodeProject.GraphComponents.Plotter.TripTime">
+            <summary>
+            Gets or sets the time of the actual trip, as a .NET DateTime object.
+            </summary>
+            <remarks>Only applicable if the data being plotted corresponds to a fault log.</remarks>
+        </member>
+        <member name="P:CodeProject.GraphComponents.Plotter.AnalogueType">
+            <summary>
+            Gets or sets the type of analogue to be plotted: single-analogue or triple-analogue.
+            </summary>
+        </member>
+        <member name="P:CodeProject.GraphComponents.Plotter.YAxisColor">
+            <summary>
+            Gets or sets the color of the Y axis.
+            </summary>
+        </member>
+        <member name="P:CodeProject.GraphComponents.Plotter.GraphMarginLeft">
+            <summary>
+            Gets or sets the left side margin width of the graph.
+            </summary>
+        </member>
+        <member name="P:CodeProject.GraphComponents.Plotter.GraphMarginTop">
+            <summary>
+            Gets or sets the upper margin width of the graph.
+            </summary>
+        </member>
+        <member name="P:CodeProject.GraphComponents.Plotter.GraphMarginRight">
+            <summary>
+            Gets or sets the right side margin width of the graph.
+            </summary>
+        </member>
+        <member name="P:CodeProject.GraphComponents.Plotter.GraphMarginBottom">
+            <summary>
+            Gets or sets the lower margin width of the graph.
+            </summary>
+            <remarks>In stopped/pause a scroll bar appears if the graphs don't fit. Ensure that the scroll bar height is also taken into account.</remarks>
+        </member>
+        <member name="P:CodeProject.GraphComponents.Plotter.Channels">
+            <summary>
+            Gets the collection of channels associated with the plot.
+            </summary>
+        </member>
+        <member name="P:CodeProject.GraphComponents.Plotter.XRange">
+            <summary>
+            Gets or sets the range of the plot i.e. the time-span between the start-time to the stop-time.
+            </summary>
+        </member>
+        <member name="P:CodeProject.GraphComponents.Plotter.PlotIntervalMs">
+            <summary>
+            Gets or sets the interval, in ms, between successive plot updates. Used when displaying live data.
+            </summary>
+        </member>
+        <member name="P:CodeProject.GraphComponents.Plotter.DataIntervalMs">
+            <summary>
+            Gets or sets the interval, in ms, between successive data entries saved in the channel reference. Used when displaying historic data. 
+            </summary>
+        </member>
+        <member name="P:CodeProject.GraphComponents.Plotter.CompressedMode">
+            <summary>
+            Gets or sets whether the plotter is to display the graphs in a compressed format so that all the data fits in the graph area. 
+            This mode can be set only when the plotter is either paused or stopped.
+            </summary>
+        </member>
+        <member name="P:CodeProject.GraphComponents.Plotter.CurrentState">
+            <summary>
+            Gets the current state of the plotter.
+            </summary>
+        </member>
+        <member name="P:CodeProject.GraphComponents.Plotter.ActiveChannelIndex">
+            <summary>
+            Gets the index of the currently active channel. To change to the next channel, use NextChannel () and PrevChannel ().
+            </summary>
+        </member>
+        <member name="P:CodeProject.GraphComponents.Plotter.ActiveChannel">
+            <summary>
+            Gets the currently active channel. To change to the next channel, use NextChannel () and PrevChannel ().
+            </summary>
+        </member>
+        <member name="P:CodeProject.GraphComponents.Plotter.TimeDisplayStyle">
+            <summary>
+            Gets or sets the style in which the values on the time axis (X axis) are to be shown.
+            </summary>
+        </member>
+        <member name="P:CodeProject.GraphComponents.Plotter.TotalTimeElapsed">
+            <summary>
+            Gets or sets the total time elapsed, in ms, since plotting began.
+            </summary>
+        </member>
+        <member name="P:CodeProject.GraphComponents.Plotter.ValueFormat">
+            <summary>
+            Gets or sets the .NET style of format for displaying the value and axis. Eg. {0:F}, {0:E} etc.
+            </summary>
+        </member>
+        <member name="P:CodeProject.GraphComponents.Plotter.MouseHoverCoordinates">
+            <summary>
+            Gets or sets the current mouse hover coordinates.
+            </summary>
+        </member>
+        <member name="P:CodeProject.GraphComponents.Plotter.MultiCursor">
+            <summary>
+            Gets or sets the static flag that controls whether: (true) the cursors for all visible plots are displayed or (false) only the cursor associated with 
+            the selected control is displayed.
+            </summary>
+        </member>
+        <member name="P:CodeProject.GraphComponents.Plotter.SelectedControlList">
+            <summary>
+            Gets a generic list of the selected user controls.
+            </summary>
+        </member>
+        <member name="T:CodeProject.GraphComponents.Plotter.PlotterEventHandler">
+            <summary>
+            Delegate for the event handler associated with PlotterStateChanged event.
+            </summary>
+        </member>
+        <member name="T:CodeProject.GraphComponents.Gridline">
+            <summary>
+            Draws the grid lines for the graph.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.Gridline.m_ParentGraph">
+            <summary>
+            Reference to the Graph class associated with the parent control.
+            </summary>
+        </member>
+        <member name="M:CodeProject.GraphComponents.Gridline.#ctor(CodeProject.GraphComponents.Graph)">
+            <summary>
+            Initializes a new instance of the class.
+            </summary>
+            <param name="parentGraph">The graph associated with the grid lines.</param>
+        </member>
+        <member name="M:CodeProject.GraphComponents.Gridline.Draw(System.Drawing.Graphics)">
+            <summary>
+            Draw the gridlines.
+            </summary>
+            <param name="graphics">Reference to the GDI+ drawing surface.</param>
+        </member>
+        <member name="T:CodeProject.GraphComponents.AxisLine">
+            <summary>
+            Draws the axis lines for the graph.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.AxisLine.m_ParentGraph">
+            <summary>
+            Reference to the Graph class associated with the parent control.
+            </summary>
+        </member>
+        <member name="M:CodeProject.GraphComponents.AxisLine.#ctor(CodeProject.GraphComponents.Graph)">
+            <summary>
+            Initializes a new instance of the class.
+            </summary>
+            <param name="parentGraph">The graph to which the axis line belongs.</param>
+        </member>
+        <member name="M:CodeProject.GraphComponents.AxisLine.Draw(System.Drawing.Graphics)">
+            <summary>
+            Draw the axis lines.
+            </summary>
+            <param name="graphics">Reference to the GDI+ drawing surface.</param>
+        </member>
+        <member name="T:CodeProject.GraphComponents.Channel">
+            <summary>
+            This class defines the channel information associated with the plot; in this case, the word channel is derived from the name used to represent the input 
+            terminals of an oscilloscope.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.Channel.FloatRepresentationOfSet">
+            <summary>
+            To use the plotter in LogicAnalyser mode, the channel value is set to 0.9 to represent a true state. Value: 0.9.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.Channel.FloatRepresentationOfClear">
+            <summary>
+            To use the plotter in LogicAnalyser mode, the channel value is set to 0.1 to represent a clear state. Value: 0.1.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.Channel.DefaultActiveChannel">
+            <summary>
+            The default active channel. Value: 0.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.Channel.DefaultMaxValue">
+            <summary>
+            The default maximum value. Value: 100.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.Channel.DefaultMinValue">
+            <summary>
+            The default minimum value. Value: 0.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.Channel.DefaultDataIntervalMs">
+            <summary>
+            The default interval, in ms, between successive data entries saved to the channel. Value: 50.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.Channel.MaxPoints">
+            <summary>
+            Size the generic list to cope with 40 minutes worth of data recorded every 50ms. Value: 48,000.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.Channel.m_IsDisposed">
+            <summary>
+            Ensure Dispose method is only called once.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.Channel.m_DefaultMinimumValue">
+            <summary>
+            The default minimum value i.e before manipulating the Y axis limits.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.Channel.m_DefaultMaximumValue">
+            <summary>
+            The default maximum value i.e before manipulating the Y axis limits.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.Channel.m_MinimumValue">
+            <summary>
+            The minimum value to display on the Y axis.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.Channel.m_MaximumValue">
+            <summary>
+            The maximum value to display on the Y axis.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.Channel.m_CurrentValue">
+            <summary>
+            The current y value of the channel.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.Channel.m_Name">
+            <summary>
+            The Y axis name e.g. Voltage, Current etc.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.Channel.m_Enabled">
+            <summary>
+            A flag to indicate whether the channel is enabled.  True, indicates that the channel is enabled; otherwise, false.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.Channel.m_ChannelColor">
+            <summary>
+            The pen colour associated with the channel.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.Channel.m_CursorOffset">
+            <summary>
+            The offset of the cursor from the center line.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.Channel.m_ChannelCursor">
+            <summary>
+            The X axis cursor line associated with the channel.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.Channel.m_TotalTimeElapsed">
+            <summary>
+            The total time elapsed, in ms, since the start of the plot.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.Channel.m_PlotIntervalMs">
+            <summary>
+            The interval, in ms, between successive plots, default = 100ms.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.Channel.m_Points">
+            <summary>
+            A generic list of PointF items containing the Y and corresponding time values of the data that is to be plotted.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.Channel.m_X">
+            <summary>
+            A generic list of long integers containing only the PointF.X values of the data that is to be plotted. Helps with the search facility.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.Channel.m_BreakPoint">
+            <summary>
+            A generic list of long integers containing those PointF.X values marking a break in the plot sequence i.e.transparent pen should be used 
+            to plot between this plot entry and the next.
+            </summary>
+        </member>
+        <member name="M:CodeProject.GraphComponents.Channel.#ctor">
+            <summary>
+            Initializes a new instance of the class.
+            </summary>
+        </member>
+        <member name="M:CodeProject.GraphComponents.Channel.#ctor(System.Single,System.Single,System.String)">
+            <summary>
+            Initializes a new instance of the class.
+            </summary>
+        </member>
+        <member name="M:CodeProject.GraphComponents.Channel.#ctor(System.Single,System.Single,System.String,System.Boolean)">
+            <summary>
+            Initializes a new instance of the class.
+            </summary>
+        </member>
+        <member name="M:CodeProject.GraphComponents.Channel.#ctor(System.Single,System.Single,System.String,System.Boolean,System.Drawing.Color)">
+            <summary>
+            Initializes a new instance of the class.
+            </summary>
+        </member>
+        <member name="M:CodeProject.GraphComponents.Channel.Finalize">
+            <summary>
+            Destructor / Finalizer. Because Dispose calls GC.SuppressFinalize, this method is called by the garbage collection process only
+            if the consumer of the object doesn't call Dispose as it should.
+            </summary>
+        </member>
+        <member name="M:CodeProject.GraphComponents.Channel.Dispose">
+            <summary>
+            Public implementation of the IDisposable.Dispose method, called by the consumer of the object in order to free unmanaged resources
+            deterministically.
+            </summary>
+        </member>
+        <member name="M:CodeProject.GraphComponents.Channel.Dispose(System.Boolean)">
+            <summary>
+            Tidy-up all resources.
+            </summary>
+            <param name="disposing">Specifies whether the method is being called by the consumer code (true), or the garbage collector (false).</param>
+        </member>
+        <member name="M:CodeProject.GraphComponents.Channel.SetYTValue(System.Single,System.Int64)">
+            <summary>
+            Add the y value and corresponding monitor real time clock offset since start of recording into an ArrayList for use by the plotter control.
+            </summary>
+            <param name="yValue">The y value associated with the specified time.</param>
+            <param name="totalTimeElapsed">The time, in ms, of the 'CurrentMonitorTime' value of the current record minus the 'StartTime' of the
+            X axis display.</param>
+        </member>
+        <member name="M:CodeProject.GraphComponents.Channel.SetState(System.Boolean,System.Int64)">
+            <summary>
+            Add the state and the corresponding monitor real time clock offset since start of recording into an ArrayList for use by the plotter control.
+            </summary>
+            <param name="state">The digital state associated with the specified time.</param>
+            <param name="totalTimeElapsed">The time, in ms, of the 'CurrentMonitorTime' value of the current record minus the 'StartTime' of the X axis display.</param>
+        </member>
+        <member name="M:CodeProject.GraphComponents.Channel.SetBreakPoint(System.Int64)">
+            <summary>
+            Record a break in the plot sequence of a log i.e the start of a period where the unit has been powered down. The break 
+            point is specified as the time, in ms, since the start of the plot. During these power down periods the pen colour of the plot is set 
+            to transparent.
+            </summary>
+            <param name="breakPoint">The time, in ms, since the 'StartTime' of the X axis display, where the break point is to be recorded.</param>
+        </member>
+        <member name="M:CodeProject.GraphComponents.Channel.Reset">
+            <summary>
+            Clear the generic lists associated with the channel. This must be carried out whenever the data values to be plotted are updated.
+            </summary>
+        </member>
+        <member name="P:CodeProject.GraphComponents.Channel.MinimumValue">
+            <summary>
+            Gets or sets the minimum value associated with the Y axis.
+            </summary>
+        </member>
+        <member name="P:CodeProject.GraphComponents.Channel.MaximumValue">
+            <summary>
+            Gets or sets the maximum value associated with the Y axis.
+            </summary>
+        </member>
+        <member name="P:CodeProject.GraphComponents.Channel.DefaultMaximumValue">
+            <summary>
+            Gets or sets the default maximum value i.e. the maximum value associated with the Y axis before manipulating the limits.
+            </summary>
+        </member>
+        <member name="P:CodeProject.GraphComponents.Channel.DefaultMinimumValue">
+            <summary>
+            Gets or sets the default minimum value i.e. the minimum value associated with the Y axis before manipulating the limits.
+            </summary>
+        </member>
+        <member name="P:CodeProject.GraphComponents.Channel.CurrentValue">
+            <summary>
+            Gets or sets the current value.
+            </summary>
+        </member>
+        <member name="P:CodeProject.GraphComponents.Channel.State">
+            <summary>
+            Gets or sets the current state.
+            </summary>
+            <remarks>
+            Only applicable if the channel is being used to plot digital values.
+            </remarks>
+        </member>
+        <member name="P:CodeProject.GraphComponents.Channel.Enabled">
+            <summary>
+            Gets or sets the flag that indicates whether the channel is enabled. True, indicates that the channel is enabled; otherwise, false.
+            </summary>
+        </member>
+        <member name="P:CodeProject.GraphComponents.Channel.YAxisName">
+            <summary>
+            Get or sets the name for the Y axis. Eg. Voltage, Current etc.
+            </summary>
+        </member>
+        <member name="P:CodeProject.GraphComponents.Channel.ChannelColor">
+            <summary>
+            Gets or sets the channel colour.
+            </summary>
+        </member>
+        <member name="P:CodeProject.GraphComponents.Channel.CursorOffset">
+            <summary>
+            Gets or sets the offset of the cursor from the centre line.
+            </summary>
+        </member>
+        <member name="P:CodeProject.GraphComponents.Channel.TotalTimeElapsed">
+            <summary>
+            Gets or sets the total time, in ms, between the start of the plot and the time of the current plot.
+            </summary>
+        </member>
+        <member name="P:CodeProject.GraphComponents.Channel.PlotIntervalMs">
+            <summary>
+            Gets or sets the interval, in ms, between successive plots.
+            </summary>
+        </member>
+        <member name="P:CodeProject.GraphComponents.Channel.ChannelCursor">
+            <summary>
+            Gets or sets the X axis cursor line associated with the channel.
+            </summary>
+        </member>
+        <member name="P:CodeProject.GraphComponents.Channel.Points">
+            <summary>
+            Generic list of <c>PointF</c> items containing the Y and corresponding time values of the data that is to be plotted.
+            </summary>
+        </member>
+        <member name="P:CodeProject.GraphComponents.Channel.X">
+            <summary>
+            Generic list of <c>long</c> integers containing the PointF.X values i.e. RTC values of the data that is to be plotted.
+            </summary>
+        </member>
+        <member name="P:CodeProject.GraphComponents.Channel.BreakPoint">
+            <summary>
+            Generic list of <c>long</c> integers containing those PointF.X values marking the breaks in the plot sequence of a min/hour/day log 
+            or RTD log i.e the times, in ms, since the start of the plot corresponding to those plot entries where the unit has been powered down until the 
+            period defined by the following plot entry time. During these power down periods the pen colour of the plot is set to transparent.
+            </summary>
+        </member>
+        <member name="T:CodeProject.GraphComponents.ChannelCollection">
+            <summary>
+            This class provides a mechanism for the user to treat the channels of the plotter as a single collection.
+            </summary>
+        </member>
+        <member name="M:CodeProject.GraphComponents.ChannelCollection.Add(CodeProject.GraphComponents.Channel)">
+            <summary>
+            Add a new <c>Channel</c> to the collection.
+            </summary>
+            <returns>The index of the added channel.</returns>
+        </member>
+        <member name="M:CodeProject.GraphComponents.ChannelCollection.IndexOf(CodeProject.GraphComponents.Channel)">
+            <summary>
+            Returns the index of the specified channel.
+            </summary>
+            <returns>The index of the specified channel.</returns>
+        </member>
+        <member name="M:CodeProject.GraphComponents.ChannelCollection.Insert(System.Int32,CodeProject.GraphComponents.Channel)">
+            <summary>
+            Inserts a channel at the specified index.
+            </summary>
+        </member>
+        <member name="M:CodeProject.GraphComponents.ChannelCollection.Remove(CodeProject.GraphComponents.Channel)">
+            <summary>
+            Removes the specified channel from the plotter.
+            </summary>
+        </member>
+        <member name="M:CodeProject.GraphComponents.ChannelCollection.Contains(CodeProject.GraphComponents.Channel)">
+            <summary>
+            Checks whether the specified channel is contained within the collection.
+            </summary>
+            <param name="channel">Reference to the channel that is to be checked.</param>
+            <returns>True, if the specified reference is contained within the collection; otherwise, false.</returns>
+        </member>
+        <member name="P:CodeProject.GraphComponents.ChannelCollection.Item(System.Int32)">
+            <summary>
+            Gets or sets the Channel object at the particular index.
+            </summary>
+        </member>
+        <member name="T:CodeProject.GraphComponents.PlotterEventArgs">
+            <summary>
+            Support for events associated with the <c>Plotter</c> class.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.PlotterEventArgs.m_Plotter">
+            <summary>
+            Reference to the plotter that caused the event to be raised.
+            </summary>
+        </member>
+        <member name="M:CodeProject.GraphComponents.PlotterEventArgs.#ctor(CodeProject.GraphComponents.Plotter)">
+            <summary>
+            Initailizes a new instance of the class.
+            </summary>
+            <param name="plotter">The plotter that caused the event to be raised</param>
+        </member>
+        <member name="P:CodeProject.GraphComponents.PlotterEventArgs.CurrentPlotter">
+            <summary>
+            Gets the plotter that caused the event to be raised.
+            </summary>
+        </member>
+        <member name="T:CodeProject.GraphComponents.LogicAnalyzer">
+            <summary>
+            A user control to plot the state of a digital variable against time.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.LogicAnalyzer.TransparencyXYText">
+            <summary>
+            The transparency of the XYText. Value: 50.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.LogicAnalyzer.m_TextAsserted">
+            <summary>
+            The text that is to appear in the cursor if the digital is in the alarm state.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.LogicAnalyzer.m_TextClear">
+            <summary>
+            The text that is to appear in the cursor if the digital is in the clear state.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.LogicAnalyzer.m_AlarmStatePlotColor">
+            <summary>
+            The pen color that is to be used to draw the plot when the digital value is in the alarm state.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.LogicAnalyzer.m_AlarmStateCursorColor">
+            <summary>
+            The pen color that is to be used to highlight the cursor when the digital value is in the alarm state.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.LogicAnalyzer.m_ClearStateCursorColor">
+            <summary>
+            The pen color that is to be used to highlight the cursor when the digital value is in the clear state.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.LogicAnalyzer.m_ClearStatePlotColor">
+            <summary>
+            The pen color that is to be used to draw the plot when the digital value is in the clear state.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.LogicAnalyzer.m_AlarmState">
+            <summary>
+            The digital state that represents an active alarm. The default state is TRUE i.e. low to high transition represents an alarm.
+            </summary>
+        </member>
+        <member name="M:CodeProject.GraphComponents.LogicAnalyzer.#ctor">
+            <summary>
+            Creates and initializes a new logic analyzer user control.
+            </summary>
+        </member>
+        <member name="M:CodeProject.GraphComponents.LogicAnalyzer.Cleanup(System.Boolean)">
+            <summary>
+            Clean up the resources used by the user control.
+            </summary>
+            <param name="disposing">True, to release both managed and unmanaged resources; false to release only unmanaged resources.</param>
+        </member>
+        <member name="M:CodeProject.GraphComponents.LogicAnalyzer.Draw(System.Drawing.Graphics)">
+            <summary>
+            The main drawing routine that renders the points onto the graph.
+            </summary>
+            <param name="graphics">Reference to the The GDI+ drawing surface.</param>
+        </member>
+        <member name="M:CodeProject.GraphComponents.LogicAnalyzer.DrawXYText(System.Drawing.Graphics)">
+            <summary>
+            Draw the X and Y coordinates for the active channel.
+            </summary>
+            <remarks>The plotter must be in stop mode and the mouse hover coordinates must be within the graph area.</remarks>
+            <param name="graphics">Reference to the GDI+ drawing surface.</param>
+        </member>
+        <member name="M:CodeProject.GraphComponents.LogicAnalyzer.AddToPointsListArray(CodeProject.GraphComponents.Channel)">
+            <summary>
+            Create an array of ArrayLists containing the points to be plotted for each block of data. This method also adds the required points 
+            into the ArrayList[] so that the digital state transitions appear as a vertical line.
+            </summary>
+            <param name="channel">The channel reference.</param>
+            <returns>An array of ArrayLists containing the points to be plotted for each block.</returns>
+        </member>
+        <member name="M:CodeProject.GraphComponents.LogicAnalyzer.PlotPointsListArray(System.Drawing.Graphics,CodeProject.GraphComponents.Channel,System.Collections.ArrayList[])">
+            <summary>
+            Plot the points contained within the specified ArrayList[]. Each element of ArrayList[] contains a continuous set of points to be plotted. 
+            If there are no gaps in the data to be plotted the array will contain a single element.
+            </summary>
+            <param name="graphics">Reference to the The GDI+ drawing surface.</param>
+            <param name="channel">The channel reference.</param>
+            <param name="pointsList">An array of ArrayLists where each element of the array contains the points to be plotted for each continuous block of data.</param>
+        </member>
+        <member name="F:CodeProject.GraphComponents.LogicAnalyzer.components">
+            <summary> 
+            Required Designer Variable.
+            </summary>
+        </member>
+        <member name="M:CodeProject.GraphComponents.LogicAnalyzer.InitializeComponent">
+            <summary> 
+            Required method for Designer support - do not modify the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="P:CodeProject.GraphComponents.LogicAnalyzer.AlarmState">
+            <summary>
+            Gets or sets the alarm state associated with a digital plot.
+            </summary>
+            <remarks>The default state is TRUE i.e. low to high transition represents an alarm.</remarks>
+        </member>
+        <member name="T:CodeProject.GraphComponents.ScreenCapture">
+            <summary>
+            Class to provide support functions to capture the entire desktop or a particular window and save it to disk in the specified format.
+            </summary>
+        </member>
+        <member name="M:CodeProject.GraphComponents.ScreenCapture.CaptureScreen">
+            <summary>
+            Capture a screen shot of the entire desktop.
+            </summary>
+            <returns>The desktop as an <c>Image</c> object.</returns>
+        </member>
+        <member name="M:CodeProject.GraphComponents.ScreenCapture.CaptureWindow(System.IntPtr)">
+            <summary>
+            Capture a screen shot of a specific window.
+            </summary>
+            <param name="handle">The window handle.</param>
+            <remarks>The window <c>handle</c>is obtained using the <c>Handle</c>property of the <c>Form</c> class.</remarks>
+            <returns>The window as an <c>Image</c> object.</returns>
+        </member>
+        <member name="M:CodeProject.GraphComponents.ScreenCapture.CaptureWindowToFile(System.IntPtr,System.String,System.Drawing.Imaging.ImageFormat)">
+            <summary>
+            Capture a screen shot of a specific window and saves it to disk.
+            </summary>
+            <param name="handle">The window handle.</param>
+            <param name="fullFilename">The fully qualified file name.</param>
+            <param name="imageFormat">The graphics format associated with the saved file e.g. png, jpg, bmp etc.</param>
+            <remarks>The window <c>handle</c>is obtained using the <c>Handle</c>property of the <c>Form</c> class.</remarks>
+        </member>
+        <member name="M:CodeProject.GraphComponents.ScreenCapture.CaptureScreenToFile(System.String,System.Drawing.Imaging.ImageFormat)">
+            <summary>
+            Capture a screen shot of the entire desktop and save it to disk.
+            </summary>
+            <param name="fullFilename">The fully qualified file name.</param>
+            <param name="imageFormat">The graphics format associated with the saved file e.g. png, jpg, bmp etc.</param>
+        </member>
+        <member name="T:CodeProject.GraphComponents.ScreenCapture.GDI32">
+            <summary>
+            Helper class containing the required Gdi32 API functions.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.ScreenCapture.GDI32.SRCCOPY">
+            <summary>
+            -
+            </summary>
+        </member>
+        <member name="M:CodeProject.GraphComponents.ScreenCapture.GDI32.BitBlt(System.IntPtr,System.Int32,System.Int32,System.Int32,System.Int32,System.IntPtr,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Bit block transfer.
+            </summary>
+            <param name="hObject">The device context of the target.</param>
+            <param name="nXDest">The X coordinate of the device context where the bitmap is to be copied from.</param>
+            <param name="nYDest">The Y coordinate of the device context where the bitmap is to be copied from.</param>
+            <param name="nWidth">The width of the bitmap.</param>
+            <param name="nHeight">The height of the bitmap.</param>
+            <param name="hObjectSource">The device context of the source.</param>
+            <param name="nXSrc">The X coordinate of the device context where the bitmap is to be copied to.</param>
+            <param name="nYSrc">The y coordinate of the device context where the bitmap is to be copied to.</param>
+            <param name="dwRop">-</param>
+            <returns>A flag to indicate whether bit block transfer was successful. True, if the bit block transfer was sucessfully deleted; otherwise, false.</returns>
+        </member>
+        <member name="M:CodeProject.GraphComponents.ScreenCapture.GDI32.CreateCompatibleBitmap(System.IntPtr,System.Int32,System.Int32)">
+            <summary>
+            Create a compatible bitmap.
+            </summary>
+            <param name="hDC">The device context of the source.</param>
+            <param name="nWidth">The width of the bitmap.</param>
+            <param name="nHeight">The height of the bitmap.</param>
+            <returns>Pointer to the bitmap image.</returns>
+        </member>
+        <member name="M:CodeProject.GraphComponents.ScreenCapture.GDI32.CreateCompatibleDC(System.IntPtr)">
+            <summary>
+            Create a new device context that is compatible with specified device context.
+            </summary>
+            <param name="hDC">The source device context.</param>
+            <returns>A new device context that is compatible with the source device context.</returns>
+        </member>
+        <member name="M:CodeProject.GraphComponents.ScreenCapture.GDI32.DeleteDC(System.IntPtr)">
+            <summary>
+            Delete the specified device context.
+            </summary>
+            <param name="hDC">The device context.</param>
+            <returns>A flag to indicate whether the device context was successfully deleted. True, if the device context was sucessfully deleted; otherwise, false.</returns>
+        </member>
+        <member name="M:CodeProject.GraphComponents.ScreenCapture.GDI32.DeleteObject(System.IntPtr)">
+            <summary>
+            
+            </summary>
+            <param name="hObject"></param>
+            <returns>A flag to indicate whether the object was successfully deleted. True, if the object was sucessfully deleted; otherwise, false.</returns>
+        </member>
+        <member name="M:CodeProject.GraphComponents.ScreenCapture.GDI32.SelectObject(System.IntPtr,System.IntPtr)">
+            <summary>
+            
+            </summary>
+            <param name="hDC"></param>
+            <param name="hObject"></param>
+            <returns></returns>
+        </member>
+        <member name="T:CodeProject.GraphComponents.ScreenCapture.User32">
+            <summary>
+            Helper class containing the required User32 API functions
+            </summary>
+        </member>
+        <member name="M:CodeProject.GraphComponents.ScreenCapture.User32.GetDesktopWindow">
+            <summary>
+            Get the handle of the user's desktop.
+            </summary>
+            <returns>The handle of the user desktop.</returns>
+        </member>
+        <member name="M:CodeProject.GraphComponents.ScreenCapture.User32.GetWindowDC(System.IntPtr)">
+            <summary>
+            Get the device context of the specified window.
+            </summary>
+            <param name="hWnd">The window handle.</param>
+            <returns>-</returns>
+        </member>
+        <member name="M:CodeProject.GraphComponents.ScreenCapture.User32.ReleaseDC(System.IntPtr,System.IntPtr)">
+            <summary>
+            Release the device context associated with the specified window.
+            </summary>
+            <param name="hWnd">The window handle.</param>
+            <param name="hDC">The device context associated with the window.</param>
+            <returns>-</returns>
+        </member>
+        <member name="M:CodeProject.GraphComponents.ScreenCapture.User32.GetWindowRect(System.IntPtr,CodeProject.GraphComponents.ScreenCapture.User32.RECT@)">
+            <summary>
+            Get the <c>RECT</c> associated with the specified window. Used to get the width and height of the window.
+            </summary>
+            <param name="hWnd">The window handle.</param>
+            <param name="rect">The rectangle associated with the specified window.</param>
+            <returns>-</returns>
+        </member>
+        <member name="T:CodeProject.GraphComponents.ScreenCapture.User32.RECT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:CodeProject.GraphComponents.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:CodeProject.GraphComponents.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:CodeProject.GraphComponents.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:CodeProject.GraphComponents.Properties.Resources.Edit_Undo">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:CodeProject.GraphComponents.Properties.Resources.MoveNext">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:CodeProject.GraphComponents.Properties.Resources.MovePrevious">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:CodeProject.GraphComponents.Properties.Resources.SMPlotInvalid">
+            <summary>
+              Looks up a localized string similar to Unable to plot the data. Some data values for this variable, and possibly other variables, may be invalid, please report this to the system administrator..
+            </summary>
+        </member>
+        <member name="P:CodeProject.GraphComponents.Properties.Resources.TextAsserted">
+            <summary>
+              Looks up a localized string similar to Asserted.
+            </summary>
+        </member>
+        <member name="P:CodeProject.GraphComponents.Properties.Resources.TextClear">
+            <summary>
+              Looks up a localized string similar to Clear.
+            </summary>
+        </member>
+        <member name="T:CodeProject.GraphComponents.PlotterRangeSelection">
+            <summary>
+            A structure to manage the range selection process.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.PlotterRangeSelection.InitialStartTime">
+            <summary>
+            The initial start time of the plot.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.PlotterRangeSelection.InitialStopTime">
+            <summary>
+            The initial stop time of the plot.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.PlotterRangeSelection.ZoomedStartTime">
+            <summary>
+            The start time of the plot if it is zoomed in; otherwise, DateTime.MinValue.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.PlotterRangeSelection.ZoomedStopTime">
+            <summary>
+            The stop time of the plot if it is zoomed in; otherwise, DateTime.MinValue.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.PlotterRangeSelection.TripTime">
+            <summary>
+            The actual time of the trip, if the data corresponds to a fault log.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.PlotterRangeSelection.StartTime">
+            <summary>
+            The selected start time of the new plot.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.PlotterRangeSelection.StopTime">
+            <summary>
+            The selected stop time of the new plot.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.PlotterRangeSelection.TimeSpan">
+            <summary>
+            The time span associated with the selected start and stop times.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.PlotterRangeSelection.PlotIntervalMs">
+            <summary>
+            The interval, in ms, between successive plot value updates.
+            </summary>
+            <remarks>This is associated with the live data display.</remarks>
+        </member>
+        <member name="F:CodeProject.GraphComponents.PlotterRangeSelection.DataIntervalMs">
+            <summary>
+            The interval,in ms, between successive plot values saved in the channel reference.
+            </summary>
+            <remarks>This is associated with the historic data display.</remarks>
+        </member>
+        <member name="F:CodeProject.GraphComponents.PlotterRangeSelection.LastPlotterRangeSelectionState">
+            <summary>
+            The state associated with the last individual plotter instance state that was modified.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.PlotterRangeSelection.m_PlotterRangeSelectionState">
+            <summary>
+            Stores the state of an individual plotter instance.
+            </summary>
+        </member>
+        <member name="M:CodeProject.GraphComponents.PlotterRangeSelection.SetTimeSpanToZero">
+            <summary>
+            Sets the time span of the plot to zero, this is used when the start time has been set but the stop time has not yet been selected.
+            </summary>
+        </member>
+        <member name="M:CodeProject.GraphComponents.PlotterRangeSelection.CalculateTimeSpan">
+            <summary>
+            Calculate the new time span of the plot from the specified start and stop times.
+            </summary>
+        </member>
+        <member name="M:CodeProject.GraphComponents.PlotterRangeSelection.Reset">
+            <summary>
+            Reset the start and stop times to the initial/default values and update the time span accordingly.
+            </summary>
+        </member>
+        <member name="P:CodeProject.GraphComponents.PlotterRangeSelection.PlotterRangeSelectionState">
+            <summary>
+            Gets or sets the state corresponding to an individual plotter instance.
+            </summary>
+        </member>
+        <member name="T:CodeProject.GraphComponents.AnalogueType">
+            <summary>
+            An enumerator to specify the type of analogue IO that is to be plotted. TripleAnalogue for triple-analogue IO points and SingleAnalogue for single-analogue 
+            IO points. 
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.AnalogueType.TripleAnalogue">
+            <summary>
+            Plot for triple analogues.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.AnalogueType.SingleAnalogue">
+            <summary>
+            Plot for single analogues.
+            </summary>
+        </member>
+        <member name="T:CodeProject.GraphComponents.PlotterRangeSelectionState">
+            <summary>
+            The different states associated with the plotter range selection process.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.PlotterRangeSelectionState.NewPlotterRangeSelected">
+            <summary>
+            The 'Select New Plotter Range' context menu option has been selected.               
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.PlotterRangeSelectionState.StartTimeSelected">
+            <summary>
+            The start time of the plotter range has been selected.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.PlotterRangeSelectionState.StopTimeSelected">
+            <summary>
+            Both the start and stop times of the plotter range have been selected.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.PlotterRangeSelectionState.ZoomSelected">
+            <summary>
+            Valid start and stop times have been configured and the 'Zoom' context menu option has been selected.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.PlotterRangeSelectionState.InitialState">
+            <summary>
+            In the initial state i.e. awaiting the 'Select Plotter Range' context menu option to be selected.
+            </summary>
+        </member>
+        <member name="T:CodeProject.GraphComponents.PlotterState">
+            <summary>
+            The possible states that the plotter can take.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.PlotterState.Reset">
+            <summary>
+            The plotter is reset. All the graphs are erased and the plotter is waiting to run.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.PlotterState.Running">
+            <summary>
+            The plotter is running. From this state the plotter may be stopped, paused or reset.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.PlotterState.Stopped">
+            <summary>
+            The plotter has stopped plotting. The graphs can now be viewed.
+            </summary>
+        </member>
+        <member name="T:CodeProject.GraphComponents.Cursor">
+            <summary>
+            Summary description for Cursor.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.Cursor.m_GraphArea">
+            <summary>
+            Reference to the graph area.
+            </summary>
+        </member>
+        <member name="F:CodeProject.GraphComponents.Cursor.m_Channel">
+            <summary>
+            Reference to the channel.
+            </summary>
+        </member>
+        <member name="M:CodeProject.GraphComponents.Cursor.#ctor(CodeProject.GraphComponents.Channel)">
+            <summary>
+            Initializes a new instance of the class.
+            </summary>
+            <param name="channel">Channel reference.</param>
+        </member>
+        <member name="M:CodeProject.GraphComponents.Cursor.Draw(System.Drawing.Graphics)">
+            <summary>
+            Draw the cursor.
+            </summary>
+            <param name="graphics">The graphics area.</param>
+        </member>
+        <member name="P:CodeProject.GraphComponents.Cursor.GraphArea">
+            <summary>
+            Gets or sets the graph area associated with the cursor.
+            </summary>
+        </member>
+    </members>
+</doc>

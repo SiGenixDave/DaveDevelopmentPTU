@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
+  <Class Name="Bombardier.PTU.Forms.FormSelectTarget">
+    <Position X="0.5" Y="0.5" Width="5.75" />
+    <Members>
+      <Field Name="components" Hidden="true" />
+      <Field Name="m_BtnOK" Hidden="true" />
+      <Field Name="m_Cancel" Hidden="true" />
+      <Field Name="m_CommunicationSetting" Hidden="true" />
+      <Field Name="m_GroupLogicList" Hidden="true" />
+      <Field Name="m_ListBoxAvailableLogicControllers" Hidden="true" />
+      <Field Name="m_PanelOuter" Hidden="true" />
+      <Field Name="m_TargetConfiguration" Hidden="true" />
+      <Field Name="m_TxtStatusInformation" Hidden="true" />
+    </Members>
+    <AssociationLine Name="TargetConfiguration" Type="Common.Communication.TargetConfiguration_t" FixedToPoint="true">
+      <Path>
+        <Point X="1.125" Y="4.559" />
+        <Point X="1.125" Y="6.25" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true" ManuallySized="true">
+        <Position X="-0.588" Y="0.227" Height="0.182" Width="1.54" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="CommunicationSetting" Type="Common.Communication.CommunicationSetting_t">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-0.242" Y="0.141" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="m_CommunicationSettingList" Type="Common.Communication.CommunicationSetting_t">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-3.223" Y="0.56" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="m_TargetConfigurationList" Type="Common.Communication.TargetConfiguration_t">
+      <MemberNameLabel ManuallyPlaced="true" ManuallySized="true">
+        <Position X="-1.505" Y="1.247" Height="0.182" Width="2.103" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>CBEAAAgAAAVQZCAAIACAgIAGCAAAAAAAAAAAAEQADAI=</HashCode>
+      <FileName>Forms\FormSelectTarget.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="m_TargetConfiguration" />
+      <Field Name="m_CommunicationSetting" />
+      <Property Name="TargetConfiguration" />
+      <Property Name="CommunicationSetting" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Field Name="m_CommunicationSettingList" />
+      <Field Name="m_TargetConfigurationList" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Struct Name="Common.Communication.CommunicationSetting_t">
+    <Position X="3" Y="5.75" Width="2" />
+    <AssociationLine Name="Protocol" Type="Common.Communication.Protocol" FixedToPoint="true">
+      <Path>
+        <Point X="5" Y="6.514" />
+        <Point X="5.75" Y="6.514" />
+        <Point X="5.75" Y="7.25" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-0.609" Y="0.154" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="Port" Type="Common.Communication.Port_t" FixedToPoint="true">
+      <Path>
+        <Point X="3.312" Y="6.853" />
+        <Point X="3.312" Y="7.25" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.068" Y="0.133" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="SerialCommunicationParameters" Type="Common.Communication.SerialCommunicationParameters_t">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.57" Y="1.433" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier />
+    <ShowAsAssociation>
+      <Field Name="Protocol" />
+      <Field Name="Port" />
+      <Field Name="SerialCommunicationParameters" />
+    </ShowAsAssociation>
+  </Struct>
+  <Struct Name="Common.Communication.TargetConfiguration_t">
+    <Position X="0.5" Y="6.25" Width="2" />
+    <TypeIdentifier />
+  </Struct>
+  <Struct Name="Common.Communication.SerialCommunicationParameters_t">
+    <Position X="7" Y="2.25" Width="2.5" />
+    <TypeIdentifier />
+  </Struct>
+  <Struct Name="Common.Communication.Port_t">
+    <Position X="3" Y="7.25" Width="2" />
+    <TypeIdentifier />
+  </Struct>
+  <Enum Name="Common.Communication.Protocol">
+    <Position X="5.5" Y="7.25" Width="1.5" />
+    <TypeIdentifier />
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

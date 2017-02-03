@@ -1,0 +1,1696 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SelfTest</name>
+    </assembly>
+    <members>
+        <member name="T:SelfTest.Forms.TestItem_t">
+            <summary>
+            A structure to store the fields associated with an individual test item. Used when adding self tests to controls such as <c>ListBox</c> controls etc.
+            </summary>
+        </member>
+        <member name="F:SelfTest.Forms.TestItem_t.FormatProviderSelftTestNumber">
+            <summary>
+            The format provider used to display the self test number associated with the current self test. Value: "###".
+            </summary>
+        </member>
+        <member name="F:SelfTest.Forms.TestItem_t.SelfTestIdentifier">
+            <summary>
+            The self test identifier. Please note, a test list identifier of short.MaxValue is reserved for the user defined test list.
+            </summary>
+        </member>
+        <member name="F:SelfTest.Forms.TestItem_t.SelfTestNumber">
+            <summary>
+            The self test number.
+            </summary>
+        </member>
+        <member name="F:SelfTest.Forms.TestItem_t.Added">
+            <summary>
+            A flag to indicate whether the self test has been added to the test list. True, indicates that the the self test has been added to the 
+            test list; otherwise, false.
+            </summary>
+        </member>
+        <member name="F:SelfTest.Forms.TestItem_t.Exists">
+            <summary>
+            A flag to indicate whether the self test exists in the current data dictionary. True, indicates that the self exists; otherwise, false.
+            </summary>
+        </member>
+        <member name="M:SelfTest.Forms.TestItem_t.ToString">
+            <summary>
+            Overrides the ToString() method to return the name/description associated with the self test.
+            </summary>
+            <returns>The name/description of the self test.</returns>
+        </member>
+        <member name="T:SelfTest.Forms.FormTestListDefine">
+            <summary>
+            Form to allow the user to configure which self tests are to be executed.
+            </summary>
+        </member>
+        <member name="F:SelfTest.Forms.FormTestListDefine.KeyListBoxAvailable">
+            <summary>
+            The key that is to be used to select the <c>ListBox</c> controls that display the tests associated with each test category. Value: "m_ListBoxAvailable".
+            </summary>
+        </member>
+        <member name="F:SelfTest.Forms.FormTestListDefine.KeyLabelAvailableCount">
+            <summary>
+            The key that is to be used to select the <c>Label</c> controls that display the number of tests associated with each test category. Value: "m_LabelAvailableCount".
+            </summary>
+        </member>
+        <member name="F:SelfTest.Forms.FormTestListDefine.m_TestItems">
+            <summary>
+            An array of <c>TestItem_t</c> structures for each test defined in the data dictionary, sorted by self test identifer. Used to keep track of which 
+            tests have been added to the list of selected tests.
+            </summary>
+        </member>
+        <member name="F:SelfTest.Forms.FormTestListDefine.m_TestListRecord">
+            <summary>
+            Reference to the selected test list record.
+            </summary>
+        </member>
+        <member name="F:SelfTest.Forms.FormTestListDefine.m_UserDefinedTestListRecord">
+            <summary>
+            Reference to the user defined test list record.
+            </summary>
+        </member>
+        <member name="F:SelfTest.Forms.FormTestListDefine.m_CalledFromAsFormViewTestResults">
+            <summary>
+            Reference to the form that called this form.
+            </summary>
+        </member>
+        <member name="M:SelfTest.Forms.FormTestListDefine.#ctor">
+            <summary>
+            Initialize an new instance of the form. Zero parameter constructor. 
+            </summary>
+        </member>
+        <member name="M:SelfTest.Forms.FormTestListDefine.#ctor(Common.Configuration.TestListRecord)">
+            <summary>
+            Initialize an new instance of the form.
+            </summary>
+            <param name="testListRecord">Reference to the currently selected test list record.</param>
+        </member>
+        <member name="M:SelfTest.Forms.FormTestListDefine.Cleanup(System.Boolean)">
+            <summary>
+            Clean up the resources used by the form.
+            </summary>
+            <param name="disposing">True to release both managed and unmanaged resources; false to release only unmanaged resources.</param>
+        </member>
+        <member name="M:SelfTest.Forms.FormTestListDefine.m_ListBoxTarget_DragDrop(System.Object,System.Windows.Forms.DragEventArgs)">
+            <summary>
+            Event handler for the <c>DragDrop</c> event associated with the target <c>ListBox</c>. The drag-drop operation is complete, move the selected items.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:SelfTest.Forms.FormTestListDefine.m_ButtonOK_Click(System.Object,System.EventArgs)">
+            <summary>
+            Event handler associated with the 'Execute' button <c>Click</c> event. Execute the selected self tests.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:SelfTest.Forms.FormTestListDefine.m_ButtonCancel_Click(System.Object,System.EventArgs)">
+            <summary>
+            Event handler associated with the 'Cance' button <c>Click</c> event. Exit self test mode and close the form.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:SelfTest.Forms.FormTestListDefine.m_TabControlAvailable_SelectedIndexChanged(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the 'Available' <c>TabControl</c> <c>SelectedIndexChanged</c> event. Activate the <c>ListBox</c> control associated with the 
+            selected tab page. 
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:SelfTest.Forms.FormTestListDefine.m_MenuItemShowDefinitionColumn_Click(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the <c>Click</c> event associated with the 'Show Definition' context menu option attached to the <c>ListBox</c> containing the self tests  
+            that have been added to the test list.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:SelfTest.Forms.FormTestListDefine.m_MenuItemShowDefinitionAll_Click(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the <c>Click</c> event associated with the 'Show Definition' context menu option attached to the <c>ListBox</c> containing the available 
+            self tests.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:SelfTest.Forms.FormTestListDefine.m_ComboBoxTestList_SelectedIndexChanged(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the <c>SelectedIndexChanged</c> event associated with the <c>ComboBox</c> control used to select one of the pre-defined test lists.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:SelfTest.Forms.FormTestListDefine.m_ListBox1_SelectedIndexChanged(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the <c>SelectedIndexChanged</c> event associated with the <c>ListBox</c> control that display the list of tests that 
+            are to be executed. Close the help window.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:SelfTest.Forms.FormTestListDefine.ListBoxAvailable_SelectedIndexChanged(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the <c>SelectedIndexChanged</c> event associated with the <c>ListBox</c> controls that display the list of available tests. 
+            Close the help window.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:SelfTest.Forms.FormTestListDefine.m_ListBoxWorkset_Enter(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the 'Enter' events associated with the ListBox controls for Column 1, Column 2, or Column 3. Clears any selected items associated
+            with the 'Available Tests' ListBox controls.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:SelfTest.Forms.FormTestListDefine.FormWorksetDefine_DataUpdate(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the <c>DataUpdate</c> event raised by the FormWorksetDefine class. This event is raised if the current test list is modified.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:SelfTest.Forms.FormTestListDefine.Add(System.Windows.Forms.ListBox@,System.Windows.Forms.ListBox@)">
+            <summary>
+            Add the selected items from the specified source <c>ListBox</c> control to the specified destination <c>ListBox</c> control.
+            </summary>
+            <param name="listSource">The source <c>ListBox</c> control.</param>
+            <param name="listDestination">the destination <c>ListBox</c> control.</param>
+        </member>
+        <member name="M:SelfTest.Forms.FormTestListDefine.Remove(System.Windows.Forms.ListBox@,System.Windows.Forms.ListBox@)">
+            <summary>
+            Remove the selected item(s) from the specified source <c>ListBox</c> control and add the item(s) to the specified destination <c>ListBox</c> control, in the
+            correct watch identifier order.
+            </summary>
+            <remarks>This method should only be used when removing entries from the workset.</remarks>
+            <param name="listSource">The source <c>ListBox</c> control.</param>
+            <param name="listDestination">The destination <c>ListBox</c> control.</param>
+        </member>
+        <member name="M:SelfTest.Forms.FormTestListDefine.UpdateCount">
+            <summary>
+            Update the count labels that show the number of watch variables that are available and the number that have been added to each column of the workset.
+            </summary>
+        </member>
+        <member name="M:SelfTest.Forms.FormTestListDefine.TestItemAddRange(System.Windows.Forms.ListBox,Common.Configuration.TestListRecord)">
+            <summary>
+            Add the self tests defined in the specified test list the specified <c>ListBox</c> control.
+            </summary>
+            <param name="listBox">The <c>ListBox</c> to which the items are to be added.</param>
+            <param name="testListRecord">The test list that is to be added to the <c>ListBox</c> control.</param>
+        </member>
+        <member name="M:SelfTest.Forms.FormTestListDefine.UpdateListBoxAvailable">
+            <summary>
+            Update the <c>ListBox</c> controls associated with each test category/group with the self tests that have been defined in the data dictionary. The self 
+            tests associated with each test category/group are defined in the <c>GROUPLIST</c> and <c>GROUPLISTIDS</c> tables of the data dictionary. The member variable 
+            <c>m_TestItems</c> must be initialized before calling this method.
+            </summary>
+        </member>
+        <member name="M:SelfTest.Forms.FormTestListDefine.ConfigureTabControl(System.Windows.Forms.TabControl)">
+            <summary>
+            Configure the specified <c>TabControl</c> so that it can be used to select between the different self test groups that are defined in the 
+            data dictionary. (1) Create a tab page for every self test group that has been defined in the <c>GROUPLIST</c> table of the data dictionary (2) add a 
+            <c>ListBox</c> control  to each <c>TabPage</c>  and (3) populate the <c>ListBox</c> controls with the self tests associated with each self 
+            test group.
+            </summary>
+            <param name="tabControl">The <c>TabControl</c> that is to be configured.</param>
+        </member>
+        <member name="M:SelfTest.Forms.FormTestListDefine.ConstructTabPage(Common.Configuration.GroupListRecord)">
+            <summary>
+            Instantiate and initialize a new <c>TabPage</c> control to display the self tests associated with a particular self test group.
+            </summary>
+            <remarks>The member variable <c>m_TestItems</c> must be initialized before calling this method.</remarks>
+            <param name="groupListRecord">Reference to the group list associated with the TabPage.</param>
+            <returns>The initialized <c>TabPage</c> control.</returns>
+        </member>
+        <member name="M:SelfTest.Forms.FormTestListDefine.ConstructTestItemArray">
+            <summary>
+            Instantiate and initialize a new array of <c>TestItem_t</c> structures based upon the tests that are defined in the <c>SELFTEST</c> table of the data 
+            dictionary.
+            </summary>
+            <returns>An array of <c>TestItem_t</c> structures based upon the self tests defined in the <c>SELFTEST</c> table of the data dictionary.</returns>
+        </member>
+        <member name="M:SelfTest.Forms.FormTestListDefine.ConstructEmptyUserDefinedTestListRecord">
+            <summary>
+            Construct an empty, user defined test list record.
+            </summary>
+            <returns>An empty user defined test list record.</returns>
+        </member>
+        <member name="M:SelfTest.Forms.FormTestListDefine.ComboBoxAddTestLists(System.Windows.Forms.ComboBox)">
+            <summary>
+            Add the pre-defined test lists defined in the <c>TESTLISTS</c> table of the data dictionary to the specified <c>ComboBox</c> control.
+            </summary>
+            <param name="comboBox">The <c>ComboBox</c> control that it to be processed.</param>
+        </member>
+        <member name="M:SelfTest.Forms.FormTestListDefine.ConvertToSelfTestRecordList(System.Windows.Forms.ListBox)">
+            <summary>
+            Convert the test items associated with the specified <c>ListBox</c> control to a list of self test records.
+            </summary>
+            <param name="listBox">The <c>ListBox</c> control containing the tests.</param>
+            <returns>A generic list of self test records corresponding to the test items contained in the specified <c>ListBox</c> control.</returns>
+        </member>
+        <member name="M:SelfTest.Forms.FormTestListDefine.LoadTestList(Common.Configuration.TestListRecord)">
+            <summary>
+            Load the specified test list into the <c>ListBox</c> control used to display the selected self tests.
+            </summary>
+            <param name="testListRecord">The test list that is to be loaded.</param>
+        </member>
+        <member name="F:SelfTest.Forms.FormTestListDefine.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:SelfTest.Forms.FormTestListDefine.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:SelfTest.MenuInterfaceSelfTest">
+            <summary>
+            Methods called by the menu options associated with the self-test sub-system  - SelfTest.dll.
+            </summary>
+        </member>
+        <member name="M:SelfTest.MenuInterfaceSelfTest.#ctor(Common.IMainWindow)">
+            <summary>
+            Initializes a new instance of the class.
+            </summary>
+            <param name="mainWindow">Reference to the main application window interface.</param>
+        </member>
+        <member name="M:SelfTest.MenuInterfaceSelfTest.ConfigureSelfTests">
+            <summary>
+            Show the dialog box which allows the user to configure which self tests are to be run.
+            </summary>
+        </member>
+        <member name="T:SelfTest.Forms.FormViewTestResults">
+            <summary>
+            A form to execute those self tests defined in the active test list and to collect and display the results in both list and pass/fail format.
+            </summary>
+        </member>
+        <member name="F:SelfTest.Forms.FormViewTestResults.IntervalMsTimerGetResults">
+            <summary>
+            The tick interval, in ms, associated with the timer used to retrieve the test results. Value: 100 ms. 
+            </summary>
+        </member>
+        <member name="F:SelfTest.Forms.FormViewTestResults.IntervalMsTimerCommWatchdog">
+            <summary>
+            The tick interval, in ms, associated with the timer used to verify the communication watchdog. Value: 500 ms. 
+            </summary>
+        </member>
+        <member name="F:SelfTest.Forms.FormViewTestResults.LoopForever">
+            <summary>
+            The value that must be passed to the CommunicationSelfTest.UpdateSTLoopCount() method in order to make the self test list run continuously. Value:
+            short.MaxValue.
+            </summary>
+        </member>
+        <member name="F:SelfTest.Forms.FormViewTestResults.Math2Power32">
+            <summary>
+            The value corresponding to 2^32. Value: 4,294,967,296.
+            </summary>
+        </member>
+        <member name="F:SelfTest.Forms.FormViewTestResults.Math2Power31">
+            <summary>
+            The value corresponding to 2^31. Value: 2,147,483,648.
+            </summary>
+        </member>
+        <member name="F:SelfTest.Forms.FormViewTestResults.Math2Power15">
+            <summary>
+            The value corresponding to 2^15. Value: 32,768.
+            </summary>
+        </member>
+        <member name="F:SelfTest.Forms.FormViewTestResults.Math2Power7">
+            <summary>
+            The value corresponding to 2^7. Value: 128.
+            </summary>
+        </member>
+        <member name="F:SelfTest.Forms.FormViewTestResults.ColumnIndexSelfTestNumber">
+            <summary>
+            The column index associated with the self test number. Value: 0;
+            </summary>
+        </member>
+        <member name="F:SelfTest.Forms.FormViewTestResults.ColumnIndexTestCase">
+            <summary>
+            The column index associated with the test case value. Value: 1.
+            </summary>
+        </member>
+        <member name="F:SelfTest.Forms.FormViewTestResults.ColumnIndexDescription">
+            <summary>
+            The column index associated with the self test description. Value: 2.
+            </summary>
+        </member>
+        <member name="F:SelfTest.Forms.FormViewTestResults.ColumnIndexResult">
+            <summary>
+            The column index associated with the test results. Value: 3.
+            </summary>
+        </member>
+        <member name="F:SelfTest.Forms.FormViewTestResults.ColumnIndexPassCount">
+            <summary>
+            The column index associated with the pass count. Value: 4.
+            </summary>
+        </member>
+        <member name="F:SelfTest.Forms.FormViewTestResults.ColumnIndexFailCount">
+            <summary>
+            The column index associated with the fail count. Value: 5.
+            </summary>
+        </member>
+        <member name="F:SelfTest.Forms.FormViewTestResults.ColumnIndexExecutionCount">
+            <summary>
+            The column index associated with the number of times a particular test has been executed in the current run. Value: 6;
+            </summary>
+        </member>
+        <member name="F:SelfTest.Forms.FormViewTestResults.HeightSelfTestControl">
+            <summary>
+            The height, in pixels, of the self test variable user control. Value: 22.
+            </summary>
+        </member>
+        <member name="F:SelfTest.Forms.FormViewTestResults.MarginRightDataGridViewControl">
+            <summary>
+            The right margin to be applied to the <c>DataGridView</c> control. Value: 2.
+            </summary>
+        </member>
+        <member name="F:SelfTest.Forms.FormViewTestResults.MarginLeftSelfTestControl">
+            <summary>
+            The left margin associated with the self test variable user control. Value: 10.
+            </summary>
+        </member>
+        <member name="F:SelfTest.Forms.FormViewTestResults.MarginRightSelfTestControl">
+            <summary>
+            The right margin associated with the self test variable user control. Value: 2.
+            </summary>
+        </member>
+        <member name="F:SelfTest.Forms.FormViewTestResults.MarginTopSelfTestControl">
+            <summary>
+            The top margin associated with the self test variable user control. Value: 2.
+            </summary>
+        </member>
+        <member name="F:SelfTest.Forms.FormViewTestResults.MarginBottomSelfTestControl">
+            <summary>
+            The bottom margin associated with the self test variable user control. Value: 2.
+            </summary>
+        </member>
+        <member name="F:SelfTest.Forms.FormViewTestResults.WidthScrollBar">
+            <summary>
+            The width to allow for a verical scrollbar.
+            </summary>
+        </member>
+        <member name="F:SelfTest.Forms.FormViewTestResults.WidthBorder">
+            <summary>
+            The combined width of the left and right borders around the self test variables panel. Used to size the help window panel.
+            </summary>
+        </member>
+        <member name="F:SelfTest.Forms.FormViewTestResults.WidthSelfTestControlVariableNameField">
+            <summary>
+            The width, in pixels, of the variable name field of the self test variable user control. Value: 250.
+            </summary>
+        </member>
+        <member name="F:SelfTest.Forms.FormViewTestResults.WidthSelfTestControlValueField">
+            <summary>
+            The width, in pixels, of the value field of the self test variable user control. Value: 160.
+            </summary>
+        </member>
+        <member name="F:SelfTest.Forms.FormViewTestResults.WidthSelfTestControlUnitsField">
+            <summary>
+            The width, in pixels, of the units field of the self test variable user control. Value: 75.
+            </summary>
+        </member>
+        <member name="F:SelfTest.Forms.FormViewTestResults.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:SelfTest.Forms.FormViewTestResults.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="F:SelfTest.Forms.FormViewTestResults.ResultAvailable">
+            <summary>
+            The value of the resultAvailable parameter returned from the GetSelfTestResult() method corresponding to a valid result being available. Value: 1.
+            </summary>
+        </member>
+        <member name="F:SelfTest.Forms.FormViewTestResults.ResultPassed">
+            <summary>
+            The value of the testResult parameter returned from the GetSelfTestResult() method corresponding to the test having passed. Value: 1.
+            </summary>
+        </member>
+        <member name="F:SelfTest.Forms.FormViewTestResults.ResultFailed">
+            <summary>
+            The value of the testResult parameter returned from the GetSelfTestResult() method corresponding to the test having failed. Value: 0.
+            </summary>
+        </member>
+        <member name="F:SelfTest.Forms.FormViewTestResults.ResultSuccess">
+            <summary>
+            The value of the result parameter returned from the StartSelfTestTask() and ExitSelfestTask() methods if the call was successful. Value: 1.
+            </summary>
+        </member>
+        <member name="F:SelfTest.Forms.FormViewTestResults.ResultDefinedByDataDictionary">
+            <summary>
+            The value of the result parameter returned from the StartSelfTestTask() and ExitSelfestTask() methods if the call was unsuccessful and the error message 
+            is defined by the <c>SELFTESTERRMESS</c> table of the data dictionary. In this case, the reason parameter corresponds to the <c>ERRID</c> field of 
+            the <c>SELFTESTERRMESS</c> table. Value: 2.
+            </summary>
+        </member>
+        <member name="F:SelfTest.Forms.FormViewTestResults.m_IsOnline">
+            <summary>
+            A flag to indicate whether the PTU is in online or offline mode. True, if the PTU is in online mode; otherise, false.
+            </summary>
+        </member>
+        <member name="F:SelfTest.Forms.FormViewTestResults.m_CommunicationInterface">
+            <summary>
+            Reference to the selected communication interface.
+            </summary>
+        </member>
+        <member name="F:SelfTest.Forms.FormViewTestResults.m_TimerGetResults">
+            <summary>
+            Timer used to collect the test results.
+            </summary>
+        </member>
+        <member name="F:SelfTest.Forms.FormViewTestResults.m_TimerCommWatchdog">
+            <summary>
+            Timer used to verify Propulsion System is in Self Test and there is still a physical/virtual connection.
+            </summary>
+        </member>
+        <member name="F:SelfTest.Forms.FormViewTestResults.m_TestsActive">
+            <summary>
+            A flag to indicate whether a test run is currently active. True, if a test run is active; otherwise, false.
+            </summary>
+        </member>
+        <member name="F:SelfTest.Forms.FormViewTestResults.m_FirstPassProcessSTInteractiveResult">
+            <summary>
+            A flag that indicates whether this is the first call in the current run to the ProcessSTInteractiveResult() method. True, if this is the first 
+            call; otherwise, false.
+            </summary>
+        </member>
+        <member name="F:SelfTest.Forms.FormViewTestResults.m_PreviousInteractiveTestNumber">
+            <summary>
+            The test number associated with the previous interactive test.
+            </summary>
+        </member>
+        <member name="F:SelfTest.Forms.FormViewTestResults.m_PreviousTestCase">
+            <summary>
+            The test case associated with the previous set of results.
+            </summary>
+        </member>
+        <member name="F:SelfTest.Forms.FormViewTestResults.m_InteractiveTestRecord">
+            <summary>
+            The <c>SelfTestRecord</c> associated with the current interactive test.
+            </summary>
+        </member>
+        <member name="F:SelfTest.Forms.FormViewTestResults.m_TestList">
+            <summary>
+            A list of the test numbers associated with the tests that are defined in the active test list.
+            </summary>
+        </member>
+        <member name="F:SelfTest.Forms.FormViewTestResults.m_UserDefinedTestListRecord">
+            <summary>
+            Reference to the user defined test list.
+            </summary>
+        </member>
+        <member name="F:SelfTest.Forms.FormViewTestResults.m_TestListRecord">
+            <summary>
+            Reference to the selected test list record.
+            </summary>
+        </member>
+        <member name="F:SelfTest.Forms.FormViewTestResults.m_ListResultList">
+            <summary>
+            A list of the test results associated with the DataGridView that is used to display the results in list format.
+            </summary>
+        </member>
+        <member name="F:SelfTest.Forms.FormViewTestResults.m_PassFailResultList">
+            <summary>
+            A list of the test results associated with the DataGridView that is used to display the results in pass/fail format.
+            </summary>
+            <remarks>This is used by the ProcessSTPassFailResult() method.</remarks>
+        </member>
+        <member name="F:SelfTest.Forms.FormViewTestResults.m_SelfTestVariableControlSize">
+            <summary>
+            Reference to the structure that defines the size of the self test variable user controls.
+            </summary>
+        </member>
+        <member name="F:SelfTest.Forms.FormViewTestResults.m_LoopCount">
+            <summary>
+            The number of times that the tests defined in the active test list are to be executed.
+            </summary>
+        </member>
+        <member name="F:SelfTest.Forms.FormViewTestResults.m_NumericUpDownLoopCountEnabledState">
+            <summary>
+            A flag that indicates the state of the Enabled property of the <c>NumericUpDown</c> control just prior to starting the self tests.
+            </summary>
+        </member>
+        <member name="F:SelfTest.Forms.FormViewTestResults.m_CheckBoxLoopForeverEnabledState">
+            <summary>
+            A flag that indicates the state of the Enabled property of the 'Loop Forever' <c>CheckBox</c> just prior to starting the self tests.
+            </summary>
+        </member>
+        <member name="M:SelfTest.Forms.FormViewTestResults.#ctor">
+            <summary>
+            Initialize a new instance of the class. Zero parameter constructor.
+            </summary>
+        </member>
+        <member name="M:SelfTest.Forms.FormViewTestResults.#ctor(Common.Communication.ICommunicationParent,Common.IMainWindow)">
+            <summary>
+            Initialize a new instance of the class
+            </summary>
+            <param name="communicationInterface">Reference to the communication interface that is to be used to communicate with the VCU.</param>
+            <param name="mainWindow">Reference to the main application window.</param>
+            <remarks>The reference to the main application window is passed as a parameter rather than relying on the usual mechanism, associated with
+            the MdiParent property, implemented in the FormPTU parent class as the ExecuteSelfTests() method, included in the constructor, displays
+            status messages on the main application window.</remarks>
+        </member>
+        <member name="M:SelfTest.Forms.FormViewTestResults.Cleanup(System.Boolean)">
+            <summary>
+            Clean up the resources used by the form.
+            </summary>
+            <param name="disposing">True to release both managed and unmanaged resources; false to release only unmanaged resources.</param>
+        </member>
+        <member name="M:SelfTest.Forms.FormViewTestResults.FormViewTestResults_Shown(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the <c>Shown</c> event.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:SelfTest.Forms.FormViewTestResults.Escape_Click(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the escape key <c>Click</c> event. Close the form.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:SelfTest.Forms.FormViewTestResults.F2_Click(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the 'F2-Print' button <c>Click</c> event. Capture the window and save the image to the specified file.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:SelfTest.Forms.FormViewTestResults.F3_Click(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the 'F3-Execute' key <c>Click</c> event. Execute the selected tests and display the results.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:SelfTest.Forms.FormViewTestResults.F4_Click(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the 'F4-Abort' key <c>Click</c> event. Abort the current self test sequence.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:SelfTest.Forms.FormViewTestResults.F5_Click(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the 'F5-Edit' key <c>Click</c> event. Configure a user defined test list.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:SelfTest.Forms.FormViewTestResults.F6_Click(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the 'F6-Continue' key <c>Click</c> event. Used to continue to the next test case during an interactive test.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:SelfTest.Forms.FormViewTestResults.m_ComboBoxTestList_SelectedIndexChanged(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the <c>ComboBox</c> control <c>SelectedIndexChanged</c> event. Load the selected test list.
+            </summary>
+            <param name="sender">Reference to the object that raised the event. In this case the value will be null as the sender is a static class.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:SelfTest.Forms.FormViewTestResults.m_ContextMenuStripDataGridViewListResult_Opened(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the<c>Opened</c> event of the <c>ContextMenuStrip</c> linked to the <c>DataGridView</c> control used to display the results in 
+            pass/fail format. Set the Enabled property of the 'Test Case Analysis' context menu option according to the state of the selected row.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:SelfTest.Forms.FormViewTestResults.m_ToolStripMenuItemTestListShowDefinition_Click(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the 'Show Definition' context menu associated with the <c>DataGridView</c> control used to display the selected tests. Show 
+            the help information for the test associated with the selected row of the <c>DataGridView</c>.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:SelfTest.Forms.FormViewTestResults.m_ToolStripMenuItemListResultShowDefinition_Click(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the 'Show Definition' context menu associated with the <c>DataGridView</c> control used to display the results in list format. Show 
+            the help information for the test associated with the selected row of the <c>DataGridView</c>.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:SelfTest.Forms.FormViewTestResults.m_ToolStripMenuItemListResultTestCaseAnalysis_Click(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the 'Test Case Analysis' context menu associated with the <c>DataGridView</c> control used to display the results in list format. Show 
+            the test case help information for the test associated with the selected row of the <c>DataGridView</c> if it is available.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:SelfTest.Forms.FormViewTestResults.m_ToolStripMenuItemPassFailResultShowDefinition_Click(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the 'Show Definition' context menu associated with the <c>DataGridView</c> control used to display the results in pass/fail format. 
+            Show the help information for the test associated with the selected row of the <c>DataGridView</c>.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:SelfTest.Forms.FormViewTestResults.m_DataGridViewTestList_CellContentDoubleClick(System.Object,System.Windows.Forms.DataGridViewCellEventArgs)">
+            <summary>
+            Event handler for the <c>CellContentDoubleClick</c> event associated with <c>DataGridView</c> control used to display the selected tests. Show 
+            the help information for the test associated with the selected row of the <c>DataGridView</c>.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:SelfTest.Forms.FormViewTestResults.m_DataGridViewListResult_CellContentDoubleClick(System.Object,System.Windows.Forms.DataGridViewCellEventArgs)">
+            <summary>
+            Event handler for the <c>CellContentDoubleClick</c> event associated with <c>DataGridView</c> control used to display the results in list format. If the 
+            user selected the pass or fail count columns of the <c>DataGridView</c> control, show the test case help information for the test associated with the 
+            selected row of the <c>DataGridView</c> if it is available; otherwise, show the help information for the test.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:SelfTest.Forms.FormViewTestResults.m_DataGridViewPassFailResult_CellContentDoubleClick(System.Object,System.Windows.Forms.DataGridViewCellEventArgs)">
+            <summary>
+            Event handler for the <c>CellContentDoubleClick</c> event associated with <c>DataGridView</c> control used to display the results in pass/fail format. 
+            Show the help information for the test associated with the selected row of the <c>DataGridView</c>.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:SelfTest.Forms.FormViewTestResults.m_DataGridView_SelectionChanged(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the <c>SelectionChanged</c> event associated with all <c>DataGridView</c> controls. Close the Windows help window.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:SelfTest.Forms.FormViewTestResults.m_TabControl_SelectedIndexChanged(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the <c>SelectedIndexChanged</c> event associated with the <c>TabControl</c>. Close the Windows help window.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="F:SelfTest.Forms.FormViewTestResults.m_Watchdog">
+            <summary>
+            A record of the watchdog count. Used to determine if the thread on which the polling is carried out has locked.
+            </summary>
+        </member>
+        <member name="F:SelfTest.Forms.FormViewTestResults.m_WatchdogTrip">
+            <summary>
+            A flag that indicates whether a watchdog trip has occurred.
+            </summary>
+        </member>
+        <member name="F:SelfTest.Forms.FormViewTestResults.m_WatchdogTripCountdown">
+            <summary>
+            The countdown to the watchdog trip.
+            </summary>
+        </member>
+        <member name="F:SelfTest.Forms.FormViewTestResults.m_ResponseCount">
+            <summary>
+            A record of the packet count. Used to determine if polling is active so that the packet received icon can be blinked in a thread-safe way.
+            </summary>
+        </member>
+        <member name="F:SelfTest.Forms.FormViewTestResults.m_Pause">
+            <summary>
+            A flag to control the display update. True, stops the display update i.e pauses the display; false, re-starts the display update.
+            </summary>
+        </member>
+        <member name="M:SelfTest.Forms.FormViewTestResults.SetPauseAndWait(System.Int32)">
+            <summary>
+            Set the Pause property and wait until the feedback signal is received or until the timeout has elapsed.
+            </summary>
+            <param name="timeoutMs">The timeout period, in ms.</param>
+            <returns>A flag to indicate whether the pause feedback signal was asserted within the specified timeout. True, if the pause feedback signal was asserted 
+            within the specified timeout; otherwise, false.</returns>
+        </member>
+        <member name="M:SelfTest.Forms.FormViewTestResults.StartPolling">
+            <summary>
+            Start polling the target hardware.
+            </summary>
+        </member>
+        <member name="M:SelfTest.Forms.FormViewTestResults.StopPolling">
+            <summary>
+            Stop polling the target hardware. If polling has already been suspended, no action will be taken. 
+            </summary>
+            <remarks>Ignores the request if the class used to poll the target hardware is null.</remarks>
+        </member>
+        <member name="F:SelfTest.Forms.FormViewTestResults.WatchdogTripCountdown">
+            <summary>
+            The countdown value associated the watchdog trip. Value: 3.
+            </summary>
+        </member>
+        <member name="F:SelfTest.Forms.FormViewTestResults.m_CommunicationFault">
+            <summary>
+            A flag that indicates whether a communication fault has been detected.
+            </summary>
+        </member>
+        <member name="F:SelfTest.Forms.FormViewTestResults.m_ThreadCommWatchdog">
+            <summary>
+            Reference to the class responsible for polling the target hardware.
+            </summary>
+        </member>
+        <member name="M:SelfTest.Forms.FormViewTestResults.m_TimerCommWatchdog_Tick(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the timer <c>Tick</c> event. Check whether Propulsion system is still in self test.
+            </summary>
+        </member>
+        <member name="M:SelfTest.Forms.FormViewTestResults.m_TimerGetResults_Tick(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the timer <c>Tick</c> event. Check whether a new test result is available and, if so, process it.
+            </summary>
+        </member>
+        <member name="M:SelfTest.Forms.FormViewTestResults.m_CheckBoxLoopForever_CheckedChanged(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the <c>CheckedChanged</c> event associated with the <c>CheckBox</c> control that is used to force the self tests to loop continuously.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:SelfTest.Forms.FormViewTestResults.Exit">
+            <summary>
+            Close the form cleanly. Simulates the user pressing the Exit button.
+            </summary>
+        </member>
+        <member name="M:SelfTest.Forms.FormViewTestResults.SetEnabled(System.Boolean)">
+            <summary>
+            Set the Enabled property of those controls that need to be inhibited while the self tests are running.
+            </summary>
+            <param name="state">The state that the Enabled properties are to be set to.</param>
+        </member>
+        <member name="M:SelfTest.Forms.FormViewTestResults.GetResultsStart">
+            <summary>
+            Start the timer that collects the test results. 
+            </summary>
+        </member>
+        <member name="M:SelfTest.Forms.FormViewTestResults.GetResultsStop">
+            <summary>
+            Stop the timer that collects the test results.
+            </summary>
+        </member>
+        <member name="M:SelfTest.Forms.FormViewTestResults.ProcessSTCountResult(System.Int16,System.Int16,System.Int32@)">
+            <summary>
+            Process the result for use in the pass/fail count presentation. Update the <c>DataGridView</c> used to display the results in pass/fail format with 
+            the latest result retrieved from the VCU.
+            </summary>
+            <param name="testNumber">The test number retrieved from the VCU.</param>
+            <param name="testResult">The test result retrieved from the VCU.</param>
+            <param name="executionCount">The number of times the test associated with the result has been executed during the current run.</param>
+        </member>
+        <member name="M:SelfTest.Forms.FormViewTestResults.ProcessSTListResult(System.Int16,System.Int16,System.Int16)">
+            <summary>
+            Process the result for use in the list presentation. Update the <c>DataGridView</c> used to display the results in list format with the latest result 
+            retrieved from the VCU.
+            </summary>
+            <param name="testNumber">The test number of the test associated with the result.</param>
+            <param name="testCase">The test case retrieved from the VCU.</param>
+            <param name="testResult">The test result retrieved from the VCU.</param>
+        </member>
+        <member name="M:SelfTest.Forms.FormViewTestResults.ProcessSTInteractiveResult(System.Int16,System.Int16,System.Int16,Common.Communication.InteractiveResults_t[])">
+            <summary>
+            Process the result of the interactive test.
+            </summary>
+            <param name="testNumber">The test number of the interactive test associated with the result.</param>
+            <param name="testCase">The current test case.</param>
+            <param name="variableCount">The number of self test variables associated with the interactive test.</param>
+            <param name="interactiveResults">The array of self test variable values retrieved from the VCU.</param>
+        </member>
+        <member name="M:SelfTest.Forms.FormViewTestResults.ProcessSTSpecialMessage(System.Int16)">
+            <summary>
+            Process the special message.
+            </summary>
+            <param name="messageIdentifier">The message identifier returned from the call to the GetSelfTestResult() method.</param>
+        </member>
+        <member name="M:SelfTest.Forms.FormViewTestResults.UpdateDataGridViewTestList(System.Collections.Generic.List{System.Int16})">
+            <summary>
+            Update the <c>DataGridView</c> used to display the tests defined in the active test list with the specified list.
+            </summary>
+            <param name="testList">A list of the test numbers associated with the active test list.</param>
+        </member>
+        <member name="M:SelfTest.Forms.FormViewTestResults.ConvertToDataGridViewRow(SelfTest.Forms.Result_t)">
+            <summary>
+            Convert the specified self test result to a <c>DataGridViewRow</c>.
+            </summary>
+            <param name="result">The latest result.</param>
+            <returns>The specified self test result converted to a <c>DataGridViewRow</c>.</returns>
+        </member>
+        <member name="M:SelfTest.Forms.FormViewTestResults.ConvertToTestList(Common.Configuration.TestListRecord)">
+            <summary>
+            Convert the specified test list record to a generic list of test numbers.
+            </summary>
+            <param name="testListRecord">The test list record containing the list of tests that are to be executed.</param>
+        </member>
+        <member name="M:SelfTest.Forms.FormViewTestResults.ComboBoxAddTestLists(System.Windows.Forms.ComboBox@)">
+            <summary>
+            Add the pre-defined test lists defined in the <c>TESTLISTS</c> table of the data dictionary to the specified <c>ComboBox</c> control.
+            </summary>
+            <param name="comboBox">The <c>ComboBox</c> control that it to be processed.</param>
+        </member>
+        <member name="M:SelfTest.Forms.FormViewTestResults.GetSelfTestMessage(System.Int16,System.Int16)">
+            <summary>
+            Get the error message corresponding to the specified self test special message parameters.
+            </summary>
+            <param name="result">The result parameter of the self test special message.</param>
+            <param name="reason">The reason parameter of the self test special message.</param>
+            <returns>The self test error message corresponding to the specified self test special message parameters.</returns>
+        </member>
+        <member name="M:SelfTest.Forms.FormViewTestResults.ConfigureSelfTestControls(System.Windows.Forms.Panel,Common.UserControls.VariableControlSize_t,System.Collections.Generic.List{Common.Configuration.SelfTestVariable})">
+            <summary>
+            Configure the specified self test variable user controls. The individual controls are laid out on the panel similar to rows on a DataGridView control. The 
+            first entry in the list, selfTestVariableList[0], is positioned at row 0, the second at row 1 etc. To configure all self test variables defined in the 
+            list specify a start index of zero.
+            </summary>
+            <param name="panel">The panel to which the self test controls are to be added.</param>
+            <param name="selfTestControlSize">The structure that is used to define the size of each self test variable user control.</param>
+            <param name="selfTestVariableList">A list of the self test variables that are to be displayed.</param>
+        </member>
+        <member name="M:SelfTest.Forms.FormViewTestResults.DisplaySelfTestVariableValues(Common.Configuration.SelfTestRecord)">
+            <summary>
+            Display the self test variable values associated with the specified self test record.
+            </summary>
+            <param name="selfTestRecord">The self test record containing the self test variables that are to be displayed.</param>
+        </member>
+        <member name="M:SelfTest.Forms.FormViewTestResults.ConvertUInt32(System.Double,Common.Configuration.DataType_e)">
+            <summary>
+            <para>
+            Convert the UInt32 value represented by the <paramref name="value"/> parameter to the value associated with the specified data type.
+            </para>
+            <para>
+            All self test variable values are passed back from PTUDLL32.dll as UInt32 values converted to double format. In order to display the correct value this 
+            UInt32 value must be converted to the value associated with the data type of the variable, as defined by the <c>DataType</c> property. For example, if the 
+            data type is of type Int16 bit 15 of the UInt32 value represents the sign bit, for Int32 types bit 31 represents the sign bit etc.
+            </para>
+            </summary>
+            <remarks>The negative value equivalent of a positive number and vice-versa is represented by the two's complement of that number i.e. all bits are inverted 
+            and 1 is added to the result. E.g. if the UInt value is 0x0000 0003 i.e 3, -3 is represented by 0xFFFF FFFD</remarks>
+            <returns>The UInt32 value converted to the specified data type and cast to a double.</returns>
+        </member>
+        <member name="M:SelfTest.Forms.FormViewTestResults.ShowTestDefinition(System.Windows.Forms.DataGridView,System.Windows.Forms.Panel)">
+            <summary>
+            Show the Windows help window associated with the test definition for the selected row of the specified <c>DataGridView</c> control.
+            </summary>
+            <remarks>If multiple rows are selected, only the first row that was selected will be processed.</remarks>
+            <param name="dataGridView">The <c>DataGridView</c> control that currently has focus.</param>
+            <param name="panel">Reference to the <c>Panel</c> where the Windows help window is to be displayed.</param>
+        </member>
+        <member name="M:SelfTest.Forms.FormViewTestResults.ShowTestMessage(System.Windows.Forms.DataGridView,System.Windows.Forms.Panel)">
+            <summary>
+            Show the Windows help window for the test message associated with the selected row of the specified <c>DataGridView</c> - if it is avaialable.
+            </summary>
+            <param name="dataGridView">The <c>DataGridView</c> control for which the test case help is to be shown.</param>
+            <param name="panel">Reference to the <c>Panel</c> where the Windows help window is to be displayed.</param>
+            <remarks>If multiple rows are selected, only the first row that was selected will be processed.</remarks>
+            <returns>A flag to indicate whether the test message was displayed.</returns>
+        </member>
+        <member name="M:SelfTest.Forms.FormViewTestResults.ExecuteSelfTests(System.Collections.Generic.List{System.Int16})">
+            <summary>
+            Send the command to execute the self tests associated with the specified array of self test numbers.
+            </summary>
+            <param name="testList">The list of self test numbers associated with the tests that are to be executed.</param>
+            <exception cref="T:System.InvalidOperationException">Thrown if the VCU cannot enter self test mode for some reason.</exception>
+            <exception cref="T:Common.Communication.CommunicationException">Thrown if a valid reply is not received from the VCU in response to a command request.</exception>
+        </member>
+        <member name="M:SelfTest.Forms.FormViewTestResults.StartSelfTestTask">
+            <summary>
+            Send the command to start the self test task.
+            </summary>
+            <exception cref="T:System.InvalidOperationException">Thrown if the result returned from the call is not ResultSuccess.</exception>
+        </member>
+        <member name="M:SelfTest.Forms.FormViewTestResults.AbortSelfTests">
+            <summary>
+            Send the command to abort the current test run.
+            </summary>
+        </member>
+        <member name="M:SelfTest.Forms.FormViewTestResults.SendOperatorAcknowledge">
+            <summary>
+            Send the acknowledge command.
+            </summary>
+        </member>
+        <member name="M:SelfTest.Forms.FormViewTestResults.ExitSelfTestTask">
+            <summary>
+            Issue the command to exit self test mode.
+            </summary>
+        </member>
+        <member name="P:SelfTest.Forms.FormViewTestResults.Pause">
+            <summary>
+            Gets or sets the flag that controls the polling of the target hardware. True, inhibits polling of the target hardware; otherwise, false,
+            resumes polling.
+            </summary>
+        </member>
+        <member name="P:SelfTest.Forms.FormViewTestResults.PauseFeedback">
+            <summary>
+            Gets the feedback flag that indicates whether polling of the target hardware has been suspended.  
+            </summary>
+            <remarks>This flag is asserted when the <c>ThreadPollWatch</c> class has entered the pause state, i.e. the current communication request is
+            complete and no further requests will be issued until the pause property has been cleared.</remarks>
+        </member>
+        <member name="P:SelfTest.Forms.FormViewTestResults.ThreadCommWatchdog">
+            <summary>
+            Gets or sets the reference to the class responsible for polling the target hardware and recording the watch values.
+            </summary>
+        </member>
+        <member name="P:SelfTest.Forms.FormViewTestResults.CommunicationInterface">
+            <summary>
+            Gets or sets the communication interface that is to be used to communicate with the VCU.
+            </summary>
+        </member>
+        <member name="P:SelfTest.Forms.FormViewTestResults.TestListRecord">
+            <summary>
+            Gets or sets the active test list record.
+            </summary>
+        </member>
+        <member name="T:SelfTest.Communication.CommunicationSelfTest">
+            <summary>
+            Class to manage the communication with the target hardware with respect to the diagnostic self test sub-system commands.
+            </summary>
+        </member>
+        <member name="F:SelfTest.Communication.CommunicationSelfTest.m_SelfTestMarshal">
+            <summary>
+            Object that is used to call methods that gather or send information pertaining to self
+            test execution on the embedded PTU target.
+            </summary>
+        </member>
+        <member name="M:SelfTest.Communication.CommunicationSelfTest.#ctor(Common.Communication.ICommunicationParent)">
+            <summary>
+            Initialize a new instance of the class
+            </summary>
+            <param name="communicationInterface">Reference to the communication interface containing the properties and member variables that are to be
+            used to initialize the class.</param>
+        </member>
+        <member name="M:SelfTest.Communication.CommunicationSelfTest.GetSelfTestSpecialMessage(System.Int16@,System.Int16@)">
+            <summary>
+            Get the self test special message.
+            </summary>
+            <param name="result">The result of the call. A value of: (1) 1 represents success; (2) indicates that the error message defined by the 
+            <paramref name="reason"/> parameter applies and (3) represents an unknown error.</param>
+            <param name="reason">A value of 1 represents success; otherwise, the value is mapped to the <c>ERRID</c> field of the
+            <c>SELFTESTERRMESS</c> table 
+            of the data dictionary in order to determine the error message returned from the VCU.</param>
+            <exception cref="T:Common.Communication.CommunicationException">Thrown if the error code returned from the call to the PTUDLL32.GetSelfTestSpecialMessage()
+            method is not CommunicationError.Success.</exception>
+        </member>
+        <member name="M:SelfTest.Communication.CommunicationSelfTest.StartSelfTestTask(System.Int16@,System.Int16@)">
+            <summary>
+            Start the self test task.
+            </summary>
+            <remarks>This request will start the self test process on the VCU.</remarks>
+            <param name="result">The result of the call. A value of: (1) 1 represents success; (2) indicates that the error message defined by the 
+            <paramref name="reason"/> parameter applies and (3) represents an unknown error.</param>
+            <param name="reason">A value of 1 represents success; otherwise, the value is mapped to the <c>ERRID</c> field of the
+            <c>SELFTESTERRMESS</c> table 
+            of the data dictionary in order to determine the error message returned from the VCU.</param>
+            <exception cref="T:Common.Communication.CommunicationException">Thrown if the error code returned from the call to the PTUDLL32.StartSelfestTask() method is not 
+            CommunicationError.Success.</exception>
+        </member>
+        <member name="M:SelfTest.Communication.CommunicationSelfTest.ExitSelfTestTask(System.Int16@,System.Int16@)">
+            <summary>
+            Exit the self test task.
+            </summary>
+            <remarks>This request will end the self test process on the VCU.</remarks>
+            <param name="result">The result of the call. A value of: (1) 1 represents success; (2) indicates that the error message defined by the 
+            <paramref name="reason"/> parameter applies and (3) represents an unknown error.</param>
+            <param name="reason">A value of 1 represents success; otherwise, the value is mapped to the <c>ERRID</c> field of the
+            <c>SELFTESTERRMESS</c> table 
+            of the data dictionary in order to determine the error message returned from the VCU.</param>
+            <exception cref="T:Common.Communication.CommunicationException">Thrown if the error code returned from the call to the PTUDLL32.ExitSelfestTask() method is not 
+            CommunicationError.Success.</exception>
+        </member>
+        <member name="M:SelfTest.Communication.CommunicationSelfTest.AbortSTSequence">
+            <summary>
+            Abort the self test sequence.
+            </summary>
+            <remarks>This request will stop the execution of the self-test process on the VCU and return control to the propulsion software.</remarks>
+            <exception cref="T:Common.Communication.CommunicationException">Thrown if the error code returned from the call to the PTUDLL32.AbortSTSequence() method is not 
+            CommunicationError.Success.</exception>
+        </member>
+        <member name="M:SelfTest.Communication.CommunicationSelfTest.SendOperatorAcknowledge">
+            <summary>
+            Send an operator acknowledge message.
+            </summary>
+            <remarks>This request allows the operator to move to the next step of an interactive test.</remarks>
+            <exception cref="T:Common.Communication.CommunicationException">Thrown if the error code returned from the call to the PTUDLL32.SendOperatorAcknowledge() method
+            is not CommunicationError.Success.</exception>
+        </member>
+        <member name="M:SelfTest.Communication.CommunicationSelfTest.CommunicationWatchdog">
+            <summary>
+            Update the list of individually selected self tests that are to be executed. 
+            </summary>
+            <remarks>This method will define the list of self-tests that are to be executed once the tester selects the execute command. The self tests
+            are defined using the self test identifiers defined in the data dictionary.</remarks>
+            <exception cref="T:Common.Communication.CommunicationException">Thrown if the error code returned from the call to the PTUDLL32.UpdateSTTestList() method is not 
+            CommunicationError.Success.</exception>
+        </member>
+        <member name="M:SelfTest.Communication.CommunicationSelfTest.UpdateSTTestList(System.Int16,System.Int16[])">
+            <summary>
+            Update the list of individually selected self tests that are to be executed. 
+            </summary>
+            <remarks>This method will define the list of self-tests that are to be executed once the tester selects the execute command. The self tests
+            are defined using the self test identifiers defined in the data dictionary.</remarks>
+            <param name="testCount">The number of tests in the list.</param>
+            <param name="tests">A list of the selfTestIdentifiers.</param>
+            <exception cref="T:Common.Communication.CommunicationException">Thrown if the error code returned from the call to the PTUDLL32.UpdateSTTestList() method is not 
+            CommunicationError.Success.</exception>
+        </member>
+        <member name="M:SelfTest.Communication.CommunicationSelfTest.RunPredefinedSTTests(System.Int16)">
+            <summary>
+            Run the predefined self tests associated with the specified test list identifier, these tests are defined in the data dictionary. 
+            </summary>
+            <param name="testListIdentifier">The test list identifier of the predefined self tests that are to be executed.</param>
+            <exception cref="T:Common.Communication.CommunicationException">Thrown if the error code returned from the call to the PTUDLL32.RunPredefinedSTTests() method is
+            not CommunicationError.Success.</exception>
+        </member>
+        <member name="M:SelfTest.Communication.CommunicationSelfTest.UpdateSTLoopCount(System.Int16)">
+            <summary>
+            Update the number of times that the selected tests are to be run.
+            </summary>
+            <param name="loopCount">The number of cycles/loops of the defined tests that are to be performed.</param>
+            <exception cref="T:Common.Communication.CommunicationException">Thrown if the error code returned from the call to the PTUDLL32.UpdateSTLoopCount() method is not 
+            CommunicationError.Success.</exception>
+        </member>
+        <member name="M:SelfTest.Communication.CommunicationSelfTest.ExecuteSTTestList(Common.Communication.TruckInformation)">
+            <summary>
+            Execute the self tests that are defined in the current list.
+            </summary>
+            <param name="truckInformation">The truck to which the self tests apply. This does not apply on the CTA project as separate self-tests are
+            set up for each truck.</param>
+            <exception cref="T:Common.Communication.CommunicationException">Thrown if the error code returned from the call to the PTUDLL32.ExecuteSTTestList() method is not
+            CommunicationError.Success.</exception>
+        </member>
+        <member name="M:SelfTest.Communication.CommunicationSelfTest.GetSelfTestResult(System.Int16@,Common.Communication.MessageMode@,System.Int16@,System.Int16@,System.Int16@,Common.Communication.TruckInformation@,System.Int16@,Common.Communication.InteractiveResults_t[]@)">
+            <summary>
+            Get the self test results.
+            </summary>
+            <param name="resultAvailable">A flag to indicate whether a valid result is available. A value of 1 indicates that a valid result is
+            available; otherwise,  0.</param>
+            <param name="messageMode">The type of message returned from the VCU.</param>
+            <param name="testIdentifier">The test result identifier; the interpretation of this value is dependent upon the message mode. For detailed
+            messages, this value represents the self test identifier.</param>
+            <param name="testCase">The test case number associated with the message.</param>
+            <param name="testResult">Used with the passive and logic self tests to define whether the test passed or failed. A value of 1 indicates
+            that the test passed; otherwise, the test failed.</param>
+            <param name="truckInformation">An enumerator to define the truck information associated with the message.</param>
+            <param name="variableCount">The number of variables associated with the message.</param>
+            <param name="results">An array of <see cref="T:Common.Communication.InteractiveResults_t"/> structures containing the value of each self test variable associated
+            with the current interactive test.</param>
+            <exception cref="T:Common.Communication.CommunicationException">Thrown if the error code returned from the call to the PTUDLL32.GetSelfTestResult() method is not 
+            CommunicationError.Success.</exception>
+            <remarks>In C# the sizeof the InteractiveResults_t structure is 16 bytes as the size is rounded up to the nearest quad word. This is 
+            inconsistent with the size of the InteractiveResults_t structure used in PTUDLL32.dll - 12 bytes. To ensure that the results are 
+            interpreted correctly the results are passed as a byte array which is then mapped to an array of InteractiveResults structures.</remarks>
+        </member>
+        <member name="M:SelfTest.Communication.CommunicationSelfTest.UpdateSTMode(Common.Communication.SelfTestMode)">
+            <summary>
+            Update the self test mode.
+            </summary>
+            <remarks>This call is used to check whether communication with the VCU has been lost.</remarks>
+            <param name="selfTestMode">The required self test mode.</param>
+            <exception cref="T:Common.Communication.CommunicationException">Thrown if the error code returned from the call to the PTUDLL32.UpdateSTMode() method is not 
+            CommunicationError.Success.</exception>
+        </member>
+        <member name="T:SelfTest.Communication.CommunicationSelfTestOffline">
+             <summary>
+            Class to simulate communication with the target hardare with respect to the diagnostic self-test sub-system.
+             </summary>
+        </member>
+        <member name="F:SelfTest.Communication.CommunicationSelfTestOffline.ResultAvailable">
+            <summary>
+            The value of the resultAvailable parameter returned from the GetSelfTestResult() method corresponding to a valid result being available.
+            Value: 1.
+            </summary>
+        </member>
+        <member name="F:SelfTest.Communication.CommunicationSelfTestOffline.ResultPassed">
+            <summary>
+            The value of the testResult parameter returned from the GetSelfTestResult() method corresponding to the test having passed. Value: 1.
+            </summary>
+        </member>
+        <member name="M:SelfTest.Communication.CommunicationSelfTestOffline.#ctor(Common.Communication.ICommunicationParent)">
+            <summary>
+            Initialize a new instance of the class and set the properties and member variables to those values associated with the specified
+            communication interface.
+            </summary>
+            <param name="communicationInterface">Reference to the communication interface containing the properties and member variables that are to be
+            used to initialize the class.</param>
+        </member>
+        <member name="F:SelfTest.Communication.CommunicationSelfTestOffline.m_QueuedTestList">
+            <summary>
+            A list of the test numbers of the self tests that are to be executed during the current run.
+            </summary>
+        </member>
+        <member name="F:SelfTest.Communication.CommunicationSelfTestOffline.m_LoopsExecuted">
+            <summary>
+            Used to keep a record of the number of loops that have been executed during the current run.
+            </summary>
+        </member>
+        <member name="F:SelfTest.Communication.CommunicationSelfTestOffline.m_CurrentTestIndex">
+            <summary>
+            The index of the queued test list associated with the current test.
+            </summary>
+        </member>
+        <member name="F:SelfTest.Communication.CommunicationSelfTestOffline.m_STLoopCount">
+            <summary>
+            The number of loops that are to be executed in the current run.
+            </summary>
+        </member>
+        <member name="F:SelfTest.Communication.CommunicationSelfTestOffline.m_UserAbort">
+            <summary>
+            A flag to indicate whether the user has initiated an abort request. True, if the user has initiated an abort request; oterwise, false.
+            </summary>
+        </member>
+        <member name="M:SelfTest.Communication.CommunicationSelfTestOffline.GetSelfTestSpecialMessage(System.Int16@,System.Int16@)">
+            <summary>
+            Get the self test special message.
+            </summary>
+            <param name="result">The result of the call. A value of: (1) 1 represents success; (2) indicates that the error message defined by the 
+            <paramref name="reason"/> parameter applies and (3) represents an unknown error.</param>
+            <param name="reason">A value of 1 represents success; otherwise, the value is mapped to the <c>ERRID</c> field of the <c>SELFTESTERRMESS
+            </c> table 
+            of the data dictionary in order to determine the error message returned from the VCU.</param>
+            <exception cref="T:Common.Communication.CommunicationException">Thrown if the error code returned from the call to the PTUDLL32.GetSelfTestSpecialMessage() method
+            is not CommunicationError.Success.</exception>
+        </member>
+        <member name="M:SelfTest.Communication.CommunicationSelfTestOffline.StartSelfTestTask(System.Int16@,System.Int16@)">
+            <summary>
+            Start the self test task.
+            </summary>
+            <remarks>This request will start the self test process on the VCU. 
+            process.</remarks>
+            <param name="result">The result of the call. A value of: (1) 1 represents success; (2) indicates that the error message defined by the 
+            <paramref name="reason"/> parameter applies and (3) represents an unknown error.</param>
+            <param name="reason">A value of 1 represents success; otherwise, the value is mapped to the <c>ERRID</c> field of the
+            <c>SELFTESTERRMESS</c> table 
+            of the data dictionary in order to determine the error message returned from the VCU.</param>
+            <exception cref="T:Common.Communication.CommunicationException">Thrown if the error code returned from the call to the PTUDLL32.StartSelfestTask() method is not 
+            CommunicationError.Success.</exception>
+        </member>
+        <member name="M:SelfTest.Communication.CommunicationSelfTestOffline.ExitSelfTestTask(System.Int16@,System.Int16@)">
+            <summary>
+            Exit the self test task.
+            </summary>
+            <remarks>This request will halt the self test process on the VCU. 
+            process.</remarks>
+            <param name="result">The result of the call. A value of: (1) 1 represents success; (2) indicates that the error message defined by the 
+            <paramref name="reason"/> parameter applies and (3) represents an unknown error.</param>
+            <param name="reason">A value of 1 represents success; otherwise, the value is mapped to the <c>ERRID</c> field of the
+            <c>SELFTESTERRMESS</c> table 
+            of the data dictionary in order to determine the error message returned from the VCU.</param>
+            <exception cref="T:Common.Communication.CommunicationException">Thrown if the error code returned from the call to the PTUDLL32.ExitSelfestTask() method is not 
+            CommunicationError.Success.</exception>
+        </member>
+        <member name="M:SelfTest.Communication.CommunicationSelfTestOffline.AbortSTSequence">
+            <summary>
+            Abort the self test sequence.
+            </summary>
+            <remarks>This request will stop the execution of the self-test process on the VCU and return control to the propulsion software.</remarks>
+            <exception cref="T:Common.Communication.CommunicationException">Thrown if the error code returned from the call to the PTUDLL32.AbortSTSequence() method is not 
+            CommunicationError.Success.</exception>
+        </member>
+        <member name="M:SelfTest.Communication.CommunicationSelfTestOffline.CommunicationWatchdog">
+            <summary>
+            Determines if a physical/virtual connection still exists with the target.
+            </summary>
+            <remarks>This request checks that the Propulsion System is still in self test mode</remarks>
+            <exception cref="T:Common.Communication.CommunicationException">Thrown if the error code returned from the call to SelfTestMarshal the CommunicationWatchdog() method is not 
+            CommunicationError.Success.</exception>
+        </member>
+        <member name="M:SelfTest.Communication.CommunicationSelfTestOffline.SendOperatorAcknowledge">
+            <summary>
+            Send an operator acknowledge message.
+            </summary>
+            <remarks>This request allows the operator to move to the next step of an interactive test.</remarks>
+            <exception cref="T:Common.Communication.CommunicationException">Thrown if the error code returned from the call to the PTUDLL32.SendOperatorAcknowledge() method
+            is not CommunicationError.Success.</exception>
+        </member>
+        <member name="M:SelfTest.Communication.CommunicationSelfTestOffline.UpdateSTTestList(System.Int16,System.Int16[])">
+            <summary>
+            Update the list of individually selected self tests that are to be executed. 
+            </summary>
+            <remarks>This method will define the list of self-tests that are to be executed once the tester selects the execute command. The self tests
+            are defined using the self test identifiers defined in the data dictionary.</remarks>
+            <param name="testCount">The number of tests in the list.</param>
+            <param name="tests">A list of the selfTestIdentifiers.</param>
+            <exception cref="T:Common.Communication.CommunicationException">Thrown if the error code returned from the call to the PTUDLL32.UpdateSTTestList() method is not 
+            CommunicationError.Success.</exception>
+        </member>
+        <member name="M:SelfTest.Communication.CommunicationSelfTestOffline.RunPredefinedSTTests(System.Int16)">
+            <summary>
+            Run the predefined self tests associated with the specified test list identifier, these tests are defined in the data dictionary. 
+            </summary>
+            <param name="testListIdentifier">The test list identifier of the predefined self tests that are to be executed.</param>
+            <exception cref="T:Common.Communication.CommunicationException">Thrown if the error code returned from the call to the PTUDLL32.RunPredefinedSTTests() method is
+            not CommunicationError.Success.</exception>
+        </member>
+        <member name="M:SelfTest.Communication.CommunicationSelfTestOffline.UpdateSTLoopCount(System.Int16)">
+            <summary>
+            Update the number of times that the selected tests are to be run.
+            </summary>
+            <param name="loopCount">The number of cycles/loops of the defined tests that are to be performed.</param>
+            <exception cref="T:Common.Communication.CommunicationException">Thrown if the error code returned from the call to the PTUDLL32.UpdateSTLoopCount() method is not 
+            CommunicationError.Success.</exception>
+        </member>
+        <member name="M:SelfTest.Communication.CommunicationSelfTestOffline.ExecuteSTTestList(Common.Communication.TruckInformation)">
+            <summary>
+            Execute the self tests that are defined in the current list.
+            </summary>
+            <param name="truckInformation">The truck to which the self tests apply. This does not apply on the CTA project as separate self-tests are
+            set up for each truck.</param>
+            <exception cref="T:Common.Communication.CommunicationException">Thrown if the error code returned from the call to the PTUDLL32.ExecuteSTTestList() method is not 
+            CommunicationError.Success.</exception>
+        </member>
+        <member name="M:SelfTest.Communication.CommunicationSelfTestOffline.GetSelfTestResult(System.Int16@,Common.Communication.MessageMode@,System.Int16@,System.Int16@,System.Int16@,Common.Communication.TruckInformation@,System.Int16@,Common.Communication.InteractiveResults_t[]@)">
+            <summary>
+            Get the self test results.
+            </summary>
+            <param name="resultAvailable">A flag to indicate whether a valid result is available. A value of 1 indicates that a valid result is
+            available; otherwise, 0.</param>
+            <param name="messageMode">The type of message returned from the VCU.</param>
+            <param name="testIdentifier">The test result identifier; the interpretation of this value is dependent upon the message mode. For detailed
+            messages, this value represents the self test identifier.</param>
+            <param name="testCase">The test case number associated with the message.</param>
+            <param name="testResult">Used with the passive and logic self tests to define whether the test passed or failed. A value of 1 indicates
+            that the test passed; otherwise, the test failed.</param>
+            <param name="truckInformation">An enumerator to define the truck information associated with the message.</param>
+            <param name="variableCount">The number of variables associated with the message.</param>
+            <param name="results">An array of <see cref="T:Common.Communication.InteractiveResults_t"/> structures containing the value of each self test variable associated
+            with the current interactive test.</param>
+            <exception cref="T:Common.Communication.CommunicationException">Thrown if the error code returned from the call to the PTUDLL32.GetSelfTestResult() method is not 
+            CommunicationError.Success.</exception>
+            <remarks>In C# the sizeof the InteractiveResults_t structure is 16 bytes as the size is rounded up to the nearest quad word. This is 
+            inconsistent with the size of the InteractiveResults_t structure used in PTUDLL32.dll - 12 bytes. To ensure that the results are 
+            interpreted correctly the results are passed as a byte array which is then mapped to an array of InteractiveResults structures.</remarks>
+        </member>
+        <member name="M:SelfTest.Communication.CommunicationSelfTestOffline.UpdateSTMode(Common.Communication.SelfTestMode)">
+            <summary>
+            Update the self test mode.
+            </summary>
+            <remarks>This call is used to check whether communication with the VCU has been lost.</remarks>
+            <param name="selfTestMode">The required self test mode.</param>
+            <exception cref="T:Common.Communication.CommunicationException">Thrown if the error code returned from the call to the PTUDLL32.UpdateSTMode() method is not 
+            CommunicationError.Success.</exception>
+        </member>
+        <member name="T:SelfTest.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:SelfTest.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:SelfTest.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:SelfTest.Properties.Resources.Abort">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:SelfTest.Properties.Resources.Continue">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:SelfTest.Properties.Resources.EMExecuteSTTestListFailed">
+            <summary>
+              Looks up a localized string similar to Unable to execute the selected tests..
+            </summary>
+        </member>
+        <member name="P:SelfTest.Properties.Resources.EMSelfTestEnterExceptionThrown">
+            <summary>
+              Looks up a localized string similar to Cannot enter Self Test. An exception was thrown while trying to determine the reason why Self Test cound not be entered..
+            </summary>
+        </member>
+        <member name="P:SelfTest.Properties.Resources.EMSelfTestEnterNoResponse">
+            <summary>
+              Looks up a localized string similar to Cannot enter Self Test. The Vehicle Control Unit did not respond to the request to enter Self Test..
+            </summary>
+        </member>
+        <member name="P:SelfTest.Properties.Resources.EMSelfTestEnterReasonNotGiven">
+            <summary>
+              Looks up a localized string similar to Cannot enter Self Test. The reason for this was not specified by the Vehicle Control Unit..
+            </summary>
+        </member>
+        <member name="P:SelfTest.Properties.Resources.EMSelfTestEnterReasonNotRecognised">
+            <summary>
+              Looks up a localized string similar to Cannot enter Self Test. The Self Test Error Message returned from the Vehicle Control Unit was not recognised..
+            </summary>
+        </member>
+        <member name="P:SelfTest.Properties.Resources.EMUpdateSTLoopCountFailed">
+            <summary>
+              Looks up a localized string similar to Unable to update the loop counter on the Vehicle Control Unit..
+            </summary>
+        </member>
+        <member name="P:SelfTest.Properties.Resources.EMUpdateSTModeFailed">
+            <summary>
+              Looks up a localized string similar to The Vehicle Control Unit did not respond to the request to set the self test mode to engineering mode..
+            </summary>
+        </member>
+        <member name="P:SelfTest.Properties.Resources.EMUpdateSTTestListFailed">
+            <summary>
+              Looks up a localized string similar to Unable to download the selected test list to the Vehicle Control Unit..
+            </summary>
+        </member>
+        <member name="P:SelfTest.Properties.Resources.FunctionKeyTextAbort">
+            <summary>
+              Looks up a localized string similar to Abort.
+            </summary>
+        </member>
+        <member name="P:SelfTest.Properties.Resources.FunctionKeyTextContinue">
+            <summary>
+              Looks up a localized string similar to Continue.
+            </summary>
+        </member>
+        <member name="P:SelfTest.Properties.Resources.FunctionKeyTextEdit">
+            <summary>
+              Looks up a localized string similar to Config..
+            </summary>
+        </member>
+        <member name="P:SelfTest.Properties.Resources.FunctionKeyTextExecute">
+            <summary>
+              Looks up a localized string similar to Execute.
+            </summary>
+        </member>
+        <member name="P:SelfTest.Properties.Resources.FunctionKeyToolTipAbort">
+            <summary>
+              Looks up a localized string similar to [Abort Current Tests].
+            </summary>
+        </member>
+        <member name="P:SelfTest.Properties.Resources.FunctionKeyToolTipContinue">
+            <summary>
+              Looks up a localized string similar to [Continue].
+            </summary>
+        </member>
+        <member name="P:SelfTest.Properties.Resources.FunctionKeyToolTipEdit">
+            <summary>
+              Looks up a localized string similar to [Configure Test List].
+            </summary>
+        </member>
+        <member name="P:SelfTest.Properties.Resources.FunctionKeyToolTipExecute">
+            <summary>
+              Looks up a localized string similar to [Execute Selected Tests].
+            </summary>
+        </member>
+        <member name="P:SelfTest.Properties.Resources.Help">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:SelfTest.Properties.Resources.LegendAvailableTests">
+            <summary>
+              Looks up a localized string similar to Available Tests.
+            </summary>
+        </member>
+        <member name="P:SelfTest.Properties.Resources.LegendCount">
+            <summary>
+              Looks up a localized string similar to Count.
+            </summary>
+        </member>
+        <member name="P:SelfTest.Properties.Resources.LegendItems">
+            <summary>
+              Looks up a localized string similar to Item(s).
+            </summary>
+        </member>
+        <member name="P:SelfTest.Properties.Resources.MBCaptionError">
+            <summary>
+              Looks up a localized string similar to Error.
+            </summary>
+        </member>
+        <member name="P:SelfTest.Properties.Resources.MBCaptionInformation">
+            <summary>
+              Looks up a localized string similar to Information.
+            </summary>
+        </member>
+        <member name="P:SelfTest.Properties.Resources.MBCaptionWarning">
+            <summary>
+              Looks up a localized string similar to Warning.
+            </summary>
+        </member>
+        <member name="P:SelfTest.Properties.Resources.MBTAbortSTSequenceFailed">
+            <summary>
+              Looks up a localized string similar to Unable to abort the self test sequence..
+            </summary>
+        </member>
+        <member name="P:SelfTest.Properties.Resources.MBTSelfTestsMaxExceeded">
+            <summary>
+              Looks up a localized string similar to Adding the selected test(s) will exceed the maximum number that are allowed..
+            </summary>
+        </member>
+        <member name="P:SelfTest.Properties.Resources.MBTSendOperatorAcknowledgeFailed">
+            <summary>
+              Looks up a localized string similar to Unable to send the acknowledge command..
+            </summary>
+        </member>
+        <member name="P:SelfTest.Properties.Resources.MBTSTResultFailed">
+            <summary>
+              Looks up a localized string similar to Unable to retrieve the self test results..
+            </summary>
+        </member>
+        <member name="P:SelfTest.Properties.Resources.MBTWorksetDefineMultipleSelection">
+            <summary>
+              Looks up a localized string similar to This feature is not available for multiple selections..
+            </summary>
+        </member>
+        <member name="P:SelfTest.Properties.Resources.Modify">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:SelfTest.Properties.Resources.SelfTest">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:SelfTest.Properties.Resources.SMCollectingResults">
+            <summary>
+              Looks up a localized string similar to Collecting Results..
+            </summary>
+        </member>
+        <member name="P:SelfTest.Properties.Resources.SMComplete">
+            <summary>
+              Looks up a localized string similar to Complete..
+            </summary>
+        </member>
+        <member name="P:SelfTest.Properties.Resources.SMLogicAbort">
+            <summary>
+              Looks up a localized string similar to Logic Abort..
+            </summary>
+        </member>
+        <member name="P:SelfTest.Properties.Resources.SMRunning">
+            <summary>
+              Looks up a localized string similar to Running..
+            </summary>
+        </member>
+        <member name="P:SelfTest.Properties.Resources.SMUserAbort">
+            <summary>
+              Looks up a localized string similar to User Abort..
+            </summary>
+        </member>
+        <member name="P:SelfTest.Properties.Resources.TextFailed">
+            <summary>
+              Looks up a localized string similar to Failed.
+            </summary>
+        </member>
+        <member name="P:SelfTest.Properties.Resources.TextPassed">
+            <summary>
+              Looks up a localized string similar to Passed.
+            </summary>
+        </member>
+        <member name="P:SelfTest.Properties.Resources.TextUserDefined">
+            <summary>
+              Looks up a localized string similar to User Defined.
+            </summary>
+        </member>
+        <member name="T:SelfTest.Forms.Result_t">
+            <summary>
+            A structure to store the result information associated with a particular test. 
+            </summary>
+        </member>
+        <member name="F:SelfTest.Forms.Result_t.Index">
+            <summary>
+            The index value of the <c>List</c> or <c>Array</c> where the result information is stored.
+            </summary>
+        </member>
+        <member name="F:SelfTest.Forms.Result_t.TestNumber">
+            <summary>
+            The self test number of the test to which the result information applies.
+            </summary>
+        </member>
+        <member name="F:SelfTest.Forms.Result_t.TestCase">
+            <summary>
+            The test case identifier associated with the result information.
+            </summary>
+        </member>
+        <member name="F:SelfTest.Forms.Result_t.Passed">
+            <summary>
+            A flag to indicate whether the current test passed or failed. True if the test passed; otherwise, false.
+            </summary>
+        </member>
+        <member name="F:SelfTest.Forms.Result_t.PassCount">
+            <summary>
+            The number of times in the current run that the test has passed.
+            </summary>
+        </member>
+        <member name="F:SelfTest.Forms.Result_t.FailCount">
+            <summary>
+            The number of times in the current run that the test has failed.
+            </summary>
+        </member>
+        <member name="F:SelfTest.Forms.Result_t.ExecutionCount">
+            <summary>
+            The number of times in the current run that the test has been executed.
+            </summary>
+        </member>
+        <member name="M:SelfTest.Forms.Result_t.CopyTo(SelfTest.Forms.Result_t@)">
+            <summary>
+            Copy all field values to the specified <c>Result_t</c> structure.
+            </summary>
+            <param name="result">The <c>Result_t</c> structure that the property values are to be copied to.</param>
+        </member>
+        <member name="T:SelfTest.ThreadCommWatchdog">
+            <summary>
+            Polls the target hardware for watch values and logs the retrieved values to a cyclic buffer. Also records the values to a second, larger, cyclic buffer if
+            the <c>Record</c> property is asserted.
+            </summary>
+        </member>
+        <member name="F:SelfTest.ThreadCommWatchdog.IntervalMsEventUpdate">
+            <summary>
+            The interval, in ms, between communication watchdog checks. Value: 1,000 ms.
+            </summary>
+        </member>
+        <member name="F:SelfTest.ThreadCommWatchdog.ReadTimeoutCountdown">
+            <summary>
+            The countdown value associated the read timeout. Value: 3.
+            </summary>
+        </member>
+        <member name="F:SelfTest.ThreadCommWatchdog.SleepMsCheckPause">
+            <summary>
+            The thread sleep interval, in ms, between checking the state of the Pause property. Value: 200 ms.
+            </summary>
+        </member>
+        <member name="F:SelfTest.ThreadCommWatchdog.SleepMsRefreshWatchdog">
+            <summary>
+            The thread sleep interval, in ms, between watchdog refreshes once a communication fault has been detected.  Value: 50 ms. 
+            </summary>
+        </member>
+        <member name="F:SelfTest.ThreadCommWatchdog.m_CommunicationInterface">
+            <summary>
+            Reference to the selected communication interface.
+            </summary>
+        </member>
+        <member name="F:SelfTest.ThreadCommWatchdog.m_Pause">
+            <summary>
+            Flag to control polling of the target hardware. True, inhibits polling of the target hardware; otherwise, false, resumes polling.
+            </summary>
+        </member>
+        <member name="F:SelfTest.ThreadCommWatchdog.m_PauseFeedback">
+            <summary>
+            Feedback flag to indicate that the polling of the target hardware has been inhibited.
+            </summary>
+        </member>
+        <member name="F:SelfTest.ThreadCommWatchdog.m_CommunicationFault">
+            <summary>
+            Flag used to indicate that there is a communication fault. True, indicates that a fault exists; otherwise, false, indicates that communication is OK.
+            </summary>
+        </member>
+        <member name="F:SelfTest.ThreadCommWatchdog.m_ResponseCount">
+            <summary>
+            The number of response that have been received since the class was instantiated;
+            </summary>
+            <remarks> 
+            Used as a thread-safe way of blinking the packet received icon on the main window. The property corresponding to this value is read by the display 
+            update method on the main thread and provided it has incremented since the previous display update that method will blink the icon. As the method
+            is on the same thread on which the icon was created it is inherently safe.
+            </remarks>
+        </member>
+        <member name="F:SelfTest.ThreadCommWatchdog.m_MutexPause">
+            <summary>
+            Mutex to control read/write access to the <c>Pause</c> property.
+            </summary>
+        </member>
+        <member name="F:SelfTest.ThreadCommWatchdog.m_MutexPauseFeedback">
+            <summary>
+            Mutex to control read/write access to the <c>PauseFeedback</c> property.
+            </summary>
+        </member>
+        <member name="F:SelfTest.ThreadCommWatchdog.m_MutexCommunicationFault">
+            <summary>
+            Mutex to control read/write access to the <c>CommunicationFault</c> property.
+            </summary>
+        </member>
+        <member name="F:SelfTest.ThreadCommWatchdog.m_FormViewTestResults">
+            <summary>
+            Reference to the calling form.
+            </summary>
+        </member>
+        <member name="F:SelfTest.ThreadCommWatchdog.m_PollScheduler">
+            <summary>
+            Reference to the class that schedules polling for new events.
+            </summary>
+        </member>
+        <member name="F:SelfTest.ThreadCommWatchdog.m_ReadTimeoutCountdown">
+            <summary>
+            The countdown to the read timeout.
+            </summary>
+        </member>
+        <member name="M:SelfTest.ThreadCommWatchdog.#ctor(Common.Communication.ICommunicationSelfTest,SelfTest.Forms.FormViewTestResults)">
+            <summary>
+            Initializes a new instance of the class. Initializes the communication interface and read/write locks.
+            </summary>
+            <param name="communicationInterface">Reference to the communication interface used to communicate with the target hardware.</param>
+            <param name="formViewTestResults">Reference to the form that called this form.</param>
+        </member>
+        <member name="M:SelfTest.ThreadCommWatchdog.Run">
+            <summary>
+            Poll the target hardware for new events.
+            </summary>
+            <remarks>Runs on a separate thread.</remarks>
+        </member>
+        <member name="P:SelfTest.ThreadCommWatchdog.CommunicationInterface">
+            <summary>
+            Gets or sets the communication interface that is to be used to communicate with the VCU.
+            </summary>
+            <summary>
+            Gets or sets the communication interface that is to be used to communicate with the VCU.
+            </summary>
+        </member>
+        <member name="P:SelfTest.ThreadCommWatchdog.Pause">
+            <summary>
+            Gets or sets the flag that controls the polling of the target hardware. True, inhibits polling of the target hardware; otherwise, false, resumes polling.
+            </summary>
+        </member>
+        <member name="P:SelfTest.ThreadCommWatchdog.PauseFeedback">
+            <summary>
+            Gets the feedback flag that indicates whether polling of the target hardware has been suspended.  
+            </summary>
+            <remarks>This flag is asserted when the polling has entered the pause state, i.e. the current communication request is complete and no further requests will 
+            be issued until the pause property has been cleared.</remarks>
+        </member>
+        <member name="P:SelfTest.ThreadCommWatchdog.CommunicationFault">
+            <summary>
+            Gets the flag used to indicate that there is a communication fault. True, indicates that a fault exists; otherwise, false, indicates that communication is OK.
+            </summary>
+        </member>
+        <member name="P:SelfTest.ThreadCommWatchdog.ResponseCount">
+            <summary>
+            Gets the number of packets received since the class was instantiated.
+            </summary>
+        </member>
+    </members>
+</doc>

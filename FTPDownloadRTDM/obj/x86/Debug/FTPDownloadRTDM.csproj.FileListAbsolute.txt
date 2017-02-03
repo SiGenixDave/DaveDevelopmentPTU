@@ -1,0 +1,14 @@
+C:\CustomerProjects\Bombardier\NSE_PTU\branches\DaveDevelopment\FTPDownloadRTDM\bin\Debug\FTPDownloadRTDM.exe
+C:\CustomerProjects\Bombardier\NSE_PTU\branches\DaveDevelopment\FTPDownloadRTDM\bin\Debug\FTPDownloadRTDM.pdb
+C:\CustomerProjects\Bombardier\NSE_PTU\branches\DaveDevelopment\FTPDownloadRTDM\bin\Debug\VcuComm.dll
+C:\CustomerProjects\Bombardier\NSE_PTU\branches\DaveDevelopment\FTPDownloadRTDM\bin\Debug\VcuComm.pdb
+C:\CustomerProjects\Bombardier\NSE_PTU\branches\DaveDevelopment\FTPDownloadRTDM\bin\Debug\VcuComm.xml
+C:\CustomerProjects\Bombardier\NSE_PTU\branches\DaveDevelopment\FTPDownloadRTDM\obj\x86\Debug\FTPDownloadRTDM.csprojResolveAssemblyReference.cache
+C:\CustomerProjects\Bombardier\NSE_PTU\branches\DaveDevelopment\FTPDownloadRTDM\obj\x86\Debug\FTPDownloadRTDM.HandleErrorForm.resources
+C:\CustomerProjects\Bombardier\NSE_PTU\branches\DaveDevelopment\FTPDownloadRTDM\obj\x86\Debug\FTPDownloadRTDM.HelpAboutForm.resources
+C:\CustomerProjects\Bombardier\NSE_PTU\branches\DaveDevelopment\FTPDownloadRTDM\obj\x86\Debug\FTPDownloadRTDM.MainForm.resources
+C:\CustomerProjects\Bombardier\NSE_PTU\branches\DaveDevelopment\FTPDownloadRTDM\obj\x86\Debug\FTPDownloadRTDM.Properties.Resources.resources
+C:\CustomerProjects\Bombardier\NSE_PTU\branches\DaveDevelopment\FTPDownloadRTDM\obj\x86\Debug\FTPDownloadRTDM.SelectVCUForm.resources
+C:\CustomerProjects\Bombardier\NSE_PTU\branches\DaveDevelopment\FTPDownloadRTDM\obj\x86\Debug\FTPDownloadRTDM.csproj.GenerateResource.Cache
+C:\CustomerProjects\Bombardier\NSE_PTU\branches\DaveDevelopment\FTPDownloadRTDM\obj\x86\Debug\FTPDownloadRTDM.exe
+C:\CustomerProjects\Bombardier\NSE_PTU\branches\DaveDevelopment\FTPDownloadRTDM\obj\x86\Debug\FTPDownloadRTDM.pdb

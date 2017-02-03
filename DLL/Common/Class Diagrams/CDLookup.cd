@@ -1,0 +1,134 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
+  <Class Name="Common.Configuration.Lookup">
+    <Position X="0.5" Y="0.5" Width="4.5" />
+    <Members>
+      <Field Name="m_WatchVariableTable" Hidden="true" />
+      <Field Name="m_WatchVariableTableByOldIdentifier" Hidden="true" />
+    </Members>
+    <AssociationLine Name="WatchVariableTableByOldIdentifier" Type="Common.Configuration.WatchVariableTableByOldIdentifier">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.091" Y="0.11" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>ABBQAECAgAAAIUAAABUAAIQAAgAIAAAAACBCAEAAIAI=</HashCode>
+      <FileName>Configuration\Lookup.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="WatchVariableTableByOldIdentifier" />
+      <Property Name="WatchVariableTable" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Common.Configuration.WatchVariableTable">
+    <Position X="5.5" Y="7" Width="5" />
+    <InheritanceLine Type="Common.Configuration.VariableTable&lt;R, T, E&gt;" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="6.25" Y="6.732" />
+        <Point X="6.25" Y="7" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Configuration\Watch\WatchVariableTable.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Common.Configuration.WatchVariableTableByOldIdentifier">
+    <Position X="0.5" Y="7.25" Width="2.75" />
+    <InheritanceLine Type="Common.Configuration.WatchVariableTable" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="5.5" Y="7.938" />
+        <Point X="3.25" Y="7.938" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Configuration\Watch\WatchVariableTableByOldIdentifier.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Common.Configuration.VariableTable&lt;R, T, E&gt;">
+    <Position X="5.5" Y="3.25" Width="2.75" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <InheritanceLine Type="Common.Configuration.Table&lt;R, T&gt;" FixedToPoint="true">
+      <Path>
+        <Point X="6.375" Y="2.891" />
+        <Point X="6.375" Y="3.25" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>wAAAAAAAABIAARAAAAEAAAAAAFIQAACAABAAAAAAAEA=</HashCode>
+      <FileName>Configuration\VariableTable.Generic.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Common.Configuration.Table&lt;R, T&gt;">
+    <Position X="5.5" Y="0.5" Width="1.75" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAAAQCEAAAAAAAAAAAAAAAAEAAAAAIgAAAAA=</HashCode>
+      <FileName>Configuration\Table.Generic.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Common.Configuration.WatchVariable">
+    <Position X="6.75" Y="9" Width="2.75" />
+    <Members>
+      <Field Name="m_AttributeFlags" Hidden="true" />
+      <Field Name="m_EmbeddedName" Hidden="true" />
+      <Field Name="m_MaxChartScale" Hidden="true" />
+      <Field Name="m_MaxModifyValue" Hidden="true" />
+      <Field Name="m_MinChartScale" Hidden="true" />
+      <Field Name="m_MinModifyValue" Hidden="true" />
+      <Field Name="m_OldIdentifier" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>YAAAABkAAAAAQgAAIAAAAAAAAQAQABAEABAAAAIAAAA=</HashCode>
+      <FileName>Configuration\Watch\WatchVariable.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Common.Configuration.Variable">
+    <Position X="3.25" Y="9" Width="2.75" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <AssociationLine Name="VariableType" Type="Common.Configuration.VariableType" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="3.25" Y="11.062" />
+        <Point X="1.906" Y="11.062" />
+        <Point X="1.906" Y="11.25" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>EAAEAgAAAAISAAAAAAgAAAQQhAAAQKACEEAQAIAABAA=</HashCode>
+      <FileName>Configuration\Variable.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="DataType" />
+      <Property Name="VariableType" />
+    </ShowAsAssociation>
+  </Class>
+  <Interface Name="Common.Configuration.IEnumBit">
+    <Position X="8.5" Y="5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Configuration\Interfaces\IEnumBit.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="Common.Configuration.DataType_e">
+    <Position X="0.75" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAIAIAAAAAABABAAAAAEQ=</HashCode>
+      <FileName>Configuration\VariableTable.Generic.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Common.Configuration.VariableType">
+    <Position X="0.75" Y="11.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAEAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAACA=</HashCode>
+      <FileName>Configuration\VariableTable.Generic.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

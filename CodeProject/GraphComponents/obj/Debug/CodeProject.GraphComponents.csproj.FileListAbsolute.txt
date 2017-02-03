@@ -1,0 +1,8 @@
+C:\CustomerProjects\Bombardier\NSE_PTU\branches\DaveDevelopment\CodeProject\GraphComponents\bin\Debug\CodeProject.GraphComponents.dll
+C:\CustomerProjects\Bombardier\NSE_PTU\branches\DaveDevelopment\CodeProject\GraphComponents\bin\Debug\CodeProject.GraphComponents.pdb
+C:\CustomerProjects\Bombardier\NSE_PTU\branches\DaveDevelopment\CodeProject\GraphComponents\obj\Debug\CodeProject.GraphComponents.LogicAnalyzer.resources
+C:\CustomerProjects\Bombardier\NSE_PTU\branches\DaveDevelopment\CodeProject\GraphComponents\obj\Debug\CodeProject.GraphComponents.Plotter.resources
+C:\CustomerProjects\Bombardier\NSE_PTU\branches\DaveDevelopment\CodeProject\GraphComponents\obj\Debug\CodeProject.GraphComponents.Properties.Resources.resources
+C:\CustomerProjects\Bombardier\NSE_PTU\branches\DaveDevelopment\CodeProject\GraphComponents\obj\Debug\CodeProject.GraphComponents.csproj.GenerateResource.Cache
+C:\CustomerProjects\Bombardier\NSE_PTU\branches\DaveDevelopment\CodeProject\GraphComponents\obj\Debug\CodeProject.GraphComponents.dll
+C:\CustomerProjects\Bombardier\NSE_PTU\branches\DaveDevelopment\CodeProject\GraphComponents\obj\Debug\CodeProject.GraphComponents.pdb

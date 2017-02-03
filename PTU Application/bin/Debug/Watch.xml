@@ -1,0 +1,2248 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Watch</name>
+    </assembly>
+    <members>
+        <member name="T:Watch.Forms.FormWorksetDefineWatch">
+            <summary>
+            Form to allow the user to define: (a) the watch variables that are associated with a workset used to view and record watch variables and (b) the order and 
+            column in which they are to be displayed.
+            </summary>
+        </member>
+        <member name="F:Watch.Forms.FormWorksetDefineWatch.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:Watch.Forms.FormWorksetDefineWatch.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="M:Watch.Forms.FormWorksetDefineWatch.#ctor">
+            <summary>
+            Initializes an new instance of the form. Zero parameter constructor, required by Visual Studio.
+            </summary>
+        </member>
+        <member name="M:Watch.Forms.FormWorksetDefineWatch.#ctor(Common.Configuration.WorksetCollection)">
+            <summary>
+            Initializes an new instance of the form. This constructor is used when a new workset is being created. Populates the 'Available' 
+            <c>ListBox</c> controls with the appropriate watch variables.
+            </summary>
+            <param name="worksetCollection">The workset collection that is to be managed.</param>
+        </member>
+        <member name="M:Watch.Forms.FormWorksetDefineWatch.#ctor(Common.Configuration.WorksetCollection,Common.Configuration.Workset_t,System.Boolean)">
+            <summary>
+            <para>
+            Initializes an new instance of the form for use when EDITing a workset. Populates the 'Configuration' ListBoxes with the data associated with the 
+            specified configuration and populates the 'Available' ListBoxes with the remaining data i.e. the difference between the configuration and the default data.
+            </para>
+            <para>
+            If the <paramref name="applyVisible"/> parameter is set to true the form will include an apply button so that the user can update the workset without closing
+            the form between updates. This is especially useful when modifying the active workset while the workset is on display.
+            </para>
+            </summary>
+            <param name="worksetCollection">The workset collection that is to be managed.</param>
+            <param name="workset">The workset that is to be edited.</param>
+            <param name="applyVisible">Flag to specify whether the Apply button is to be visible; True, displays the Apply button, false, hides the Apply button.</param>
+        </member>
+        <member name="M:Watch.Forms.FormWorksetDefineWatch.Cleanup(System.Boolean)">
+            <summary>
+            Clean up the resources used by the form.
+            </summary>
+            <param name="disposing">True to release both managed and unmanaged resources; false to release only unmanaged resources.</param>
+        </member>
+        <member name="M:Watch.Forms.FormWorksetDefineWatch.m_ButtonApply_Click(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the Apply button <c>Click</c> event. Add the defined workset to the to list of available worksets.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Watch.Forms.FormWorksetDefineWatch.UpdateCount">
+            <summary>
+            Update the count labels that show the number of watch variables that are available and the number that have been added to each column of the workset.
+            </summary>
+        </member>
+        <member name="M:Watch.Forms.FormWorksetDefineWatch.ConvertToWorkset(System.String)">
+            <summary>
+            Convert the current user setting to a workset.
+            </summary>
+            <param name="worksetName">The name of the workset.</param>
+            <returns>The user settings converted to a workset.</returns>
+        </member>
+        <member name="T:Watch.Forms.FormViewWatch">
+            <summary>
+            Form to view and record the watch variables defined by the <c>WorksetManager</c> class.
+            </summary>
+        </member>
+        <member name="F:Watch.Forms.FormViewWatch.IntervalMsDisplayUpdate">
+            <summary>
+            The interval, in ms, between successive display updates. Value: 500ms.
+            </summary>
+        </member>
+        <member name="F:Watch.Forms.FormViewWatch.m_CommunicationInterface">
+            <summary>
+            Reference to the selected communication interface.
+            </summary>
+        </member>
+        <member name="F:Watch.Forms.FormViewWatch.m_Pause">
+            <summary>
+            A flag to control the display update. True, stops the display update i.e pauses the display; false, re-starts the display update.
+            </summary>
+        </member>
+        <member name="F:Watch.Forms.FormViewWatch.m_ThreadPollWatch">
+            <summary>
+            Reference to the class responsible for polling the target hardware and recording the watch values.
+            </summary>
+        </member>
+        <member name="M:Watch.Forms.FormViewWatch.StartPolling">
+            <summary>
+            Start polling the target hardware.
+            </summary>
+        </member>
+        <member name="M:Watch.Forms.FormViewWatch.StopPolling">
+            <summary>
+            Stop polling the target hardware. 
+            </summary>
+            <remarks>Ignores the request if the class used to poll the target hardware is null.</remarks>
+        </member>
+        <member name="M:Watch.Forms.FormViewWatch.SetPauseAndWait(System.Int32)">
+            <summary>
+            Set the Pause property and wait until the feedback signal is received or until the timeout has elapsed.
+            </summary>
+            <param name="timeoutMs">The timeout period, in ms.</param>
+            <returns>A flag to indicate whether the pause feedback signal was asserted within the specified timeout. True, if the pause feedback signal was asserted 
+            within the specified timeout; otherwise, false.</returns>
+        </member>
+        <member name="F:Watch.Forms.FormViewWatch.WatchdogTripCountdown">
+            <summary>
+            The countdown value associated the watchdog trip. Value: 10.
+            </summary>
+        </member>
+        <member name="F:Watch.Forms.FormViewWatch.m_TimerDisplayUpdate">
+            <summary>
+            The System.Windows.Forms timer used to manage the display update.
+            </summary>
+        </member>
+        <member name="F:Watch.Forms.FormViewWatch.m_PacketCount">
+            <summary>
+            A record of the packet count. Used to determine if polling is active so that the packet received icon can be blinked in a thread-safe way.
+            </summary>
+        </member>
+        <member name="F:Watch.Forms.FormViewWatch.m_Watchdog">
+            <summary>
+            A record of the watchdog count. Used to determine if the thread on which the polling is carried out has locked.
+            </summary>
+        </member>
+        <member name="F:Watch.Forms.FormViewWatch.m_WatchdogTrip">
+            <summary>
+            A flag that indicates whether a watchdog trip has occurred.
+            </summary>
+        </member>
+        <member name="F:Watch.Forms.FormViewWatch.m_WatchdogTripCountdown">
+            <summary>
+            The countdown to the watchdog trip.
+            </summary>
+        </member>
+        <member name="F:Watch.Forms.FormViewWatch.m_CommunicationFault">
+            <summary>
+            A flag that indicates whether a communication fault has been detected.
+            </summary>
+        </member>
+        <member name="F:Watch.Forms.FormViewWatch.m_TimerSimulatedFaultLog">
+            <summary>
+            The timer used to manage the simulated fault log recording.
+            </summary>
+        </member>
+        <member name="F:Watch.Forms.FormViewWatch.m_Record">
+            <summary>
+            Flag to control data recording. True, starts recording of the watch variable data; false, stops recording of the data.
+            </summary>
+        </member>
+        <member name="F:Watch.Forms.FormViewWatch.m_StartTime">
+            <summary>
+            The time when recording of the watch variable data was started.
+            </summary>
+        </member>
+        <member name="F:Watch.Forms.FormViewWatch.m_FullyQualifiedFilename">
+            <summary>
+            The fully qualified file name of the file used to record the watch data, excluding the extension.
+            </summary>
+        </member>
+        <member name="F:Watch.Forms.FormViewWatch.m_WatchFileRecordedData">
+            <summary>
+            The recorded watch data that is serialized to disk.
+            </summary>
+        </member>
+        <member name="F:Watch.Forms.FormViewWatch.m_CyclicQueueSizeRecord">
+            <summary>
+            The size of the cyclic queue used to store recorded watch data.
+            </summary>
+        </member>
+        <member name="F:Watch.Forms.FormViewWatch.m_CyclicQueueSizeSimulatedFaultLog">
+            <summary>
+            The size of the cyclic queue used to store simulated fault log data.
+            </summary>
+        </member>
+        <member name="F:Watch.Forms.FormViewWatch.m_DataStreamSimulatedFaultLog">
+            <summary>
+            The data stream associated with a simulated fault log.
+            </summary>
+        </member>
+        <member name="M:Watch.Forms.FormViewWatch.#ctor">
+            <summary>
+            Initializes a new instance of the class. Zero parameter constructor, required for Visual Studio.
+            </summary>
+        </member>
+        <member name="M:Watch.Forms.FormViewWatch.#ctor(Common.Communication.ICommunicationParent)">
+            <summary>
+            Form to view the watch variables in real time.
+            </summary>
+        </member>
+        <member name="M:Watch.Forms.FormViewWatch.Cleanup(System.Boolean)">
+            <summary>
+            Clean up the resources used by the form.
+            </summary>
+            <param name="disposing">True to release both managed and unmanaged resources; false to release only unmanaged resources.</param>
+        </member>
+        <member name="M:Watch.Forms.FormViewWatch.FormViewWatch_Shown(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the <c>Shown</c> event. (1) Initialize the progress bar; (2) add the watch controls associated with each workgroup to the 
+            appropriate <c>TabPage</c> control; (3) show the <c>TabPage</c> corresponding to the active workgroup and (4) start the display update
+            timer. 
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:Watch.Forms.FormViewWatch.FormViewWatch_KeyDown(System.Object,System.Windows.Forms.KeyEventArgs)">
+            <summary>
+            Event handler for the KeyDown event. If the space bar has been pressed, initiate fault logging. 
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Watch.Forms.FormViewWatch.Escape_Click(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the escape key <c>Click</c> event. Close the form.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Watch.Forms.FormViewWatch.F2_Click(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the 'F2-PrtScr' button <c>Click</c> event. Capture the window and save the image to the specified file.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Watch.Forms.FormViewWatch.F3_Click(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the 'F3-Record' button <c>Click</c> event. Manage all aspects of the user pressing the 'F3-Record' button: (a) update
+            the text and image; (b) enable/disable any other buttons, as appropriate and (c) assert or clear the recording flag, as required.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Watch.Forms.FormViewWatch.F4_Click(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the 'F4-Pause' button <c>Click</c> event. Manages all aspects of the user pressing the 'F4-Pause' button: (a) updates
+            the text and image; (b) enables/disables any other buttons, as appropriate and (c) inhibits or resumes the screen update, as appropriate.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+            <remarks>This event handler was deprecated in Rev. 1.15.1.</remarks>
+        </member>
+        <member name="M:Watch.Forms.FormViewWatch.F5_Click(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the 'F5-Edit' button <c>Click</c> event. Displays the dialog form which allows the user to edit the current workset.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Watch.Forms.FormViewWatch.DisplayUpdate(System.Object,System.EventArgs)">
+            <summary>
+            Called periodically by the System.Windows.Forms.Timer event. Updates: (a) the status information and (b) the <c>Value</c> property of all
+            user controls associated with this form.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Watch.Forms.FormViewWatch.SaveSimulatedFaultLog(System.Object,System.EventArgs)">
+            <summary>
+            Called by the System.Windows.Forms.Timer Tick event. Save the simulated fault log data to disk.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Watch.Forms.FormViewWatch.m_ToolStripComboBox1_SelectedIndexChanged(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the <c>ToolStripComboBox</c> control <c>SelectedIndexChanged</c> event. Stops updating the display and polling the target
+            and then loads and displays the selected workset.
+            </summary>
+            <param name="sender">Reference to the object that raised the event. In this case the value will be null as the sender is a static 
+            class.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Watch.Forms.FormViewWatch.TabPage_Click(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the <c>Click</c> event associated with each <c>TabPage</c>. (1) Sets the focus to the selected <c>TabPage</c>, this
+            ensures that the <c>Leave</c> event for the selected user control is triggered.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Watch.Forms.FormViewWatch.WorksetManager_WorksetCollectionModified(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the <c>WorksetCollectionModified</c> event associated with the <c>WorksetCollection</c> class. Dynamically updates the
+            ToolStripComboBox control with the updated worksets.
+            </summary>
+            <param name="sender">Reference to the object that raised the event. In this case the value will be null as the sender is a static 
+            class.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Watch.Forms.FormViewWatch.Exit">
+            <summary>
+            Close the form cleanly. Simulates the user pressing the Exit button.
+            </summary>
+        </member>
+        <member name="M:Watch.Forms.FormViewWatch.UpdateMenu(Common.Security)">
+            <summary>
+            Process any form specific changes to the menu system or function keys resulting from a change in the security level of the user. Check
+            whether the new securitly level allows the user to edit the current workset.
+            </summary>
+            <param name="security">Reference to the security class.</param>
+        </member>
+        <member name="M:Watch.Forms.FormViewWatch.SaveRecordedWatchData(System.String,Common.WatchFile_t)">
+            <summary>
+            Add (1) the watch values associated with the cyclic buffer used to store recorded watch values and (2) the max/min values for each watch
+            element to the structure specified by parameter <paramref name="watchFile"/> and serialize the structure to disk using the specified
+            filename.
+            </summary>
+        </member>
+        <member name="M:Watch.Forms.FormViewWatch.ReportRecordingStatus(System.Boolean)">
+            <summary>
+            Report the current recording status.
+            </summary>
+            <param name="isRecording">Flag to indicate whether the watch data is currently being recorded.</param>
+        </member>
+        <member name="M:Watch.Forms.FormViewWatch.LoadWorkset(Common.Configuration.Workset_t)">
+            <summary>
+            Load and display the specified workset.
+            </summary>
+            <remarks>Polling of the target hardware and the display update must be suspended before calling this method.</remarks>
+            <param name="workset">The workset that is to be loaded.</param>
+        </member>
+        <member name="M:Watch.Forms.FormViewWatch.ComboBoxUpdateWorksets(System.Windows.Forms.ToolStripComboBox@,Common.Configuration.WorksetCollection)">
+            <summary>
+            Update the worksets associated with the <c>Items</c> property of the specified <c>ToolStripComboBox</c> control.
+            </summary>
+            <param name="comboBox">The <c>ToolStripComboBox</c> control that it to be processed.</param>
+            <param name="worksetCollection">The workset collection containing the updated worksets.</param>
+        </member>
+        <member name="F:Watch.Forms.FormViewWatch.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:Watch.Forms.FormViewWatch.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="P:Watch.Forms.FormViewWatch.CommunicationInterface">
+            <summary>
+            Gets or sets the communication interface that is to be used to communicate with the target.
+            </summary>
+        </member>
+        <member name="P:Watch.Forms.FormViewWatch.Pause">
+            <summary>
+            Gets or sets the flag that controls the polling of the target hardware. True, inhibits polling of the target hardware; otherwise, false,
+            resumes polling.
+            </summary>
+        </member>
+        <member name="P:Watch.Forms.FormViewWatch.PauseFeedback">
+            <summary>
+            Gets the feedback flag that indicates whether polling of the target hardware has been suspended.  
+            </summary>
+            <remarks>This flag is asserted when the <c>ThreadPollWatch</c> class has entered the pause state, i.e. the current communication request is
+            complete and no further requests will be issued until the pause property has been cleared.</remarks>
+        </member>
+        <member name="P:Watch.Forms.FormViewWatch.ThreadPollWatch">
+            <summary>
+            Gets or sets the reference to the class responsible for polling the target hardware and recording the watch values.
+            </summary>
+        </member>
+        <member name="P:Watch.Forms.FormViewWatch.CyclicQueueSizeRecord">
+            <summary>
+            Gets the size of the cyclic queue used to store recorded watch data.
+            </summary>
+        </member>
+        <member name="P:Watch.Forms.FormViewWatch.CyclicQueueSizeSimulatedFaultLog">
+            <summary>
+            Gets the size of the cyclic queue used to store the simulated fault log data.
+            </summary>
+        </member>
+        <member name="T:Watch.Forms.FormWorksetManagerChartRecorder">
+            <summary>
+            Form to manage the the worksets associated with the chart recorder. Allows the user to: edit, add and delete individual worksets or 
+            set any of the worksets to be the default workset.
+            </summary>
+        </member>
+        <member name="M:Watch.Forms.FormWorksetManagerChartRecorder.#ctor">
+            <summary>
+            Initializes a new instance of the class. Zero parameter constructor, required by Visual Studio.
+            </summary>
+        </member>
+        <member name="M:Watch.Forms.FormWorksetManagerChartRecorder.#ctor(Common.Configuration.WorksetCollection)">
+            <summary>
+            Initializes a new instance of the class. Records the securty level of the user and enables/disables the 'Set as Default' context menu option accordingly.
+            </summary>
+            <param name="worksetCollection">The workset collection that is to be managed.</param>
+        </member>
+        <member name="M:Watch.Forms.FormWorksetManagerChartRecorder.Cleanup(System.Boolean)">
+            <summary>
+            Clean up the resources used by the form.
+            </summary>
+            <param name="disposing">True to release both managed and unmanaged resources; false to release only unmanaged resources.</param>
+        </member>
+        <member name="M:Watch.Forms.FormWorksetManagerChartRecorder.EditSelectedWorkset(Common.Configuration.WorksetItem)">
+            <summary>
+            Call the form which allows the user to edit the selected workset.
+            </summary>
+            <param name="selectedItem">The selected workset item.</param>
+        </member>
+        <member name="M:Watch.Forms.FormWorksetManagerChartRecorder.CreateNewWorkset">
+            <summary>
+            Call the form which allows the user to create a new workset.
+            </summary>
+        </member>
+        <member name="F:Watch.Forms.FormWorksetManagerChartRecorder.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:Watch.Forms.FormWorksetManagerChartRecorder.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:Watch.Forms.FormConfigureChartRecorder">
+            <summary>
+            Form to allow the user to configure the chart recorder.
+            </summary>
+        </member>
+        <member name="T:Watch.Forms.IChartScale">
+            <summary>
+            An interface to allow the FormChangeChartScale form to modify the chart recorder Y axis upper and lower limits. 
+            
+            </summary>
+        </member>
+        <member name="P:Watch.Forms.IChartScale.ListBoxChartScaleLowerLimit">
+            <summary>
+            The <c>ListBox</c> control that contains the lower limits of the Y axis for each chart recorder channel.
+            </summary>
+        </member>
+        <member name="P:Watch.Forms.IChartScale.ListBoxChartScaleUpperLimit">
+            <summary>
+            The <c>ListBox</c> control that contains the upper limits of the Y axis for each chart recorder channel.
+            </summary>
+        </member>
+        <member name="F:Watch.Forms.FormConfigureChartRecorder.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:Watch.Forms.FormConfigureChartRecorder.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="F:Watch.Forms.FormConfigureChartRecorder.m_ListBoxUnits">
+            <summary>
+            Reference to the 'Units' <c>ListBox</c>.
+            </summary>
+        </member>
+        <member name="F:Watch.Forms.FormConfigureChartRecorder.m_ListBoxChartScaleLowerLimit">
+            <summary>
+            Reference to the 'Chart Scale/Lower Limit' <c>ListBox</c>.
+            </summary>
+        </member>
+        <member name="F:Watch.Forms.FormConfigureChartRecorder.m_ListBoxChartScaleUpperLimit">
+            <summary>
+            Reference to the 'Chart Scale/Upper Limit' <c>ListBox</c>.
+            </summary>
+        </member>
+        <member name="F:Watch.Forms.FormConfigureChartRecorder.m_LabelListBoxUnitsColumnHeader">
+            <summary>
+            Reference to the 'Units' Header <c>Label</c>.
+            </summary>
+        </member>
+        <member name="F:Watch.Forms.FormConfigureChartRecorder.m_LabelListBoxChartScaleLowerLimitColumnHeader">
+            <summary>
+            Reference to the 'Chart Scale/Lower Limit' Header <c>Label</c>.
+            </summary>
+        </member>
+        <member name="F:Watch.Forms.FormConfigureChartRecorder.m_LabelListBoxChartScaleUpperLimitColumnHeader">
+            <summary>
+            Reference to the 'Chart Scale/Upper Limit' Header <c>Label</c>.
+            </summary>
+        </member>
+        <member name="F:Watch.Forms.FormConfigureChartRecorder.m_LegendListBoxTitle">
+            <summary>
+            Reference to the 'Title' Legend.
+            </summary>
+        </member>
+        <member name="F:Watch.Forms.FormConfigureChartRecorder.m_GroupBoxChartMode">
+            <summary>
+            Reference to the 'Chart Mode' GroupBox control.
+            </summary>
+        </member>
+        <member name="F:Watch.Forms.FormConfigureChartRecorder.m_ToolStripChartMode">
+            <summary>
+            Reference to the 'Chart Mode' ToolStrip control.
+            </summary>
+        </member>
+        <member name="F:Watch.Forms.FormConfigureChartRecorder.m_TSBDataMode">
+            <summary>
+            Reference to the 'Data Mode' ToolStripButton control.
+            </summary>
+        </member>
+        <member name="F:Watch.Forms.FormConfigureChartRecorder.m_TSSeparatorDataMode">
+            <summary>
+            Reference to the 'Data Mode' ToolStripSeparator control.
+            </summary>
+        </member>
+        <member name="F:Watch.Forms.FormConfigureChartRecorder.m_TSSeparatorRampMode">
+            <summary>
+            Reference to the 'Ramp Mode' ToolStripSeparator control.
+            </summary>
+        </member>
+        <member name="F:Watch.Forms.FormConfigureChartRecorder.m_TSBZeroOutput">
+            <summary>
+            Reference to the 'Zero Output Mode' ToolStripButton control.
+            </summary>
+        </member>
+        <member name="F:Watch.Forms.FormConfigureChartRecorder.m_TSSeparatorZeroOutput">
+            <summary>
+            Reference to the 'Zero Output Mode' ToolStripSeparator control.
+            </summary>
+        </member>
+        <member name="F:Watch.Forms.FormConfigureChartRecorder.m_TSBFullScale">
+            <summary>
+            Reference to the 'Full Scale Mode' ToolStripButton control.
+            </summary>
+        </member>
+        <member name="F:Watch.Forms.FormConfigureChartRecorder.m_TSSeparatorFullScale">
+            <summary>
+            Reference to the 'Full Scale Mode' ToolStripSeparator control.
+            </summary>
+        </member>
+        <member name="F:Watch.Forms.FormConfigureChartRecorder.m_TSBRampMode">
+            <summary>
+            Reference to the 'Ramp Mode' ToolStripButton control.
+            </summary>
+        </member>
+        <member name="F:Watch.Forms.FormConfigureChartRecorder.m_CommunicationInterface">
+            <summary>
+            Reference to the selected communication interface.
+            </summary>
+        </member>
+        <member name="F:Watch.Forms.FormConfigureChartRecorder.m_MenuInterfaceWatch">
+            <summary>
+            Reference to the class which calls the menu options associated with the subsystem which shows and records the watch variables - Watch.dll.
+            </summary>
+        </member>
+        <member name="F:Watch.Forms.FormConfigureChartRecorder.m_ChartMode">
+            <summary>
+            The current <c>ChartMode</c> of the chart recorder.
+            </summary>
+        </member>
+        <member name="M:Watch.Forms.FormConfigureChartRecorder.#ctor">
+            <summary>
+            Initializes an new instance of the form. Zero parameter constructor.
+            </summary>
+        </member>
+        <member name="M:Watch.Forms.FormConfigureChartRecorder.#ctor(Common.Communication.ICommunicationParent,Common.IMainWindow,Common.Configuration.WorksetCollection)">
+            <summary>
+            Initializes an new instance of the form. Retrieve the chart recorder configuration from the VCU.
+            </summary>
+            <remarks>The reference to the main application window is also derived from the CalledFrom parameter, however, this is not obtained until after the form 
+            has been shown. As a number of multiple document interface child forms (mdi child) may be polling the VCU when this form is instantiated, the 
+            call to the PauseCommunication() method must be made before the chart configuration data can be retrieved from the VCU from within the constructor code. 
+            A requirement of the PauseCommunication() method is that the reference to the main application window must be defined.
+            </remarks>
+            <param name="communicationInterface">Reference to the communication interface that is to be used to communicate with the VCU.</param>
+            <param name="mainWindow">Reference to the main application window, this is required for the call to the PauseCommunication() method in the constructor 
+            code.</param>
+            <param name="worksetCollection">The workset collection associated with the chart recorder.</param>
+        </member>
+        <member name="M:Watch.Forms.FormConfigureChartRecorder.Cleanup(System.Boolean)">
+            <summary>
+            Clean up the resources used by the form.
+            </summary>
+            <param name="disposing">True to release both managed and unmanaged resources; false to release only unmanaged resources.</param>
+        </member>
+        <member name="M:Watch.Forms.FormConfigureChartRecorder.m_TSBUpload_Click(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the 'Upload' <c>ToolStripButton</c> <c>Click</c> event. Upload the selected chart recorder workset to the VCU.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Watch.Forms.FormConfigureChartRecorder.m_ButtonMoveUp_Click(System.Object,System.EventArgs)">
+            <summary>
+            Event handler associated with the 'Move Up' button <c>Click</c> event. Move the selected item up the list.
+            </summary>
+            <remarks>Only one item may be selected at a time. If more than one item is selected the action will be ignored.</remarks>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Watch.Forms.FormConfigureChartRecorder.m_ButtonMoveDown_Click(System.Object,System.EventArgs)">
+            <summary>
+            Event handler associated with the 'Move Down' button <c>Click</c> event. Move the selected item down the list.
+            </summary>
+            <remarks>Only one item may be selected at a time. If more than one item is selected the action will be ignored.</remarks>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Watch.Forms.FormConfigureChartRecorder.m_MenuItemChangeChartScaleFactor_Click(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the <c>Click</c> event associated with the 'Change Chart Scale' context menu option attached to the <c>ListBox</c> containing the watch 
+            variables that have been added to the workset.
+            </summary>
+            <remarks>This menu option is only relevant to the form used to configure the chart recorder.</remarks>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Watch.Forms.FormConfigureChartRecorder.m_TSBDataMode_Click(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the <c>Click</c> event associated with the 'Data Mode' ToolStripButton.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Watch.Forms.FormConfigureChartRecorder.m_TSBRampMode_Click(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the <c>Click</c> event associated with the 'Ramp Mode' ToolStripButton.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Watch.Forms.FormConfigureChartRecorder.m_TSBZeroOutput_Click(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the <c>Click</c> event associated with the 'Zero Output' ToolStripButton.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Watch.Forms.FormConfigureChartRecorder.m_TSBFullScale_Click(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the <c>Click</c> event associated with the 'Full Scale' ToolStripButton.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Watch.Forms.FormConfigureChartRecorder.AddSupplementalFields(System.Int32)">
+            <summary>
+            Add any supplemental workset fields specific to the child class. Add the chart recorder scaling information.
+            </summary>
+            <param name="oldIdentifier">The old identifier of the watch variable that is to be added.</param>
+        </member>
+        <member name="M:Watch.Forms.FormConfigureChartRecorder.RemoveSupplementalFields(System.Int32)">
+            <summary>
+            Remove any supplemental workset fields specific to the child class. Remove the chart recorder scaling information.
+            </summary>
+            <param name="removeAtIndex">The index of the ListBox row that is to be removed.</param>
+        </member>
+        <member name="M:Watch.Forms.FormConfigureChartRecorder.UpdateCount">
+            <summary>
+            Update the count label that shows the number of watch variables that have been added to the chart configuration workset.
+            </summary>
+        </member>
+        <member name="M:Watch.Forms.FormConfigureChartRecorder.WatchItemAddRange(System.Windows.Forms.ListBox,Common.Configuration.Column_t)">
+            <summary>
+            Add the watch variables defined in the specified workset column to the <c>ListBox</c> controls that display the description and the chart recorder scaling 
+            information for each chart recorder channel.
+            </summary>
+            <param name="listBox">The <c>ListBox</c> to which the items are to be added.</param>
+            <param name="worksetColumn">The column of the workset that is to be added to the <c>ListBox</c> control.</param>
+        </member>
+        <member name="M:Watch.Forms.FormConfigureChartRecorder.UploadWorkset(Common.Configuration.Workset_t)">
+            <summary>
+            Upload the specified workset to the VCU.
+            </summary>
+            <param name="workset">The workset that is to be downloaded to the VCU.</param>
+            <returns>A flag that indicates whether the workset was successfully downloaded to the VCU. True, if the VCU update was successful; otherwise, false.</returns>
+        </member>
+        <member name="M:Watch.Forms.FormConfigureChartRecorder.SetModifyState(Common.Forms.FormConfigure.ModifyState)">
+            <summary>
+            Set the modify state to the specified state.
+            </summary>
+            <param name="modifyState">The required modify state.</param>
+        </member>
+        <member name="M:Watch.Forms.FormConfigureChartRecorder.ConvertToWorkset(System.String)">
+            <summary>
+            Convert the current user setting to a workset.
+            </summary>
+            <remarks>
+            The conversion includes the chart scaling parameters.
+            </remarks>
+            <param name="worksetName">The name of the workset.</param>
+            <returns>The user settings converted to a workset.</returns>
+        </member>
+        <member name="M:Watch.Forms.FormConfigureChartRecorder.ClearListBoxColumnItems">
+            <summary>
+            Clear the items in the 'Column' ListBox controls.
+            </summary>
+        </member>
+        <member name="M:Watch.Forms.FormConfigureChartRecorder.CompareWorkset(Common.Configuration.Workset_t)">
+            <summary>
+            Predicate function called by the <c>List.Find()</c> method to return a workset that matches the specified workset, ignoring the Name, SecurityLevel and 
+            HeaderText fields of each workset. 
+            </summary>
+            <param name="workset">The list item that is to be processed.</param>
+            <returns>True, if the specified item meets the logic requirements given in the function; otherwise false.</returns>
+        </member>
+        <member name="M:Watch.Forms.FormConfigureChartRecorder.SetCheckedChartModeToolStripButtons(Common.Communication.ChartMode)">
+            <summary>
+            Set the <c>Checked</c> properties of the 'Chart Mode' ToolStripButton controls according the the specified chart mode.
+            </summary>
+            <param name="chartMode">The current mode of the Chart Recorder.</param>
+        </member>
+        <member name="M:Watch.Forms.FormConfigureChartRecorder.GetChartMode">
+            <summary>
+            Get the mode of the chart recorder e.g. Data, Ramp, Full Scale or Zero. 
+            </summary>
+            <returns>The current <c>ChartMode</c> of the Chart Recorder; otherwise, if unsuccessful, ChartMode.Undefined.</returns>
+        </member>
+        <member name="P:Watch.Forms.FormConfigureChartRecorder.CommunicationInterface">
+            <summary>
+            Gets or sets the communication interface that is to be used to communicate with the target.
+            </summary>
+            <remarks>This property is set by the child class, if appropriate.</remarks>
+        </member>
+        <member name="P:Watch.Forms.FormConfigureChartRecorder.ListBoxChartScaleLowerLimit">
+            <summary>
+            Gets the reference to the <c>ListBox</c> control that contains the lower limits of the Y axis for each chart recorder channel.
+            </summary>
+        </member>
+        <member name="P:Watch.Forms.FormConfigureChartRecorder.ListBoxChartScaleUpperLimit">
+            <summary>
+            Gets the reference to the <c>ListBox</c> control that contains the upper limits of the Y axis for each chart recorder channel.
+            </summary>
+        </member>
+        <member name="P:Watch.Forms.FormConfigureChartRecorder.TSBSave">
+            <summary>
+            Gets the refernce to the 'Save' <c>ToolStripButton</c> control.
+            </summary>
+        </member>
+        <member name="T:Watch.Forms.FormChangeChartScale">
+            <summary>
+            Form to allow the user to modify the upper and lower limits of the Y axis associated with an individual chart recorder channel.
+            </summary>
+            <summary>
+            Form to allow the user to modify the scaling of individual channels of the chart recorder.
+            </summary>
+        </member>
+        <member name="F:Watch.Forms.FormChangeChartScale.m_WatchVariable">
+            <summary>
+            The selected watch variable.
+            </summary>
+        </member>
+        <member name="F:Watch.Forms.FormChangeChartScale.m_IChartScale">
+            <summary>
+            Reference to the class that implements the IChartScale interface.
+            </summary>
+        </member>
+        <member name="F:Watch.Forms.FormChangeChartScale.m_CalledFromAsFormConfigureChartRecorder">
+            <summary>
+            Reference to the calling form as a <c>FormConfigureChartRecorder</c> class. Used to enable the 'Save' ToolStripButton if the class was called from the form 
+            used to configure the chart recorder.
+            </summary>
+        </member>
+        <member name="F:Watch.Forms.FormChangeChartScale.m_SelectedIndex">
+            <summary>
+            The selected index of the the <c>ListBox</c> control containing the list of old identifiers.
+            </summary>
+        </member>
+        <member name="F:Watch.Forms.FormChangeChartScale.m_HexFormat">
+            <summary>
+            Flag to indicate whether the scalar is to be specified and displayed in hexadecimal format. True, indicated hexadecimal format; otherwise, false indicates 
+            general format.
+            </summary>
+        </member>
+        <member name="F:Watch.Forms.FormChangeChartScale.m_ChartScaleLowerLimit">
+            <summary>
+            The current lower limit of the Y axis associated with the chart recorder channel.
+            </summary>
+        </member>
+        <member name="F:Watch.Forms.FormChangeChartScale.m_ChartScaleUpperLimit">
+            <summary>
+            The current upper limit of the Y axis associated with the chart recorder channel.
+            </summary>
+        </member>
+        <member name="M:Watch.Forms.FormChangeChartScale.#ctor">
+            <summary>
+            Initializes a new instance of the class. Zero parameter constructor.
+            </summary>
+        </member>
+        <member name="M:Watch.Forms.FormChangeChartScale.#ctor(System.Windows.Forms.ListBox)">
+            <summary>
+            Initializes a new instance of the class.
+            </summary>.
+            <param name="listBox">The ListBox control containing the chart recorder channel scaling information.</param>
+        </member>
+        <member name="M:Watch.Forms.FormChangeChartScale.Cleanup(System.Boolean)">
+            <summary>
+            Clean up the resources used by the form.
+            </summary>
+            <param name="disposing">True to release both managed and unmanaged resources; false to release only unmanaged resources.</param>
+        </member>
+        <member name="M:Watch.Forms.FormChangeChartScale.FormChangeChartScale_Shown(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the form <c>Shown</c> event.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Watch.Forms.FormChangeChartScale.m_TextBoxM_KeyPress(System.Object,System.Windows.Forms.KeyPressEventArgs)">
+            <summary>
+            Event handler for the <c>KeyPress</c> event associated with all <c>TextBox</c> controls. Checks if the user entered a [CR] and, if so, moves the focus 
+            to the next <c>TextBox</c> control on the form.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Watch.Forms.FormChangeChartScale.TextBox_Validating(System.Object,System.ComponentModel.CancelEventArgs)">
+            <summary>
+            Event handler for the <c>Validating</c> event associated with all <c>TextBox</c> controls. Validates the user entry and warns the user, using an ErrorProvider 
+            control, if the value entered is outside the valid range.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Watch.Forms.FormChangeChartScale.m_ButtonOK_Click(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the OK button <c>Click</c> event. Apply any otstanding changes.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Watch.Forms.FormChangeChartScale.m_ButtonCancel_Click(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the Cancel button <c>Click</c> event. Close the form.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Watch.Forms.FormChangeChartScale.m_ButtonApply_Click(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the Apply button <c>Click</c> event. Update the ListBox controls in the calling form with the modified limits.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="F:Watch.Forms.FormChangeChartScale.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:Watch.Forms.FormChangeChartScale.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:Watch.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:Watch.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:Watch.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:Watch.Properties.Resources.Data">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Watch.Properties.Resources.EMGetChartRecorderWatchIDFailed">
+            <summary>
+              Looks up a localized string similar to Unable to retrieve the watch variable identifier associated with channel {0} of the chart recorder..
+            </summary>
+        </member>
+        <member name="P:Watch.Properties.Resources.EMSendVariableFailed">
+            <summary>
+              Looks up a localized string similar to Unable to write the new value to the target hardware..
+            </summary>
+        </member>
+        <member name="P:Watch.Properties.Resources.EMSetChartRecorderWatchIDFailed">
+            <summary>
+              Looks up a localized string similar to Unable to set the watch variable identifier associated with channel {0} of the chart recorder..
+            </summary>
+        </member>
+        <member name="P:Watch.Properties.Resources.EMSetWatchElementsFailed">
+            <summary>
+              Looks up a localized string similar to Unable to map the watch identifiers to the watch elements..
+            </summary>
+        </member>
+        <member name="P:Watch.Properties.Resources.EMUpdateWatchElementsFailed">
+            <summary>
+              Looks up a localized string similar to Unable to retrieve the watch elements from the target hardware..
+            </summary>
+        </member>
+        <member name="P:Watch.Properties.Resources.EMWorksetIntegrityCheckFailed">
+            <summary>
+              Looks up a localized string similar to There is a problem with the integrity check on the workset, please contact the system administrator..
+            </summary>
+        </member>
+        <member name="P:Watch.Properties.Resources.FileDialogOpenFilterRecordedWatchFile">
+            <summary>
+              Looks up a localized string similar to Recorded Watch Files.
+            </summary>
+        </member>
+        <member name="P:Watch.Properties.Resources.FileDialogOpenFilterSimulatedFaultLog">
+            <summary>
+              Looks up a localized string similar to Simulated Data Stream Files.
+            </summary>
+        </member>
+        <member name="P:Watch.Properties.Resources.FileDialogOpenTitleRecordedWatchFile">
+            <summary>
+              Looks up a localized string similar to Select Recorded Watch File.
+            </summary>
+        </member>
+        <member name="P:Watch.Properties.Resources.FileDialogOpenTitleSimulatedFaultLog">
+            <summary>
+              Looks up a localized string similar to Select Simulated Data Stream.
+            </summary>
+        </member>
+        <member name="P:Watch.Properties.Resources.FileInformation">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Watch.Properties.Resources.Full_Scale">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Watch.Properties.Resources.FunctionKeyTextContinue">
+            <summary>
+              Looks up a localized string similar to Cont..
+            </summary>
+        </member>
+        <member name="P:Watch.Properties.Resources.FunctionKeyTextEdit">
+            <summary>
+              Looks up a localized string similar to Config..
+            </summary>
+        </member>
+        <member name="P:Watch.Properties.Resources.FunctionKeyTextInfo">
+            <summary>
+              Looks up a localized string similar to Info.
+            </summary>
+        </member>
+        <member name="P:Watch.Properties.Resources.FunctionKeyTextPause">
+            <summary>
+              Looks up a localized string similar to Pause.
+            </summary>
+        </member>
+        <member name="P:Watch.Properties.Resources.FunctionKeyTextRecord">
+            <summary>
+              Looks up a localized string similar to Rec..
+            </summary>
+        </member>
+        <member name="P:Watch.Properties.Resources.FunctionKeyTextSave">
+            <summary>
+              Looks up a localized string similar to Save.
+            </summary>
+        </member>
+        <member name="P:Watch.Properties.Resources.FunctionKeyTextStop">
+            <summary>
+              Looks up a localized string similar to Stop.
+            </summary>
+        </member>
+        <member name="P:Watch.Properties.Resources.FunctionKeyToolTipChartRecorderConfigure">
+            <summary>
+              Looks up a localized string similar to [Configure Selected Chart Recorder Configuration].
+            </summary>
+        </member>
+        <member name="P:Watch.Properties.Resources.FunctionKeyToolTipChartRecorderConfigureUndo">
+            <summary>
+              Looks up a localized string similar to [Undo - Configure Selected Chart Recorder Configuration].
+            </summary>
+        </member>
+        <member name="P:Watch.Properties.Resources.FunctionKeyToolTipChartRecorderCopy">
+            <summary>
+              Looks up a localized string similar to [Copy Chart Recorder Configuration].
+            </summary>
+        </member>
+        <member name="P:Watch.Properties.Resources.FunctionKeyToolTipChartRecorderCopyUndo">
+            <summary>
+              Looks up a localized string similar to [Undo - Copy Chart Recorder Configuration].
+            </summary>
+        </member>
+        <member name="P:Watch.Properties.Resources.FunctionKeyToolTipChartRecorderCreate">
+            <summary>
+              Looks up a localized string similar to [Create New Chart Recorder Configuration].
+            </summary>
+        </member>
+        <member name="P:Watch.Properties.Resources.FunctionKeyToolTipChartRecorderCreateUndo">
+            <summary>
+              Looks up a localized string similar to [Undo - Create New Chart Recorder Configuration].
+            </summary>
+        </member>
+        <member name="P:Watch.Properties.Resources.FunctionKeyToolTipChartRecorderDelete">
+            <summary>
+              Looks up a localized string similar to [Delete Selected Chart Recorder Configuration].
+            </summary>
+        </member>
+        <member name="P:Watch.Properties.Resources.FunctionKeyToolTipChartRecorderDeleteUndo">
+            <summary>
+              Looks up a localized string similar to [Undo - Delete Selected Chart Recorder Configuration].
+            </summary>
+        </member>
+        <member name="P:Watch.Properties.Resources.FunctionKeyToolTipChartRecorderOverrideSecurity">
+            <summary>
+              Looks up a localized string similar to [Override Chart Recorder Configuration Security Setting].
+            </summary>
+        </member>
+        <member name="P:Watch.Properties.Resources.FunctionKeyToolTipChartRecorderOverrideSecurityUndo">
+            <summary>
+              Looks up a localized string similar to [Undo - Override Chart Recorder Configuration Security Setting].
+            </summary>
+        </member>
+        <member name="P:Watch.Properties.Resources.FunctionKeyToolTipChartRecorderRename">
+            <summary>
+              Looks up a localized string similar to [Rename Chart Recorder Configuration].
+            </summary>
+        </member>
+        <member name="P:Watch.Properties.Resources.FunctionKeyToolTipChartRecorderRenameUndo">
+            <summary>
+              Looks up a localized string similar to [Undo - Rename Chart Recorder Configuration].
+            </summary>
+        </member>
+        <member name="P:Watch.Properties.Resources.FunctionKeyToolTipChartRecorderSave">
+            <summary>
+              Looks up a localized string similar to [Save Chart Recorder Configuration].
+            </summary>
+        </member>
+        <member name="P:Watch.Properties.Resources.FunctionKeyToolTipChartRecorderSetAsDefault">
+            <summary>
+              Looks up a localized string similar to [Set Selected Chart Recorder Configuration As Default].
+            </summary>
+        </member>
+        <member name="P:Watch.Properties.Resources.FunctionKeyToolTipChartRecorderSetAsDefaultUndo">
+            <summary>
+              Looks up a localized string similar to [Undo - Set Selected Chart Recorder Configuration As Default].
+            </summary>
+        </member>
+        <member name="P:Watch.Properties.Resources.FunctionKeyToolTipChartRecorderUpload">
+            <summary>
+              Looks up a localized string similar to [Upload Chart Recorder Configuration].
+            </summary>
+        </member>
+        <member name="P:Watch.Properties.Resources.FunctionKeyToolTipContinue">
+            <summary>
+              Looks up a localized string similar to [Continue].
+            </summary>
+        </member>
+        <member name="P:Watch.Properties.Resources.FunctionKeyToolTipEdit">
+            <summary>
+              Looks up a localized string similar to [Configure Watch Window].
+            </summary>
+        </member>
+        <member name="P:Watch.Properties.Resources.FunctionKeyToolTipInfo">
+            <summary>
+              Looks up a localized string similar to [Show Header Information].
+            </summary>
+        </member>
+        <member name="P:Watch.Properties.Resources.FunctionKeyToolTipPause">
+            <summary>
+              Looks up a localized string similar to [Pause].
+            </summary>
+        </member>
+        <member name="P:Watch.Properties.Resources.FunctionKeyToolTipRecord">
+            <summary>
+              Looks up a localized string similar to [Record].
+            </summary>
+        </member>
+        <member name="P:Watch.Properties.Resources.FunctionKeyToolTipSave">
+            <summary>
+              Looks up a localized string similar to [Save].
+            </summary>
+        </member>
+        <member name="P:Watch.Properties.Resources.FunctionKeyToolTipStop">
+            <summary>
+              Looks up a localized string similar to [Stop Recording] .
+            </summary>
+        </member>
+        <member name="P:Watch.Properties.Resources.FunctionKeyToolTipWatchWindowConfigure">
+            <summary>
+              Looks up a localized string similar to [Configure Selected Watch Window Configuration].
+            </summary>
+        </member>
+        <member name="P:Watch.Properties.Resources.FunctionKeyToolTipWatchWindowConfigureUndo">
+            <summary>
+              Looks up a localized string similar to [Undo - Configure Selected Watch Window Configuration].
+            </summary>
+        </member>
+        <member name="P:Watch.Properties.Resources.FunctionKeyToolTipWatchWindowCopy">
+            <summary>
+              Looks up a localized string similar to [Copy  Watch Window Configuration].
+            </summary>
+        </member>
+        <member name="P:Watch.Properties.Resources.FunctionKeyToolTipWatchWindowCopyUndo">
+            <summary>
+              Looks up a localized string similar to [Undo - Copy  Watch Window Configuration].
+            </summary>
+        </member>
+        <member name="P:Watch.Properties.Resources.FunctionKeyToolTipWatchWindowCreate">
+            <summary>
+              Looks up a localized string similar to [Create New  Watch Window Configuration].
+            </summary>
+        </member>
+        <member name="P:Watch.Properties.Resources.FunctionKeyToolTipWatchWindowCreateUndo">
+            <summary>
+              Looks up a localized string similar to [Undo - Create New  Watch Window Configuration].
+            </summary>
+        </member>
+        <member name="P:Watch.Properties.Resources.FunctionKeyToolTipWatchWindowDelete">
+            <summary>
+              Looks up a localized string similar to [Delete Selected  Watch Window Configuration].
+            </summary>
+        </member>
+        <member name="P:Watch.Properties.Resources.FunctionKeyToolTipWatchWindowDeleteUndo">
+            <summary>
+              Looks up a localized string similar to [Undo - Delete Selected  Watch Window Configuration].
+            </summary>
+        </member>
+        <member name="P:Watch.Properties.Resources.FunctionKeyToolTipWatchWindowOverrideSecurity">
+            <summary>
+              Looks up a localized string similar to [Override Watch Window Configuration Security Setting].
+            </summary>
+        </member>
+        <member name="P:Watch.Properties.Resources.FunctionKeyToolTipWatchWindowOverrideSecurityUndo">
+            <summary>
+              Looks up a localized string similar to [Undo - Override Watch Window Configuration Security Setting].
+            </summary>
+        </member>
+        <member name="P:Watch.Properties.Resources.FunctionKeyToolTipWatchWindowRename">
+            <summary>
+              Looks up a localized string similar to [Rename  Watch Window Configuration].
+            </summary>
+        </member>
+        <member name="P:Watch.Properties.Resources.FunctionKeyToolTipWatchWindowRenameUndo">
+            <summary>
+              Looks up a localized string similar to Undo - [Rename  Watch Window Configuration].
+            </summary>
+        </member>
+        <member name="P:Watch.Properties.Resources.FunctionKeyToolTipWatchWindowSave">
+            <summary>
+              Looks up a localized string similar to [Save  Watch Window Configuration].
+            </summary>
+        </member>
+        <member name="P:Watch.Properties.Resources.FunctionKeyToolTipWatchWindowSetAsDefault">
+            <summary>
+              Looks up a localized string similar to [Set Selected  Watch Window Configuration As Default].
+            </summary>
+        </member>
+        <member name="P:Watch.Properties.Resources.FunctionKeyToolTipWatchWindowSetAsDefaultUndo">
+            <summary>
+              Looks up a localized string similar to [Undo - Set Selected  Watch Window Configuration As Default].
+            </summary>
+        </member>
+        <member name="P:Watch.Properties.Resources.FunctionKeyToolTipWatchWindowUpload">
+            <summary>
+              Looks up a localized string similar to [Upload  Watch Window Configuration].
+            </summary>
+        </member>
+        <member name="P:Watch.Properties.Resources.InformationLegendDate">
+            <summary>
+              Looks up a localized string similar to Date:.
+            </summary>
+        </member>
+        <member name="P:Watch.Properties.Resources.InformationLegendDuration">
+            <summary>
+              Looks up a localized string similar to Duration:.
+            </summary>
+        </member>
+        <member name="P:Watch.Properties.Resources.InformationLegendRecordingStartTime">
+            <summary>
+              Looks up a localized string similar to Rec. Start:.
+            </summary>
+        </member>
+        <member name="P:Watch.Properties.Resources.InformationLegendTime">
+            <summary>
+              Looks up a localized string similar to PC Time:.
+            </summary>
+        </member>
+        <member name="P:Watch.Properties.Resources.LegendAvailable">
+            <summary>
+              Looks up a localized string similar to Available.
+            </summary>
+        </member>
+        <member name="P:Watch.Properties.Resources.LegendConfiguration">
+            <summary>
+              Looks up a localized string similar to Watch Window Confi&amp;guration :.
+            </summary>
+        </member>
+        <member name="P:Watch.Properties.Resources.LegendCount">
+            <summary>
+              Looks up a localized string similar to Count.
+            </summary>
+        </member>
+        <member name="P:Watch.Properties.Resources.LegendFormatHex">
+            <summary>
+              Looks up a localized string similar to (Hex).
+            </summary>
+        </member>
+        <member name="P:Watch.Properties.Resources.LegendItems">
+            <summary>
+              Looks up a localized string similar to Item(s).
+            </summary>
+        </member>
+        <member name="P:Watch.Properties.Resources.LegendOf">
+            <summary>
+              Looks up a localized string similar to of.
+            </summary>
+        </member>
+        <member name="P:Watch.Properties.Resources.LegendRecording">
+            <summary>
+              Looks up a localized string similar to Recording:.
+            </summary>
+        </member>
+        <member name="P:Watch.Properties.Resources.LegendTotalCount">
+            <summary>
+              Looks up a localized string similar to Total Count.
+            </summary>
+        </member>
+        <member name="P:Watch.Properties.Resources.LegendWatchConfiguration">
+            <summary>
+              Looks up a localized string similar to Watch Configuration :.
+            </summary>
+        </member>
+        <member name="P:Watch.Properties.Resources.LegendWorkset">
+            <summary>
+              Looks up a localized string similar to Wor&amp;kset:.
+            </summary>
+        </member>
+        <member name="P:Watch.Properties.Resources.MBCaptionError">
+            <summary>
+              Looks up a localized string similar to Error.
+            </summary>
+        </member>
+        <member name="P:Watch.Properties.Resources.MBCaptionInformation">
+            <summary>
+              Looks up a localized string similar to Information.
+            </summary>
+        </member>
+        <member name="P:Watch.Properties.Resources.MBCaptionWarning">
+            <summary>
+              Looks up a localized string similar to Warning.
+            </summary>
+        </member>
+        <member name="P:Watch.Properties.Resources.MBTChartScaleLimitsInvalid">
+            <summary>
+              Looks up a localized string similar to One or both of the chart recorder Y axis limits for this watch variable contain(s) invalid data. The upper and lower limits wil be set to their default values..
+            </summary>
+        </member>
+        <member name="P:Watch.Properties.Resources.MBTChartScaleLowerLimitInvalid">
+            <summary>
+              Looks up a localized string similar to Data entry error - The lower limit must be less than or equal to the upper limit..
+            </summary>
+        </member>
+        <member name="P:Watch.Properties.Resources.MBTChartScaleUpperLimitInvalid">
+            <summary>
+              Looks up a localized string similar to Data entry error - The upper limit must be greater than or equal to the lower limit..
+            </summary>
+        </member>
+        <member name="P:Watch.Properties.Resources.MBTDataEntryDecimalInvalid">
+            <summary>
+              Looks up a localized string similar to Data entry error - The specified value did not represent a valid 32 bit decimal value..
+            </summary>
+        </member>
+        <member name="P:Watch.Properties.Resources.MBTDataEntryHexInvalid">
+            <summary>
+              Looks up a localized string similar to Data entry error - The specified value did not represent a valid 32 bit hexadecimal value..
+            </summary>
+        </member>
+        <member name="P:Watch.Properties.Resources.MBTInsufficientPrivilegesEdit">
+            <summary>
+              Looks up a localized string similar to You do not have sufficient privileges to modify the current workset..
+            </summary>
+        </member>
+        <member name="P:Watch.Properties.Resources.MBTLoadingBaselineWorkset">
+            <summary>
+              Looks up a localized string similar to Loading the baseline workset &apos;{0}&apos;..
+            </summary>
+        </member>
+        <member name="P:Watch.Properties.Resources.MBTLogFileTypeNotSupported">
+            <summary>
+              Looks up a localized string similar to This log file type is not supported..
+            </summary>
+        </member>
+        <member name="P:Watch.Properties.Resources.MBTModifyChannelsFailed">
+            <summary>
+              Looks up a localized string similar to Unable to re-configure the chart recorder channels..
+            </summary>
+        </member>
+        <member name="P:Watch.Properties.Resources.MBTModifyChartRecorderConfigurationSuccess">
+            <summary>
+              Looks up a localized string similar to The chart recorder has been successfully re-configured..
+            </summary>
+        </member>
+        <member name="P:Watch.Properties.Resources.MBTModifyChartRecorderModeFailed">
+            <summary>
+              Looks up a localized string similar to Unable to set the mode of the chart recorder..
+            </summary>
+        </member>
+        <member name="P:Watch.Properties.Resources.MBTModifyLimitFailed">
+            <summary>
+              Looks up a localized string similar to Unable to modify the upper and lower limits of the chart recorder channel..
+            </summary>
+        </member>
+        <member name="P:Watch.Properties.Resources.MBTQueryModifyChartRecorderChannels">
+            <summary>
+              Looks up a localized string similar to Are you sure that you want to modify the chart recorder channel configuration to the selected settings ?.
+            </summary>
+        </member>
+        <member name="P:Watch.Properties.Resources.MBTValidWorksetNotFound">
+            <summary>
+              Looks up a localized string similar to No valid worksets were found..
+            </summary>
+        </member>
+        <member name="P:Watch.Properties.Resources.MBTWatchVariableNotFound">
+            <summary>
+              Looks up a localized string similar to The selected watch variable does not exist..
+            </summary>
+        </member>
+        <member name="P:Watch.Properties.Resources.Modify">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Watch.Properties.Resources.NameBaselineWorkset">
+            <summary>
+              Looks up a localized string similar to Baseline.
+            </summary>
+        </member>
+        <member name="P:Watch.Properties.Resources.Pause">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Watch.Properties.Resources.Play">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Watch.Properties.Resources.Ramp">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Watch.Properties.Resources.Record">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Watch.Properties.Resources.RecordStop">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Watch.Properties.Resources.Save">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Watch.Properties.Resources.SMCommunicationFaultPortLocked">
+            <summary>
+              Looks up a localized string similar to Communication Fault - Port Locked..
+            </summary>
+        </member>
+        <member name="P:Watch.Properties.Resources.SMCommunicationFaultReadTimeout">
+            <summary>
+              Looks up a localized string similar to Communication Fault - Read Timeout..
+            </summary>
+        </member>
+        <member name="P:Watch.Properties.Resources.SMFunctionKeyPause">
+            <summary>
+              Looks up a localized string similar to Paused..
+            </summary>
+        </member>
+        <member name="P:Watch.Properties.Resources.TitleOpenSimulatedFaultLog">
+            <summary>
+              Looks up a localized string similar to Open/Simulated Data Stream: {0}.
+            </summary>
+        </member>
+        <member name="P:Watch.Properties.Resources.TitleOpenWatchFile">
+            <summary>
+              Looks up a localized string similar to Open/Watch File : {0}.
+            </summary>
+        </member>
+        <member name="P:Watch.Properties.Resources.Zero_Output">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="T:Watch.MenuInterfaceWatch">
+            <summary>
+            Methods called by the menu options associated with the viewing and recording of watch variables - Watch.dll.
+            </summary>
+        </member>
+        <member name="M:Watch.MenuInterfaceWatch.#ctor(Common.IMainWindow)">
+            <summary>
+            Initializes a new instance of the class.
+            </summary>
+            <param name="mainWindow">Reference to the main application window interface.</param>
+        </member>
+        <member name="M:Watch.MenuInterfaceWatch.OpenSimulatedFaultLog">
+            <summary>
+            Call the <c>OpenDataStreamFile</c> method specifying the parameters associated with a simulated fault log.
+            </summary>
+        </member>
+        <member name="M:Watch.MenuInterfaceWatch.OpenRecordedWatchFile">
+            <summary>
+            Call the <c>OpenDataStreamFile</c> method specifying the parameters associated with a recorded watch file.
+            </summary>
+        </member>
+        <member name="M:Watch.MenuInterfaceWatch.ShowDataStreamFile(System.String,System.String,System.String,System.String)">
+            <summary>
+            Ask the user to select a data-stream file, de-serialized this to the appropriate object type and then display the data using the 
+            <c>FormDataStreamPlot</c> class.
+            </summary>
+            <param name="title">The title that is to appear on the <c>OpenFileDialog</c> form.</param>
+            <param name="defaultExtension">The default extension associated with the type of log.</param>
+            <param name="filterText">The filter text. Used to filter the list of available files.</param>
+            <param name="initialDirectory">The initial directory that will be show.</param>
+            <returns>A flag to indicate whether a valid watch file was selected. True, indicates that the selected file was valid; otherwise, false.</returns>
+        </member>
+        <member name="M:Watch.MenuInterfaceWatch.ViewWatchWindow">
+            <summary>
+            Show the multiple document interface child form which displays and records the watch variables.
+            </summary>
+        </member>
+        <member name="M:Watch.MenuInterfaceWatch.ReplaceWatch">
+            <summary>
+            Show the dialog form to allow the user to modify the current workset.
+            </summary>
+        </member>
+        <member name="M:Watch.MenuInterfaceWatch.ConfigureWorksetsWatchWindow">
+            <summary>
+            Show the form which allows the user the configure the worksets associated with the viewing and recording of watch variables.
+            </summary>
+        </member>
+        <member name="M:Watch.MenuInterfaceWatch.ConfigureWorksetsChartRecorder">
+            <summary>
+            Show the form which allows the user the configure the worksets associated with the chart recorder.
+            </summary>
+        </member>
+        <member name="M:Watch.MenuInterfaceWatch.ConfigureWatchWindow">
+            <summary>
+            Show the form which allows the user the configure the watch window.
+            </summary>
+        </member>
+        <member name="M:Watch.MenuInterfaceWatch.ConfigureChartRecorder">
+            <summary>
+            Show the form which allows the user the configure the chart recorder.
+            </summary>
+        </member>
+        <member name="M:Watch.MenuInterfaceWatch.ConfigureChartModeData">
+            <summary>
+            Set the chart recorder mode to be data mode.
+            </summary>
+        </member>
+        <member name="M:Watch.MenuInterfaceWatch.ConfigureChartModeRamp">
+            <summary>
+            Set the chart recorder mode to be ramp mode.
+            </summary>
+        </member>
+        <member name="M:Watch.MenuInterfaceWatch.ConfigureChartModeZeroOutput">
+            <summary>
+            Set the chart recorder mode to be zero output.
+            </summary>
+        </member>
+        <member name="M:Watch.MenuInterfaceWatch.ConfigureChartModeFullScale">
+            <summary>
+            Set the chart recorder mode to be full scale.
+            </summary>
+        </member>
+        <member name="M:Watch.MenuInterfaceWatch.SetChartMode(Common.Communication.ChartMode)">
+            <summary>
+            Set the mode of the chart recorder to the specified mode.
+            </summary>
+            <param name="chartMode">The requested chart recorder mode.</param>
+        </member>
+        <member name="T:Watch.Forms.FormWorksetDefineChartRecorder">
+            <summary>
+            Form to allow the user to define a chart recorder workset.
+            </summary>
+        </member>
+        <member name="M:Watch.Forms.FormWorksetDefineChartRecorder.#ctor">
+            <summary>
+            Initializes an new instance of the form. Zero parameter constructor.
+            </summary>
+        </member>
+        <member name="M:Watch.Forms.FormWorksetDefineChartRecorder.#ctor(Common.Configuration.WorksetCollection)">
+            <summary>
+            Initializes an new instance of the form. This constructor is used when a new workset is being created. Populates the 'Available' 
+            <c>ListBox</c> controls with the appropriate watch variables.
+            </summary>
+            <param name="worksetCollection">The workset collection that is to be managed.</param>
+        </member>
+        <member name="M:Watch.Forms.FormWorksetDefineChartRecorder.#ctor(Common.Configuration.WorksetCollection,Common.Configuration.Workset_t,System.Boolean)">
+            <summary>
+            <para>
+            Initializes an new instance of the form for use when EDITing a workset. Populates the 'Configuration' ListBoxes with the data associated with the 
+            specified configuration and populates the 'Available' ListBoxes with the remaining data i.e. the difference between the configuration and the default data.
+            </para>
+            <para>
+            If the <paramref name="applyVisible"/> parameter is set to true the form will include an apply button so that the user can update the workset without closing
+            the form between updates. This is especially useful when modifying the active workset while the workset is on display.
+            </para>
+            </summary>
+            <param name="worksetCollection">The workset collection that is to be managed.</param>
+            <param name="workset">The workset that is to be edited.</param>
+            <param name="applyVisible">Flag to specify whether the Apply button is to be visible; True, displays the Apply button, false, hides the Apply button.</param>
+        </member>
+        <member name="M:Watch.Forms.FormWorksetDefineChartRecorder.Cleanup(System.Boolean)">
+            <summary>
+            Clean up the resources used by the form.
+            </summary>
+            <param name="disposing">True to release both managed and unmanaged resources; false to release only unmanaged resources.</param>
+        </member>
+        <member name="M:Watch.Forms.FormWorksetDefineChartRecorder.m_ButtonMoveUp_Click(System.Object,System.EventArgs)">
+            <summary>
+            Event handler associated with the 'Move Up' button <c>Click</c> event. Move the selected item up the list.
+            </summary>
+            <remarks>Only one item may be selected at a time. If more than one item is selected the action will be ignored.</remarks>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Watch.Forms.FormWorksetDefineChartRecorder.m_ButtonMoveDown_Click(System.Object,System.EventArgs)">
+            <summary>
+            Event handler associated with the 'Move Down' button <c>Click</c> event. Move the selected item down the list.
+            </summary>
+            <remarks>Only one item may be selected at a time. If more than one item is selected the action will be ignored.</remarks>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Watch.Forms.FormWorksetDefineChartRecorder.m_ButtonApply_Click(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the Apply button <c>Click</c> event. Add the defined workset to the to list of available worksets.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Watch.Forms.FormWorksetDefineChartRecorder.m_MenuItemChangeChartScaleFactor_Click(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the <c>Click</c> event associated with the 'Change Chart Scale' context menu option attached to the <c>ListBox</c> containing the watch 
+            variables that have been added to the workset. Calls the form which allows the user to modify the chart scaling associated with the selected channel.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Watch.Forms.FormWorksetDefineChartRecorder.AddSupplementalFields(System.Int32)">
+            <summary>
+            Add any supplemental workset fields specific to the child class. Add the chart recorder scaling information.
+            </summary>
+            <param name="oldIdentifier">The old identifier of the watch variable that is to be added.</param>
+        </member>
+        <member name="M:Watch.Forms.FormWorksetDefineChartRecorder.RemoveSupplementalFields(System.Int32)">
+            <summary>
+            Remove any supplemental workset fields specific to the child class. Remove the chart recorder scaling information.
+            </summary>
+            <param name="removeAtIndex">The index of the ListBox row that is to be removed.</param>
+        </member>
+        <member name="M:Watch.Forms.FormWorksetDefineChartRecorder.UpdateCount">
+            <summary>
+            Update the count labels that show the number of watch variables that are available and the number that have been added to each column of the workset.
+            </summary>
+        </member>
+        <member name="M:Watch.Forms.FormWorksetDefineChartRecorder.WatchItemAddRange(System.Windows.Forms.ListBox,Common.Configuration.Column_t)">
+            <summary>
+            Add the watch variables defined in the specified workset column to the <c>ListBox</c> controls that display the description and the chart recorder scaling 
+            information for each chart recorder channel.
+            </summary>
+            <param name="listBox">The <c>ListBox</c> to which the items are to be added.</param>
+            <param name="worksetColumn">The column of the workset that is to be added to the <c>ListBox</c> control.</param>
+        </member>
+        <member name="M:Watch.Forms.FormWorksetDefineChartRecorder.ConvertToWorkset(System.String)">
+            <summary>
+            Convert the current user setting to a workset.
+            </summary>
+            <param name="worksetName">The name of the workset.</param>
+            <returns>The user settings converted to a workset.</returns>
+        </member>
+        <member name="F:Watch.Forms.FormWorksetDefineChartRecorder.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:Watch.Forms.FormWorksetDefineChartRecorder.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="F:Watch.Forms.FormWorksetDefineChartRecorder.m_ListBoxUnits">
+            <summary>
+            Reference to the 'Units' <c>ListBox</c>.
+            </summary>
+        </member>
+        <member name="F:Watch.Forms.FormWorksetDefineChartRecorder.m_ListBoxChartScaleLowerLimit">
+            <summary>
+            Reference to the 'Chart Scale/Lower Limit' <c>ListBox</c>.
+            </summary>
+        </member>
+        <member name="F:Watch.Forms.FormWorksetDefineChartRecorder.m_ListBoxChartScaleUpperLimit">
+            <summary>
+            Reference to the 'Chart Scale/Upper Limit' <c>ListBox</c>.
+            </summary>
+        </member>
+        <member name="F:Watch.Forms.FormWorksetDefineChartRecorder.m_LabelListBoxChartScaleUpperLimitColumnHeader">
+            <summary>
+            Reference to the 'Chart Scale/Upper Limit' Header <c>Label</c>.
+            </summary>
+        </member>
+        <member name="F:Watch.Forms.FormWorksetDefineChartRecorder.m_LabelListBoxUnitsColumnHeader">
+            <summary>
+            Reference to the 'Units' Header <c>Label</c>.
+            </summary>
+        </member>
+        <member name="F:Watch.Forms.FormWorksetDefineChartRecorder.m_LabelListBoxChartScaleLowerLimitColumnHeader">
+            <summary>
+            Reference to the 'Chart Scale/Lower Limit' Header <c>Label</c>.
+            </summary>
+        </member>
+        <member name="F:Watch.Forms.FormWorksetDefineChartRecorder.m_LegendListBoxTitle">
+            <summary>
+            Reference to the 'Title' Legend.
+            </summary>
+        </member>
+        <member name="F:Watch.Forms.FormWorksetDefineChartRecorder.m_LabelListBoxTitle">
+            <summary>
+            Reference to the <c>ListBox</c> Title <c>Label.</c>
+            </summary>
+        </member>
+        <member name="P:Watch.Forms.FormWorksetDefineChartRecorder.ListBoxChartScaleLowerLimit">
+            <summary>
+            Get the reference to the <c>ListBox</c> control that contains the lower limits of the Y axis for each chart recorder channel.
+            </summary>
+        </member>
+        <member name="P:Watch.Forms.FormWorksetDefineChartRecorder.ListBoxChartScaleUpperLimit">
+            <summary>
+            Get the reference to the <c>ListBox</c> control that contains the upper limits of the Y axis for each chart recorder channel.
+            </summary>
+        </member>
+        <member name="T:Watch.Forms.FormOpenSimulatedFaultLog">
+            <summary>
+            Form to plot the historic data associated with a saved simulated fault log.
+            </summary>
+        </member>
+        <member name="F:Watch.Forms.FormOpenSimulatedFaultLog.ResolutionLogFileMs">
+            <summary>
+            The time resolution, in ms, of the log start and stop times.
+            </summary>
+            <remarks>
+            The time is currently rounded down to the nearest resoulution i.e. 10.479 would be rounded down to 10.470 ms.
+            </remarks>
+        </member>
+        <member name="M:Watch.Forms.FormOpenSimulatedFaultLog.#ctor">
+            <summary>
+            Initializes a new instance of the class. Zero parameter constructor.
+            </summary>
+        </member>
+        <member name="M:Watch.Forms.FormOpenSimulatedFaultLog.#ctor(Common.WatchFile_t)">
+            <summary>
+            Initializes a new instance of the class. Initialize: (1) Any additional function keys or information labels that are required; (2) the <c>Form</c> and 
+            <c>TabPage</c> titles; (3) the time axis and (4) the information label values.
+            </summary>
+            <param name="watchFile">The structure containing the fault log data that is to be plotted.</param>
+        </member>
+        <member name="M:Watch.Forms.FormOpenSimulatedFaultLog.Cleanup(System.Boolean)">
+            <summary>
+            Clean up the resources used by the form.
+            </summary>
+            <param name="disposing">True to release both managed and unmanaged resources; false to release only unmanaged resources.</param>
+        </member>
+        <member name="M:Watch.Forms.FormOpenSimulatedFaultLog.InitializePlotterRangeSelection(System.DateTime)">
+            <summary>
+            Initialize the <see cref="T:CodeProject.GraphComponents.PlotterRangeSelection"/> structure using the watch variable data loaded into the <see cref="T:Common.HistoricDataManager"/> class. 
+            If the data to be displayed is not a fault log or a simulated fault log, <paramref name="tripTime"/> will be ignored.
+            </summary>
+            <param name="tripTime">The time of the trip if the data represents a fault log or a simulated fault log; otherwise DateTime.Now.</param>
+        </member>
+        <member name="M:Watch.Forms.FormOpenSimulatedFaultLog.SetTripTime(System.Windows.Forms.TabControl,System.DateTime)">
+            <summary>
+            Set the TripTime property of the plotter controls associated with the specified <c>TabControl</c>.
+            </summary>
+            <param name="tabControl">The <c>TabControl</c> that is to be processed.</param>
+            <param name="tripTime">The time of the trip that initiated the log.</param>
+        </member>
+        <member name="F:Watch.Forms.FormOpenSimulatedFaultLog.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:Watch.Forms.FormOpenSimulatedFaultLog.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:Watch.Forms.FormConfigureWatchWindow">
+            <summary>
+            Form to allow the user to configure the various worksets associated with the Watch Window screen.
+            </summary>
+        </member>
+        <member name="F:Watch.Forms.FormConfigureWatchWindow.m_CommunicationInterface">
+            <summary>
+            Reference to the selected communication interface.
+            </summary>
+        </member>
+        <member name="M:Watch.Forms.FormConfigureWatchWindow.#ctor">
+            <summary>
+            Initializes an new instance of the form. Zero parameter constructor.
+            </summary>
+        </member>
+        <member name="M:Watch.Forms.FormConfigureWatchWindow.#ctor(Common.Communication.ICommunicationParent,Common.IMainWindow,Common.Configuration.WorksetCollection)">
+            <summary>
+            Initializes an new instance of the form. Retrieve the chart recorder configuration from the VCU.
+            </summary>
+            <remarks>The reference to the main application window is also derived from the CalledFrom parameter, however, this is not obtained until after the form 
+            has been shown. As a number of multiple document interface child forms (mdi child) may be polling the VCU when this form is instantiated, the 
+            call to the PauseCommunication() method must be made before the chart configuration data can be retrieved from the VCU from within the constructor code. 
+            A requirement of the PauseCommunication() method is that the reference to the main application window must be defined.
+            </remarks>
+            <param name="communicationInterface">Reference to the communication interface that is to be used to communicate with the VCU.</param>
+            <param name="mainWindow">Reference to the main application window, this is required for the call to the PauseCommunication() method in the constructor 
+            code.</param>
+            <param name="worksetCollection">The workset collection associated with the chart recorder.</param>
+        </member>
+        <member name="M:Watch.Forms.FormConfigureWatchWindow.Cleanup(System.Boolean)">
+            <summary>
+            Clean up the resources used by the form.
+            </summary>
+            <param name="disposing">True to release both managed and unmanaged resources; false to release only unmanaged resources.</param>
+        </member>
+        <member name="M:Watch.Forms.FormConfigureWatchWindow.FormPTUDialog_Shown(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the form <c>Shown</c> event.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Watch.Forms.FormConfigureWatchWindow.UpdateCount">
+            <summary>
+            Update the count label that shows the number of watch variables that have been added to the chart configuration workset.
+            </summary>
+        </member>
+        <member name="M:Watch.Forms.FormConfigureWatchWindow.SetModifyState(Common.Forms.FormConfigure.ModifyState)">
+            <summary>
+            Set the modify state to the specified state.
+            </summary>
+            <param name="modifyState">The required modify state.</param>
+        </member>
+        <member name="M:Watch.Forms.FormConfigureWatchWindow.ClearListBoxColumnItems">
+            <summary>
+            Clear the items in the 'Column' ListBox controls.
+            </summary>
+        </member>
+        <member name="M:Watch.Forms.FormConfigureWatchWindow.ConvertToWorkset(System.String)">
+            <summary>
+            Convert the current user setting to a workset.
+            </summary>
+            <param name="worksetName">The name of the workset.</param>
+            <returns>The user settings converted to a workset.</returns>
+        </member>
+        <member name="M:Watch.Forms.FormConfigureWatchWindow.CompareWorkset(Common.Configuration.Workset_t)">
+            <summary>
+            Predicate function called by the <c>List.Find()</c> method to return a workset that matches the specified workset, ignoring the Name and SecurityLevel fields
+            of each workset. 
+            </summary>
+            <param name="workset">The list item that is to be processed.</param>
+            <returns>True, if the specified item meets the logic requirements given in the function; otherwise false.</returns>
+        </member>
+        <member name="M:Watch.Forms.FormConfigureWatchWindow.LoadWorkset(Common.Configuration.Workset_t)">
+            <summary>
+            Load the specified workset.
+            </summary>
+            <param name="workset">The workset that is to be processed.</param>
+        </member>
+        <member name="F:Watch.Forms.FormConfigureWatchWindow.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:Watch.Forms.FormConfigureWatchWindow.NoRowHeader">
+            <summary>
+            Resizes and repositions the <c>ListBox</c> controls for when the 'Row Header' <c>ListBox</c> is not used i.e. 
+            if the project supports multiple data stream types or the number of parameters supported by the workset exceeds the number that can be 
+            displayed on the <c>TabPage</c> without the use of scroll bars.
+            </summary>
+            <remarks>The 'Total Count' <c>Label</c> i.e. 'Total Count: nn of 20', can't be displayed if the project supports multiple data stream types
+            as the upper limit is the maximum number of watch variables and may not apply to the current workset, which could be confusing to the 
+            operator.</remarks>
+        </member>
+        <member name="M:Watch.Forms.FormConfigureWatchWindow.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="P:Watch.Forms.FormConfigureWatchWindow.CommunicationInterface">
+            <summary>
+            Gets or sets the communication interface that is to be used to communicate with the target.
+            </summary>
+            <remarks>This property is set by the child class, if appropriate.</remarks>
+        </member>
+        <member name="T:Watch.Communication.CommunicationWatchOffline">
+            <summary>
+            Class to simulate communication with the target hardware with respect to the watch sub-system.
+            </summary>
+        </member>
+        <member name="M:Watch.Communication.CommunicationWatchOffline.#ctor(Common.Communication.ICommunicationParent)">
+            <summary>
+            Initialize a new instance of the class and set the properties and member variables to those values associated with the specified
+            communication interface.
+            </summary>
+            <param name="communicationInterface">Reference to the communication interface containing the properties and member variables that are to be
+            used to initialize the class.</param>
+        </member>
+        <member name="M:Watch.Communication.CommunicationWatchOffline.SendVariable(System.Int16,System.Int16,System.Double)">
+            <summary>
+            Write the specified data to the watch variable specified by the <paramref name="dictionaryIndex"/> parameter.
+            </summary>
+            <param name="dictionaryIndex">The dictionary index.</param>
+            <param name="dataType">The data type.</param>
+            <param name="data">The data.</param>
+            <exception cref="T:Common.Communication.CommunicationException">Thrown if the error code returned from the call to the PTUDLL32.CloseCommunication() method is not
+            CommunicationError.Success.</exception>
+        </member>
+        <member name="M:Watch.Communication.CommunicationWatchOffline.SetWatchElements(System.Collections.Generic.List{System.Int16})">
+            <summary>
+            Map the watch identifiers listed in <paramref name="watchElementList"/> to the watch element array monitored by the target hardware.
+            </summary>
+            <remarks> The number of watch identifiers in the list must mot exceed <c>WatchSize</c>.</remarks>
+            <param name="watchElementList">The list containing the watch identifiers that are to be mapped to each element of the watch element
+            array.</param>
+            <exception cref="T:Common.Communication.CommunicationException">Thrown if the error code returned from the call to the PTUDLL32.SetWatchElements() method is not
+            CommunicationError.Success.</exception>
+        </member>
+        <member name="M:Watch.Communication.CommunicationWatchOffline.SetWatchElement(System.Int16,System.Int16)">
+            <summary>
+            Map an individual watch identifier to a specific watch element.
+            </summary>
+            <param name="elementIndex">The index of the watch element array that is to be set.</param>
+            <param name="watchIdentifier">The watch identifier corresponding to the watch variable that is to be mapped into the watch element table at
+            the specified index.</param>
+            <exception cref="T:Common.Communication.CommunicationException">Thrown if the error code returned from the call to the PTUDLL32.SetWatchElement() method is not
+            CommunicationError.Success.</exception>
+        </member>
+        <member name="M:Watch.Communication.CommunicationWatchOffline.UpdateWatchElements(System.Boolean)">
+            <summary>
+            Retrieve the watch elements from the target hardware.
+            </summary>
+            <remarks>The watch elements are the watch values that are being monitored by the target hardware as defined by the <c>SetWatchElements()
+            </c> method.</remarks>
+            <returns>The retrieved watch element table, if successful; otherwise, null.</returns>
+            <exception cref="T:Common.Communication.CommunicationException">Thrown if the error code returned from the call to the PTUDLL32.UpdateElements() method is not
+            CommunicationError.Success.</exception>
+        </member>
+        <member name="M:Watch.Communication.CommunicationWatchOffline.UpdateWatchVariableTable(Common.Communication.WatchElement_t[])">
+            <summary>
+            Update the watch variable lookup table with the latest watch element data retrieved from the targer hardware.
+            </summary>
+            <param name="watchElements">The watch element table retrieved from the target hardware.</param>
+        </member>
+        <member name="M:Watch.Communication.CommunicationWatchOffline.GetChartConfiguration">
+            <summary>
+            Get the watch variable identifiers of the watch variables that are currently assigned to the chart recorder channels.
+            </summary>
+            <returns>An array of the watch variable identifiers corresponding to the watch variables that are currently assigned to the chart recorder
+            channels.</returns>
+            <exception cref="T:Common.Communication.CommunicationException">Thrown if the error code returned from the call to the PTUDLL32.GetChartIndex() method is not
+            CommunicationError.Success.</exception>
+        </member>
+        <member name="M:Watch.Communication.CommunicationWatchOffline.ConfigureChartRecorderChannels(System.Int16[])">
+            <summary>
+            Configure the chart recorder channels i.e. assign each channel of the chart recorder to a specific watch variable.
+            </summary>
+            <exception cref="T:Common.Communication.CommunicationException">Thrown if the error code returned from a call to the PTUDLL32.SetChartIndex() method is not
+            CommunicationError.Success.</exception>
+        </member>
+        <member name="T:Watch.Forms.FormOpenWatch">
+            <summary>
+            Form to plot the historic watch variable values contained within a recorded watch variable data stream.
+            </summary>
+        </member>
+        <member name="M:Watch.Forms.FormOpenWatch.#ctor">
+            <summary>
+            Initializes a new instance of the class. Zero parameter constructor.
+            </summary>
+        </member>
+        <member name="M:Watch.Forms.FormOpenWatch.#ctor(Common.WatchFile_t)">
+            <summary>
+            Initializes a new instance of the class. Initialize: (1) Any additional function keys or information labels that are required; (2) the <c>Form</c> and 
+            <c>TabPage</c> titles; (3) the time axis and (4) the information label values.
+            </summary>
+            <param name="watchFile">The structure containing the fault log data that is to be plotted.</param>
+        </member>
+        <member name="M:Watch.Forms.FormOpenWatch.Cleanup(System.Boolean)">
+            <summary>
+            Clean up the resources used by the form.
+            </summary>
+            <param name="disposing">True to release both managed and unmanaged resources; false to release only unmanaged resources.</param>
+        </member>
+        <member name="M:Watch.Forms.FormOpenWatch.InitializePlotterRangeSelection(System.DateTime)">
+            <summary>
+            Initialize the <see cref="T:CodeProject.GraphComponents.PlotterRangeSelection"/> structure using the watch variable data loaded into the <see cref="T:Common.HistoricDataManager"/> class. 
+            If the data to be displayed is not a fault log or a simulated fault log, <paramref name="tripTime"/> will be ignored.
+            </summary>
+            <param name="tripTime">The time of the trip if the data represents a fault log or a simulated fault log; otherwise DateTime.Now.</param>
+        </member>
+        <member name="M:Watch.Forms.FormOpenWatch.PlotHistoricData(System.Windows.Forms.TabControl)">
+            <summary>
+            Plot the historic data for all watch variables associated with the specified <c>TabControl</c>. Include a check for breaks in communication with the VCU.
+            </summary>
+        </member>
+        <member name="F:Watch.Forms.FormOpenWatch.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:Watch.Forms.FormOpenWatch.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:Watch.ThreadPollWatch">
+            <summary>
+            Polls the target hardware for watch values and logs the retrieved values to a cyclic buffer. Also records the values to a second, larger, cyclic buffer if
+            the <c>Record</c> property is asserted.
+            </summary>
+        </member>
+        <member name="F:Watch.ThreadPollWatch.IntervalMsUpdate">
+            <summary>
+            The interval, in ms, between watch variable updates. Value: 250 ms.
+            </summary>
+        </member>
+        <member name="F:Watch.ThreadPollWatch.ReadTimeoutCountdown">
+            <summary>
+            The countdown value associated the read timeout. Value: 3.
+            </summary>
+        </member>
+        <member name="F:Watch.ThreadPollWatch.SleepMsCheckPause">
+            <summary>
+            The thread sleep interval, in ms, between checking the state of the Pause property. Value: 10 ms.
+            </summary>
+        </member>
+        <member name="F:Watch.ThreadPollWatch.SleepMsRefreshWatchdog">
+            <summary>
+            The thread sleep interval, in ms, between watchdog refreshes once a communication fault has been detected.  Value: 50 ms. 
+            </summary>
+        </member>
+        <member name="F:Watch.ThreadPollWatch.m_CommunicationInterface">
+            <summary>
+            Reference to the selected communication interface.
+            </summary>
+        </member>
+        <member name="F:Watch.ThreadPollWatch.m_Pause">
+            <summary>
+            Flag to control polling of the target hardware. True, inhibits polling of the target hardware; otherwise, false, resumes polling.
+            </summary>
+        </member>
+        <member name="F:Watch.ThreadPollWatch.m_PauseFeedback">
+            <summary>
+            Feedback flag to indicate that the polling of the target hardware has been inhibited.
+            </summary>
+        </member>
+        <member name="F:Watch.ThreadPollWatch.m_CommunicationFault">
+            <summary>
+            Flag used to indicate that there is a communication fault. True, indicates that a fault exists; otherwise, false, indicates that communication is OK.
+            </summary>
+        </member>
+        <member name="F:Watch.ThreadPollWatch.m_PacketCount">
+            <summary>
+            The number of packets that have been received since the class was instantiated;
+            </summary>
+            <remarks> 
+            Used as a thread-safe way of blinking the packet received icon on the main window. The property correponding to this value is read by the display 
+            update method on the main thread and provided it has incremented since the previous display update that method will blink the icon. As the method
+            is on the same thread on which the icon was created it is inherently safe.
+            </remarks>
+        </member>
+        <member name="F:Watch.ThreadPollWatch.m_Record">
+            <summary>
+            Flag to control the recording of watch data to the cyclic buffer. True, records the data; otherwise, false, does not record the data.
+            </summary>
+        </member>
+        <member name="F:Watch.ThreadPollWatch.m_CyclicQueueLog">
+            <summary>
+            Generic cyclic queue used to store logged watch data.
+            </summary>
+        </member>
+        <member name="F:Watch.ThreadPollWatch.m_CyclicQueueRecord">
+            <summary>
+            Generic cyclic queue used to store recorded watch data.
+            </summary>
+        </member>
+        <member name="F:Watch.ThreadPollWatch.m_AutoScaleWatchValues">
+            <summary>
+            The auto-scale information for each watch element over the duration of the recording period.
+            </summary>
+        </member>
+        <member name="F:Watch.ThreadPollWatch.m_RecordCount">
+            <summary>
+            The number of frames that have been added to the cyclic buffer used to store recorded watch data.
+            </summary>
+            <remarks>Used as a thread-safe way of updating the progress bar on the main window.</remarks>
+        </member>
+        <member name="F:Watch.ThreadPollWatch.m_MutexPause">
+            <summary>
+            Mutex to control read/write access to the <c>Pause</c> property.
+            </summary>
+        </member>
+        <member name="F:Watch.ThreadPollWatch.m_MutexPauseFeedback">
+            <summary>
+            Mutex to control read/write access to the <c>PauseFeedback</c> property.
+            </summary>
+        </member>
+        <member name="F:Watch.ThreadPollWatch.m_MutexCommunicationFault">
+            <summary>
+            Mutex to control read/write access to the <c>CommunicationFault</c> property.
+            </summary>
+        </member>
+        <member name="F:Watch.ThreadPollWatch.m_MutexRecord">
+            <summary>
+            Mutex to control read/write access to the <c>Record</c> property.
+            </summary>
+        </member>
+        <member name="F:Watch.ThreadPollWatch.m_MutexAutoScaleWatchValues">
+            <summary>
+            Mutex to control read/write access to the <c>AutoScaleWatchValues</c> property.
+            </summary>
+        </member>
+        <member name="F:Watch.ThreadPollWatch.m_FormViewWatch">
+            <summary>
+            Reference to the calling form.
+            </summary>
+        </member>
+        <member name="F:Watch.ThreadPollWatch.m_PollScheduler">
+            <summary>
+            Reference to the class that schedules polling for new events.
+            </summary>
+        </member>
+        <member name="F:Watch.ThreadPollWatch.m_ReadTimeoutCountdown">
+            <summary>
+            The countdown to the read timeout.
+            </summary>
+        </member>
+        <member name="F:Watch.ThreadPollWatch.m_FirstRecordPass">
+            <summary>
+            Flag to record whether it is the first pass of the loop while in record mode.
+            </summary>
+        </member>
+        <member name="M:Watch.ThreadPollWatch.#ctor(Common.Communication.ICommunicationWatch,System.Int32,System.Int32,Watch.Forms.FormViewWatch)">
+            <summary>
+            Initializes a new instance of the class. Initializes the: communication interface; main window interface; cyclic queues; max/min values and
+            read/write locks.
+            </summary>
+            <param name="communicationInterface">Reference to the communication interface used to communicate with the target hardware.</param>
+            <param name="cyclicQueueRecordSize">The required size of the cyclic buffer used to record watch data.</param>
+            <param name="cyclicQueueLogSize">The required size of the cyclic buffer used to log watch data.</param>
+            <param name="formWatchView">Reference to the form that called this form.</param>
+        </member>
+        <member name="M:Watch.ThreadPollWatch.Run">
+            <summary>
+            Poll the target hardware for watch values and store the retrieve values in the log cyclic queue. If the <c>Record</c> property is asserted also store
+            the watch values in the cyclic queue used to store recorded data.
+            </summary>
+            <remarks>Runs on the underlying thread.</remarks>
+        </member>
+        <member name="M:Watch.ThreadPollWatch.StartRecord">
+            <summary>
+            Start recording the watch data.
+            </summary>
+        </member>
+        <member name="M:Watch.ThreadPollWatch.StopRecord">
+            <summary>
+            Stop recording the watch data.
+            </summary>
+        </member>
+        <member name="P:Watch.ThreadPollWatch.Pause">
+            <summary>
+            Gets or sets the flag that controls the polling of the target hardware. True, inhibits polling of the target hardware; otherwise, false, resumes polling.
+            </summary>
+        </member>
+        <member name="P:Watch.ThreadPollWatch.PauseFeedback">
+            <summary>
+            Gets or sets the feedback flag that indicates whether polling of the target hardware has been suspended.  
+            </summary>
+            <remarks>This flag is asserted when the polling has entered the pause state, i.e. the current communication request is complete and no further requests will 
+            be issued until the pause property has been cleared.</remarks>
+        </member>
+        <member name="P:Watch.ThreadPollWatch.CommunicationFault">
+            <summary>
+            Gets the flag used to indicate that there is a communication fault. True, indicates that a fault exists; otherwise, false, indicates that communication is OK.
+            </summary>
+        </member>
+        <member name="P:Watch.ThreadPollWatch.PacketCount">
+            <summary>
+            Gets the number of packets received since the class was instantiated.
+            </summary>
+        </member>
+        <member name="P:Watch.ThreadPollWatch.Record">
+            <summary>
+            Gets or sets the flag that controls recording of the data to the cyclic buffer.
+            </summary>
+        </member>
+        <member name="P:Watch.ThreadPollWatch.CyclicQueueLogArray">
+            <summary>
+            Gets the array of frames corresponding to the contents of the cyclic buffer associated with logging of watch values.
+            </summary>
+        </member>
+        <member name="P:Watch.ThreadPollWatch.CyclicQueueRecordArray">
+            <summary>
+            Gets the array of frames corresponding to the contents of the cyclic buffer associated with recording of watch values.
+            </summary>
+        </member>
+        <member name="P:Watch.ThreadPollWatch.AutoScaleWatchValues">
+            <summary>
+            Gets the array containing the maximum, minimum and range values of all watch elements over the period of the recording.
+            </summary>
+        </member>
+        <member name="P:Watch.ThreadPollWatch.RecordCount">
+            <summary>
+            Gets the number of frames that have been added to the cyclic buffer used to store recorded watch data.
+            </summary>
+        </member>
+        <member name="T:Watch.Forms.FormWorksetManagerWatch">
+            <summary>
+            Form to manage the the worksets associated with the viewing and recording of watch variables. Allows the user to: edit, add and delete individual worksets or 
+            set any of the worksets to be the default workset.
+            </summary>
+        </member>
+        <member name="M:Watch.Forms.FormWorksetManagerWatch.#ctor">
+            <summary>
+            Initializes a new instance of the class. Zero parameter constructor, required by Visual Studio.
+            </summary>
+        </member>
+        <member name="M:Watch.Forms.FormWorksetManagerWatch.#ctor(Common.Configuration.WorksetCollection)">
+            <summary>
+            Initializes a new instance of the class. Records the securty level of the user and enables/disables the 'Set as Default' context menu option accordingly.
+            </summary>
+            <param name="worksetCollection">The workset collection that is to be managed.</param>
+        </member>
+        <member name="M:Watch.Forms.FormWorksetManagerWatch.Cleanup(System.Boolean)">
+            <summary>
+            Clean up the resources used by the form.
+            </summary>
+            <param name="disposing">True to release both managed and unmanaged resources; false to release only unmanaged resources.</param>
+        </member>
+        <member name="M:Watch.Forms.FormWorksetManagerWatch.EditSelectedWorkset(Common.Configuration.WorksetItem)">
+            <summary>
+            Call the form which allows the user to edit the selected workset.
+            </summary>
+            <param name="selectedItem">The selected workset item.</param>
+        </member>
+        <member name="M:Watch.Forms.FormWorksetManagerWatch.CreateNewWorkset">
+            <summary>
+            Call the form which allows the user to create a new workset.
+            </summary>
+        </member>
+        <member name="F:Watch.Forms.FormWorksetManagerWatch.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:Watch.Forms.FormWorksetManagerWatch.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:Watch.Communication.CommunicationWatch">
+            <summary>
+            Class to communicate with the target hardware with respect to the watch sub-system.
+            </summary>
+        </member>
+        <member name="M:Watch.Communication.CommunicationWatch.#ctor(Common.Communication.ICommunicationParent)">
+            <summary>
+            Initialize a new instance of the class and set the function delegates, properties and member variables to those values associated with the
+            specified communication interface.
+            </summary>
+            <param name="communicationInterface">Reference to the communication interface containing the properties and member variables that are to be
+            used to initialize the class.</param>
+        </member>
+        <member name="M:Watch.Communication.CommunicationWatch.SendVariable(System.Int16,System.Int16,System.Double)">
+            <summary>
+            Write the specified data to the watch variable specified by the <paramref name="dictionaryIndex"/> parameter.
+            </summary>
+            <param name="dictionaryIndex">The dictionary index.</param>
+            <param name="dataType">The data type.</param>
+            <param name="data">The data.</param>
+            <exception cref="T:Common.Communication.CommunicationException">Thrown if the error code returned from the call to the PTUDLL32.CloseCommunication() method is not
+            CommunicationError.Success.</exception>
+        </member>
+        <member name="M:Watch.Communication.CommunicationWatch.SetWatchElements(System.Collections.Generic.List{System.Int16})">
+            <summary>
+            Map the watch identifiers listed in <paramref name="watchElementList"/> to the watch element array monitored by the target hardware.
+            </summary>
+            <remarks> The number of watch identifiers in the list must not exceed <c>WatchSize</c>.</remarks>
+            <param name="watchElementList">The list containing the watch identifiers that are to be mapped to each element of the watch element array.
+            </param>
+            <exception cref="T:Common.Communication.CommunicationException">Thrown if the error code returned from the call to the PTUDLL32.SetWatchElements() method is not
+            CommunicationError.Success.</exception>
+        </member>
+        <member name="M:Watch.Communication.CommunicationWatch.UpdateWatchElements(System.Boolean)">
+            <summary>
+            Retrieve the watch elements from the target hardware.
+            </summary>
+            <remarks>The watch elements are the watch values that are being monitored by the target hardware as defined by the 
+            <c>SetWatchElements()&gt; method.</c></remarks>
+            <returns>The retrieved watch element table, if successful; otherwise, null.</returns>
+            <exception cref="T:Common.Communication.CommunicationException">Thrown if the error code returned from the call to the
+            UpdateWatchElements() method is not CommunicationError.Success.</exception>
+        </member>
+        <member name="M:Watch.Communication.CommunicationWatch.UpdateWatchVariableTable(Common.Communication.WatchElement_t[])">
+            <summary>
+            Update the watch variable lookup table with the latest watch element data retrieved from the targer hardware.
+            </summary>
+            <param name="watchElements">The watch element table retrieved from the target hardware.</param>
+        </member>
+        <member name="M:Watch.Communication.CommunicationWatch.GetChartConfiguration">
+            <summary>
+            Get the watch variable identifiers of the watch variables that are currently assigned to the chart recorder channels.
+            </summary>
+            <returns>An array of the watch variable identifiers corresponding to the watch variables that are currently assigned to the chart recorder
+            channels.</returns>
+            <exception cref="T:Common.Communication.CommunicationException">Thrown if the error code returned from the call to the PTUDLL32.GetChartIndex() method is not
+            CommunicationError.Success.</exception>
+        </member>
+        <member name="M:Watch.Communication.CommunicationWatch.ConfigureChartRecorderChannels(System.Int16[])">
+            <summary>
+            Configure the chart recorder channels i.e. assign each channel of the chart recorder to a specific watch variable.
+            </summary>
+            <exception cref="T:Common.Communication.CommunicationException">Thrown if the error code returned from a call to the PTUDLL32.SetChartIndex() method is not
+            CommunicationError.Success.</exception>
+        </member>
+    </members>
+</doc>

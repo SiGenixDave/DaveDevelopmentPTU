@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
+  <Class Name="Watch.Forms.FormViewWatch">
+    <Position X="0.5" Y="0.5" Width="5" />
+    <Members>
+      <Field Name="m_CommunicationInterface" Hidden="true" />
+      <Field Name="m_ThreadPollWatch" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AJAkRAgKpCCABCJYQJjAIQqCAAEACAkQIABIQcCBABI=</HashCode>
+      <FileName>Forms\FormViewWatch.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="m_CommunicationInterface" />
+      <Field Name="m_ThreadPollWatch" />
+      <Field Name="m_WatchFileRecordedData" />
+      <Field Name="m_DataStreamSimulatedFaultLog" />
+      <Property Name="CommunicationInterface" />
+      <Property Name="ThreadPollWatch" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Watch.ThreadPollWatch" Collapsed="true">
+    <Position X="7.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAgAAECgCAAAACAQkIAIAqEgAgAACMRBAAGICBQBEI=</HashCode>
+      <FileName>ThreadPollWatch.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Watch.Forms.FormOpenWatch">
+    <Position X="12" Y="3" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAAAAAAAAAAACAAAACQAAAAAAAAAAAAEAAAAA=</HashCode>
+      <FileName>Forms\FormOpenWatch.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="Common.WatchFile_t">
+    <Position X="7.75" Y="3" Width="2.75" />
+    <TypeIdentifier />
+  </Struct>
+  <Struct Name="Common.Communication.DataStream_t">
+    <Position X="7.75" Y="6.5" Width="4" />
+    <TypeIdentifier />
+  </Struct>
+  <Interface Name="Common.Communication.ICommunicationWatch">
+    <Position X="7.75" Y="0.5" Width="3.25" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="Common.IPollTarget">
+    <Position X="12" Y="0.5" Width="1.75" />
+    <TypeIdentifier />
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

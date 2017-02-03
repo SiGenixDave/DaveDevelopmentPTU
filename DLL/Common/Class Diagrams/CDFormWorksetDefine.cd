@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="Common.Forms.FormWorksetDefine">
+    <Position X="0.5" Y="2" Width="6" />
+    <Members>
+      <Field Name="components" Hidden="true" />
+      <Event Name="DataUpdate" Hidden="true" />
+      <Field Name="m_ButtonAdd" Hidden="true" />
+      <Field Name="m_ButtonApply" Hidden="true" />
+      <Field Name="m_ButtonCancel" Hidden="true" />
+      <Field Name="m_ButtonClear" Hidden="true" />
+      <Field Name="m_ButtonMoveDown" Hidden="true" />
+      <Field Name="m_ButtonMoveUp" Hidden="true" />
+      <Field Name="m_ButtonOK" Hidden="true" />
+      <Field Name="m_ButtonRemove" Hidden="true" />
+      <Field Name="m_GroupBoxAvailable" Hidden="true" />
+      <Field Name="m_GroupBoxWorkset" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>YSNgQKzKgeYpBUEOgDCyDoQ6kEyaAnABIRpKEMDkEoA=</HashCode>
+      <FileName>Forms\FormWorksetDefine.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Common.Forms.FormPTUDialog">
+    <Position X="7.25" Y="2" Width="5" />
+    <Members>
+      <Field Name="m_CalledFrom" Hidden="true" />
+      <Field Name="m_MainWindow" Hidden="true" />
+      <Field Name="m_Security" Hidden="true" />
+    </Members>
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <InheritanceLine Type="System.Windows.Forms.Form" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="8.5" Y="1.191" />
+        <Point X="8.5" Y="2" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAACAABAQAAAGEChCCACAAAAAAAQAEAEAAAAA=</HashCode>
+      <FileName>Forms\FormPTUDialog.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="m_Security" />
+      <Property Name="Security" />
+      <Property Name="MainWindow" />
+      <Property Name="CalledFrom" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Common.Forms.FormConfigure">
+    <Position X="7.25" Y="7.25" Width="5.75" />
+    <NestedTypes>
+      <Enum Name="Common.Forms.FormConfigure.ModifyState" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Forms\FormConfigure.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AUIEBAAAAAA0ABCQUUGChAYiAAwAJQTAAIKEAEGACCA=</HashCode>
+      <FileName>Forms\FormConfigure.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Common.Forms.FormPlotDefine">
+    <Position X="7.25" Y="19.25" Width="4.75" />
+    <TypeIdentifier>
+      <HashCode>AAICAACAAMAgAAAMQADABAQSAEBIACBAAAAAAECEAAA=</HashCode>
+      <FileName>Forms\FormPlotDefine.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Common.Security" Collapsed="true">
+    <Position X="13.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACABAAAIAQQgQQAIgABTAAIAAIAAiKAEAIACQFJAiAA=</HashCode>
+      <FileName>Security.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="System.Windows.Forms.Form" Collapsed="true">
+    <Position X="7.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Interface Name="Common.IDataUpdate">
+    <Position X="0.5" Y="0.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\IDataUpdate.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Common.IMainWindow" Collapsed="true">
+    <Position X="13.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IIQQBwCQAYAAAgJAAAAAAiEQAAMAgCACAAACAICOBEA=</HashCode>
+      <FileName>Interfaces\IMainWindow.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

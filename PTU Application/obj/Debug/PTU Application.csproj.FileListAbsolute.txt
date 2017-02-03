@@ -1,0 +1,40 @@
+C:\CustomerProjects\Bombardier\NSE_PTU\branches\DaveDevelopment\PTU Application\bin\Debug\PTU.exe.config
+C:\CustomerProjects\Bombardier\NSE_PTU\branches\DaveDevelopment\PTU Application\bin\Debug\Command Files\FtpTransfer.cmd
+C:\CustomerProjects\Bombardier\NSE_PTU\branches\DaveDevelopment\PTU Application\bin\Debug\PTU.XML
+C:\CustomerProjects\Bombardier\NSE_PTU\branches\DaveDevelopment\PTU Application\bin\Debug\PTU.exe
+C:\CustomerProjects\Bombardier\NSE_PTU\branches\DaveDevelopment\PTU Application\bin\Debug\PTU.pdb
+C:\CustomerProjects\Bombardier\NSE_PTU\branches\DaveDevelopment\PTU Application\bin\Debug\CodeProject.GraphComponents.dll
+C:\CustomerProjects\Bombardier\NSE_PTU\branches\DaveDevelopment\PTU Application\bin\Debug\Common.dll
+C:\CustomerProjects\Bombardier\NSE_PTU\branches\DaveDevelopment\PTU Application\bin\Debug\Event.dll
+C:\CustomerProjects\Bombardier\NSE_PTU\branches\DaveDevelopment\PTU Application\bin\Debug\SelfTest.dll
+C:\CustomerProjects\Bombardier\NSE_PTU\branches\DaveDevelopment\PTU Application\bin\Debug\Watch.dll
+C:\CustomerProjects\Bombardier\NSE_PTU\branches\DaveDevelopment\PTU Application\bin\Debug\WibuKey.dll
+C:\CustomerProjects\Bombardier\NSE_PTU\branches\DaveDevelopment\PTU Application\bin\Debug\VcuComm.dll
+C:\CustomerProjects\Bombardier\NSE_PTU\branches\DaveDevelopment\PTU Application\bin\Debug\CodeProject.GraphComponents.pdb
+C:\CustomerProjects\Bombardier\NSE_PTU\branches\DaveDevelopment\PTU Application\bin\Debug\CodeProject.GraphComponents.xml
+C:\CustomerProjects\Bombardier\NSE_PTU\branches\DaveDevelopment\PTU Application\bin\Debug\Common.pdb
+C:\CustomerProjects\Bombardier\NSE_PTU\branches\DaveDevelopment\PTU Application\bin\Debug\Common.xml
+C:\CustomerProjects\Bombardier\NSE_PTU\branches\DaveDevelopment\PTU Application\bin\Debug\Event.pdb
+C:\CustomerProjects\Bombardier\NSE_PTU\branches\DaveDevelopment\PTU Application\bin\Debug\Event.xml
+C:\CustomerProjects\Bombardier\NSE_PTU\branches\DaveDevelopment\PTU Application\bin\Debug\SelfTest.pdb
+C:\CustomerProjects\Bombardier\NSE_PTU\branches\DaveDevelopment\PTU Application\bin\Debug\SelfTest.xml
+C:\CustomerProjects\Bombardier\NSE_PTU\branches\DaveDevelopment\PTU Application\bin\Debug\Watch.pdb
+C:\CustomerProjects\Bombardier\NSE_PTU\branches\DaveDevelopment\PTU Application\bin\Debug\Watch.xml
+C:\CustomerProjects\Bombardier\NSE_PTU\branches\DaveDevelopment\PTU Application\bin\Debug\WibuKey.pdb
+C:\CustomerProjects\Bombardier\NSE_PTU\branches\DaveDevelopment\PTU Application\bin\Debug\WibuKey.xml
+C:\CustomerProjects\Bombardier\NSE_PTU\branches\DaveDevelopment\PTU Application\bin\Debug\VcuComm.pdb
+C:\CustomerProjects\Bombardier\NSE_PTU\branches\DaveDevelopment\PTU Application\bin\Debug\VcuComm.xml
+C:\CustomerProjects\Bombardier\NSE_PTU\branches\DaveDevelopment\PTU Application\obj\Debug\PTU Application.csprojResolveAssemblyReference.cache
+C:\CustomerProjects\Bombardier\NSE_PTU\branches\DaveDevelopment\PTU Application\obj\Debug\Bombardier.PTU.Forms.FormRealTimeClock.resources
+C:\CustomerProjects\Bombardier\NSE_PTU\branches\DaveDevelopment\PTU Application\obj\Debug\Bombardier.PTU.Forms.FormHelpAbout.resources
+C:\CustomerProjects\Bombardier\NSE_PTU\branches\DaveDevelopment\PTU Application\obj\Debug\Bombardier.PTU.Forms.FormConfigurePasswordProtection.resources
+C:\CustomerProjects\Bombardier\NSE_PTU\branches\DaveDevelopment\PTU Application\obj\Debug\Bombardier.PTU.Forms.FormLogin.resources
+C:\CustomerProjects\Bombardier\NSE_PTU\branches\DaveDevelopment\PTU Application\obj\Debug\Bombardier.PTU.Forms.FormOptions.resources
+C:\CustomerProjects\Bombardier\NSE_PTU\branches\DaveDevelopment\PTU Application\obj\Debug\Bombardier.PTU.Forms.FormSelectTarget.resources
+C:\CustomerProjects\Bombardier\NSE_PTU\branches\DaveDevelopment\PTU Application\obj\Debug\Bombardier.PTU.Forms.FormShowSystemInformation.resources
+C:\CustomerProjects\Bombardier\NSE_PTU\branches\DaveDevelopment\PTU Application\obj\Debug\Bombardier.PTU.MdiPTU.resources
+C:\CustomerProjects\Bombardier\NSE_PTU\branches\DaveDevelopment\PTU Application\obj\Debug\Bombardier.PTU.Properties.Resources.resources
+C:\CustomerProjects\Bombardier\NSE_PTU\branches\DaveDevelopment\PTU Application\obj\Debug\Bombardier.PTU.ControlPanel.resources
+C:\CustomerProjects\Bombardier\NSE_PTU\branches\DaveDevelopment\PTU Application\obj\Debug\PTU Application.csproj.GenerateResource.Cache
+C:\CustomerProjects\Bombardier\NSE_PTU\branches\DaveDevelopment\PTU Application\obj\Debug\PTU.exe
+C:\CustomerProjects\Bombardier\NSE_PTU\branches\DaveDevelopment\PTU Application\obj\Debug\PTU.pdb

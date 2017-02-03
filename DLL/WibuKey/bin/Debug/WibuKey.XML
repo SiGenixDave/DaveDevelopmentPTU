@@ -1,0 +1,149 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>WibuKey</name>
+    </assembly>
+    <members>
+        <member name="T:WibuKey.MenuInterfaceWibuKey">
+            <summary>
+            The interface between the main PTU application and the WibuKey sub-system  - WibuKey.dll.
+            </summary>
+        </member>
+        <member name="F:WibuKey.MenuInterfaceWibuKey.EncryptionData">
+            <summary>
+            A string containing the data that is to be encrypted. Value: "12345678".
+            </summary>
+        </member>
+        <member name="F:WibuKey.MenuInterfaceWibuKey.WkDevUser">
+            <summary>
+            The user code of the development WibuBox. Value: 600615.
+            </summary>
+        </member>
+        <member name="F:WibuKey.MenuInterfaceWibuKey.WkDevFirm">
+            <summary>
+            The firm code of the development WibuBox. Value: 10.
+            </summary>
+        </member>
+        <member name="F:WibuKey.MenuInterfaceWibuKey.WkDevSlot">
+            <summary>
+            The slot number where the firm and user codes are programmed for the development dongle. Value: 4.
+            </summary>
+            <remarks>This value must be the same as the slot number that is used to program the client firm and user codes.</remarks>
+        </member>
+        <member name="F:WibuKey.MenuInterfaceWibuKey.m_WibuBoxValid">
+            <summary>
+            A flag to indicate whether a WibuBox device with the correct Firm and User codes programmed into the appropriate slot has been found. True, if a valid WibuBox
+            has been found; otherwise, false. 
+            </summary>
+        </member>
+        <member name="F:WibuKey.MenuInterfaceWibuKey.m_WibuBoxFound">
+            <summary>
+            A flag that indicates whether a WibuBox device has been found. True, if a WibuBox device has been found; otherwise, false.
+            </summary>
+        </member>
+        <member name="F:WibuKey.MenuInterfaceWibuKey.m_WibuBoxRemoved">
+            <summary>
+            A flag to indicate whether the WibuBox has been removed. True, if the WibuBox has been removed; otherwise, false.
+            </summary>
+        </member>
+        <member name="F:WibuKey.MenuInterfaceWibuKey.m_WibuKey">
+            <summary>
+            A reference to the WibuKey Component Object Model (COM) Application Programmer Interface (API).
+            </summary>
+        </member>
+        <member name="M:WibuKey.MenuInterfaceWibuKey.#ctor(Common.IMainWindow)">
+            <summary>
+            Initializes a new instance of the class.
+            </summary>
+            <param name="mainWindow">Reference to the main application window interface.</param>
+        </member>
+        <member name="M:WibuKey.MenuInterfaceWibuKey.WibuBoxCheckIfRemoved">
+            <summary>
+            Check whether the WibuBox/U+ device has been removed from the port. This method can only be called following a successful call to the
+            WibuBoxCheckForValidEntry() method i.e. the call determined that a valid WibuBox is connected to the USB or parallel port of the computer.
+            </summary>
+            <remarks>This method is called at regular intervals if the current project supports WibuBox/U+ hardware and the user is logged 
+            into the Engineering account. If the method indicates that the WibuBox/U+ hardware has been removed the user is automatically logged out of the Engineering
+            account.</remarks>
+            <returns>A flag to indicate whether the WibuBox has been removed from the port. True, if the WibuBox has been removed; otherwise, false.</returns>
+        </member>
+        <member name="M:WibuKey.MenuInterfaceWibuKey.WibuBoxCheckForValidEntry(System.Boolean)">
+            <summary>
+            <para>Check whether a WibuBox/U+ device is connected to either a USB or Parallel port and, if so, whether the appropriate slot has been programmed with
+            the correct Firm and User Codes.</para>
+            <para>This method is called during PTU start-up, in order to update the WibuBox status label, and whenever the 'Login' menu option is selected, provided
+            the current project supports WibuBox/U+ hardware.</para>
+            <para>The dialog box used to enter the Engineering password is only displayed if this method indicates that a valid WibuBox/U+ device was found.</para>
+            </summary>
+            <param name="suppressMessageBox">A flag that is used to control <c>MessageBox.Show()</c> reporting. True, if the method is to suppress<c>MessageBox.Show()</c>
+            reporting; otherwise, false.</param>
+            <returns>A flag to indicate whether a valid WibuBox device was found. True, if a valid WibuBox was found; otherwise, false.</returns>
+        </member>
+        <member name="T:WibuKey.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:WibuKey.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:WibuKey.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:WibuKey.Properties.Resources.MBCaptionError">
+            <summary>
+              Looks up a localized string similar to Error.
+            </summary>
+        </member>
+        <member name="P:WibuKey.Properties.Resources.MBCaptionInformation">
+            <summary>
+              Looks up a localized string similar to Information.
+            </summary>
+        </member>
+        <member name="P:WibuKey.Properties.Resources.MBCaptionWarning">
+            <summary>
+              Looks up a localized string similar to Warning.
+            </summary>
+        </member>
+        <member name="P:WibuKey.Properties.Resources.MBTWibuBoxDevelopmentFound">
+            <summary>
+              Looks up a localized string similar to A development Wibu-Key security device has been detected....
+            </summary>
+        </member>
+        <member name="P:WibuKey.Properties.Resources.MBTWibuBoxFoundButInvalid">
+            <summary>
+              Looks up a localized string similar to Although a Wibu-Key security device was found, the appropriate slot was not programmed with the correct Firm and User codes..
+            </summary>
+        </member>
+        <member name="P:WibuKey.Properties.Resources.MBTWibuBoxNotFound">
+            <summary>
+              Looks up a localized string similar to A Wibu-Key security device was not found..
+            </summary>
+        </member>
+        <member name="P:WibuKey.Properties.Resources.MBTWibuBoxNotInitialized">
+            <summary>
+              Looks up a localized string similar to The Wibu-Key has not been initialized..
+            </summary>
+        </member>
+        <member name="P:WibuKey.Properties.Resources.MBTWibuBoxUserMessage">
+            <summary>
+              Looks up a localized string similar to Access to the Engineering account is only allowed if a valid Wibu-Key security device is connected to either a parallel or USB port. Please shut down the application, insert a valid Wibu-Key security device and then retry this operation..
+            </summary>
+        </member>
+        <member name="P:WibuKey.Properties.Resources.MBTWibuKeyEncryptionInvalid">
+            <summary>
+              Looks up a localized string similar to The Wibu-Key did not encrypt the data correctly..
+            </summary>
+        </member>
+        <member name="P:WibuKey.Properties.Resources.MBTWibuKeySubsystemNotFound">
+            <summary>
+              Looks up a localized string similar to No WibuKey Subsystems found..
+            </summary>
+        </member>
+    </members>
+</doc>

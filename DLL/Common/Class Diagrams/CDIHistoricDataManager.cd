@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Struct Name="Common.Communication.WatchFrame_t">
+    <Position X="6.25" Y="0.5" Width="3.25" />
+    <Members>
+      <Field Name="m_WatchElements" Hidden="true" />
+    </Members>
+    <AssociationLine Name="WatchElements" Type="Common.Communication.WatchElement_t">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-2.382" Y="0.282" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEEAAAAARAAAA=</HashCode>
+      <FileName>Communication\WatchFrame.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="m_WatchElements" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="WatchElements" />
+    </ShowAsCollectionAssociation>
+  </Struct>
+  <Struct Name="Common.Communication.WatchElement_t">
+    <Position X="6.5" Y="3.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAIAAAAAAAAAAAAAACAAAAAAAAAgAAIAAAA=</HashCode>
+      <FileName>Communication\CommunicationParent.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Common.Configuration.Workset_t">
+    <Position X="0.5" Y="5.25" Width="8" />
+    <AssociationLine Name="PlotTabPages" Type="Common.Configuration.PlotTabPage_t">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-1.003" Y="0.252" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAACBAgAAACAAAAEAABQAAQAAAAAAAAAAgACAAEBIAA=</HashCode>
+      <FileName>Configuration\WorksetCollection.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="SecurityLevel" />
+      <Field Name="WatchItems" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Field Name="Column" />
+      <Field Name="PlotTabPages" />
+    </ShowAsCollectionAssociation>
+  </Struct>
+  <Struct Name="Common.Configuration.WatchItem_t">
+    <Position X="0.5" Y="9.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAAAAAAgAEAAAAAEAAAAAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>Configuration\WorksetCollection.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Common.Configuration.Column_t">
+    <Position X="2.75" Y="9.25" Width="2.5" />
+    <AssociationLine Name="ChartScaleList" Type="Common.Configuration.ChartScale_t">
+      <MemberNameLabel ManuallyPlaced="true" ManuallySized="true">
+        <Position X="-0.082" Y="0.11" Height="0.182" Width="1.463" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAQAAAAAAAAAAAAAAAAAAAAACAAAAAAAA=</HashCode>
+      <FileName>Configuration\WorksetCollection.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Field Name="ChartScaleList" />
+    </ShowAsCollectionAssociation>
+  </Struct>
+  <Struct Name="Common.Configuration.ChartScale_t">
+    <Position X="2.75" Y="11" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAAAQAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAA=</HashCode>
+      <FileName>Configuration\WorksetCollection.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Common.Configuration.PlotTabPage_t">
+    <Position X="6.25" Y="9.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAQAAAAAAAAAAAAAAAAAAAAACAAAAAAAA=</HashCode>
+      <FileName>Configuration\WorksetCollection.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Interface Name="Common.IHistoricDataManager">
+    <Position X="0.5" Y="0.5" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAABAAAABAAAAAAAAAAIIEgAAAAAAAQAAAACAAA=</HashCode>
+      <FileName>Interfaces\IHistoricDataManager.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Workset" />
+      <Property Name="LogType" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="AllFrames" />
+      <Property Name="FramesToDisplay" />
+    </ShowAsCollectionAssociation>
+  </Interface>
+  <Enum Name="Common.SecurityLevel">
+    <Position X="4" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAACA=</HashCode>
+      <FileName>Security.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Common.LogType">
+    <Position X="1.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAAgAAAAAAAAAAgAAAAAAAAAAAgAAACA=</HashCode>
+      <FileName>FileHandling.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

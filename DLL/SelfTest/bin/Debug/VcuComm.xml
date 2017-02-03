@@ -1,0 +1,1496 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>VcuComm</name>
+    </assembly>
+    <members>
+        <member name="T:VcuComm.Serial">
+            <summary>
+            Used to communicate to a target PTU via RS-232 (Serial)
+            </summary>
+        </member>
+        <member name="T:VcuComm.ICommDevice">
+            <summary>
+            Interface used to abstract calls so that any hardware connection (RS-232, TCP, etc) implements
+            these same methods.
+            </summary>
+        </member>
+        <member name="M:VcuComm.ICommDevice.Close">
+            <summary>
+            Closes the hardware device (TCP connection, RS-232 port, etc.)
+            </summary>
+            <returns>less than 0 if any failure occurs; greater than or equal to 0 if successful</returns>
+        </member>
+        <member name="M:VcuComm.ICommDevice.IsTargetBigEndian">
+            <summary>
+            The target is responsible for reporting whether it is a big or little endian machine. The start of
+            message received from the target indicates the machine type of target
+            </summary>
+            <remarks>It is imperative that the calling function perform all error checking prior to invoking this
+            method. That includes verification that the transmitted SOM was echoed before making assumptions that there
+            is an embedded PTU connected.
+            </remarks>
+            <returns>true if target is Big Endian; false otherwise</returns>
+        </member>
+        <member name="M:VcuComm.ICommDevice.Open(System.String)">
+            <summary>
+            Attempts to opens a port and establish communication with a target device
+            </summary>
+            <param name="commaDelimitedOptions">string contains comma delimited options based on the port being opened</param>
+            <returns>less than 0 if any failure occurs; greater than or equal to 0 if successful</returns>
+        </member>
+        <member name="M:VcuComm.ICommDevice.ReceiveTargetAcknowledge">
+            <summary>
+            Reads the data from the  port and verifies the target acknowledged the message. Target acknowledges
+            the message sent from the application when no data is sent back from the target (i.e. a command was sent)
+            </summary>
+            <returns>less than 0 if any failure occurs; greater than or equal to 0 if successful</returns>
+        </member>
+        <member name="M:VcuComm.ICommDevice.ReceiveTargetDataPacket(System.Byte[])">
+            <summary>
+            Receives a message from the target
+            </summary>
+            <param name="rxMessage">the message received from the target is placed here</param>
+            <returns>less than 0 if any failure occurs; greater than or equal to 0 if successful</returns>
+        </member>
+        <member name="M:VcuComm.ICommDevice.SendMessageToTarget(System.Byte[])">
+            <summary>
+            Sends a message to the target
+            </summary>
+            <param name="txMessage">message that is sent to the target</param>
+            <returns>less than 0 if any failure occurs; number of bytes sent otherwise</returns>
+        </member>
+        <member name="M:VcuComm.ICommDevice.SendReceiveSOM">
+            <summary>
+            Sends and receives the Start Of Message (SOM) to/from the target
+            </summary>
+            <returns>less than 0 if any failure occurs; greater than or equal to 0 if successful</returns>
+        </member>
+        <member name="P:VcuComm.ICommDevice.Error">
+            <summary>
+            Allows access to the logged error so as to pinpoint the part of the code where the error occurred and 
+            the type of error logged
+            </summary>
+        </member>
+        <member name="P:VcuComm.ICommDevice.ExceptionMessage">
+            <summary>
+            Allows access to any exception message containing detailed information
+            </summary>
+        </member>
+        <member name="F:VcuComm.Serial.NO_SERIAL_ISSUES">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="F:VcuComm.Serial.m_ExceptionMessage">
+            <summary>
+            Maintains the exception message thrown when a serial port error occurs. Allows the calling function
+            to ascertain more detail about the error.
+            </summary>
+        </member>
+        <member name="F:VcuComm.Serial.m_ReadTimeout">
+            <summary>
+            Used to adjust the read timeout of the serial port. -1 means the receive call will wait forever until
+            a character is received
+            </summary>
+        </member>
+        <member name="F:VcuComm.Serial.m_SerialError">
+            <summary>
+            Stores the most recent serial port error. Cleared whenever a calling function reads the state.
+            </summary>
+        </member>
+        <member name="F:VcuComm.Serial.m_SerialPort">
+            <summary>
+            object that contains the serial port object
+            </summary>
+        </member>
+        <member name="F:VcuComm.Serial.m_TargetStartOfMessage">
+            <summary>
+            contains the start of message byte received from the target
+            </summary>
+        </member>
+        <member name="M:VcuComm.Serial.Close">
+            <summary>
+            Closes the serial port
+            </summary>
+            <returns>less than 0 if any failure occurs; greater than or equal to 0 if successful</returns>
+        </member>
+        <member name="M:VcuComm.Serial.IsTargetBigEndian">
+            <summary>
+            The target is responsible for reporting whether it is a big or little endian machine. The start of
+            message received from the target indicates the machine type of target
+            </summary>
+            <remarks>It is imperative that the calling function perform all error checking prior to invoking this
+            method. That includes verification that the transmitted SOM was echoed before making assumptions that there
+            is an embedded PTU connected.
+            </remarks>
+            <returns>true if target is Big Endian; false otherwise</returns>
+        </member>
+        <member name="M:VcuComm.Serial.Open(System.String)">
+            <summary>
+            Opens the desired serial port based on the comma delimited string passed as the argument. The first argument
+            is the COM port (e.g. COM1). The 2nd argument in the string is the baud rate (e.g. 19200). The 3rd argument is
+            the parity (e.g. none, odd, or even). The 4th argument is the number of data bits (e.g. 8). The 5th argument is
+            the number of stop bits (e.g. 1).
+            </summary>
+            <param name="commaDelimitedOptions">COM port settings - "COMX,BaudRate,Parity,DataBits,StopBits"</param>
+            <returns>less than 0 if any failure occurs; greater than or equal to 0 if successful</returns>
+        </member>
+        <member name="M:VcuComm.Serial.ReceiveTargetAcknowledge">
+            <summary>
+            Reads the serial port and verifies the target acknowledged the message. Target acknowledges
+            the message sent from the application when no data is sent back from the target (i.e. a command was sent)
+            </summary>
+            <returns>less than 0 if any failure occurs; greater than or equal to 0 if successful</returns>
+        </member>
+        <member name="M:VcuComm.Serial.ReceiveTargetDataPacket(System.Byte[])">
+            <summary>
+            Receives a message from the target. It is assumed that the target sends a message with the first 2 bytes
+            indicating the size of the message.
+            </summary>
+            <param name="rxMessage">array where the received message will be stored</param>
+            <returns>less than 0 if any failure occurs; greater than or equal to 0 if successful</returns>
+        </member>
+        <member name="M:VcuComm.Serial.SendMessageToTarget(System.Byte[])">
+            <summary>
+            Send a message to the embedded PTU target. The SOM is sent and then waits for an echo from the target.
+            The message is then sent and an echo that is identical to the message sent is verified.
+            </summary>
+            <param name="txMessage">the message to be sent to the target</param>
+            <returns>less than 0 if any failure occurs; greater than or equal to 0 if successful</returns>
+        </member>
+        <member name="M:VcuComm.Serial.SendReceiveSOM">
+             <summary>
+            
+             </summary>
+             <returns></returns>
+        </member>
+        <member name="M:VcuComm.Serial.FlushRxBuffer">
+            <summary>
+            Flushes the serial port receive buffer
+            </summary>
+            <returns>less than 0 if any failure occurs; greater than or equal to 0 if successful</returns>
+        </member>
+        <member name="M:VcuComm.Serial.FlushTxBuffer">
+            <summary>
+            Flushes the serial port transmit buffer
+            </summary>
+            <returns>less than 0 if any failure occurs; greater than or equal to 0 if successful</returns>
+        </member>
+        <member name="M:VcuComm.Serial.ReceiveMessage(System.Byte[],System.Int32)">
+            <summary>
+            This method is responsible for reading all available chars that are in the serial port
+            sent by the embedded PTU. All characters are copied to the <paramref name="rxMessage"/>
+            starting at the <paramref name="bufferOffset"/>. This feature allows multiple calls to
+            this method until the entire message is received.
+            </summary>
+            <param name="rxMessage">buffer where the received message is stored</param>
+            <param name="bufferOffset">offset into the receive buffer</param>
+            <returns>less than 0 if any failure occurs; number of bytes read if successful</returns>
+        </member>
+        <member name="M:VcuComm.Serial.ReceiveStartOfMessage">
+            <summary>
+            Receives the Start of Message byte from the target
+            </summary>
+            <returns>less than 0 if any failure occurs; greater than or equal to 0 if successful</returns>
+        </member>
+        <member name="M:VcuComm.Serial.SendStartOfMessage">
+            <summary>
+            Sends the Start of Message byte to the target
+            </summary>
+            <returns>less than 0 if any failure occurs; greater than or equal to 0 if successful</returns>
+        </member>
+        <member name="M:VcuComm.Serial.TransmitMessage(System.Byte[])">
+            <summary>
+            Sends a message to the target via the serial port
+            </summary>
+            <param name="txMessage">the byte array to be sent to the embedded PTU</param>
+            <returns>less than 0 if any failure occurs; number of bytes sent if successful</returns>
+        </member>
+        <member name="P:VcuComm.Serial.Error">
+            <summary>
+            Allows access to the logged error so as to pinpoint the part of the code where the error occurred and 
+            the type of error logged
+            </summary>
+        </member>
+        <member name="P:VcuComm.Serial.ExceptionMessage">
+            <summary>
+            Allows access to any exception message containing detailed information
+            </summary>
+        </member>
+        <member name="P:VcuComm.Serial.ReadTimeout">
+            <summary>
+            This is the amount of time (in msecs) that the serial port waits for at least 1 character
+            before a timeout expires.
+            </summary>
+        </member>
+        <member name="T:VcuComm.TCP">
+            <summary>
+            Class that implements the TCP client communication with the embedded TCP PTU
+            </summary>
+        </member>
+        <member name="F:VcuComm.TCP.PTU_SERVER_SOCKET">
+            <summary>
+            This is the fixed server port number for any embedded TCP PTU.
+            </summary>
+        </member>
+        <member name="F:VcuComm.TCP.SOCKET_ACTIVE_WAIT_TIME_MS">
+            <summary>
+            This is the fixed server port number for any embedded TCP PTU.
+            </summary>
+        </member>
+        <member name="F:VcuComm.TCP.m_AsyncExceptionThrown">
+            <summary>
+            Becomes true when an asynchronous method throws an exception. Used by the method
+            that indirectly invoked the asynchronous method to determine if a timeout or exception 
+            was thrown.
+            </summary>
+        </member>
+        <member name="F:VcuComm.TCP.m_BytesRead">
+            <summary>
+            The number of bytes read by the TCP client when the server responds to a client request
+            </summary>
+        </member>
+        <member name="F:VcuComm.TCP.m_BytesSent">
+            <summary>
+            The number of bytes sent by the TCP client to the server 
+            </summary>
+        </member>
+        <member name="F:VcuComm.TCP.m_Client">
+            <summary>
+            TCP client object that is created and used to send requests to the embedded TCP PTU
+            server as well as read and process responses from the server.
+            </summary>
+        </member>
+        <member name="F:VcuComm.TCP.m_ConnectDone">
+            <summary>
+            Used to suspend main thread waiting for a connection. Once connection is established, this gatekeeper
+            is signaled and execution resumes. ManualResetEvent is used instead of AutoResetEvent since
+            a connection is established only once, unlike sending and receiving, which happens many times
+            per socket connection.
+            </summary>
+        </member>
+        <member name="F:VcuComm.TCP.m_ExceptionMessage">
+            <summary>
+            Maintains the exception message thrown when a serial port error occurs. Allows the calling function
+            to ascertain more detail about the error.
+            </summary>
+        </member>
+        <member name="F:VcuComm.TCP.m_ReceiveDone">
+            <summary>
+            Used to suspend main thread waiting for data to be received. Once data is received, this gatekeeper
+            is signaled and execution resumes.
+            </summary>
+        </member>
+        <member name="F:VcuComm.TCP.m_TargetStartOfMessage">
+            <summary>
+            Stores the most recent server start of message response. In theory, once updated by the
+            embedded PTU, this value should never change because it is not possible to establish
+            a TCP connection with another embedded PTU.
+            </summary>
+        </member>
+        <member name="F:VcuComm.TCP.m_TCPError">
+            <summary>
+            Stores the most recent TCP error. Cleared whenever a calling function reads the state.
+            </summary>
+        </member>
+        <member name="F:VcuComm.TCP.m_TransmitDone">
+            <summary>
+            Used to suspend main thread waiting for data to be transmitted. Once data is transmitted, this gatekeeper
+            is signaled and execution resumes. 
+            </summary>
+        </member>
+        <member name="M:VcuComm.TCP.Close">
+            <summary>
+            Closes the TCP connection gracefully by issuing a shutdown which effectively disables sends
+            and receives on the socket and then closes the socket (issues a [FIN,ACK]).
+            </summary>
+            <returns>less than 0 if any failure occurs; greater than or equal to 0 if successful</returns>
+        </member>
+        <member name="M:VcuComm.TCP.IsTargetBigEndian">
+            <summary>
+            The target is responsible for reporting whether it is a big or little endian machine. The start of
+            message received from the target indicates the machine type of target
+            </summary>
+            <remarks>It is imperative that the calling function perform all error checking prior to invoking this
+            method. That includes verification that the transmitted SOM was echoed before making assumptions that there
+            is an embedded PTU connected.
+            </remarks>
+            <returns>true if target is Big Endian; false otherwise</returns>
+        </member>
+        <member name="M:VcuComm.TCP.Open(System.String)">
+            <summary>
+            This function attempts to open a new connection with an embedded PTU.
+            </summary>
+            <param name="commaDelimitedOptions">valid URL or valid IP address</param>
+            <returns>less than 0 if any failure occurs; greater than or equal to 0 if successful</returns>
+        </member>
+        <member name="M:VcuComm.TCP.ReceiveTargetAcknowledge">
+            <summary>
+            Reads the data from the TCP port and verifies the target acknowledged the message. Target acknowledges
+            the message sent from the application when no data is sent back from the target (i.e. a command was sent)
+            </summary>
+            <returns>less than 0 if any failure occurs; greater than or equal to 0 if successful</returns>
+        </member>
+        <member name="M:VcuComm.TCP.ReceiveTargetDataPacket(System.Byte[])">
+            <summary>
+            Receives a message from the target. It is assumed that the target sends a message with the first 2 bytes
+            indicating the size of the message.
+            </summary>
+            <param name="rxMessage">array where the received message will be stored</param>
+            <returns>less than 0 if any failure occurs; greater than or equal to 0 if successful</returns>
+        </member>
+        <member name="M:VcuComm.TCP.SendMessageToTarget(System.Byte[])">
+            <summary>
+            Send a message to the target. The SOM is sent and then waits for an echo from the target.
+            The message is then sent and an echo that is identical to the message sent is verified.
+            </summary>
+            <param name="txMessage">the message to be sent to the target</param>
+            <returns>less than 0 if any failure occurs; greater than or equal to 0 if successful</returns>
+        </member>
+        <member name="M:VcuComm.TCP.SendReceiveSOM">
+            <summary>
+            Sends the Start of Message to the embedded PTU target and also waits for the response from the
+            target. 
+            </summary>
+            <returns>0 if successful; less than 0 if a failure occurs</returns>
+        </member>
+        <member name="M:VcuComm.TCP.ConnectCallback(System.IAsyncResult)">
+            <summary>
+            This method is invoked after a successful TCP connection (3 way handshake) with the embedded PTU
+            is established. It sets a flag to inform the connection was established.
+            </summary>
+            <param name="result">delegate parameter required; UNUSED</param>
+        </member>
+        <member name="M:VcuComm.TCP.ReceiveCallback(System.IAsyncResult)">
+            <summary>
+            This callback is invoked when data is received on the socket. 
+            </summary>
+            <param name="ar">Required parameter for asynchronous callback; contains info about the socket</param>
+        </member>
+        <member name="M:VcuComm.TCP.ReceiveMessage(System.Byte[],System.Int32)">
+            <summary>
+            This method is responsible for reading all available chars that are in the serial port
+            sent by the embedded PTU. All characters are copied to the <paramref name="rxMessage"/>
+            starting at the <paramref name="bufferOffset"/>. This feature allows multiple calls to
+            this method until the entire message is received.
+            </summary>
+            <param name="rxMessage">buffer where the received message is stored</param>
+            <param name="bufferOffset">offset into the receive buffer</param>
+            <returns>less than 0 if any failure occurs; number of bytes read if successful</returns>
+        </member>
+        <member name="M:VcuComm.TCP.ReceiveStartOfMessage">
+            <summary>
+            Receives the Start Of Message (SOM) from the embedded the embedded PTU
+            </summary>
+            <returns>less than 0 if any failure occurs; greater than or equal to 0 if successful</returns>
+        </member>
+        <member name="M:VcuComm.TCP.SendStartOfMessage">
+            <summary>
+            Sends the Start Of Message (SOM) to the embedded PTU.
+            </summary>
+            <returns>less than 0 if any failure occurs; greater than or equal to 0 if successful</returns>
+        </member>
+        <member name="M:VcuComm.TCP.TransmitCallback(System.IAsyncResult)">
+            <summary>
+            This callback is invoked when data is transmitted on the socket. 
+            </summary>
+            <param name="ar">Required parameter for asynchronous callback; contains info about the socket</param>
+        </member>
+        <member name="M:VcuComm.TCP.TransmitMessage(System.Byte[])">
+            <summary>
+            Sends a message to the embedded TCP server target from the TCP client
+            </summary>
+            <param name="txMessage">the byte array to be sent to the embedded PTU</param>
+            <returns>less than 0 if any failure occurs; number of bytes sent if successful</returns>
+        </member>
+        <member name="P:VcuComm.TCP.Error">
+            <summary>
+            Property for m_TCPError
+            </summary>
+        </member>
+        <member name="P:VcuComm.TCP.ExceptionMessage">
+            <summary>
+            Property for m_ExceptionMessage
+            </summary>
+        </member>
+        <member name="T:VcuComm.ICommRequest">
+            <summary>
+            Every request from the PTU to the embedded target that has a payload must implement this
+            interface.
+            </summary>
+        </member>
+        <member name="M:VcuComm.ICommRequest.GetByteArray(System.Boolean)">
+            <summary>
+            Method that formats the message going to the embedded PTU target. The format of the message
+            is specific to the type of request made.
+            </summary>
+            <param name="targetIsBigEndian">true if the embedded PTU target is a Big Endian machine; false otherwise</param>
+            <returns>ordered byte array that is to be sent to the embedded PTU target</returns>
+        </member>
+        <member name="F:VcuComm.ProtocolPTU.MAX_TX_STREAM_SIZE">
+            <summary>
+            This is the maximum size of the outgoing message from PTU to the embedded PTU target. This
+            size includes the packet header. This is used to allocate memory for a payload of indeterminate
+            size or when stream writing is required to order the payload properly.
+            </summary>
+        </member>
+        <member name="F:VcuComm.ProtocolPTU.PTU_ACK">
+            <summary>
+            This is the response that is returned from the embedded target PTU when it acknowledges
+            a command and no data from the embedded target is to be returned.
+            </summary>
+        </member>
+        <member name="F:VcuComm.ProtocolPTU.TARGET_BIG_ENDIAN_SOM">
+            <summary>
+            This is the byte that is returned from the embedded target PTU when the machine that
+            the embedded target resides on is Big Endian.
+            </summary>
+        </member>
+        <member name="F:VcuComm.ProtocolPTU.THE_SOM">
+            <summary>
+            This is the byte that is returned from the embedded target PTU when the machine that
+            the embedded target resides on is Little Endian.
+            </summary>
+        </member>
+        <member name="F:VcuComm.ProtocolPTU.HEADER_SIZE_BYTES">
+            <summary>
+            The size of every PTU header to and from the embedded target PTU. The header consists
+            of 4 16 bit words of which the checksum is not used on either the PTU or the embedded
+            target.
+            </summary>
+        </member>
+        <member name="T:VcuComm.ProtocolPTU.ChangeEventLogReq">
+            <summary>
+            Used to format and create a byte array used to change the event log in the embedded PTU target PTU
+            </summary>
+        </member>
+        <member name="F:VcuComm.ProtocolPTU.ChangeEventLogReq.PACKET_TYPE">
+            <summary>
+            Sets the packet type used to identify the message contents
+            </summary>
+        </member>
+        <member name="F:VcuComm.ProtocolPTU.ChangeEventLogReq.RESPONSE_TYPE">
+            <summary>
+            Informs the embedded PTU target that this request expects some data response
+            in return
+            </summary>
+        </member>
+        <member name="F:VcuComm.ProtocolPTU.ChangeEventLogReq.NewEventLog">
+            <summary>
+            Id of the event log to change to
+            </summary>
+        </member>
+        <member name="M:VcuComm.ProtocolPTU.ChangeEventLogReq.#ctor(System.Int16)">
+            <summary>
+            Public constructor that is the only one permitted to create this object
+            </summary>
+            <param name="NewEventLog">Id of the event log to change to</param>
+        </member>
+        <member name="M:VcuComm.ProtocolPTU.ChangeEventLogReq.#ctor">
+            <summary>
+            Private 0 argument constructor that forces the instantiation of this class
+            to use the public constructor
+            </summary>
+        </member>
+        <member name="M:VcuComm.ProtocolPTU.ChangeEventLogReq.GetByteArray(System.Boolean)">
+            <summary>
+            Method that formats the message going to the embedded PTU target. The format of the message
+            is specific to the type of request made.
+            </summary>
+            <param name="targetIsBigEndian">true if the embedded PTU target is a Big Endian machine; false otherwise</param>
+            <returns>ordered byte array that is to be sent to the embedded PTU target</returns>
+        </member>
+        <member name="T:VcuComm.ProtocolPTU.GetChartIndexReq">
+            <summary>
+            Used to format and create a byte array used to get the variable index of the desired chart channel
+            </summary>
+        </member>
+        <member name="F:VcuComm.ProtocolPTU.GetChartIndexReq.PACKET_TYPE">
+            <summary>
+            Sets the packet type used to identify the message contents
+            </summary>
+        </member>
+        <member name="F:VcuComm.ProtocolPTU.GetChartIndexReq.RESPONSE_TYPE">
+            <summary>
+            Informs the embedded PTU target that this request expects some data response
+            in return
+            </summary>
+        </member>
+        <member name="F:VcuComm.ProtocolPTU.GetChartIndexReq.ChartIndex">
+            <summary>
+            The desired chart index to retrieve; if there 8 chart channels then this
+            value can range from 0 to 7
+            </summary>
+        </member>
+        <member name="M:VcuComm.ProtocolPTU.GetChartIndexReq.#ctor(System.Byte)">
+            <summary>
+            Public constructor that is the only one permitted to create this object
+            </summary>
+            <param name="ChartIndex">The desired chart index to retrieve</param>
+        </member>
+        <member name="M:VcuComm.ProtocolPTU.GetChartIndexReq.#ctor">
+            <summary>
+            Private 0 argument constructor that forces the instantiation of this class
+            to use the public constructor
+            </summary>
+        </member>
+        <member name="M:VcuComm.ProtocolPTU.GetChartIndexReq.GetByteArray(System.Boolean)">
+            <summary>
+            Method that formats the message going to the embedded PTU target. The format of the message
+            is specific to the type of request made.
+            </summary>
+            <param name="targetIsBigEndian">true if the embedded PTU target is a Big Endian machine; false otherwise</param>
+            <returns>ordered byte array that is to be sent to the embedded PTU target</returns>
+        </member>
+        <member name="T:VcuComm.ProtocolPTU.GetDatalogBufferReq">
+            <summary>
+            Issues a request to the embedded target for a data log buffer
+            </summary>
+        </member>
+        <member name="F:VcuComm.ProtocolPTU.GetDatalogBufferReq.PACKET_TYPE">
+            <summary>
+            Sets the packet type used to identify the message contents
+            </summary>
+        </member>
+        <member name="F:VcuComm.ProtocolPTU.GetDatalogBufferReq.RESPONSE_TYPE">
+            <summary>
+            Informs the embedded PTU target that this request expects some data response
+            in return
+            </summary>
+        </member>
+        <member name="F:VcuComm.ProtocolPTU.GetDatalogBufferReq.DatalogIndex">
+            <summary>
+            the index into the array of the desired data log
+            </summary>
+        </member>
+        <member name="M:VcuComm.ProtocolPTU.GetDatalogBufferReq.#ctor(System.UInt16)">
+            <summary>
+            Public constructor that is the only one permitted to create this object
+            </summary>
+            <param name="DatalogIndex">the index in the embedded target data log array</param>
+        </member>
+        <member name="M:VcuComm.ProtocolPTU.GetDatalogBufferReq.#ctor">
+            <summary>
+            Private 0 argument constructor that forces the instantiation of this class
+            to use the public constructor
+            </summary>
+        </member>
+        <member name="M:VcuComm.ProtocolPTU.GetDatalogBufferReq.GetByteArray(System.Boolean)">
+            <summary>
+            Method that formats the message going to the embedded PTU target. The format of the message
+            is specific to the type of request made.
+            </summary>
+            <param name="targetIsBigEndian">true if the embedded PTU target is a Big Endian machine; false otherwise</param>
+            <returns>ordered byte array that is to be sent to the embedded PTU target</returns>
+        </member>
+        <member name="T:VcuComm.ProtocolPTU.GetFaultDataReq">
+            <summary>
+            Issues a request  to the embedded target for at least one fault log 
+            </summary>
+        </member>
+        <member name="F:VcuComm.ProtocolPTU.GetFaultDataReq.PACKET_TYPE">
+            <summary>
+            Sets the packet type used to identify the message contents
+            </summary>
+        </member>
+        <member name="F:VcuComm.ProtocolPTU.GetFaultDataReq.RESPONSE_TYPE">
+            <summary>
+            Informs the embedded PTU target that this request expects some data response
+            in return
+            </summary>
+        </member>
+        <member name="F:VcuComm.ProtocolPTU.GetFaultDataReq.FaultIndex">
+            <summary>
+            The starting fault log index to get faults from
+            </summary>
+        </member>
+        <member name="F:VcuComm.ProtocolPTU.GetFaultDataReq.NumberOfFaults">
+            <summary>
+            The number of fault logs to retrieve 
+            </summary>
+        </member>
+        <member name="M:VcuComm.ProtocolPTU.GetFaultDataReq.#ctor(System.UInt32,System.UInt16)">
+            <summary>
+            Public constructor that is the only one permitted to create this object
+            </summary>
+            <param name="FaultIndex">The starting fault log index to get faults from</param>
+            <param name="NumberOfFaults">The number of fault logs to retrieve</param>
+        </member>
+        <member name="M:VcuComm.ProtocolPTU.GetFaultDataReq.#ctor">
+            <summary>
+            Private 0 argument constructor that forces the instantiation of this class
+            to use the public constructor
+            </summary>
+        </member>
+        <member name="M:VcuComm.ProtocolPTU.GetFaultDataReq.GetByteArray(System.Boolean)">
+            <summary>
+            Method that formats the message going to the embedded PTU target. The format of the message
+            is specific to the type of request made.
+            </summary>
+            <param name="targetIsBigEndian">true if the embedded PTU target is a Big Endian machine; false otherwise</param>
+            <returns>ordered byte array that is to be sent to the embedded PTU target</returns>
+        </member>
+        <member name="T:VcuComm.ProtocolPTU.GetFaultHistoryReq">
+            <summary>
+            Gets the number of faults detected for a specific fault from the embedded target. 
+            </summary>
+        </member>
+        <member name="F:VcuComm.ProtocolPTU.GetFaultHistoryReq.PACKET_TYPE">
+            <summary>
+            Sets the packet type used to identify the message contents
+            </summary>
+        </member>
+        <member name="F:VcuComm.ProtocolPTU.GetFaultHistoryReq.RESPONSE_TYPE">
+            <summary>
+            Informs the embedded PTU target that this request expects some data response
+            in return
+            </summary>
+        </member>
+        <member name="F:VcuComm.ProtocolPTU.GetFaultHistoryReq.FaultID">
+            <summary>
+            The fault id whose history is retrieved
+            </summary>
+        </member>
+        <member name="F:VcuComm.ProtocolPTU.GetFaultHistoryReq.TaskID">
+            <summary>
+            The task id of the fault whose history is retrieved
+            </summary>
+        </member>
+        <member name="M:VcuComm.ProtocolPTU.GetFaultHistoryReq.#ctor(System.UInt16,System.UInt16)">
+            <summary>
+            Public constructor that is the only one permitted to create this object
+            </summary>
+            <param name="TaskID">The task id of the fault whose history is retrieved</param>
+            <param name="FaultID">The fault id whose history is retrieved</param>
+        </member>
+        <member name="M:VcuComm.ProtocolPTU.GetFaultHistoryReq.#ctor">
+            <summary>
+            Private 0 argument constructor that forces the instantiation of this class
+            to use the public constructor
+            </summary>
+        </member>
+        <member name="M:VcuComm.ProtocolPTU.GetFaultHistoryReq.GetByteArray(System.Boolean)">
+            <summary>
+            Method that formats the message going to the embedded PTU target. The format of the message
+            is specific to the type of request made.
+            </summary>
+            <param name="targetIsBigEndian">true if the embedded PTU target is a Big Endian machine; false otherwise</param>
+            <returns>ordered byte array that is to be sent to the embedded PTU target</returns>
+        </member>
+        <member name="T:VcuComm.ProtocolPTU.GetStreamInfoReq">
+            <summary>
+            Issues a request to get information regarding a specific stream on the embedded
+            target. 
+            </summary>
+        </member>
+        <member name="F:VcuComm.ProtocolPTU.GetStreamInfoReq.PACKET_TYPE">
+            <summary>
+            Sets the packet type used to identify the message contents
+            </summary>
+        </member>
+        <member name="F:VcuComm.ProtocolPTU.GetStreamInfoReq.RESPONSE_TYPE">
+            <summary>
+            Informs the embedded PTU target that this request expects some data response
+            in return
+            </summary>
+        </member>
+        <member name="F:VcuComm.ProtocolPTU.GetStreamInfoReq.StreamNumber">
+            <summary>
+            The stream number whose information is retrieved from the embedded target
+            </summary>
+        </member>
+        <member name="M:VcuComm.ProtocolPTU.GetStreamInfoReq.#ctor(System.Int16)">
+            <summary>
+            Public constructor that is the only one permitted to create this object
+            </summary>
+            <param name="StreamNumber">The stream number whose information is retrieved from the 
+            embedded target</param>
+        </member>
+        <member name="M:VcuComm.ProtocolPTU.GetStreamInfoReq.#ctor">
+            <summary>
+            Private 0 argument constructor that forces the instantiation of this class
+            to use the public constructor
+            </summary>
+        </member>
+        <member name="M:VcuComm.ProtocolPTU.GetStreamInfoReq.GetByteArray(System.Boolean)">
+            <summary>
+            Method that formats the message going to the embedded PTU target. The format of the message
+            is specific to the type of request made.
+            </summary>
+            <param name="targetIsBigEndian">true if the embedded PTU target is a Big Endian machine; false otherwise</param>
+            <returns>ordered byte array that is to be sent to the embedded PTU target</returns>
+        </member>
+        <member name="T:VcuComm.ProtocolPTU.GetVariableInfoReq">
+            <summary>
+            Queries the embedded target about the type of variable, max and min values, chart scaling, etc.
+            Believe this is a legacy request and is no longer used.
+            </summary>
+        </member>
+        <member name="F:VcuComm.ProtocolPTU.GetVariableInfoReq.PACKET_TYPE">
+            <summary>
+            Sets the packet type used to identify the message contents
+            </summary>
+        </member>
+        <member name="F:VcuComm.ProtocolPTU.GetVariableInfoReq.RESPONSE_TYPE">
+            <summary>
+            Informs the embedded PTU target that this request expects some data response
+            in return
+            </summary>
+        </member>
+        <member name="F:VcuComm.ProtocolPTU.GetVariableInfoReq.DictionaryIndex">
+            <summary>
+            The data dictionary index of the variable
+            </summary>
+        </member>
+        <member name="M:VcuComm.ProtocolPTU.GetVariableInfoReq.#ctor(System.UInt16)">
+            <summary>
+            Public constructor that is the only one permitted to create this object
+            </summary>
+            <param name="DictionaryIndex">The data dictionary index of the variable</param>
+        </member>
+        <member name="M:VcuComm.ProtocolPTU.GetVariableInfoReq.#ctor">
+            <summary>
+            Private 0 argument constructor that forces the instantiation of this class
+            to use the public constructor
+            </summary>
+        </member>
+        <member name="M:VcuComm.ProtocolPTU.GetVariableInfoReq.GetByteArray(System.Boolean)">
+            <summary>
+            Method that formats the message going to the embedded PTU target. The format of the message
+            is specific to the type of request made.
+            </summary>
+            <param name="targetIsBigEndian">true if the embedded PTU target is a Big Endian machine; false otherwise</param>
+            <returns>ordered byte array that is to be sent to the embedded PTU target</returns>
+        </member>
+        <member name="T:VcuComm.ProtocolPTU.SendVariableReq">
+            <summary>
+            Updates the desired embedded target variable with a new value.
+            </summary>
+        </member>
+        <member name="F:VcuComm.ProtocolPTU.SendVariableReq.PACKET_TYPE">
+            <summary>
+            Sets the packet type used to identify the message contents
+            </summary>
+        </member>
+        <member name="F:VcuComm.ProtocolPTU.SendVariableReq.RESPONSE_TYPE">
+            <summary>
+            Informs the embedded PTU target that this request is a command only and expects
+            no data response in return; only an acknowledge that the message was received
+            </summary>
+        </member>
+        <member name="F:VcuComm.ProtocolPTU.SendVariableReq.DictionaryIndex">
+            <summary>
+            The dictionary index of the variable to be updated
+            </summary>
+        </member>
+        <member name="F:VcuComm.ProtocolPTU.SendVariableReq.NewValue">
+            <summary>
+            The new variable value
+            </summary>
+        </member>
+        <member name="M:VcuComm.ProtocolPTU.SendVariableReq.#ctor(System.Int16,System.UInt32)">
+            <summary>
+            Public constructor that is the only one permitted to create this object
+            </summary>
+            <param name="DictionaryIndex">The dictionary index of the variable to be updated</param>
+            <param name="NewValue">The new variable value</param>
+        </member>
+        <member name="M:VcuComm.ProtocolPTU.SendVariableReq.#ctor">
+            <summary>
+            Private 0 argument constructor that forces the instantiation of this class
+            to use the public constructor
+            </summary>
+        </member>
+        <member name="M:VcuComm.ProtocolPTU.SendVariableReq.GetByteArray(System.Boolean)">
+            <summary>
+            Method that formats the message going to the embedded PTU target. The format of the message
+            is specific to the type of request made.
+            </summary>
+            <param name="targetIsBigEndian">true if the embedded PTU target is a Big Endian machine; false otherwise</param>
+            <returns>ordered byte array that is to be sent to the embedded PTU target</returns>
+        </member>
+        <member name="T:VcuComm.ProtocolPTU.SetCarIDReq">
+            <summary>
+            Updates the embedded target with a new car ID.
+            </summary>
+        </member>
+        <member name="F:VcuComm.ProtocolPTU.SetCarIDReq.PACKET_TYPE">
+            <summary>
+            Sets the packet type used to identify the message contents
+            </summary>
+        </member>
+        <member name="F:VcuComm.ProtocolPTU.SetCarIDReq.RESPONSE_TYPE">
+            <summary>
+            Informs the embedded PTU target that this request is a command only and expects
+            no data response in return; only an acknowledge that the message was received
+            </summary>
+        </member>
+        <member name="F:VcuComm.ProtocolPTU.SetCarIDReq.NewCarId">
+            <summary>
+            The new car ID
+            </summary>
+        </member>
+        <member name="M:VcuComm.ProtocolPTU.SetCarIDReq.#ctor(System.UInt16)">
+            <summary>
+            Public constructor that is the only one permitted to create this object
+            </summary>
+            <param name="NewCarId">The new car ID</param>
+        </member>
+        <member name="M:VcuComm.ProtocolPTU.SetCarIDReq.#ctor(System.String)">
+            <summary>
+            Public constructor that is the only one permitted to create this object
+            </summary>
+            <param name="NewCarId">The new car ID</param>
+        </member>
+        <member name="M:VcuComm.ProtocolPTU.SetCarIDReq.#ctor">
+            <summary>
+            Private 0 argument constructor that forces the instantiation of this class
+            to use the public constructor
+            </summary>
+        </member>
+        <member name="M:VcuComm.ProtocolPTU.SetCarIDReq.GetByteArray(System.Boolean)">
+            <summary>
+            Method that formats the message going to the embedded PTU target. The format of the message
+            is specific to the type of request made.
+            </summary>
+            <param name="targetIsBigEndian">true if the embedded PTU target is a Big Endian machine; false otherwise</param>
+            <returns>ordered byte array that is to be sent to the embedded PTU target</returns>
+        </member>
+        <member name="T:VcuComm.ProtocolPTU.SetChartIndexReq">
+            <summary>
+            Adds or changes a chart recorder output to a new variable
+            </summary>
+        </member>
+        <member name="F:VcuComm.ProtocolPTU.SetChartIndexReq.PACKET_TYPE">
+            <summary>
+            Sets the packet type used to identify the message contents
+            </summary>
+        </member>
+        <member name="F:VcuComm.ProtocolPTU.SetChartIndexReq.RESPONSE_TYPE">
+            <summary>
+            Informs the embedded PTU target that this request is a command only and expects
+            no data response in return; only an acknowledge that the message was received
+            </summary>
+        </member>
+        <member name="F:VcuComm.ProtocolPTU.SetChartIndexReq.ChartIndex">
+            <summary>
+            The chart recorder output index
+            </summary>
+        </member>
+        <member name="F:VcuComm.ProtocolPTU.SetChartIndexReq.VariableIndex">
+            <summary>
+            The data dictionary index of the variable which will now be part of the chart output
+            </summary>
+        </member>
+        <member name="M:VcuComm.ProtocolPTU.SetChartIndexReq.#ctor(System.Int16,System.Int16)">
+            <summary>
+            Public constructor that is the only one permitted to create this object
+            </summary>
+            <param name="ChartIndex">The chart recorder output index</param>
+            <param name="VariableIndex">The data dictionary index of the variable which will now be part of the chart output</param>
+        </member>
+        <member name="M:VcuComm.ProtocolPTU.SetChartIndexReq.#ctor">
+            <summary>
+            Private 0 argument constructor that forces the instantiation of this class
+            to use the public constructor
+            </summary>
+        </member>
+        <member name="M:VcuComm.ProtocolPTU.SetChartIndexReq.GetByteArray(System.Boolean)">
+            <summary>
+            Method that formats the message going to the embedded PTU target. The format of the message
+            is specific to the type of request made.
+            </summary>
+            <param name="targetIsBigEndian">true if the embedded PTU target is a Big Endian machine; false otherwise</param>
+            <returns>ordered byte array that is to be sent to the embedded PTU target</returns>
+        </member>
+        <member name="T:VcuComm.ProtocolPTU.SetChartModeReq">
+            <summary>
+            Sets the chart recorder mode (full, zero, data, ramp)
+            </summary>
+        </member>
+        <member name="F:VcuComm.ProtocolPTU.SetChartModeReq.PACKET_TYPE">
+            <summary>
+            Sets the packet type used to identify the message contents
+            </summary>
+        </member>
+        <member name="F:VcuComm.ProtocolPTU.SetChartModeReq.RESPONSE_TYPE">
+            <summary>
+            Informs the embedded PTU target that this request is a command only and expects
+            no data response in return; only an acknowledge that the message was received
+            </summary>
+        </member>
+        <member name="F:VcuComm.ProtocolPTU.SetChartModeReq.TargetChartMode">
+            <summary>
+            The chart recorder mode (full, zero, data, ramp)
+            </summary>
+        </member>
+        <member name="M:VcuComm.ProtocolPTU.SetChartModeReq.#ctor(System.Byte)">
+            <summary>
+            Public constructor that is the only one permitted to create this object
+            </summary>
+            <param name="TargetChartMode">The chart recorder mode (full, zero, data, ramp)</param>
+        </member>
+        <member name="M:VcuComm.ProtocolPTU.SetChartModeReq.#ctor">
+            <summary>
+            Private 0 argument constructor that forces the instantiation of this class
+            to use the public constructor
+            </summary>
+        </member>
+        <member name="M:VcuComm.ProtocolPTU.SetChartModeReq.GetByteArray(System.Boolean)">
+            <summary>
+            Method that formats the message going to the embedded PTU target. The format of the message
+            is specific to the type of request made.
+            </summary>
+            <param name="targetIsBigEndian">true if the embedded PTU target is a Big Endian machine; false otherwise</param>
+            <returns>ordered byte array that is to be sent to the embedded PTU target</returns>
+        </member>
+        <member name="T:VcuComm.ProtocolPTU.SetChartScaleReq">
+            <summary>
+            Updates the chart scaling of the desired variable
+            </summary>
+        </member>
+        <member name="F:VcuComm.ProtocolPTU.SetChartScaleReq.PACKET_TYPE">
+            <summary>
+            Sets the packet type used to identify the message contents
+            </summary>
+        </member>
+        <member name="F:VcuComm.ProtocolPTU.SetChartScaleReq.RESPONSE_TYPE">
+            <summary>
+            Informs the embedded PTU target that this request is a command only and expects
+            no data response in return; only an acknowledge that the message was received
+            </summary>
+        </member>
+        <member name="F:VcuComm.ProtocolPTU.SetChartScaleReq.DictionaryIndex">
+            <summary>
+            The dictionary index of the variable to be updated
+            </summary>
+        </member>
+        <member name="F:VcuComm.ProtocolPTU.SetChartScaleReq.MaxScale">
+            <summary>
+            The chart recorder scaling (max value)
+            </summary>
+        </member>
+        <member name="F:VcuComm.ProtocolPTU.SetChartScaleReq.MinScale">
+            <summary>
+            The chart recorder scaling (min value)
+            </summary>
+        </member>
+        <member name="M:VcuComm.ProtocolPTU.SetChartScaleReq.#ctor(System.Int16,System.Int32,System.Int32)">
+            <summary>
+            Public constructor that is the only one permitted to create this object
+            </summary>
+            <param name="DictionaryIndex">The dictionary index of the variable to be updated</param>
+            <param name="MaxScale">The chart recorder scaling (max value)</param>
+            <param name="MinScale">The chart recorder scaling (min value)</param>
+        </member>
+        <member name="M:VcuComm.ProtocolPTU.SetChartScaleReq.#ctor">
+            <summary>
+            Private 0 argument constructor that forces the instantiation of this class
+            to use the public constructor
+            </summary>
+        </member>
+        <member name="M:VcuComm.ProtocolPTU.SetChartScaleReq.GetByteArray(System.Boolean)">
+            <summary>
+            Method that formats the message going to the embedded PTU target. The format of the message
+            is specific to the type of request made.
+            </summary>
+            <param name="targetIsBigEndian">true if the embedded PTU target is a Big Endian machine; false otherwise</param>
+            <returns>ordered byte array that is to be sent to the embedded PTU target</returns>
+        </member>
+        <member name="T:VcuComm.ProtocolPTU.SetFaultFlagReq">
+            <summary>
+            Updates the fault and trigger table on th embedded target with the desired
+            settings for the given fault. Either enables/disables fault logging and 
+            streaming for a given fault
+            </summary>
+        </member>
+        <member name="F:VcuComm.ProtocolPTU.SetFaultFlagReq.PACKET_TYPE">
+            <summary>
+            Sets the packet type used to identify the message contents
+            </summary>
+        </member>
+        <member name="F:VcuComm.ProtocolPTU.SetFaultFlagReq.RESPONSE_TYPE">
+            <summary>
+            Informs the embedded PTU target that this request is a command only and expects
+            no data response in return; only an acknowledge that the message was received
+            </summary>
+        </member>
+        <member name="F:VcuComm.ProtocolPTU.SetFaultFlagReq.DatalogFlag">
+            <summary>
+            Non zero to enable data logging for the fault; zero to disable
+            </summary>
+        </member>
+        <member name="F:VcuComm.ProtocolPTU.SetFaultFlagReq.EnableFlag">
+            <summary>
+            Non zero to enable fault logging for the fault; zero to disable
+            </summary>
+        </member>
+        <member name="F:VcuComm.ProtocolPTU.SetFaultFlagReq.FaultID">
+            <summary>
+            the fault id
+            </summary>
+        </member>
+        <member name="F:VcuComm.ProtocolPTU.SetFaultFlagReq.TaskID">
+            <summary>
+            the task id of the fault parameters to update
+            </summary>
+        </member>
+        <member name="M:VcuComm.ProtocolPTU.SetFaultFlagReq.#ctor(System.Int16,System.Int16,System.Int16,System.Int16)">
+            <summary>
+            Public constructor that is the only one permitted to create this object
+            </summary>
+            <param name="TaskID">the task id of the fault parameters to update</param>
+            <param name="FaultID">the fault id</param>
+            <param name="EnableFlag">Non zero to enable fault logging for the fault; zero to disable</param>
+            <param name="DatalogFlag">Non zero to enable data logging for the fault; zero to disable</param>
+        </member>
+        <member name="M:VcuComm.ProtocolPTU.SetFaultFlagReq.#ctor">
+            <summary>
+            Private 0 argument constructor that forces the instantiation of this class
+            to use the public constructor
+            </summary>
+        </member>
+        <member name="M:VcuComm.ProtocolPTU.SetFaultFlagReq.GetByteArray(System.Boolean)">
+            <summary>
+            Method that formats the message going to the embedded PTU target. The format of the message
+            is specific to the type of request made.
+            </summary>
+            <param name="targetIsBigEndian">true if the embedded PTU target is a Big Endian machine; false otherwise</param>
+            <returns>ordered byte array that is to be sent to the embedded PTU target</returns>
+        </member>
+        <member name="T:VcuComm.ProtocolPTU.EnableFaultLoggingReq">
+            <summary>
+            Enables or disables fault logging on the embedded target
+            </summary>
+        </member>
+        <member name="F:VcuComm.ProtocolPTU.EnableFaultLoggingReq.PACKET_TYPE">
+            <summary>
+            Sets the packet type used to identify the message contents
+            </summary>
+        </member>
+        <member name="F:VcuComm.ProtocolPTU.EnableFaultLoggingReq.RESPONSE_TYPE">
+            <summary>
+            Informs the embedded PTU target that this request is a command only and expects
+            no data response in return; only an acknowledge that the message was received
+            </summary>
+        </member>
+        <member name="F:VcuComm.ProtocolPTU.EnableFaultLoggingReq.TargetState">
+            <summary>
+            Non-zero to enable fault logging; 0 to disable fault logging
+            </summary>
+        </member>
+        <member name="M:VcuComm.ProtocolPTU.EnableFaultLoggingReq.#ctor(System.Byte)">
+            <summary>
+            Public constructor that is the only one permitted to create this object
+            </summary>
+            <param name="TargetState">Non-zero to enable fault logging; 0 to disable fault logging</param>
+        </member>
+        <member name="M:VcuComm.ProtocolPTU.EnableFaultLoggingReq.#ctor">
+            <summary>
+            Private 0 argument constructor that forces the instantiation of this class
+            to use the public constructor
+            </summary>
+        </member>
+        <member name="M:VcuComm.ProtocolPTU.EnableFaultLoggingReq.GetByteArray(System.Boolean)">
+            <summary>
+            Method that formats the message going to the embedded PTU target. The format of the message
+            is specific to the type of request made.
+            </summary>
+            <param name="targetIsBigEndian">true if the embedded PTU target is a Big Endian machine; false otherwise</param>
+            <returns>ordered byte array that is to be sent to the embedded PTU target</returns>
+        </member>
+        <member name="T:VcuComm.ProtocolPTU.SetStreamInfoReq">
+            <summary>
+            Updates the embedded target stream information which includes the data dictionary
+            variable index and the variable type of the variable
+            </summary>
+        </member>
+        <member name="F:VcuComm.ProtocolPTU.SetStreamInfoReq.PACKET_TYPE">
+            <summary>
+            Sets the packet type used to identify the message contents
+            </summary>
+        </member>
+        <member name="F:VcuComm.ProtocolPTU.SetStreamInfoReq.RESPONSE_TYPE">
+            <summary>
+            Informs the embedded PTU target that this request is a command only and expects
+            no data response in return; only an acknowledge that the message was received
+            </summary>
+        </member>
+        <member name="F:VcuComm.ProtocolPTU.SetStreamInfoReq.streamInformation">
+            <summary>
+            Maintains all of the new stream information
+            </summary>
+        </member>
+        <member name="M:VcuComm.ProtocolPTU.SetStreamInfoReq.#ctor(System.Int16,System.Int16,System.Int16[])">
+            <summary>
+            Public constructor that is the only one permitted to create this object
+            </summary>
+            <param name="NumberOfVariables"></param>
+            <param name="SampleRate"></param>
+            <param name="VariableIndex"></param>
+        </member>
+        <member name="M:VcuComm.ProtocolPTU.SetStreamInfoReq.#ctor">
+            <summary>
+            Private 0 argument constructor that forces the instantiation of this class
+            to use the public constructor
+            </summary>
+        </member>
+        <member name="M:VcuComm.ProtocolPTU.SetStreamInfoReq.GetByteArray(System.Boolean)">
+            <summary>
+            Method that formats the message going to the embedded PTU target. The format of the message
+            is specific to the type of request made.
+            </summary>
+            <param name="targetIsBigEndian">true if the embedded PTU target is a Big Endian machine; false otherwise</param>
+            <returns>ordered byte array that is to be sent to the embedded PTU target</returns>
+        </member>
+        <member name="T:VcuComm.ProtocolPTU.SetTimeDateReq">
+            <summary>
+            Updates the embedded target's real time clock with the date and time
+            </summary>
+        </member>
+        <member name="F:VcuComm.ProtocolPTU.SetTimeDateReq.PACKET_TYPE">
+            <summary>
+            Sets the packet type used to identify the message contents
+            </summary>
+        </member>
+        <member name="F:VcuComm.ProtocolPTU.SetTimeDateReq.RESPONSE_TYPE">
+            <summary>
+            Informs the embedded PTU target that this request is a command only and expects
+            no data response in return; only an acknowledge that the message was received
+            </summary>
+        </member>
+        <member name="F:VcuComm.ProtocolPTU.SetTimeDateReq.Day">
+            <summary>
+            The day of the month
+            </summary>
+        </member>
+        <member name="F:VcuComm.ProtocolPTU.SetTimeDateReq.fourDigitYear">
+            <summary>
+            True if a 4 digit year is to be used; false for a 2 digit year
+            </summary>
+        </member>
+        <member name="F:VcuComm.ProtocolPTU.SetTimeDateReq.Hour">
+            <summary>
+            The hour of the day
+            </summary>
+        </member>
+        <member name="F:VcuComm.ProtocolPTU.SetTimeDateReq.Minute">
+            <summary>
+            The minute of the hour
+            </summary>
+        </member>
+        <member name="F:VcuComm.ProtocolPTU.SetTimeDateReq.Month">
+            <summary>
+            The month of the year
+            </summary>
+        </member>
+        <member name="F:VcuComm.ProtocolPTU.SetTimeDateReq.Second">
+            <summary>
+            The second of the minute
+            </summary>
+        </member>
+        <member name="F:VcuComm.ProtocolPTU.SetTimeDateReq.Year">
+            <summary>
+            The year
+            </summary>
+        </member>
+        <member name="M:VcuComm.ProtocolPTU.SetTimeDateReq.#ctor(System.Boolean,System.Byte,System.Byte,System.Byte,System.UInt16,System.Byte,System.Byte)">
+            <summary>
+            Public constructor that is the only one permitted to create this object
+            </summary>
+            <param name="fourDigitYear">True if a 4 digit year is to be used; false for a 2 digit year</param>
+            <param name="Hour">The hour of the day</param>
+            <param name="Minute">The minute of the hour</param>
+            <param name="Second">The second of the minute</param>
+            <param name="Year">The year</param>
+            <param name="Month">The month of the year</param>
+            <param name="Day">The day of the month</param>
+        </member>
+        <member name="M:VcuComm.ProtocolPTU.SetTimeDateReq.#ctor">
+            <summary>
+            Private 0 argument constructor that forces the instantiation of this class
+            to use the public constructor
+            </summary>
+        </member>
+        <member name="M:VcuComm.ProtocolPTU.SetTimeDateReq.GetByteArray(System.Boolean)">
+            <summary>
+            Method that formats the message going to the embedded PTU target. The format of the message
+            is specific to the type of request made.
+            </summary>
+            <param name="targetIsBigEndian">true if the embedded PTU target is a Big Endian machine; false otherwise</param>
+            <returns>ordered byte array that is to be sent to the embedded PTU target</returns>
+        </member>
+        <member name="T:VcuComm.ProtocolPTU.SetWatchElementsReq">
+            <summary>
+            Method updates the embedded target watch element list
+            </summary>
+        </member>
+        <member name="F:VcuComm.ProtocolPTU.SetWatchElementsReq.PACKET_TYPE">
+            <summary>
+            Sets the packet type used to identify the message contents
+            </summary>
+        </member>
+        <member name="F:VcuComm.ProtocolPTU.SetWatchElementsReq.RESPONSE_TYPE">
+            <summary>
+            Informs the embedded PTU target that this request is a command only and expects
+            no data response in return; only an acknowledge that the message was received
+            </summary>
+        </member>
+        <member name="F:VcuComm.ProtocolPTU.SetWatchElementsReq.WatchElement">
+            <summary>
+            An array of data dictionary indexes of watch variables to be reported from the embedded
+            target back to this application
+            </summary>
+        </member>
+        <member name="M:VcuComm.ProtocolPTU.SetWatchElementsReq.#ctor(System.Int16[])">
+            <summary>
+            Public constructor that is the only one permitted to create this object
+            </summary>
+            <param name="WatchElement">An array of data dictionary indexes of watch variables to be 
+            reported from the embedded target back to this application</param>
+        </member>
+        <member name="M:VcuComm.ProtocolPTU.SetWatchElementsReq.#ctor">
+            <summary>
+            Private 0 argument constructor that forces the instantiation of this class
+            to use the public constructor
+            </summary>
+        </member>
+        <member name="M:VcuComm.ProtocolPTU.SetWatchElementsReq.GetByteArray(System.Boolean)">
+            <summary>
+            Method that formats the message going to the embedded PTU target. The format of the message
+            is specific to the type of request made.
+            </summary>
+            <param name="targetIsBigEndian">true if the embedded PTU target is a Big Endian machine; false otherwise</param>
+            <returns>ordered byte array that is to be sent to the embedded PTU target</returns>
+        </member>
+        <member name="T:VcuComm.ProtocolPTU.UpdateWatchElementsReq">
+            <summary>
+            Used to request an update of all watch variable values from the embedded target
+            </summary>
+        </member>
+        <member name="F:VcuComm.ProtocolPTU.UpdateWatchElementsReq.PACKET_TYPE">
+            <summary>
+            Sets the packet type used to identify the message contents
+            </summary>
+        </member>
+        <member name="F:VcuComm.ProtocolPTU.UpdateWatchElementsReq.RESPONSE_TYPE">
+            <summary>
+            Informs the embedded PTU target that this request expects some data response
+            in return
+            </summary>
+        </member>
+        <member name="F:VcuComm.ProtocolPTU.UpdateWatchElementsReq.ForceFullUpdate">
+            <summary>
+            Not used by embedded target, legacy
+            </summary>
+        </member>
+        <member name="M:VcuComm.ProtocolPTU.UpdateWatchElementsReq.#ctor(System.Int16)">
+            <summary>
+            Public constructor that is the only one permitted to create this object
+            </summary>
+            <param name="ForceFullUpdate">Not used by embedded target, legacy</param>
+        </member>
+        <member name="M:VcuComm.ProtocolPTU.UpdateWatchElementsReq.#ctor">
+            <summary>
+            Private 0 argument constructor that forces the instantiation of this class
+            to use the public constructor
+            </summary>
+        </member>
+        <member name="M:VcuComm.ProtocolPTU.UpdateWatchElementsReq.GetByteArray(System.Boolean)">
+            <summary>
+            Method that formats the message going to the embedded PTU target. The format of the message
+            is specific to the type of request made.
+            </summary>
+            <param name="targetIsBigEndian">true if the embedded PTU target is a Big Endian machine; false otherwise</param>
+            <returns>ordered byte array that is to be sent to the embedded PTU target</returns>
+        </member>
+        <member name="T:VcuComm.ProtocolPTU.SelfTestCommand">
+            <summary>
+            Updates the current self test command on the embedded target. This is used to enter
+            exit, abort, and execute self tests.
+            </summary>
+        </member>
+        <member name="F:VcuComm.ProtocolPTU.SelfTestCommand.PACKET_TYPE">
+            <summary>
+            Sets the packet type used to identify the message contents
+            </summary>
+        </member>
+        <member name="F:VcuComm.ProtocolPTU.SelfTestCommand.RESPONSE_TYPE">
+            <summary>
+            Informs the embedded PTU target that this request is a command only and expects
+            no data response in return; only an acknowledge that the message was received
+            </summary>
+        </member>
+        <member name="F:VcuComm.ProtocolPTU.SelfTestCommand.CommandId">
+            <summary>
+            The command id 
+            </summary>
+        </member>
+        <member name="F:VcuComm.ProtocolPTU.SelfTestCommand.TruckId">
+            <summary>
+            The truck id
+            </summary>
+        </member>
+        <member name="F:VcuComm.ProtocolPTU.SelfTestCommand.Data">
+            <summary>
+            The data
+            </summary>
+        </member>
+        <member name="M:VcuComm.ProtocolPTU.SelfTestCommand.#ctor(System.Byte,System.Byte,System.UInt16)">
+            <summary>
+            Public constructor that is the only one permitted to create this object
+            </summary>
+            <param name="CommandId">The command id</param>
+            <param name="TruckId">The truck id</param>
+            <param name="Data">The data</param>
+        </member>
+        <member name="M:VcuComm.ProtocolPTU.SelfTestCommand.#ctor">
+            <summary>
+            Private 0 argument constructor that forces the instantiation of this class
+            to use the public constructor
+            </summary>
+        </member>
+        <member name="M:VcuComm.ProtocolPTU.SelfTestCommand.GetByteArray(System.Boolean)">
+            <summary>
+            Method that formats the message going to the embedded PTU target. The format of the message
+            is specific to the type of request made.
+            </summary>
+            <param name="targetIsBigEndian">true if the embedded PTU target is a Big Endian machine; false otherwise</param>
+            <returns>ordered byte array that is to be sent to the embedded PTU target</returns>
+        </member>
+        <member name="T:VcuComm.ProtocolPTU.SelfTestUpdateListReq">
+            <summary>
+            Updates the self test list on the embedded target
+            </summary>
+        </member>
+        <member name="F:VcuComm.ProtocolPTU.SelfTestUpdateListReq.PACKET_TYPE">
+            <summary>
+            Sets the packet type used to identify the message contents
+            </summary>
+        </member>
+        <member name="F:VcuComm.ProtocolPTU.SelfTestUpdateListReq.RESPONSE_TYPE">
+            <summary>
+            Informs the embedded PTU target that this request is a command only and expects
+            no data response in return; only an acknowledge that the message was received
+            </summary>
+        </member>
+        <member name="F:VcuComm.ProtocolPTU.SelfTestUpdateListReq.CommandId">
+            <summary>
+            The command id
+            </summary>
+        </member>
+        <member name="F:VcuComm.ProtocolPTU.SelfTestUpdateListReq.NumberOfTests">
+            <summary>
+            The number of tests in the test list
+            </summary>
+        </member>
+        <member name="F:VcuComm.ProtocolPTU.SelfTestUpdateListReq.TestList">
+            <summary>
+            The list of tests to be executed
+            </summary>
+        </member>
+        <member name="M:VcuComm.ProtocolPTU.SelfTestUpdateListReq.#ctor(System.Byte,System.Int16,System.Int16[])">
+            <summary>
+            Public constructor that is the only one permitted to create this object
+            </summary>
+            <param name="CommandId">The command id</param>
+            <param name="NumberOfTests">The number of tests in the test list</param>
+            <param name="TestList">The list of tests to be executed</param>
+        </member>
+        <member name="M:VcuComm.ProtocolPTU.SelfTestUpdateListReq.#ctor">
+            <summary>
+            Private 0 argument constructor that forces the instantiation of this class
+            to use the public constructor
+            </summary>
+        </member>
+        <member name="M:VcuComm.ProtocolPTU.SelfTestUpdateListReq.GetByteArray(System.Boolean)">
+            <summary>
+            Method that formats the message going to the embedded PTU target. The format of the message
+            is specific to the type of request made.
+            </summary>
+            <param name="targetIsBigEndian">true if the embedded PTU target is a Big Endian machine; false otherwise</param>
+            <returns>ordered byte array that is to be sent to the embedded PTU target</returns>
+        </member>
+        <member name="T:VcuComm.ProtocolPTU.ResponseType">
+            <summary>
+            This information is passed to the embedded target to inform the target whether the 
+            request is a command request (no response besides ACK) or a data request (data message
+            expected). Currently, this field in the header is unused by both this application and the
+            embedded target but is provided for future use
+            </summary>
+        </member>
+        <member name="T:VcuComm.ProtocolPTU.PacketType">
+            <summary>
+            This enumeration's values match exactly with those on the embedded target. These are the commands
+            that are used to communicate information from the embedded target. Some are unused, but are included
+            for the sake of completeness.
+            </summary>
+        </member>
+        <member name="T:VcuComm.ProtocolPTU.VariableType">
+            <summary>
+            This enumeration matches the enumeration type on the embedded target. When variable information
+            is passed back and forth between this application and the embedded target, a way of determining 
+            the size of the variable is sometimes needed. 
+            </summary>
+        </member>
+        <member name="T:VcuComm.ProtocolPTU.IntegerType">
+            <summary>
+            This enumeration indicates whether a variable returned from the embedded target
+            is a signed or unsigned value.
+            </summary>
+        </member>
+        <member name="T:VcuComm.ProtocolPTU.Errors">
+            <summary>
+            These errors are logged whenever any error is detected when a transaction occurs
+            </summary>
+        </member>
+        <member name="T:VcuComm.Utils">
+            <summary>
+            This class contains utility functions used by PTU to VCU interface.
+            </summary>
+        </member>
+        <member name="M:VcuComm.Utils.ReverseByteOrder(System.Byte)">
+            <summary>
+            Reverses the byte order of the argument to account for big endian to little endian compatibility
+            </summary>
+            <param name="value">parameter whose byte order is to be reversed</param>
+            <returns>byte order of passed argument reversed</returns>
+        </member>
+        <member name="M:VcuComm.Utils.ReverseByteOrder(System.SByte)">
+            <summary>
+            Reverses the byte order of the argument to account for big endian to little endian compatibility
+            </summary>
+            <param name="value">parameter whose byte order is to be reversed</param>
+            <returns>byte order of passed argument reversed</returns>
+        </member>
+        <member name="M:VcuComm.Utils.ReverseByteOrder(System.UInt32)">
+            <summary>
+            Reverses the byte order of the argument to account for big endian to little endian compatibility
+            </summary>
+            <param name="value">parameter whose byte order is to be reversed</param>
+            <returns>byte order of passed argument reversed</returns>
+        </member>
+        <member name="M:VcuComm.Utils.ReverseByteOrder(System.Int32)">
+            <summary>
+            Reverses the byte order of the argument to account for big endian to little endian compatibility
+            </summary>
+            <param name="value">parameter whose byte order is to be reversed</param>
+            <returns>byte order of passed argument reversed</returns>
+        </member>
+        <member name="M:VcuComm.Utils.ReverseByteOrder(System.UInt16)">
+            <summary>
+            Reverses the byte order of the argument to account for big endian to little endian compatibility
+            </summary>
+            <param name="value">parameter whose byte order is to be reversed</param>
+            <returns>byte order of passed argument reversed</returns>
+        </member>
+        <member name="M:VcuComm.Utils.ReverseByteOrder(System.Int16)">
+            <summary>
+            Reverses the byte order of the argument to account for big endian to little endian compatibility
+            </summary>
+            <param name="value">parameter whose byte order is to be reversed</param>
+            <returns>byte order of passed argument reversed</returns>
+        </member>
+    </members>
+</doc>

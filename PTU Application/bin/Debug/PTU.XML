@@ -1,0 +1,3368 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>PTU</name>
+    </assembly>
+    <members>
+        <member name="T:Bombardier.PTU.ControlPanel">
+            <summary>
+            <para>
+            This UserControl allows the user to access the key PTE maintenance and administrative operations via a set of Button controls on the
+            'Control Panel' and gives feedback, via the 'PTE STATUS' panel, on its current operational status.</para>
+            <para>The UserControl monitors: TextChanged; EnabledChanged; CheckedChanged; MdiChildActive; MenuUpdated; and ChangeFont PTE events and uses
+            the PerformClick() method associated with the ToolStripMeneuItem control to modify the standard PTE User Interface to that specified in the NYCT
+            specification.</para>
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.ControlPanel.ConnectionDirect">
+            <summary>
+            The connection text string that is used to specify that the PTU is connected to the PTU connector on the Supplier Subsystem.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.ControlPanel.ConnectionRemote">
+            <summary>
+            The connection text string that is used to specify that the PTU is connected via a MDS PTU connector.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.ControlPanel.components">
+            <summary> 
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:Bombardier.PTU.ControlPanel.Dispose(System.Boolean)">
+            <summary>
+            Disposes of the resources used by the form.
+            </summary>
+            <param name="disposing">True to release both managed and unmanaged resources; false to release only unmanaged resources.</param>
+        </member>
+        <member name="M:Bombardier.PTU.ControlPanel.InitializeComponent">
+            <summary> 
+            Required method for Designer support - do not modify 
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.ControlPanel.m_IsDisposed">
+            <summary>
+            Flag to indicate whether the class has been disposed of. True, indicates that the class has already been disposed of; otherwise, false.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.ControlPanel.m_MainWindow">
+            <summary>
+            Reference to the main application window.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.ControlPanel.m_ToolStripButtonOnline">
+            <summary>
+            Reference to the 'Online' ToolStripButton.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.ControlPanel.m_ToolStripButtonOffline">
+            <summary>
+            Reference to the 'Offline' ToolStripButton.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.ControlPanel.m_ToolStripMenuItemFile">
+            <summary>
+            Reference to the 'File' ToolStripMenuItem.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.ControlPanel.m_ToolStripSeparatorFileOpenDataDictionary">
+            <summary>
+            Reference to the 'File/Select Data Dictionary' ToolStripSeparator.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.ControlPanel.m_ToolStripMenuItemFileExit">
+            <summary>
+            Reference to the 'File/Exit' ToolStripMenuItem.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.ControlPanel.m_ToolStripMenuItemView">
+            <summary>
+            Reference to the 'View' ToolStripMenuItem.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.ControlPanel.m_ToolStripMenuItemViewWatchWindow">
+            <summary>
+            Reference to the 'View/Watch Window' ToolStripMenuItem.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.ControlPanel.m_ToolStripMenuItemViewSystemInformation">
+            <summary>
+            Reference to the 'View/System Information' ToolStripMenuItem.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.ControlPanel.m_ToolStripMenuItemDiagnostics">
+            <summary>
+            Reference to the 'Diagnostics' ToolStripMenuItem.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.ControlPanel.m_ToolStripMenuItemDiagnosticsEventLog">
+            <summary>
+            Reference to the 'Diagnostics/Event Log' ToolStripMenuItem.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.ControlPanel.m_ToolStripMenuItemDiagnosticsSelfTests">
+            <summary>
+            Reference to the 'Diagnostics/Self Tests' ToolStripMenuItem.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.ControlPanel.m_ToolStripMenuItemDiagnosticsInitializeEventLogs">
+            <summary>
+            Reference to the 'Diagnostics/Initialize Event Logs' ToolStripMenuItem.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.ControlPanel.m_ToolStripMenuItemConfigure">
+            <summary>
+            Reference to the 'Configure' ToolStripMenuItem.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.ControlPanel.m_ToolStripMenuItemConfigurePasswordProtection">
+            <summary>
+            Reference to the 'Configure/Password Protection' ToolStripMenuItem.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.ControlPanel.m_ToolStripSeparatorConfigurePasswordProtection">
+            <summary>
+            Reference to the 'Configure/Password Protection' ToolStripSeparator.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.ControlPanel.m_ToolStripMenuItemHelp">
+            <summary>
+            Reference to the 'Help' ToolStripMenuItem.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.ControlPanel.m_ToolStripMenuItemHelpShowUserManual">
+            <summary>
+            Reference to the 'Help/Show User Manual' ToolStripMenuItem.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.ControlPanel.m_ToolStripSeparatorHelpShowUserManual">
+            <summary>
+            Reference to the 'Help/Show User Manual' ToolStripSeparator.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.ControlPanel.m_MdiPTU">
+            <summary>
+            Reference to the PTU Multiple Document Interface.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.ControlPanel.m_ToolStripStatusLabelLogStatus">
+            <summary>
+            Reference to the LogStatus ToolStripStatusLabel.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.ControlPanel.m_ToolStripStatusLabelWibuBoxStatus">
+            <summary>
+            Reference to the WibuBoxStatus ToolStripStatusLabel.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.ControlPanel.m_ToolStripStatusLabelCarNumber">
+            <summary>
+            Reference to the CarNumber ToolStripStatusLabel.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.ControlPanel.m_ToolStripStatusLabelMode">
+            <summary>
+            Reference to the Mode ToolStripStatusLabel.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.ControlPanel.m_ToolStripStatusLabelSecurityLevel">
+            <summary>
+            Reference to the SecurityLevel ToolStripStatusLabel.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.ControlPanel.m_WibuBoxSupportRequired">
+            <summary>
+            A flag that that controls whether the control panel is to support the WibuBox security system. True, if support for the WibuBox security system is required;
+            otherwise, false.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.ControlPanel.m_ProjectIdentifier">
+            <summary>
+            The project identifier associated with the control panel.
+            </summary>
+        </member>
+        <member name="M:Bombardier.PTU.ControlPanel.#ctor">
+            <summary>
+            Zero Parameter Constructor.
+            </summary>
+        </member>
+        <member name="M:Bombardier.PTU.ControlPanel.Cleanup(System.Boolean)">
+            <summary>
+            Clean up the resources used by the form.
+            </summary>
+            <param name="disposing">True to release both managed and unmanaged resources; false to release only unmanaged resources.</param>
+        </member>
+        <member name="M:Bombardier.PTU.ControlPanel.m_ButtonViewSystemInformation_Click(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the 'Maintenance/System Information' Button Click event. Simulates the user selecting the 'View/System Information' menu option. The
+            simulation only works if the menu option is enabled.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Bombardier.PTU.ControlPanel.m_ButtonViewWatchWindow_Click(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the 'Watch Window' Button Click event. Simulates the user selecting the 'View/Watch Window' menu option. The
+            simulation only works if the menu option is enabled and visible.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Bombardier.PTU.ControlPanel.m_ButtonDiagnosticsEventLog_Click(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the 'Maintenance/Event Log' Button menu Click event. Simulates the user selecting the 'Diagnostics/Event Log' menu option. The
+            simulation only works if the menu option is enabled and visible.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Bombardier.PTU.ControlPanel.m_ButtonDiagnosticsSelfTest_Click(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the 'Maintenance/Self-Tests' Button menu Click event. Simulates the user selecting the 'Diagnostics/Self-Tests' menu option. The
+            simulation only works if the menu option is enabled and visible.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Bombardier.PTU.ControlPanel.m_ButtonMaintenanceSpare1_Click(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the 'Maintenance/Spare 1' Button menu Click event.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Bombardier.PTU.ControlPanel.m_ButtonMaintenanceSpare2_Click(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the 'Maintenance/Spare 2' Button menu Click event.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Bombardier.PTU.ControlPanel.m_ButtonDiagnosticsInitializeEventLogs_Click(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the 'Administration/Initialize Event Logs' Button menu Click event. Simulates the user selecting the 'Diagnostics/Initialize Event Logs'
+            menu option. The simulation only works if the menu option is enabled and visible.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Bombardier.PTU.ControlPanel.m_ButtonAdministrationPasswordProtection_Click(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the 'Administration/Password Protection' Button menu Click event. Simulates the user selecting the 'Configure/Password Protection'
+            menu option.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Bombardier.PTU.ControlPanel.m_RemoveBlueHighlightFromButton">
+            <summary>
+            Removes the "blue outline" or control focus from the button after returning from another form invocation
+            </summary>
+        </member>
+        <member name="M:Bombardier.PTU.ControlPanel.m_AdministrationSpare2_Click(System.Object,System.EventArgs)">
+            <summary>
+             Event handler for the 'Administration/Spare 2' Button menu Click event
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Bombardier.PTU.ControlPanel.m_ButtonHelp_Click(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the 'Help' Button menu Click event. Simulates the user selecting the 'Help/Show User Manual' menu option.
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:Bombardier.PTU.ControlPanel.m_ButtonExit_Click(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the 'Exit' Button menu Click event. Simulates the user selecting the 'File/Exit' menu option.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Bombardier.PTU.ControlPanel.LogStatus_TextChanged(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the 'Log Status' StatusLabel TextChanged event. Writes the contents of the 'Log Status' StatusLabel Text property to the Text property
+            of the local 'Log Status' Label.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Bombardier.PTU.ControlPanel.WibuBoxStatus_TextChanged(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the 'WibuBox' StatusLabel TextChanged event. Writes the contents of the 'WibuBox' StatusLabel Text property to the Text property
+            of the local 'WibuBox' Label without any legend text.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Bombardier.PTU.ControlPanel.CarNumber_TextChanged(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the 'Car Number' StatusLabel TextChanged event. Writes the contents of the 'Car Number' StatusLabel Text property to the Text property
+            of the local 'Car Number' Label.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Bombardier.PTU.ControlPanel.Mode_TextChanged(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the 'Mode' StatusLabel TextChanged event. Writes the contents of the 'Mode' StatusLabel Text property to the Text property
+            of the local 'Mode' Label.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Bombardier.PTU.ControlPanel.SecurityLevel_TextChanged(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the 'SecurityLevel' StatusLabel TextChanged event. Writes the contents of the 'SecurityLevel' StatusLabel Text property to the Text property
+            of the local 'SecurityLevel' Label.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Bombardier.PTU.ControlPanel.ViewWatchWindow_EnabledChanged(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the 'View/Watch Window' menu option EnabledChanged event. Updates the Enabled property of the 'Maintenance/Watch Window' Button to reflect
+            whether the 'View/Watch Window' menu option is currently enabled.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Bombardier.PTU.ControlPanel.ViewSystemInformation_EnabledChanged(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the 'View/System Information'  menu option EnabledChanged event. Updates the Enabled property of the 'Maintenance/System Information'
+            Button to reflect whether the 'View/System Information' menu option is currently enabled.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Bombardier.PTU.ControlPanel.DiagnosticsEventLog_EnabledChanged(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the 'Diagnostics/Event Log'  menu option EnabledChanged event. Updates the Enabled property of the 'Maintenance/Event Log' Button to reflect
+            whether the 'Diagnostics/Event Log' menu option is currently enabled.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Bombardier.PTU.ControlPanel.DiagnosticsSelfTests_EnabledChanged(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the 'Diagnostics/Self-Test'  menu option EnabledChanged event. Updates the Enabled property of the 'Maintenance/Self-Tests' Button
+            to reflect whether the 'Diagnostics/Self-Test' menu option is currently enabled.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Bombardier.PTU.ControlPanel.DiagnosticsInitializeEventLogs_EnabledChanged(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the 'Diagnostics/Initialize Event Logs'  menu option EnabledChanged event. Updates the Enabled property of the
+            'Administration/Initialize Event Logs' Button to reflect whether the 'Diagnostics/Initialize Event Logs' menu option is currently enabled.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Bombardier.PTU.ControlPanel.ConfigurePasswordProtection_EnabledChanged(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the 'Configure/Password Protection'  menu option EnabledChanged event. Updates the Enabled property of the 
+            'Administration/Password Protection' Button to reflect whether the 'Configure/Password Protection' menu option is currently enabled.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Bombardier.PTU.ControlPanel.Online_CheckedChanged(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the 'Online' ToolStripButton CheckedChanged event. Toggles the ToolStripButton Text and ToolTipText properties depending upon
+            the state of the Checked property.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Bombardier.PTU.ControlPanel.Offline_CheckedChanged(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the 'Offline' ToolStripButton CheckedChanged event. Toggles the ToolStripButton Text and ToolTipText properties depending upon
+            the state of the Checked property.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Bombardier.PTU.ControlPanel.MdiChildActivate(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the MdiChildActivate event. This event is raised whenever a child Form is displayed in the MDI. The handler checks the Name
+            of the child Form that has been activated and determines whether this ControlPanel is to be visible or not while the child Form is on display.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Bombardier.PTU.ControlPanel.MenuUpdated(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the MenuUpdated event. This event is raised whenever the main menu of the MDI has been updated as a result of a Mode or SecurityLevel
+            change. The handler hides those menu options and separators that have been replaced by Button controls on the control panel.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Bombardier.PTU.ControlPanel.ChangeFont(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the FontChanged event. Changes the font of this form and all controls associated with the form to the same font as that of the main window.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Bombardier.PTU.ControlPanel.InitializeControlPanel(Common.IMainWindow)">
+            <summary>
+            Initializes the ControlPanel UserControl.
+            </summary>
+            <param name="mainWindow">Reference to the IMAinWindow interface.</param>
+        </member>
+        <member name="P:Bombardier.PTU.ControlPanel.MainWindow">
+            <summary>
+            Get or set the reference to the IMainWindow interface.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.ControlPanel.ControlPanelTitle">
+            <summary>
+            Get or set the title of the control panel.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.ControlPanel.SubsystemCode">
+            <summary>
+            Get or set the sub-system code text.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.ControlPanel.LocationCode">
+            <summary>
+            Get or set the location code text. The location code is used to specify which connector the PTU is connected to in to the car. This field is blank where 
+            the location is not ambiguous i.e. only one PTU connector exists on a car.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.ControlPanel.Connection">
+            <summary>
+            Get or set the connection text. This is normally either "Direct" or "Remote". Direct means that the PTU is connected to the PTU connector on the 
+            Supplier Subsystem. Remote means that the PTU is connected via a MDS PTU connector.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.ControlPanel.WibuBoxRequired">
+            <summary>
+            Get or set the flag that controls whether the control panel is to support the WibuBox security system. True, if support for the WibuBox security system is
+            required; otherwise, false.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.ControlPanel.ProjectIdentifier">
+            <summary>
+            Get or set the project identifier associated with the control panel.
+            </summary>
+        </member>
+        <member name="T:Bombardier.PTU.Forms.FormOptions">
+            <summary>
+            Form to allow the user to modify the user settings.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.Forms.FormOptions.TabPageIndexThirdParty">
+            <summary>
+            The index of the <c>TabPage</c> associated with the configuration of the third party application software.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.Forms.FormOptions.MajorBuildXP">
+            <summary>
+             The value of the Major component of the version number corresponding to the Windows 2000, Windows XP and Windows Server 2003 operating systems. Value: 5.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.Forms.FormOptions.MajorBuildWin7">
+            <summary>
+            The value of the Major component of the version number corresponding to the Windows 7, Windows Server 2008 and Windows 8 operating systems. Value: 6.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.Forms.FormOptions.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:Bombardier.PTU.Forms.FormOptions.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.Forms.FormOptions.m_Font">
+            <summary>
+            The selected Font.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.Forms.FormOptions.m_TCMSProgrammer">
+            <summary>
+            The fully qualified filename corresponding to the TCMS Programmer application. 
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.Forms.FormOptions.m_FTPClient">
+            <summary>
+            The fully qualified filename corresponding to the FTP Client application. 
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.Forms.FormOptions.m_Browser">
+            <summary>
+            The fully qualified filename corresponding to the web browser.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.Forms.FormOptions.DefaultTCMSProgrammer">
+            <summary>
+            The default fully qualified filename for the APU programmer application.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.Forms.FormOptions.DefaultFTPClient">
+            <summary>
+            The default fully qualified filename for the FTP Client browser.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.Forms.FormOptions.DefaultBrowser">
+            <summary>
+            The default fully qualified filename for the web browser.
+            </summary>
+        </member>
+        <member name="M:Bombardier.PTU.Forms.FormOptions.#ctor">
+            <summary>
+            Initializes a new instance of the class. Copy the current user settings to the appropriate member variables and enable/disable options according to
+            the users security level.
+            </summary>
+        </member>
+        <member name="M:Bombardier.PTU.Forms.FormOptions.Cleanup(System.Boolean)">
+            <summary>
+            Clean up the resources used by the form.
+            </summary>
+            <param name="disposing">True to release both managed and unmanaged resources; false to release only unmanaged resources.</param>
+        </member>
+        <member name="M:Bombardier.PTU.Forms.FormOptions.m_BtnSelectFont_Click(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the 'Font - Select' button 'Click' event. Display the font dialog box and update the <c>Font</c> property with the selected font to
+            give the user some idea of what the font looks like.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Bombardier.PTU.Forms.FormOptions.m_BtnDefaultFont_Click(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the 'Font - Default' button 'Click' event. Set the current font to be the default font.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Bombardier.PTU.Forms.FormOptions.m_BtnSpecifyBrowser_Click(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the 'Third Party Software - Browser - Specify' button Click event. Show the <c>OpenFileDialog</c> form so that the user can select 
+            the appropriate web browser application.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Bombardier.PTU.Forms.FormOptions.m_BtnDefaultApplications_Click(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the Application Data button Click event. Display the <c>FolderBrowserDialog</c> class and update the 
+            Application Data <c>TextBox</c> with the selected directory.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Bombardier.PTU.Forms.FormOptions.m_TabControl_SelectedIndexChanged(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the <c>TabControl</c>, <c>SelectedIndexChanged</c> event. Display a message box if the user selects the 'Third Party Software' tab page
+            and is not logged into the required security level.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Bombardier.PTU.Forms.FormOptions.m_BtnCancel_Click(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the Cancel button 'Click' event. Close the form.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Bombardier.PTU.Forms.FormOptions.m_BtnOK_Click(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the OK button 'Click' event. Update the user settings and then close the form.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Bombardier.PTU.Forms.FormOptions.GetOSFont(System.Boolean)">
+            <summary>
+            Get the default or current font associated with the operating system, depending upon the state of the <paramref name="requestDefaultFont"/> flag.
+            </summary>
+            <remarks>
+            <para>
+            The current Windows operating system is determined by checking the value of the Major amd Minor properties of 
+            the Environment.OSVersion.Version class.
+            </para>
+            <para>The version references associated with each Windows operating system are given below: 
+            </para>
+                <list type="bullet">
+                    <listheader><osname>Operating System</osname><version>Version Number</version></listheader>
+                    <item><osname>Windows 8</osname><version>6.2</version></item> 
+                    <item><osname>Windows Server 2012</osname><version>6.2</version></item> 
+                    <item><osname>Windows 7</osname><version>6.1</version></item> 
+                    <item><osname>Windows Server 2008 R2</osname><version>6.1</version></item> 
+                    <item><osname>Windows Server 2008</osname><version>6.0</version></item> 
+                    <item><osname>Windows Vista</osname><version>6.0</version></item> 
+                    <item><osname>Windows Server 2003 R2</osname><version>5.2</version></item> 
+                    <item><osname>Windows Server 2003</osname><version>5.2</version></item> 
+                    <item><osname>Windows XP 64-Bit Edition</osname><version>5.2</version></item> 
+                    <item><osname>Windows XP</osname><version>5.1</version></item> 
+                    <item><osname>Windows 2000</osname><version>5.0</version></item> 
+                </list>
+            </remarks>
+            <param name="requestDefaultFont">A flag to specify whether the default or current font is required. True, specifies 
+            that the default font is required; otherwise, false indicates that the current font is required.</param>
+            <returns>The default or the current font associated with the operating system, depending upon which font was requested.</returns>
+        </member>
+        <member name="M:Bombardier.PTU.Forms.FormOptions.SetOSFont(System.Drawing.Font)">
+            <summary>
+            Set the font setting associated with the operating system to the font specified by the <paramref name="font"/> parameter.
+            </summary>
+            <remarks>This method does not save the current settings to disk.</remarks>
+            <param name="font">The font that is to be used to update the appropriate font setting.</param>
+        </member>
+        <member name="T:Bombardier.PTU.Communication.CommunicationApplication">
+            <summary>
+            Class to manage communication with the target hardare with respect to the main PTU application.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.Communication.CommunicationApplication.YearBoundary">
+            <summary>
+            <para>The boundary year value for 2 digit year codes.</para><para>If the 2 digit year code returned from the VCU is within the supported range
+            (00 to 99) and is above or equal to the value of <c>YearBoundary</c> then the 4 digit year code is deemed to be associated with the 20th Century.</para>
+            <para>If the year code is below <c>YearBoundary</c> then the 2 digit year code is associated with the 21st Century. This ensures that the PTU displays
+            the correct date between 1970 - 2069. Value: 70.</para>
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.Communication.CommunicationApplication.Century20th">
+            <summary>
+            The value to be added to the 2 digit year code if the year is associated with the 20th Century. Value: 1900.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.Communication.CommunicationApplication.Century21st">
+            <summary>
+            The value to be added to the 2 digit year code if the year is associated with the 21st Century. Value: 2000.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.Communication.CommunicationApplication.YearCode2DigitMax">
+            <summary>
+            The maximum supported value for 2 digit year codes. Value: 99.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.Communication.CommunicationApplication.YearCode2DigitMin">
+            <summary>
+            The minimum supported value for 2 digit year codes. Value: 0.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.Communication.CommunicationApplication.YearCode4DigitMax">
+            <summary>
+            The maximum supported 4 digit year code on a 2 digit year code VCU. Value: 2069.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.Communication.CommunicationApplication.YearCode4DigitMin">
+            <summary>
+            The minimum supported 4 digit year code on a 2 digit year code VCU. Value: 1970.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.Communication.CommunicationApplication.Use4DigitYearCodeTrue">
+            <summary>
+            <para>The value to represent that the SetTimeDate() and GetTimeDate() use4DigitYearCode flag parameter is True.</para><para>This parameter specifies whether
+            the Vehicle Control Unit uses a 2 or 4 digit year code. True, if it uses a 4 digit year code; otherwise, false. Value: 0x01.</para>
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.Communication.CommunicationApplication.Use4DigitYearCodeFalse">
+            <summary>
+            <para>The value to represent that the SetTimeDate() and GetTimeDate() use4DigitYearCode flag parameter is False.</para><para>This parameter\
+            specifies whether the Vehicle Control Unit uses a 2 or 4 digit year code. True, if it uses a 4 digit year code; otherwise, false. Value: 0x00.</para>
+            </summary>
+        </member>
+        <member name="M:Bombardier.PTU.Communication.CommunicationApplication.#ctor">
+            <summary>
+            Initialize a new instance of the class.
+            </summary>
+        </member>
+        <member name="M:Bombardier.PTU.Communication.CommunicationApplication.#ctor(Common.Communication.ICommunicationParent)">
+            <summary>
+            Initialize a new instance of the class and set the properties and member variables to those values associated with the specified
+            communication interface.
+            </summary>
+            <param name="communicationInterface">Reference to the communication interface containing the properties and member variables that are to be
+            used to initialize the class.</param>
+        </member>
+        <member name="M:Bombardier.PTU.Communication.CommunicationApplication.GetTimeDate(System.Boolean,System.DateTime@)">
+            <summary>
+            Get the time and date from the target hardware.
+            </summary>
+            <param name="use4DigitYearCode">A flag that specifies whether the Vehicle Control Unit uses a 2 or 4 digit year code. True, if it
+            uses a 4 digit year code; otherwise, false.</param>
+            <param name="dateTime">The time and date as a .NET <c>DateTime</c> object.</param>
+        </member>
+        <member name="M:Bombardier.PTU.Communication.CommunicationApplication.SetTimeDate(System.Boolean,System.DateTime)">
+            <summary>
+            Set the time and date on the target hardware.
+            </summary>
+            <param name="use4DigitYearCode">A flag that specifies whether the Vehicle Control Unit uses a 2 or 4 digit year code. True, if it
+            uses a 4 digit year code; otherwise, false.</param>
+            <param name="dateTime">The time and date as a .NET <c>DateTime</c> object.</param>
+        </member>
+        <member name="M:Bombardier.PTU.Communication.CommunicationApplication.SetCarID(System.String)">
+            <summary>
+            Set the car identifier.
+            </summary>
+            <param name="carIdentifier">The car identifier.</param>
+        </member>
+        <member name="M:Bombardier.PTU.Communication.CommunicationApplication.ScanPort(Common.Communication.CommunicationSetting_t,Common.Communication.TargetConfiguration_t@)">
+            <summary>
+            Scan the specified serial communication port to determine if it is connected to a target logic controller. If a target is found
+            the target configuration information is written to the output parameter <paramref name="targetConfiguration"/>.
+            </summary>
+            <param name="communicationSetting">The communication settings that are to be used to communicate with the target.</param>
+            <param name="targetConfiguration">The target configuration information returned from the target hardware if a target is found.</param>
+            <returns>A flag to indicate whether a target was found; true, if a target was found, otherwise, false.</returns>
+            <exception cref="T:Common.Communication.CommunicationException">Thrown if the error code returned from the call to the PTUDLL32.InitCommunication() method is not
+            CommunicationError.Success.</exception>
+        </member>
+        <member name="M:Bombardier.PTU.Communication.CommunicationApplication.ConvertYearTo4DigitFormat(System.Int16)">
+            <summary>
+            <para>Convert a 2 digit year code that is within the supported range to its equivalent 4 digit year code.</para>
+            <para>Any 2 digit year code that is within the supported range, 00 to 99, and is >= 70 is converted to (1900 + 2 digit year code) and any value that
+            is less than 70 is converted to (2000 + 2 digit year code) e.g. 00 --> 2000, 69 --> 2069, 70 --> 1970, 99 --> 1999.</para><para>Any 2 digit year code
+            that is > 99 returns a value of 2069 and any value less than 0 returns a value of 1970.</para>
+            </summary>
+            <param name="year">A 2 digit year code that is within the supported range. Valid 2 digit year codes are in the range 00 to 99.</param>
+            <returns>The 4 digit year code corresponding to the specified 2 digit year code e.g. 00 --> 2000, 69 --> 2069, 70 --> 1970, 99 --> 1999 etc.</returns>
+        </member>
+        <member name="M:Bombardier.PTU.Communication.CommunicationApplication.ConvertYearTo2DigitFormat(System.Int16)">
+            <summary>
+            <para>Convert a 4 digit year code that is within the supported range to its equivalent 2 digit year code.</para>
+            <para>Any 4 digit year code that is within the supported range, 1970 to 2069, but less than 2000 is converted to (4 digit year code - 1900) and any value that
+            is >= 2000 is converted to (4 digit year code - 2000) e.g. 1970 --> 70, 1999 --> 99, 2000 --> 00, 2069 --> 69.</para><para>Any 4 digit year code that is
+            outside the supported range is converted to <c>YearBoundary</c> i.e. 70.</para> 
+            </summary>
+            <param name="year">A 4 digit year code that is within the supported range. Supported 4 digit year codes are in the range 1970 to 2069.</param>
+            <returns>The 2 digit year code corresponding to the specified 4 digit year code e.g. 1970 --> 70, 1999 --> 99, 2000 --> 00, 2069 --> 69.</returns>
+        </member>
+        <member name="T:Bombardier.PTU.Forms.FormShowSystemInformation">
+            <summary>
+            Form to allow the user to view the system information loaded into the target hardware.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.Forms.FormShowSystemInformation.FormatStringTime">
+            <summary>
+            The format string to be used when displaying the current time. Value: "HH:mm:ss".
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.Forms.FormShowSystemInformation.IntervalDisplayUpdate">
+            <summary>
+            The display update interval, in ms. Value: 1,000 ms.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.Forms.FormShowSystemInformation.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:Bombardier.PTU.Forms.FormShowSystemInformation.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.Forms.FormShowSystemInformation.m_TimerDisplayUpdate">
+            <summary>
+            The System.Windows.Forms timer used to manage the display update.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.Forms.FormShowSystemInformation.m_DateTime">
+            <summary>
+            The date and time retrieved from the VCU as a .NET <c>DateTime</c> object.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.Forms.FormShowSystemInformation.m_CommunicationInterface">
+            <summary>
+            Reference to the selected communication interface.
+            </summary>
+        </member>
+        <member name="M:Bombardier.PTU.Forms.FormShowSystemInformation.#ctor">
+            <summary>
+            Initializes a new instance of the class. Zero parameter constructor, required by Visual Studio.
+            </summary>
+        </member>
+        <member name="M:Bombardier.PTU.Forms.FormShowSystemInformation.#ctor(Common.Communication.ICommunicationParent)">
+            <summary>
+            Initializes a new instance of the class.
+            </summary>
+            <param name="communicationInterface">Reference to the communication interface that is to be used to communicate with the VCU.</param>
+        </member>
+        <member name="M:Bombardier.PTU.Forms.FormShowSystemInformation.Cleanup(System.Boolean)">
+            <summary>
+            Clean up the resources used by the form.
+            </summary>
+            <param name="disposing">True to release both managed and unmanaged resources; false to release only unmanaged resources.</param>
+        </member>
+        <member name="M:Bombardier.PTU.Forms.FormShowSystemInformation.FormShowSystemInformation_Shown(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the <c>Shown</c> event. Get the target configuration from the VCU and update the appropriate form labels.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Bombardier.PTU.Forms.FormShowSystemInformation.DisplayUpdate(System.Object,System.EventArgs)">
+            <summary>
+            Event handler associated with the timer <c>Tick</c> event. Get the time and date from the VCU and update the corresponding form labels.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Bombardier.PTU.Forms.FormShowSystemInformation.m_ButtonOK_Click(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the OK button <c>Click</c> event. Close the form.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="P:Bombardier.PTU.Forms.FormShowSystemInformation.DateTime">
+            <summary>
+            Gets the date and time retrieved from the VCU as a .NET <c>DateTime</c> object.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Forms.FormShowSystemInformation.CommunicationInterface">
+            <summary>
+            Gets or sets the communication interface that is to be used to communicate with the target.
+            </summary>
+            <remarks>This property is set by the child class, if appropriate.</remarks>
+        </member>
+        <member name="T:Bombardier.PTU.Forms.FormConfigurePasswordProtection">
+            <summary>
+            Form to allow the engineering user to manage password settings.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.Forms.FormConfigurePasswordProtection.m_SkipLeaveEvent">
+            <summary>
+            Flag to control event processing associated with the <c>TextBox</c> controls. True, to skip the <c>Leave</c> event processing; otherwise, false.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.Forms.FormConfigurePasswordProtection.m_NewPassword">
+            <summary>
+            The new password entered by the user.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.Forms.FormConfigurePasswordProtection.m_VerifyPassword">
+            <summary>
+            The password verification string entered by the user.
+            </summary>
+        </member>
+        <member name="M:Bombardier.PTU.Forms.FormConfigurePasswordProtection.#ctor">
+            <summary>
+            Initialize a new instance of the class. Add the description text to the <c>ComboBox</c> control.
+            </summary>
+        </member>
+        <member name="M:Bombardier.PTU.Forms.FormConfigurePasswordProtection.Cleanup(System.Boolean)">
+            <summary>
+            Clean up the resources used by the form.
+            </summary>
+            <param name="disposing">True to release both managed and unmanaged resources; false to release only unmanaged resources.</param>
+        </member>
+        <member name="M:Bombardier.PTU.Forms.FormConfigurePasswordProtection.m_RadioReset_CheckedChanged(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the <c>CheckedChange</c> event. Check which radio button option the user has selected and enable/disable the appropriate controls.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Bombardier.PTU.Forms.FormConfigurePasswordProtection.m_BtnApply_Click(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the 'Apply' button <c>Click</c> event. Check whether the user has opted to: (a) create a new password or to (b) reset the password and 
+            update the <c>Security</c> class accordingly.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Bombardier.PTU.Forms.FormConfigurePasswordProtection.m_BtnCancel_Click(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the Cancel button 'Click' event. Close the form.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Bombardier.PTU.Forms.FormConfigurePasswordProtection.m_TxtNew_KeyPress(System.Object,System.Windows.Forms.KeyPressEventArgs)">
+            <summary>
+            Event handler for the <c>KeyPress</c> event associated with the 'New Password' <c>TextBox</c>. Check whether the user has entered a string and, if so, enable
+            the 'Verify Password' <c>TextBox</c> control.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Bombardier.PTU.Forms.FormConfigurePasswordProtection.m_TxtVerify_KeyPress(System.Object,System.Windows.Forms.KeyPressEventArgs)">
+            <summary>
+            Event handler for the <c>KeyPress</c> event associated with the 'Verify Password' <c>TextBox</c>. Check whether the user has entered a string and, if so,
+            compare the string with the one entered into the 'New Password <c>TextBox</c> control. If the strings match, enable and set the focus to the 
+            'Apply' button; otherwise: (a) inform the user; (b) clear the <c>TextBox</c> controls and (c) set the focus back to the 'New Password' <c>TextBox</c> control.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Bombardier.PTU.Forms.FormConfigurePasswordProtection.TextBox_Leave(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the <c>TextBox</c>, <c>Leave</c> event. Provided that the <c>SkipLeaveEvent</c> flag is not asserted, simulate the user having entered
+            a carriage return into the <c>TextBox</c> control that raised the event.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="F:Bombardier.PTU.Forms.FormConfigurePasswordProtection.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:Bombardier.PTU.Forms.FormConfigurePasswordProtection.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:Bombardier.PTU.MdiPTU">
+            <summary>
+            Main user interface for the Portable Test Unit (PTU) application.
+            </summary>
+            <summary>
+            Methods to support the MdiPTU class.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.MdiPTU.IntervalMsWibuBoxUpdate">
+            <summary>
+            Th interval, in ms, between successive checks to see whether the WibuBox is still attached to the system. Value: 5,000.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.MdiPTU.CarNumberMax">
+            <summary>
+            The Maximum car number value associated with any project. This is derived from the car identifier string that is downloaded from the VCU/COMC unit. On most
+            projects this is a string representation of a numeric value, however, on the BART project this numeric value is prepended with either 'D' or 'E' depending
+            upon the car type. Despite being prepended with either 'D' or 'E' the numeric value is still unique, therefore the car number on BART is derived by simply
+            stripping off the car type character. Value: 9999.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.MdiPTU.VERSION_LENGTH">
+            <summary>
+            The number of characters which are snipped off of the tail end of the version string to generate the default
+            filenames for the help and database files. Methodology is a legacy of the DDB tool.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.MdiPTU.m_Restart">
+            <summary>
+            A static flag that controls whether the PTU does an automatic restart when the main PTU application is closed. True, if the PTU is to do an automatic
+            restart; otherwise, false.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.MdiPTU.m_IsDisposed">
+            <summary>
+            Flag to indicate whether the Dispose() method has been called. True indicates that the Dispose() method has been called; otherwise, false.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.MdiPTU.m_DisplayQueryExit">
+            <summary>
+            A flag that controls whether the user is asked to confirm that they wish to close the application. True, asks the user to confirm that they wish to
+            close the application; otherwise, false to close regardless.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.MdiPTU.m_ProjectIdentifierPassedAsParameter">
+            <summary>
+            The project identifier that was passed to the application as a command line parameter. If no command line parameter is passed to the
+            application then the value is set to string.Empty.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.MdiPTU.m_SecurityLevelPassedAsParameter">
+            <summary>
+            The security level that was passed to the application as a command line parameter. If no command line parameter is passed to the
+            application then the value is set to <c>SecurityLevel.Undefined</c>.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.MdiPTU.m_TimerWibuBox">
+            <summary>
+            The timer that is used to check that the WibuKey security device is still attached to the system.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.MdiPTU.m_KeyEventArgs">
+            <summary>
+            Reference to the KeyEventArgs object associated with the last recorded key press. 
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.MdiPTU.m_DataDictionary">
+            <summary>
+            The <c>DataSet</c> used to store the information loaded from the XML data dictionary.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.MdiPTU.m_FilenameDataDictionary">
+            <summary>
+            The filename of the XML data dictionary file.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.MdiPTU.m_Mode">
+            <summary>
+            The current mode of operation: setup, online, diagnostic or offline.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.MdiPTU.m_Security">
+            <summary>
+            Reference to the <c>Security</c> class associated with the PTU.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.MdiPTU.m_CommunicationInterface">
+            <summary>
+            Reference to the selected communication interface.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.MdiPTU.m_MenuInterfaceApplication">
+            <summary>
+            Reference to the class which calls the menu options associated with the main PTU application. 
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.MdiPTU.m_MenuInterfaceWatch">
+            <summary>
+            Reference to the class which calls the menu options associated with the subsystem which shows and records the watch variables - Watch.dll.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.MdiPTU.m_MenuInterfaceEvent">
+            <summary>
+            Reference to the class which calls the menu options associated with the events subsystem - Events.dll.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.MdiPTU.m_MenuInterfaceSelfTest">
+            <summary>
+            Reference to the class which calls the menu options associated with the self-test subsystem - SelfTest.dll.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.MdiPTU.m_MenuInterfaceWibuKey">
+            <summary>
+            Reference to the class which calls the menu options associated with the WibuKey subsystem - WibuKey.dll.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.MdiPTU.m_ToolStripItemCollectionMainWindow">
+            <summary>
+            The collection of function keys associated with the form. This allows any child form that is called indirectly to restore the function keys 
+            on exit.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.MdiPTU.m_DebugMode">
+            <summary>
+            Flag to control whether logging of the parameter values associated with the calls to those methods within the PTUDLL32 dynamic link library is enabled. 
+            True, to enable debug mode; otherwise, false.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.MdiPTU.m_ShowBusyAnimation">
+            <summary>
+            Flag to control whether the animation showing that the PTU is busy processing data is visible. True, to show the animation; otherwise, false.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.MdiPTU.m_EventLogSavedStatus">
+            <summary>
+            The event log saved saved associated with the current car.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.MdiPTU.m_WibuBoxPresent">
+            <summary>
+            Flag to indicate whether a WibuBox security device is present or not. True, if a WibuBox security device is present; otherwise, false.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.MdiPTU.m_CarNumber">
+            <summary>
+            The current car number, if the PTU is connected to the target logic; otherwise, if not connected to the car logic, the vale that is returned is
+            short.MinVal.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.MdiPTU.m_HideLogin">
+            <summary>
+            Flag to control whether the 'Login' menu option is to be hidden. True if the 'Login' menu option is to be hidden; otherwise, false.
+            </summary>
+            <remarks>At present this is only applicable to the BART project. The client wants the start-up security level to be specified as a command line
+            parameter.</remarks>
+        </member>
+        <member name="M:Bombardier.PTU.MdiPTU.#ctor(System.String[])">
+            <summary>
+            Initializes a new instance of the class. This constructor is called if one or more shortcut parameters are passed to the PTU by the desktop shortcut.
+            </summary>
+            <param name="args">An array of the parameter strings that were passed to the PTU by the desktop shortcut. Note: only one parameter, arg[0], should be passed
+            and this must specify the project identifier e.g. "CTPA", "R8PR" etc</param>
+        </member>
+        <member name="M:Bombardier.PTU.MdiPTU.#ctor">
+            <summary>
+            Initialises a new instance of the class. 
+            </summary>
+        </member>
+        <member name="M:Bombardier.PTU.MdiPTU.Cleanup(System.Boolean)">
+            <summary>
+            Clean up the resources used by the form.
+            </summary>
+            <param name="disposing">True to release both managed and unmanaged resources; false to release only unmanaged resources.</param>
+        </member>
+        <member name="M:Bombardier.PTU.MdiPTU.MdiPTU_Shown(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the form 'Shown' event. Loads the PTU configuration file and initializes the communication interface.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Bombardier.PTU.MdiPTU.MdiPTU_ResizeEnd(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the form 'ResizeEnd' event. Only update the FormLocation and FormSize settings if the window is in the normal state.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Bombardier.PTU.MdiPTU.MdiPTU_FormClosing(System.Object,System.Windows.Forms.FormClosingEventArgs)">
+            <summary>
+            Event handler for the FormClosing event.
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:Bombardier.PTU.MdiPTU.MdiPTU_KeyDown(System.Object,System.Windows.Forms.KeyEventArgs)">
+            <summary>
+            Event handler for the <c>KeyDown</c> event. Maps the Function keys to the <c>ToolStrip</c> buttons.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Bombardier.PTU.MdiPTU.MdiPTU_KeyUp(System.Object,System.Windows.Forms.KeyEventArgs)">
+            <summary>
+            Event handler for the <c>KeyUp</c> event.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Bombardier.PTU.MdiPTU.m_MenuItemFileOpenWatchFile_Click(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the 'File/Open - Data File/Recorded Watch File' menu option. Dispatch to the appropriate menu interface method.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Bombardier.PTU.MdiPTU.m_MenuItemFileOpenSimulatedFaultLog_Click(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the 'File/Open - Data File/Simulated Fault Log' menu option. Dispatch to the appropriate menu interface method.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Bombardier.PTU.MdiPTU.m_MenuItemFileOpenFaultLog_Click(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the 'File/Open - Data File/Fault Log' menu option <c>Click</c> event. Dispatch to the appropriate menu interface method.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Bombardier.PTU.MdiPTU.m_MenuItemFileOpenEventLog_Click(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the 'File/Open - Data File/Event Log' menu option <c>Click</c> event. Dispatch to the appropriate menu interface method.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Bombardier.PTU.MdiPTU.m_MenuItemFileOpenScreenCapture_Click(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the 'File/Open - Data File/Screen Capture' menu option <c>Click</c> event.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Bombardier.PTU.MdiPTU.m_MenuItemFileOpenDataDictionary_Click(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the 'File/Select Data Dictionary' menu option. Allows the user to select a new data dictionary.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Bombardier.PTU.MdiPTU.m_MenuItemFileSaveFaultLogs_Click(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the 'File/Save/Fault Logs' menu option <c>Click</c> event.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Bombardier.PTU.MdiPTU.m_MenuItemFileSaveEventLog_Click(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the 'File/Save/Event Log' menu option <c>Click</c> event.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Bombardier.PTU.MdiPTU.m_MenuItemFileSaveAll_Click(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the 'File/Save All' menu option <c>Click</c> event.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Bombardier.PTU.MdiPTU.m_MenuItemFileExit_Click(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the 'File/Exit' menu option. Closes the PTU application.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Bombardier.PTU.MdiPTU.m_MenuItemWatchViewWatchWindow_Click(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the 'View/Watch Window' menu option. Show the child form which displays the watch variables defined by the current workset.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Bombardier.PTU.MdiPTU.m_MenuItemViewSystemInformation_Click(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the 'View/System Information' menu option. Shows the dialog box which displays the system information retrieved from the VCU.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Bombardier.PTU.MdiPTU.m_MenuItemDiagnosticsSelfTests_Click(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the 'Diagnostics/Self-Test' menu option. Allows the user to run the self tests.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Bombardier.PTU.MdiPTU.m_MenuItemDiagnosticsEventLog_Click(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the 'Diagnostics/Event Log' menu option.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Bombardier.PTU.MdiPTU.m_MenuItemDiagnosticsAnnunciators_Click(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the 'Diagnostics/Annunciators' menu option.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Bombardier.PTU.MdiPTU.m_MenuItemDiagnosticsMacros_Click(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the 'Diagnostics/Macros' menu option.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Bombardier.PTU.MdiPTU.m_MenuItemDiagnosticsInitializeEventLogs_Click(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the 'Diagnostics/Initialize Event Logger' menu option.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Bombardier.PTU.MdiPTU.m_MenuItemConfigureWorksetsWatchWindow_Click(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the 'Configure/Worksets/Watch Window' menu option. Instantiate and show the FormWorksetManager dialog box. This allows the user to
+            manage the worksets associated with viewing and recording watch variables.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Bombardier.PTU.MdiPTU.m_MenuItemConfigureWorksetsFaultLog_Click(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the 'Configure/Worksets/Fault Log' menu option. Instantiate and show the FormWorksetManagerFaultLog dialog box. This allows the user to
+            manage the worksets associated with the fault log data stream.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Bombardier.PTU.MdiPTU.m_MenuItemConfigureWorksetsChartRecorder_Click(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the 'Configure/Worksets/Chart Recorder' menu option. Instantiate and show the FormWorksetManagerChartRecorder dialog box. This allows 
+            the user to manage the worksets associated with the chart recorder.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Bombardier.PTU.MdiPTU.m_MenuItemConfigurePasswordProtection_Click(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the 'Configure/Password Protection' menu option. Show the form which allows user to manage password protection.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Bombardier.PTU.MdiPTU.m_MenuItemConfigureChartRecorder_Click(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the 'Configure/Chart Recorder' menu option. Show the form which allows user to configure the chart recorder.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Bombardier.PTU.MdiPTU.m_MenuItemConfigureDataStream_Click(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the 'Configure/Data Stream' menu option. Show the form which allows user to configure the data stream.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Bombardier.PTU.MdiPTU.m_MenuItemConfigureWatchWindow_Click(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the 'Configure/Watch Window' menu option. Show the form which allows user to configure the Watch Window.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Bombardier.PTU.MdiPTU.m_MenuItemToolsRealTimeClock_Click(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the 'Tools/Real Time Clock' menu option. Call the menu interface method that is responsible for showing the dialog box which 
+            allows the user to configure the VCU real time clock.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Bombardier.PTU.MdiPTU.m_MenuItemToolsConvertEngineeringDatabase(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the 'Tools/Data Dictionary/Convert to XML Format' menu option. Allows the user to create an XML based data dictionary using an existing
+            Access database data dictionary derived from the Data Dictionary Builder utility.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Bombardier.PTU.MdiPTU.m_MenuItemToolsDebugMode_Click(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the 'Tools/Debug Mode' menu option. Enable/disable debugging.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Bombardier.PTU.MdiPTU.m_MenuItemToolsOptions_Click(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the 'Tools/Options' menu option. Displays the form which allows the user to set up the user specific parameters.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Bombardier.PTU.MdiPTU.m_MenuItemHelpShowUserManual_Click(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the 'Help/PTU Help' menu option. Show the PTU user manual.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Bombardier.PTU.MdiPTU.m_MenuItemHelpAboutPTU_Click(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the 'Help/About PTU' menu option. Display the About form.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Bombardier.PTU.MdiPTU.m_MenuItemLogin_Click(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the 'Login/Logout' menu option.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Bombardier.PTU.MdiPTU.m_TSBOnline_Click(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the on-line button <c>Click</c> event. Initializes the communication port specified in the <c>Communication</c> project user settings 
+            and, if successful: (a) updates the mode setting and then (b) displays the form to show the live watch variable data.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Bombardier.PTU.MdiPTU.m_TSBOffline_Click(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the off-line button <c>Click</c> event. Enter offline mode.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Bombardier.PTU.MdiPTU.MdiPTU_FontChanged(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the <c>FontChanged</c> event. Update the font associated with the controls on this form.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Bombardier.PTU.MdiPTU.WibuBoxCheck(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the WibuBox Timer Click event. Checks whether a valid WibuBox is connected to the USB or Parallel port.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Bombardier.PTU.MdiPTU.UpdateFilenameDateDictionaryProperty(System.String)">
+            <summary>
+            If the XML configuration file (data dictionary) associated with the specified project identifier exists, update the <c>FilenameDataDictionary</c>
+            property with the name of said XML configuration file. Also update the ProjectIdentifierPassedAsParameter property with string value of the specified
+            project identifier regardless of whether the corresponding XML configuration file exists or not.
+            </summary>
+            <param name="projectIdentifierPassedAsParameter">The project identifier string that was passed as a command line parameter.</param>
+            <returns>A flag that specifies whether the project XML configuration file (data dictionary) exists or not. True, if the file exists; otherwise,
+            false.</returns>
+        </member>
+        <member name="M:Bombardier.PTU.MdiPTU.CheckConfiguration(System.String,System.String)">
+            <summary>
+            Check whether the PTU configuration and the propulsion system software match. This method checks whether the PTU configuration matches that of the
+            propulsion system software and attempts to load the correct configuration file if they do not match.
+            </summary>
+            <param name="targetProjectIdentifier">The project identifier of the propulsion system software.</param>
+            <param name="targetVersion">The version reference of the propulsion system software.</param>
+            <returns>A flag that indicates whether the PTU configuration matches that of the propulsion system software. True, if they are matched; otherwise, false.
+            </returns>
+        </member>
+        <member name="F:Bombardier.PTU.MdiPTU.WriteDefaultBackColor">
+            <summary>
+            The default background color associated with the status message and progress bar legend. Value: Color.WhiteSmoke.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.MdiPTU.WriteDefaultForeColor">
+            <summary>
+            The default foreground color associated with the status message and progress bar legend. Value: Color.Black.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.MdiPTU.m_ControlPanel">
+            <summary>
+            Reference to the Control Panel UserControl if one is used on the project.
+            </summary>
+        </member>
+        <member name="M:Bombardier.PTU.MdiPTU.SetRestart(System.Boolean)">
+            <summary>
+            Sets the static flag that controls whether the PTU does an automatic restart when the main PTU application is closed. True, if the PTU is to do
+            an automatic restart; otherwise, false.
+            </summary>
+        </member>
+        <member name="M:Bombardier.PTU.MdiPTU.CloseChildForms">
+            <summary>
+            Close any child form that may be open. For this to work the child form must inherit from <c>FormPTU</c>.
+            </summary>
+            <remarks>The child forms are closed cleanly by simulating the user having pressed the escape key associated with the form.</remarks>
+        </member>
+        <member name="M:Bombardier.PTU.MdiPTU.WriteCarIdentifier(System.String)">
+            <summary>
+            Write the specified car identifier string in the status label used to display the car identifier, convert the car identifier string to a numeric value
+            and update the CarNumber property.
+            </summary>
+            <remarks>The car identifier string on BART includes a leading 'D' or 'E' car type identifier, it is necessary to remove this before attempting to
+            convert the car identifier string to a numeric value, otherwise an exception is thrown.</remarks>
+            <param name="carIdentifierString">The car identifier string. Valid values are from "0000" to "9999". All 4 digits must be specified.</param>
+        </member>
+        <member name="M:Bombardier.PTU.MdiPTU.BlinkUpdateIcon">
+            <summary>
+            Blink the data update icon - this indicates that data has been received from the target hardware.
+            </summary>
+        </member>
+        <member name="M:Bombardier.PTU.MdiPTU.ShowSecurityLevelChange(Common.Security)">
+            <summary>
+            Show that the security level has been updated by modifying: (a) the Login/Logout text associated with the menu and button; (b) the status line text 
+            and (c) the menu options to reflect the new clearance level.
+            </summary>
+            <param name="security">Reference to the security class for which the security clearance level is to be displayed.</param>
+        </member>
+        <member name="M:Bombardier.PTU.MdiPTU.WriteStatusMessage(System.String)">
+            <summary>
+            Write the specified message to the status message control using the default <c>BackColor</c> and <c>ForeColor</c> properties.
+            </summary>
+        </member>
+        <member name="M:Bombardier.PTU.MdiPTU.WriteStatusMessage(System.String,System.Drawing.Color,System.Drawing.Color)">
+            <summary>
+            Write the specified message to the status message control using the specified <c>BackColor</c> and <c>ForeColor</c> properties.
+            </summary>
+            <param name="message">The message that is to be written.</param>
+            <param name="backColor">The background color of the message.</param>
+            <param name="foreColor">The foreground color of the message.</param>
+        </member>
+        <member name="M:Bombardier.PTU.MdiPTU.ShowMdiChild(Common.Forms.FormPTU)">
+            <summary>
+             Show the specified child form.
+            </summary>
+            <param name="childForm">The child form that is to be displayed.</param>
+        </member>
+        <member name="M:Bombardier.PTU.MdiPTU.ShowDialog(Common.Forms.FormPTUDialog)">
+            <summary>
+             Show the specified dialog form.
+            </summary>
+            <param name="dialogForm">The child form that is to be displayed.</param>
+        </member>
+        <member name="M:Bombardier.PTU.MdiPTU.LoadDictionary(Common.Configuration.DataDictionary)">
+            <summary>
+            <para>Configures the PTU application using the specified data dictionary. The configuration procedure is as follows:</para>
+            <para>(1) updates the <c>Parameter</c> class;</para>
+            <para>(2) updates the Lookup static class to allow the records contained within the primary key data tables of the data dictionary to be accessed;</para> 
+            <para>(3) creates the application data sub-directories if they do not exist;</para>
+            <para>(4) updates the main menu options to reflect the current project and security level;</para>
+            <para>(5) updates the file header information;</para>
+            <para>(6) loads the default worksets associated with the specified data dictionary, if they exist;</para>
+            <para>(7) loads the help file associated with the current project and software version;</para>
+            <para>(8) shows the 'Help/About' screen.</para>
+            </summary>
+            <param name="dataDictionary">The data dictionary that is to be used to configure the PTU.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown if <paramref name="dataDictionary"/> is null.</exception>
+        </member>
+        <member name="M:Bombardier.PTU.MdiPTU.SetMode(Common.Mode)">
+            <summary>
+            Set the current mode of operation. This will set the on-line/off-line buttons; status line text and menu options to reflect the specified mode.
+            </summary>
+            <param name="mode">The new mode of operation.</param>
+        </member>
+        <member name="M:Bombardier.PTU.MdiPTU.LoadWorksetCollection(Common.Configuration.WorksetCollection,System.String)">
+            <summary> 
+            Load the specified workset collection file from disk and then set the active workset to be the default workset. If the workset collection 
+            file does not exist or is corrupt, then an empty workset collection file is created.
+            </summary>
+            <remarks>
+            The workset collection filename is derived as follows: {project identifier}.{workset collection type}.{extension} and it is assumed that it is located in 
+            the 'DirectoryManager.PathwWorksetFiles' directory.
+            </remarks>
+            <param name="worksetCollection">The workset collection that is to be loaded from disk.</param>
+            <param name="projectIdentifier">The project identifier used to generate the workset filename.</param>
+        </member>
+        <member name="M:Bombardier.PTU.MdiPTU.InitializePTUProjectSpecific(System.String)">
+            <summary>
+            <para>Initialize the project specific features of the PTU application:</para>
+            <para>(1) check whether a WibuBox is required for the project and, if so, initialize it;</para>
+            <para>(2) check whether the project uses a control panel and, if so, initialize it.</para>
+            </summary>
+            <param name="projectIdentifier">The project identifier string that was passed as a shortcut parameter.</param>
+        </member>
+        <member name="M:Bombardier.PTU.MdiPTU.InitializePTU">
+            <summary>
+            <para>Initialize the PTU application:</para>
+            <para>(1) position the form;</para> 
+            <para>(2) update the LogStatus StatusLabel, regardless of whether this is visible for the current project;</para>
+            <para>(3) set the font;</para>
+            <para>(4) instantiate the menu interfaces to the various sub-systems;</para>
+            <para>(5) create the required PTU configuration sub-directories if they don't already exist;</para>
+            <para>(6) initialize the menu system;</para>
+            <para>(7) set the 'Checked' property of the 'Configure/Enumeration' menu option; and</para>
+            <para>(8) clear the Restart property to ensure that the program terminates when the Close() method is called.</para>
+            </summary>
+        </member>
+        <member name="M:Bombardier.PTU.MdiPTU.LoadAllWorksetCollections(System.String)">
+            <summary>
+            Load all workset collections associated with the specified project identifier from disk. The filename of the file containing the workset collection is 
+            derived from the project identifier as follows: {project identifier}.{workset collection type}.{extension}.
+            </summary>
+            <param name="projectIdentifier">The project identifier associated with the data dictionary.</param>
+        </member>
+        <member name="M:Bombardier.PTU.MdiPTU.LoadHelpFile(System.String,System.String)">
+            <summary>
+            Load the help file associated with the specified project version reference.
+            </summary>
+            <remarks>
+            The help filename is derived as follows: '{project version reference}.hlp' and it is assumed that it is located in the 'DirectoryManager.' 
+            directory.
+            </remarks>
+            <param name="version">The project version reference, used to generate the filename of the help file.</param>
+            <param name="projectIdentifier">The project identifier code</param>
+        </member>
+        <member name="M:Bombardier.PTU.MdiPTU.InitializeDataSubDirectories">
+            <summary>
+            Determines the configured PTU application data directory path and: (a) creates the PTU application data directory, if it does not exist; (b) creates the PTU
+            application data sub-directories, if they do not exist and (c) resets the initial directory paths associated with reading and writing data from/to the 
+            PTU application data directories to their default values.
+            </summary>
+            <remarks>Uses the static classes Parameter and DirectoryManager.</remarks>
+        </member>
+        <member name="M:Bombardier.PTU.MdiPTU.UpdateMenu(Common.Security)">
+            <summary>
+            Update the main menu options to reflect the mode and security level.
+            </summary>
+        </member>
+        <member name="M:Bombardier.PTU.MdiPTU.OnMenuUpdated(System.Object,System.EventArgs)">
+            <summary>
+            Raises a <c>MenuUpdated</c> event. This event is raised when the menu is updated to reflect a new mode or security level.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="eventArgs">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="F:Bombardier.PTU.MdiPTU.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:Bombardier.PTU.MdiPTU.Dispose(System.Boolean)">
+            <summary>
+            Disposes of the resources used by the form.
+            </summary>
+            <param name="disposing">True to release both managed and unmanaged resources; false to release only unmanaged resources.</param>
+        </member>
+        <member name="M:Bombardier.PTU.MdiPTU.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.MdiPTU.Restart">
+            <summary>
+            Gets the state of the static flag that controls whether the PTU does an automatic restart when the main PTU application is closed. True, if the PTU is to do
+            an automatic restart; otherwise, false.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.MdiPTU.IsDisposed">
+            <summary>
+            Gets or sets the flag which indicates whether the Dispose() method has been called. True indicates that the Dispose() method has been called; otherwise,
+            false.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.MdiPTU.SecurityLevelPassedAsParameter">
+            <summary>
+            Get the security level that was passed to the application as a command line parameter. If no command line parameter is passed to the
+            application then the value is set to <c>SecurityLevel.Undefined</c>.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.MdiPTU.MenuStrip">
+            <summary>
+            Gets the reference to the main menu strip.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.MdiPTU.StatusStrip">
+            <summary>
+            Gets the reference to the main status strip.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.MdiPTU.ToolStripFunctionKeys">
+            <summary>
+            Gets or sets the reference to the <c>ToolStrip</c> control containing the function key buttons.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.MdiPTU.Mode">
+            <summary>
+            Gets the mode of operation of the PTU application: setup, online, diagnostic or offline.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.MdiPTU.CommunicationInterface">
+            <summary>
+            Gets or sets the communication interface that is to be used to communicate with the target.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.MdiPTU.ToolStripItemCollectionMainWindow">
+            <summary>
+            Gets the collection of function keys associated with the form. This allows any child form that is called indirectly to restore the function keys 
+            on exit.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.MdiPTU.ShowBusyAnimation">
+            <summary>
+            Gets or sets the flag that controls whether the animation showing that the PTU is busy processing data is visible or not. True, to show the animation; 
+            otherwise, false.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.MdiPTU.FilenameDataDictionary">
+            <summary>
+            Gets the filename of the XML data dictionary file.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.MdiPTU.LogStatus">
+            <summary>
+            Gets or sets the event log saved status associated with the current car. This property also updates the LogStatus StatusLabel whenever the property is
+            written to.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.MdiPTU.WibuBoxPresent">
+            <summary>
+            Gets or sets the Flag that indicates whether a WibuBox security device is present or not. True, if a WibuBox security device is present; otherwise, false.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.MdiPTU.CarNumber">
+            <summary>
+            Gets the current car number, if the PTU is connected to the target logic. If not connected to the car logic, the value that will be returned is
+            short.MinVal.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.MdiPTU.ProjectIdentifierPassedAsParameter">
+            <summary>
+            Get the project identifier that was passed to the application as a shortcut parameter. If no command line parameter is passed to the
+            application then the value is set to string.Empty.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.MdiPTU.DisplayQueryExit">
+            <summary>
+            Get or set the flag that controls whether the user is asked to confirm that they wish to close the application. True, to ask the user to confirm that they
+            wish to close the application; otherwise, false, to close regardless.
+            </summary>
+        </member>
+        <member name="E:Bombardier.PTU.MdiPTU.MenuUpdated">
+            <summary>
+            Raised when the menu is updated to reflect a new mode or security level.
+            </summary>
+        </member>
+        <member name="T:Bombardier.PTU.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.Blank">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.BombardierLogo">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.Bookmark">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.CarNumber">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.CommandLineArgumentBART">
+            <summary>
+              Looks up a localized string similar to BARTVC*.* 10.0.1.21 10.0.1.22.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.CommandLineArgumentCTA">
+            <summary>
+              Looks up a localized string similar to CTPAVC*.* 10.0.1.5 10.0.2.5.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.COMPort">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.COMPort1">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.Configuration">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.DataStream">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.DataStreamSimulated">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.EMBrowserStartFailed">
+            <summary>
+              Looks up a localized string similar to Unable to start the browser specified in the user settings..
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.EMCarIDSetFailed">
+            <summary>
+              Looks up a localized string similar to Unable to set the car identifier..
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.Empty">
+            <summary>
+              Looks up a localized string similar to .
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.EMTimeDateGetFailed">
+            <summary>
+              Looks up a localized string similar to Unable to retrieve the time and date..
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.EMTimeDateSetFailed">
+            <summary>
+              Looks up a localized string similar to Unable to set the time and date..
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.Eventlog">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.FileDialogOpenFilterDataDictionary">
+            <summary>
+              Looks up a localized string similar to Data Dictionary Files.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.FileDialogOpenTitleDataDictionary">
+            <summary>
+              Looks up a localized string similar to Select Data Dictionary.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.FileDialogOpenTitleWebBrowser">
+            <summary>
+              Looks up a localized string similar to Select the Web Browser.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.FilenameDefaultDataDictionary">
+            <summary>
+              Looks up a localized string similar to Configuration.xml.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.FilenameReleaseNotesPTE">
+            <summary>
+              Looks up a localized string similar to PTE-ReleaseNotes.pdf.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.FilenameReleaseNotesPTU">
+            <summary>
+              Looks up a localized string similar to PTU-ReleaseNotes.pdf.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.FilenameSoftwareUserManualPTE">
+            <summary>
+              Looks up a localized string similar to PTE-SoftwareUserManual.pdf.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.FilenameSoftwareUserManualPTU">
+            <summary>
+              Looks up a localized string similar to PTU-SoftwareUserManual.pdf.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.FilenameSoftwareUserManualPTUBart">
+            <summary>
+              Looks up a localized string similar to PTU-SoftwareUserManual.chm.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.FilenameWindowsCommandFile">
+            <summary>
+              Looks up a localized string similar to FtpTransfer.cmd.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.FolderOpen">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.Font">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.fSEARCH_00">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.FTPErrorCodeFileNotFoundBoth">
+            <summary>
+              Looks up a localized string similar to File Not Found - XML and HLP File..
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.FTPErrorCodeFileNotFoundHLP">
+            <summary>
+              Looks up a localized string similar to File Not Found - HLP File..
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.FTPErrorCodeFileNotFoundSearchResults">
+            <summary>
+              Looks up a localized string similar to File Not Found - Search Results..
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.FTPErrorCodeFileNotFoundXML">
+            <summary>
+              Looks up a localized string similar to File Not Found - XML File..
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.FTPErrorCodeFindStrIncorrectSyntax">
+            <summary>
+              Looks up a localized string similar to FindStr Error - Incorrect Syntax..
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.FTPErrorCodeFindStrNoMatchFound">
+            <summary>
+              Looks up a localized string similar to FindStr Error - There were no files matching the specified search criterion found on the Remote Host..
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.FTPErrorCodeNcFTPCouldNotConnectToRemoteHost">
+            <summary>
+              Looks up a localized string similar to NcFTP Error - Could Not Connect to the Remote Host..
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.FTPErrorCodeNcFTPCouldNotConnectToRemoteHostTimedOut">
+            <summary>
+              Looks up a localized string similar to NcFTP Error - Could Not Connect to the Remote Host - Timed Out..
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.FTPErrorCodeNcFTPDirectoryChangeFailed">
+            <summary>
+              Looks up a localized string similar to NcFTP Error - Directory Change Failed..
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.FTPErrorCodeNcFTPDirectoryChangeFailedTimedOut">
+            <summary>
+              Looks up a localized string similar to NcFTP Error - Directory Change Failed - Timed Out..
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.FTPErrorCodeNcFTPErrorCodeInLoginConfigurationFile">
+            <summary>
+              Looks up a localized string similar to NcFTP Error - Error in Login Configuration File..
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.FTPErrorCodeNcFTPGetHLPFailed">
+            <summary>
+              Looks up a localized string similar to NcFTPGET Failed - HLP File..
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.FTPErrorCodeNcFTPGetXMLFailed">
+            <summary>
+              Looks up a localized string similar to NcFTPGET Failed - XML File..
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.FTPErrorCodeNcFTPLibraryInitializationFailed">
+            <summary>
+              Looks up a localized string similar to NcFTP Error - Library Initialization Failed..
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.FTPErrorCodeNcFTPMalformedURL">
+            <summary>
+              Looks up a localized string similar to NcFTP Error - Malformed URL..
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.FTPErrorCodeNcFTPSessionInitializationFailed">
+            <summary>
+              Looks up a localized string similar to NcFTP Error - Session Initialization Failed..
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.FTPErrorCodeNcFTPTransferFailed">
+            <summary>
+              Looks up a localized string similar to NcFTP Error - Transfer Failed..
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.FTPErrorCodeNcFTPTransferFailedTimedOut">
+            <summary>
+              Looks up a localized string similar to NcFTP Error - Transfer Failed - Timed Out..
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.FTPErrorCodeNcFTPUsageError">
+            <summary>
+              Looks up a localized string similar to NcFTP Error - FTP Usage Error..
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.FTPErrorCodePingCannotOpenPingReply">
+            <summary>
+              Looks up a localized string similar to Ping Error - Cannot Open Ping Reply..
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.FTPErrorCodePingError">
+            <summary>
+              Looks up a localized string similar to Ping Error..
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.FTPErrorCodePingInvalidPacketInformation">
+            <summary>
+              Looks up a localized string similar to Ping Error - Invalid Packet Information..
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.FTPErrorCodePingNoReply">
+            <summary>
+              Looks up a localized string similar to Ping Error - No Reply..
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.FTPErrorCodeSuccess">
+            <summary>
+              Looks up a localized string similar to Success.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.FTPErrorCodeSystemException">
+            <summary>
+              Looks up a localized string similar to System Exception..
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.FTPErrorCodeUndefined">
+            <summary>
+              Looks up a localized string similar to Error Undefined..
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.FTPErrorCodeUnrecognized">
+            <summary>
+              Looks up a localized string similar to Unrecognised Error Code..
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.FTPErrorCodeXCopyCtrlC">
+            <summary>
+              Looks up a localized string similar to XCopy Error - Ctrl C Used to Terminate XCopy..
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.FTPErrorCodeXCopyDiskWriteError">
+            <summary>
+              Looks up a localized string similar to XCopy Error - Disk Write Error..
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.FTPErrorCodeXCopyInitFailed">
+            <summary>
+              Looks up a localized string similar to XCopy Error - Initialization Failed..
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.FTPErrorCodeXCopyNoFilesFound">
+            <summary>
+              Looks up a localized string similar to XCopy Error - No Files Found..
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.Function">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.FunctionKeyTextDisconnectLogic">
+            <summary>
+              Looks up a localized string similar to F2-Disconnect Target.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.FunctionKeyTextOffline">
+            <summary>
+              Looks up a localized string similar to F3-Offline.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.FunctionKeyTextOnline">
+            <summary>
+              Looks up a localized string similar to F2-Online.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.FunctionKeyTextSelectLogic">
+            <summary>
+              Looks up a localized string similar to F2-Connect to Target.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.FunctionKeyTextSimulationExit">
+            <summary>
+              Looks up a localized string similar to F3-Exit Simulation.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.FunctionKeyTextSimulationStart">
+            <summary>
+              Looks up a localized string similar to F3-Logic Simulation.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.FunctionKeyToolTipTextDisconnectLogic">
+            <summary>
+              Looks up a localized string similar to [Disconnect the Vehicle Control Unit].
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.FunctionKeyToolTipTextOffline">
+            <summary>
+              Looks up a localized string similar to [Display Screens without Connecting to the Vehicle Control Unit].
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.FunctionKeyToolTipTextOnline">
+            <summary>
+              Looks up a localized string similar to [Connect to the Vehicle Control Unit].
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.FunctionKeyToolTipTextSelectLogic">
+            <summary>
+              Looks up a localized string similar to [Connect to the Vehicle Control Unit].
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.FunctionKeyToolTipTextSimulationExit">
+            <summary>
+              Looks up a localized string similar to [Exit the Vehicle Control Unit Simulation].
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.FunctionKeyToolTipTextSimulationStart">
+            <summary>
+              Looks up a localized string similar to [Start the Vehicle Control Unit Simulation].
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.Help">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.HotPlug">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.Information">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.Initialize">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.Keys">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.LabelModeDiagnostic">
+            <summary>
+              Looks up a localized string similar to .
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.LabelModeOffline">
+            <summary>
+              Looks up a localized string similar to Offline.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.LabelModeOnline">
+            <summary>
+              Looks up a localized string similar to Online.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.LabelModeSelfTest">
+            <summary>
+              Looks up a localized string similar to Self Test.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.LabelModeSetup">
+            <summary>
+              Looks up a localized string similar to Setup.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.LabelModeVCUSimulation">
+            <summary>
+              Looks up a localized string similar to Simulation.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.LabelWebAddress">
+            <summary>
+              Looks up a localized string similar to www.bombardier.com.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.LabelWibuBoxStatusNotPresent">
+            <summary>
+              Looks up a localized string similar to Not Present.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.LabelWibuBoxStatusPresent">
+            <summary>
+              Looks up a localized string similar to Present.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.LegendCarNumber">
+            <summary>
+              Looks up a localized string similar to Car No.:.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.LegendCopyright">
+            <summary>
+              Looks up a localized string similar to (C) 2010 - 2015  Bombardier Transportation (Holdings) USA Inc..
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.LegendLogStatus">
+            <summary>
+              Looks up a localized string similar to Log:.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.LegendMode">
+            <summary>
+              Looks up a localized string similar to .
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.LegendOS">
+            <summary>
+              Looks up a localized string similar to Windows 7/Vista/XP.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.LegendRights">
+            <summary>
+              Looks up a localized string similar to All rights reserved..
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.LegendSecurityLevel">
+            <summary>
+              Looks up a localized string similar to .
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.LegendWibuBoxStatus">
+            <summary>
+              Looks up a localized string similar to .
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.LightMetallic">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.LinkBombardier">
+            <summary>
+              Looks up a localized string similar to http://www.bombardier.com/en/transportation.html.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.MBCaptionError">
+            <summary>
+              Looks up a localized string similar to Error.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.MBCaptionInformation">
+            <summary>
+              Looks up a localized string similar to Information.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.MBCaptionWarning">
+            <summary>
+              Looks up a localized string similar to Warning.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.MBTConfigDataDictionaryDefaultDoesNotExist">
+            <summary>
+              Looks up a localized string similar to The default data dictionary, &apos;{0}&apos;, does not exist. Terminating the program..
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.MBTConfigDataDictionaryDoesNotExist">
+            <summary>
+              Looks up a localized string similar to The data dictionary for the specified project identifier does not exist. Terminating the program..
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.MBTConfigDataDictionaryInvalid">
+            <summary>
+              Looks up a localized string similar to The data dictionary, &apos;{0}&apos;, is invalid and cannot be read. Terminating the program..
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.MBTConfigProjectIDMismatch">
+            <summary>
+              Looks up a localized string similar to The project identifier defined in the project data dictionary does not match the project identifier that was passed as a command line parameter. Terminating the program..
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.MBTConfigProjectIDPassedAsParameterNotFound">
+            <summary>
+              Looks up a localized string similar to A valid project identifier was not passed as a command line parameter. Terminating the program..
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.MBTConfigReadFailed">
+            <summary>
+              Looks up a localized string similar to Unable to read the data dictionary..
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.MBTConfigSecurityLevelPassedAsParameterInvalid">
+            <summary>
+              Looks up a localized string similar to The security level that was passed as a command line parameter is invalid; valid parameters are -l2 and -l3. Reverting to the standard login procedure..
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.MBTConfigVCUDownloadCommandFileNotFound">
+            <summary>
+              Looks up a localized string similar to The Windows Command File ({0}) used to download the files from the VCU cannot be found. Please contact the system administrator..
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.MBTConfigVCUDownloadComplete">
+            <summary>
+              Looks up a localized string similar to The PTU configuration has been updated. Please disconnect the Ethernet cable and reconnect the original RS-232 connection. Click &apos;OK&apos; when the PTU is reconnected to the propulsion system..
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.MBTConfigVCUDownloadInProgress">
+            <summary>
+              Looks up a localized string similar to The file transfer is in progress. Please do not disconnect the Ethernet cable until the transfer is complete..
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.MBTConfigVCUDownloadStart">
+            <summary>
+              Looks up a localized string similar to In order to update the PTU configuration: {0}1. Please disconnect the RS-232 connection and move the PTU up to the cab area. {1}2. Using a M12 to RS-485 Ethernet cable, connect the PTU laptop port (RJ45) to the J4 port (M12) located in the ceiling cabinet directly above the doorway entrance to the cab and locker area. The J4 Ethernet port is located directly to the left of the HV Box RS-232 serial port in this cabinet.{2}3. Move the mouse to the &apos;virtual machine&apos; down arrow box at the top of the screen. Cli [rest of string was truncated]&quot;;.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.MBTConfigVCUDownloadUnsuccessful">
+            <summary>
+              Looks up a localized string similar to The PTU configuration download from the propulsion system was unsuccessful..
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.MBTConfigVCUDownloadUnsuccessfulWithErrorCode">
+            <summary>
+              Looks up a localized string similar to The PTU configuration download from the propulsion system was unsuccessful. The Windows Command File returned with the error code: {0}, {1}.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.MBTConfigVCUMatchNotFoundManualSelection">
+            <summary>
+              Looks up a localized string similar to The PTU configuration file associated with the propulsion system software could not be found in the default sub-directory, do you want to select a file manually?.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.MBTConfigVCUMatchNotFoundTryAgain">
+            <summary>
+              Looks up a localized string similar to The PTU configuration file associated with the propulsion system software still cannot be found in the default sub-directory. Please try again.&quot;.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.MBTConfigVCUMismatchProjectId">
+            <summary>
+              Looks up a localized string similar to The project identifier of the PTU configuration does not match that of the propulsion system software. Would you like to update the PTU configuration now?.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.MBTConfigVCUMismatchVersion1">
+            <summary>
+              Looks up a localized string similar to The version reference of the PTU configuration.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.MBTConfigVCUMismatchVersion2">
+            <summary>
+              Looks up a localized string similar to does not match that of the propulsion system software.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.MBTConfigVCUMismatchVersion3">
+            <summary>
+              Looks up a localized string similar to Would you like to update the PTU configuration now?.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.MBTDataDictionaryApplicationDataPathInvalid">
+            <summary>
+              Looks up a localized string similar to The application data path specified in the configuration file is invalid; using the Windows default path..
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.MBTDataDictionaryLoadFailed">
+            <summary>
+              Looks up a localized string similar to Unable to load the data dictionary..
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.MBTDataDictionaryProjectIdEmpty">
+            <summary>
+              Looks up a localized string similar to The data dictionary did not contain a valid project identifier, please contact the system administrator..
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.MBTDateTimeGetFailed">
+            <summary>
+              Looks up a localized string similar to Unable to retrieve the date and time..
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.MBTDateTimeSetFailed">
+            <summary>
+              Looks up a localized string similar to Unable to set the real time clock..
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.MBTDateTimeSetSuccess">
+            <summary>
+              Looks up a localized string similar to The real time clock has been successfully updated..
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.MBTDiagnosticHelpNotFound">
+            <summary>
+              Looks up a localized string similar to The diagnostic help file for the current project cannot be found..
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.MBTHelpFileNotFound">
+            <summary>
+              Looks up a localized string similar to The help document cannot be found..
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.MBTInvalidWorkset">
+            <summary>
+              Looks up a localized string similar to The watch variables associated with the following old identifiers are present in the &apos;{0}&apos; workset file but cannot be found in the data dictionary: {1}..
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.MBTLogicsNotFound">
+            <summary>
+              Looks up a localized string similar to No targets were found. Please select Retry to rescan all available ports..
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.MBTModifyChartRecorderModeFailed">
+            <summary>
+              Looks up a localized string similar to Unable to set the mode of the chart recorder..
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.MBTNoPasswordsToConfigure">
+            <summary>
+              Looks up a localized string similar to There are no passwords associated with the current security configuration..
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.MBTNotTrueTypeFont">
+            <summary>
+              Looks up a localized string similar to Only TrueType fonts are supported. This is not a TrueType font..
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.MBTNotYetImplemented">
+            <summary>
+              Looks up a localized string similar to This menu option has not yet been implemented..
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.MBTOptionThirdPartyUnauthorized">
+            <summary>
+              Looks up a localized string similar to The third party application software can only be modified by logging into the highest security level..
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.MBTPortCloseFailed">
+            <summary>
+              Looks up a localized string similar to Unable to close the communication port..
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.MBTPortInitializationFailed">
+            <summary>
+              Looks up a localized string similar to Unable to initialize the communication port..
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.MBTQueryExit">
+            <summary>
+              Looks up a localized string similar to Are you sure that you want to exit the Portable Test Application?.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.MBTReleaseNotesNotFound">
+            <summary>
+              Looks up a localized string similar to The release notes cannot be found..
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.MBTSecurityCurrentUserNotGroupMember">
+            <summary>
+              Looks up a localized string similar to The current user is not a member of the PrimaryMaintenance or Engineering Windows group. Reverting to the standard login procedure..
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.MBTSecurityLoginFailed">
+            <summary>
+              Looks up a localized string similar to Login failed, please contact the system administrator..
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.MBTSecurityMismatch">
+            <summary>
+              Looks up a localized string similar to The new password and the verification password did not match, please try again..
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.MBTSecurityPasswordIncorrect">
+            <summary>
+              Looks up a localized string similar to That password is incorrect, please try again..
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.MBTSecurityQueryLogOut">
+            <summary>
+              Looks up a localized string similar to Are you sure that you want to log out?.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.MBTSecuritySuccess">
+            <summary>
+              Looks up a localized string similar to The password has been successfully updated..
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.MBTSelectTarget">
+            <summary>
+              Looks up a localized string similar to Please select a target or press Cancel..
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.MBTSerialDeviceNotFound">
+            <summary>
+              Looks up a localized string similar to There we no serial communication devices found on this computer..
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.MBTSetDataDictionaryNotAllowed">
+            <summary>
+              Looks up a localized string similar to A new data dictionary cannot be selected while the PTU is {0}. Please disconnect and ensure that you are logged into the {1} account to complete this operation..
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.MBTSetDataDictionaryNotAllowedSelfTest">
+            <summary>
+              Looks up a localized string similar to A new data dictionary cannot be selected while the PTU is running self tests. Please terminate the self tests, disconnect and ensure that you are logged into the {1} account to complete this operation..
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.MBTShowHelpFileFailed">
+            <summary>
+              Looks up a localized string similar to Unable to display the help information..
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.MBTUnauthorizedSetDataDictionary">
+            <summary>
+              Looks up a localized string similar to You do not have sufficient privileges to select a new data dictionary. Please log into the {0} account to complete this operation..
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.MBTWibuBoxReInsert">
+            <summary>
+              Looks up a localized string similar to Please re-insert the Wibu-Key security device and log back in..
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.MBTWibuBoxRemoved">
+            <summary>
+              Looks up a localized string similar to The Wibu-Key security device has been removed. Access to the Engineering account is only allowed if a valid Wibu-Key security device is present. Logging out....
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.MBTWibuKeyDeviceDriverNotInstalled">
+            <summary>
+              Looks up a localized string similar to The current project requires a Wibu-Key security device, however, the WibuKey Runtime Device Driver is not installed..
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.MBTWibuKeyInstall">
+            <summary>
+              Looks up a localized string similar to Please contact the system administrator or install the WibuKey Runtime Device Driver..
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.MBTWorksetCollectionChartRecorderLoadFailed">
+            <summary>
+              Looks up a localized string similar to Unable to load the workset collection associated with the chart recorder..
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.MBTWorksetCollectionFaultLogLoadFailed">
+            <summary>
+              Looks up a localized string similar to Unable to load the workset collection associated with the data stream parameters..
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.MBTWorksetCollectionWatchLoadFailed">
+            <summary>
+              Looks up a localized string similar to Unable to load the workset collection associated with viewing and recording watch variables..
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.MetallicRaised">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.ModeDiagnostic">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.ModeOffline">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.ModeOnline">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.Modify">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.Offline">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.Options">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.PathDefaultBrowser">
+            <summary>
+              Looks up a localized string similar to C:\Program Files\Internet Explorer\iexplore.exe.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.PathDefaultFTPClient">
+            <summary>
+              Looks up a localized string similar to C:\Program Files\FileZilla Client\filezilla.exe.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.PathDefaultTCMSProgrammer">
+            <summary>
+              Looks up a localized string similar to C:\Program Files\Bombardier.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.PathRelativeDocumentation">
+            <summary>
+              Looks up a localized string similar to \Documentation.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.PathUseDefault">
+            <summary>
+              Looks up a localized string similar to &lt;default&gt;.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.ProductNamePTE">
+            <summary>
+              Looks up a localized string similar to Portable Test Equipment (PTE).
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.ProductNamePTU">
+            <summary>
+              Looks up a localized string similar to Portable Test Unit (PTU).
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.Record">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.SecurityLogIn">
+            <summary>
+              Looks up a localized string similar to &amp;Login.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.SecurityLogOut">
+            <summary>
+              Looks up a localized string similar to &amp;Logout.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.SelfTest">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.TextEnterFactEngMaintPassword">
+            <summary>
+              Looks up a localized string similar to Enter Factory, Engineering or Maintenance Password..
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.TextEnterFactEngPassword">
+            <summary>
+              Looks up a localized string similar to Enter Factory or Engineering Password.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.TextNoTargetFoundOn">
+            <summary>
+              Looks up a localized string similar to No target found on.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.TextNoTargetsFound">
+            <summary>
+              Looks up a localized string similar to No targets found.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.TextProjectTitleBART">
+            <summary>
+              Looks up a localized string similar to BART.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.TextProjectTitleR179">
+            <summary>
+              Looks up a localized string similar to NYCT R179.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.TextProjectTitleR188">
+            <summary>
+              Looks up a localized string similar to NYCT R188.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.TextProjectTitleTorontoRocket">
+            <summary>
+              Looks up a localized string similar to Rocket.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.TextSearchingForTargetOn">
+            <summary>
+              Looks up a localized string similar to Searching for target on.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.TextTargetFoundOn">
+            <summary>
+              Looks up a localized string similar to Target found on.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.TextTargetsFound">
+            <summary>
+              Looks up a localized string similar to target(s) found.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.TextURI">
+            <summary>
+              Looks up a localized string similar to URI.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.Time">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.TitleLogin">
+            <summary>
+              Looks up a localized string similar to Portable Test Application (Build: {0}) Login.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.Train">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.User">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.Warning">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.Watch">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Properties.Resources.WibuKey">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="T:Bombardier.PTU.Forms.FormRealTimeClock">
+            <summary>
+            Form used to configure the VCU date and time.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.Forms.FormRealTimeClock.IntervalDisplayUpdate">
+            <summary>
+            The display update interval, in ms. Value: 1,000 ms.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.Forms.FormRealTimeClock.FormatStringTime">
+            <summary>
+            The format string to be used when displaying the current time. Value: "HH:mm:ss".
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.Forms.FormRealTimeClock.MaxMonth">
+            <summary>
+            The maximum value for the Month property of a .NET DateTime object. Value: 12.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.Forms.FormRealTimeClock.MinMonth">
+            <summary>
+            The minimum value for the Month property of a .NET DateTime object. Value: 1
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.Forms.FormRealTimeClock.MaxDay">
+            <summary>
+            The maximum value for the Day property of a .NET DateTime object. Value: 31.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.Forms.FormRealTimeClock.MinDay">
+            <summary>
+            The minimum value for the Day property of a .NET DateTime object. Value: 1.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.Forms.FormRealTimeClock.MaxYear2DigitYearCode">
+            <summary>
+            The maximum value for the Year property of a .NET DateTime object if the VCU supports a 2 digit year code. Value: 2069.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.Forms.FormRealTimeClock.MinYear2DigitYearCode">
+            <summary>
+            The minimum value for the Year property of a .NET DateTime object if the VCU supports a 2 digit year code. Value: 1970.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.Forms.FormRealTimeClock.MaxYear4DigitYearCode">
+            <summary>
+            The maximum value for the Year property of a .NET DateTime object if the VCU supports a 4 digit year code. Value: 2199.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.Forms.FormRealTimeClock.MinYear4DigitYearCode">
+            <summary>
+            The minimum value for the Year property of a .NET DateTime object if the VCU supports a 4 digit year code. Value: 1900.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.Forms.FormRealTimeClock.m_TimerDisplayUpdate">
+            <summary>
+            The System.Windows.Forms timer used to manage the display update.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.Forms.FormRealTimeClock.m_DateTime">
+            <summary>
+            The date and time retrieved from the VCU as a .NET <c>DateTime</c> object.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.Forms.FormRealTimeClock.m_CommunicationInterface">
+            <summary>
+            Reference to the selected communication interface.
+            </summary>
+        </member>
+        <member name="M:Bombardier.PTU.Forms.FormRealTimeClock.#ctor">
+            <summary>
+            Initializes a new instance of the class. Zero parameter constructor, required by Visual Studio.
+            </summary>
+        </member>
+        <member name="M:Bombardier.PTU.Forms.FormRealTimeClock.#ctor(Common.Communication.ICommunicationParent)">
+            <summary>
+            Initializes a new instance of the class. 
+            </summary>
+            <param name="communicationInterface">Reference to the communication interface that is to be used to communicate with the VCU.</param>
+        </member>
+        <member name="M:Bombardier.PTU.Forms.FormRealTimeClock.Cleanup(System.Boolean)">
+            <summary>
+            Clean up the resources used by the form.
+            </summary>
+            <param name="disposing">True to release both managed and unmanaged resources; false to release only unmanaged resources.</param>
+        </member>
+        <member name="M:Bombardier.PTU.Forms.FormRealTimeClock.FormConfigureDateTime_Shown(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the form <c>Shown</c> event.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Bombardier.PTU.Forms.FormRealTimeClock.m_ButtonOK_Click(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the OK button <c>Click</c> event. Simulate the user pressing the Apply button and then close the form.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Bombardier.PTU.Forms.FormRealTimeClock.m_ButtonCancel_Click(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the Cancel button <c>Click</c> event. Close the form.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Bombardier.PTU.Forms.FormRealTimeClock.m_ButtonApply_Click(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the Apply button <c>Click</c> event. Update the date and time on the VCU according to which radio button option has been
+            selected.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Bombardier.PTU.Forms.FormRealTimeClock.m_RadioButtonAuto_CheckedChanged(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the <c>CheckChanged</c> event associated with the radio buttons. Enable/Disable the <c>DateTimePicker</c> controls
+            depending upon which radio button is selected.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Bombardier.PTU.Forms.FormRealTimeClock.m_DateTimePicker_ValueChanged(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the <c>ValueChanged</c> event associated with either the date or time <c>DateTimePicker</c> control. Re-enable the apply
+            button if the user changes the date or time.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Bombardier.PTU.Forms.FormRealTimeClock.DisplayUpdate(System.Object,System.EventArgs)">
+            <summary>
+            Event handler associated with the timer <c>Tick</c> event. Get the time and date from the VCU and update the corresponding form labels.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="F:Bombardier.PTU.Forms.FormRealTimeClock.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:Bombardier.PTU.Forms.FormRealTimeClock.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Forms.FormRealTimeClock.CommunicationInterface">
+            <summary>
+            Gets or sets the communication interface that is to be used to communicate with the target.
+            </summary>
+            <remarks>This property is set by the child class, if appropriate.</remarks>
+        </member>
+        <member name="T:Bombardier.PTU.Communication.CommunicationApplicationOffline">
+            <summary>
+            Class to simulate communication with the target hardare with respect to the main PTU application.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.Communication.CommunicationApplicationOffline.m_Offset">
+            <summary>
+            Offset from the real-time clock.
+            </summary>
+        </member>
+        <member name="M:Bombardier.PTU.Communication.CommunicationApplicationOffline.#ctor">
+            <summary>
+            Initialize a new instance of the class.
+            </summary>
+        </member>
+        <member name="M:Bombardier.PTU.Communication.CommunicationApplicationOffline.#ctor(Common.Communication.ICommunicationParent)">
+            <summary>
+            Initialize a new instance of the class and set the properties and member variables to those values associated with the specified communication interface.
+            </summary>
+            <param name="communicationInterface">Reference to the communication interface containing the properties and member variables that are to be used to 
+            initialize the class.</param>
+        </member>
+        <member name="M:Bombardier.PTU.Communication.CommunicationApplicationOffline.GetTimeDate(System.Boolean,System.DateTime@)">
+            <summary>
+            Get the date and time from the running computer and apply the offset.
+            </summary>
+            <param name="use4DigitYearCode">A flag that specifies whether the Vehicle Control Unit uses a 2 or 4 digit year code. True, if it
+            uses a 4 digit year code; otherwise, false.</param>
+            <param name="dateTime">The the date and time as a .NET <c>DateTime</c> object.</param>
+        </member>
+        <member name="M:Bombardier.PTU.Communication.CommunicationApplicationOffline.SetTimeDate(System.Boolean,System.DateTime)">
+            <summary>
+            Sets the date and time of the target hardware as an offset from the current computer time.
+            </summary>
+            <param name="use4DigitYearCode">A flag that specifies whether the Vehicle Control Unit uses a 2 or 4 digit year code. True, if it
+            uses a 4 digit year code; otherwise, false.</param>
+            <param name="dateTime">The date and time as a .NET <c>DateTime</c> object.</param>
+        </member>
+        <member name="M:Bombardier.PTU.Communication.CommunicationApplicationOffline.SetCarID(System.String)">
+            <summary>
+            Set the car identifier.
+            </summary>
+            <param name="carIdentifier">The car identifier.</param>
+        </member>
+        <member name="M:Bombardier.PTU.Communication.CommunicationApplicationOffline.ScanPort(Common.Communication.CommunicationSetting_t,Common.Communication.TargetConfiguration_t@)">
+            <summary>
+            Provide dummy target configuration information and write it to the output parameter <paramref name="targetConfiguration"/>.
+            </summary>
+            <param name="communicationSetting">The communication settings that are to be used to communicate with the target. Ignored.</param>
+            <param name="targetConfiguration">The target configuration information returned from the target hardware if a target is found.</param>
+            <returns>A flag to indicate whether a target was found; true, if a target was found, otherwise, false.</returns>
+            <exception cref="T:Common.Communication.CommunicationException">Thrown if the error code returned from the call to the PTUDLL32.InitCommunication() method is not
+            CommunicationError.Success.</exception>
+        </member>
+        <member name="M:Bombardier.PTU.Program.Main(System.String[])">
+            <summary>
+            The main entry point for the PTU application.
+            </summary>
+        </member>
+        <member name="T:Bombardier.PTU.Forms.FormSelectTarget">
+            <summary>
+            Form to allow the user to select the logic controller with which the PTU is to communicate. 
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.Forms.FormSelectTarget.ComDeviceTotalCharacters">
+            <summary>
+            The total number of characters associated with the serial communication device, for padding purposes. Value: 5.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.Forms.FormSelectTarget.RegistryKeySerialCommunication">
+            <summary>
+            The LocalMachine registry key that defines serial communication device names. Value: "HARDWARE\DEVICEMAP\SERIALCOMM". 
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.Forms.FormSelectTarget.SerialCommRegistryKeyWinachsf0">
+            <summary>
+            A serial communication registry key found on the PhilipsX58 laptop that is to be excluded from the search.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.Forms.FormSelectTarget.VirtualComPort">
+            <summary>
+            The mnemonic used to specify that the COM port is a virtual COM port. Value: "VCP".
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.Forms.FormSelectTarget.m_TargetSelected">
+            <summary>
+            Flag to indicate whether a target logic controller has been selected; true indicates that a target has been seected, otherwise false.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.Forms.FormSelectTarget.m_TargetConfiguration">
+            <summary>
+            The target configuration information associated with the selected target.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.Forms.FormSelectTarget.m_CommunicationSetting">
+            <summary>
+            The communication setting associated with the selected target.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.Forms.FormSelectTarget.m_TargetConfigurationList">
+            <summary>
+            The list of target configuration information associated with the target logic controllers that were found.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.Forms.FormSelectTarget.m_CommunicationSettingList">
+            <summary>
+            The list of communication settings associated with the target logic controllers that were found. 
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.Forms.FormSelectTarget.m_CancelSelected">
+            <summary>
+            A flag to indicate that the Cancel button been selected.
+            </summary>
+        </member>
+        <member name="M:Bombardier.PTU.Forms.FormSelectTarget.#ctor">
+            <summary>
+            Initialize a new instance of the form.
+            </summary>
+        </member>
+        <member name="M:Bombardier.PTU.Forms.FormSelectTarget.Cleanup(System.Boolean)">
+            <summary>
+            Clean up the resources used by the form.
+            </summary>
+            <param name="disposing">True to release both managed and unmanaged resources; false to release only unmanaged resources.</param>
+        </member>
+        <member name="M:Bombardier.PTU.Forms.FormSelectTarget.FormSelectTargetLogic_Shown(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the <c>Shown</c> event.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Bombardier.PTU.Forms.FormSelectTarget.m_Cancel_Click(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the cancel button <c>Click</c> event. Closes the form.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Bombardier.PTU.Forms.FormSelectTarget.m_BtnOK_Click(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the OK button <c>Click</c> event. Updates the properties with the selected target logic and communication settings.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Bombardier.PTU.Forms.FormSelectTarget.GetTargets(System.Windows.Forms.ListBox,System.Windows.Forms.Control,System.Collections.Generic.List{Common.Communication.TargetConfiguration_t}@,System.Collections.Generic.List{Common.Communication.CommunicationSetting_t}@)">
+            <summary>
+            Scans each of the communication ports listed in the registry to determine if it is connected to target hardware and generates a list
+            of the target configuration information and the communication settings for each target that is located. 
+            </summary>
+            <param name="targetConfigurationList">The list containing the target configuration information for any targets connected to the PTU.</param>
+            <param name="communicationSettingList">The communication settings associated with each target that was found.</param>
+            <param name="listBoxTargetsFound">The <c>ListBox</c> control on which the target names are to be displayed.</param>
+            <param name="statusInformation">The control on which the status information is to be displayed.</param>
+            <returns>A flag to indicate whether one or more targets were found; true, if  targets were found, otherwise, false.</returns>
+        </member>
+        <member name="F:Bombardier.PTU.Forms.FormSelectTarget.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:Bombardier.PTU.Forms.FormSelectTarget.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Forms.FormSelectTarget.TargetConfiguration">
+            <summary>
+            Gets the target configuration information associated with the selected target.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Forms.FormSelectTarget.CommunicationSetting">
+            <summary>
+            Gets the communication setting associated with the selected target.
+            </summary>
+        </member>
+        <member name="P:Bombardier.PTU.Forms.FormSelectTarget.TargetSelected">
+            <summary>
+            Gets the flag that indicates whether a target logic controller has been selected; true indicates that a target has been selected, otherwise false.
+            </summary>
+        </member>
+        <member name="T:Bombardier.PTU.MenuInterfaceApplication">
+            <summary>
+            Methods called by the menu options associated with the main application - PTU.exe.
+            </summary>
+        </member>
+        <member name="M:Bombardier.PTU.MenuInterfaceApplication.#ctor(Common.IMainWindow)">
+            <summary>
+            Initializes a new instance of the class.
+            </summary>
+            <param name="mainWindow">Reference to the main application window interface.</param>
+        </member>
+        <member name="M:Bombardier.PTU.MenuInterfaceApplication.OpenDataDictionary">
+            <summary>
+            Calls the method which asks the user to specify an XML data dictionary and then loads this into the PTU application.
+            </summary>
+        </member>
+        <member name="M:Bombardier.PTU.MenuInterfaceApplication.ShowSystemInformation">
+            <summary>
+            Show the dialog box which displays the system information retrieved from the VCU.
+            </summary>
+        </member>
+        <member name="M:Bombardier.PTU.MenuInterfaceApplication.ConfigurePasswordProtection">
+            <summary>
+            Show the form which allows the user to configure paswords.
+            </summary>
+        </member>
+        <member name="M:Bombardier.PTU.MenuInterfaceApplication.RealTimeClock">
+            <summary>
+            Show the dialog box which allows the user to set the VCU real time clock.
+            </summary>
+        </member>
+        <member name="M:Bombardier.PTU.MenuInterfaceApplication.ConvertEngineeringDatabase">
+            <summary>
+            Calls the method which asks the user to specify an Access engineering data dictionary database (.e1) and then converts it into an XML file.
+            </summary>
+        </member>
+        <member name="M:Bombardier.PTU.MenuInterfaceApplication.Options">
+            <summary>
+            Show the form which allows the user to configure user options.
+            </summary>
+        </member>
+        <member name="M:Bombardier.PTU.MenuInterfaceApplication.ShowUserManual(System.Windows.Forms.Form)">
+            <summary>
+            Show the PTU user manual.
+            </summary>
+            <param name="parentForm">Reference to the parent form. Only used when chm (Help) file is spawned 
+            and not used for launching a PDF file.</param>
+        </member>
+        <member name="M:Bombardier.PTU.MenuInterfaceApplication.HelpAbout">
+            <summary>
+            Show the splash screen.
+            </summary>
+        </member>
+        <member name="M:Bombardier.PTU.MenuInterfaceApplication.Login(System.String)">
+            <summary>
+            Show the form which allows the user to log in, if currently logged out, and vice-versa.
+            </summary>
+            <param name="projectIdentifier">The project-identifier of the active project.</param>
+        </member>
+        <member name="T:Bombardier.PTU.Forms.FormLogin">
+            <summary>
+            Form to allow the user to log into the different security levels associated with the PTU application.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.Forms.FormLogin.MaxAttempts">
+            <summary>
+            The maximum allowed number of attempts at logging in before terminating the process. Value: 3.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.Forms.FormLogin.m_Attempts">
+            <summary>
+            The number of invalid attempts at inputting the correct password.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.Forms.FormLogin.m_Hashcode">
+            <summary>
+            The hash code associated with the password.
+            </summary>
+        </member>
+        <member name="M:Bombardier.PTU.Forms.FormLogin.#ctor">
+            <summary>
+            Initialize a new instance of the class.
+            </summary>
+        </member>
+        <member name="M:Bombardier.PTU.Forms.FormLogin.Cleanup(System.Boolean)">
+            <summary>
+            Clean up the resources used by the form.
+            </summary>
+            <param name="disposing">True to release both managed and unmanaged resources; false to release only unmanaged resources.</param>
+        </member>
+        <member name="M:Bombardier.PTU.Forms.FormLogin.FormLogin_Shown(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the form <c>Shown</c> event. Initialize the combo box used to request the user's security level.
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:Bombardier.PTU.Forms.FormLogin.FormAccount_KeyPress(System.Object,System.Windows.Forms.KeyPressEventArgs)">
+            <summary>
+            Event handler for the KeyPress event. Check if the user has depressed the escape key and if so close the form.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Bombardier.PTU.Forms.FormLogin.m_BtnCancel_Click(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the Cancel button 'Click' event.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Bombardier.PTU.Forms.FormLogin.m_BtnOK_Click(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the OK button 'Click' event.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Bombardier.PTU.Forms.FormLogin.LoginAttempt">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Bombardier.PTU.Forms.FormLogin.m_TxtPassword_KeyPress(System.Object,System.Windows.Forms.KeyPressEventArgs)">
+            <summary>
+            Event handler for the TextBox KeyPress event. Checks if the user entered a [CR] and, if so, starts processing the input.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="F:Bombardier.PTU.Forms.FormLogin.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:Bombardier.PTU.Forms.FormLogin.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:Bombardier.PTU.FTPErrorCode">
+            <summary>
+            The Error Code values associated with the FTP transfer Windows Command File.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.FTPErrorCode.Success">
+            <summary>
+            The function call was successful i.e. there were no errors. Value: 0.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.FTPErrorCode.NcFTPCouldNotConnectToRemoteHost">
+            <summary>
+            NcFTP Error - Could Not Connect to the Remote Host. Value: 1.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.FTPErrorCode.NcFTPCouldNotConnectToRemoteHostTimedOut">
+            <summary>
+            NcFTP Error - Could Not Connect to the Remote Host - Timed Out. Value: 2.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.FTPErrorCode.NcFTPTransferFailed">
+            <summary>
+            NcFTP Error - Transfer Failed. Value: 3.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.FTPErrorCode.NcFTPTransferFailedTimedOut">
+            <summary>
+            NcFTP Error - Transfer Failed - Timed Out. Value: 4.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.FTPErrorCode.NcFTPDirectoryChangeFailed">
+            <summary>
+            NcFTP Error - Directory Change Failed. Value: 5.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.FTPErrorCode.NcFTPDirectoryChangeFailedTimedOut">
+            <summary>
+            NcFTP Error - Directory Change Failed - Timed Out. Value: 6.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.FTPErrorCode.NcFTPMalformedURL">
+            <summary>
+            NcFTP Error - Malformed URL. Value: 7.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.FTPErrorCode.NcFTPUsageError">
+            <summary>
+            NcFTP Error - FTP Usage Error. Value: 8.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.FTPErrorCode.NcFTPErrorInLoginConfigurationFile">
+            <summary>
+            NcFTP Error - Error in Login Configuration File. Value: 9.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.FTPErrorCode.NcFTPLibraryInitializationFailed">
+            <summary>
+            NcFTP Error - Library Initialization Failed. Value: 10.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.FTPErrorCode.NcFTPSessionInitializationFailed">
+            <summary>
+            NcFTP Error - Session Initialization Failed. Value: 11.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.FTPErrorCode.FindStrNoMatchFound">
+            <summary>
+            FindStr Error - No Match Found. Value: 21.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.FTPErrorCode.FindStrIncorrectSyntax">
+            <summary>
+            FindStr Error - Incorrect Syntax. Value: 22.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.FTPErrorCode.SystemException">
+            <summary>
+            System Exception. Value: 30.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.FTPErrorCode.PingError">
+            <summary>
+            Ping Error. Value: 31.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.FTPErrorCode.PingCannotOpenPingReply">
+            <summary>
+            Ping Error - Cannot Open Ping Reply. Value: 32.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.FTPErrorCode.PingInvalidPacketInformation">
+            <summary>
+            Ping Error - Invalid Packet Information. Value: 33.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.FTPErrorCode.PingNoReply">
+            <summary>
+            Ping Error - No Reply. Value: 34.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.FTPErrorCode.FileNotFoundXML">
+            <summary>
+            File Not Found - XML File. Value: 35.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.FTPErrorCode.FileNotFoundHLP">
+            <summary>
+            File Not Found - HLP File. Value: 36.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.FTPErrorCode.FileNotFoundBoth">
+            <summary>
+            File Not Found - XML and HLP File. Value: 37.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.FTPErrorCode.FileNotFoundSearchResults">
+            <summary>
+            File Not Found - Search Results. Value: 38.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.FTPErrorCode.NcFTPGetXMLFailed">
+            <summary>
+            NcFTPGET Failed - XML File. Value: 39.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.FTPErrorCode.NcFTPGetHLPFailed">
+            <summary>
+            FTPGET Failed - HLP File. Value: 40.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.FTPErrorCode.XCopyNoFilesFound">
+            <summary>
+            XCopy Error - No Files Found. Value: 51.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.FTPErrorCode.XCopyCtrlC">
+            <summary>
+            XCopy Error - Ctrl C Used to Terminate XCopy. Value: 52.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.FTPErrorCode.XCopyInitFailed">
+            <summary>
+            XCopy Error - Initialization Failed. Value: 54.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.FTPErrorCode.XCopyDiskWriteError">
+            <summary>
+            XCopy Error - Disk Write Error. Value: 55.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.FTPErrorCode.Undefined">
+            <summary>
+            Undefined. Value: 60.
+            </summary>
+        </member>
+        <member name="T:Bombardier.PTU.FtpErrorProcessing">
+            <summary>
+            Class to support processing of the error codes returned from the FTP transfer Windows Command File.
+            </summary>
+        </member>
+        <member name="M:Bombardier.PTU.FtpErrorProcessing.GetErrorMessage(Bombardier.PTU.FTPErrorCode)">
+            <summary>
+            Gets the error message corresponding to the specified error code associated with the FTP transfer Windows Command File.
+            </summary>
+            <param name="errorCode">The error code that was returned from the FTP transfer Windows Command File.</param>
+            <returns>The error message corresponding to the specified error code.</returns>
+        </member>
+        <member name="T:Bombardier.PTU.Forms.FormHelpAbout">
+            <summary>
+            Form to display the version and copyright information associated with the application.
+            </summary>
+        </member>
+        <member name="F:Bombardier.PTU.Forms.FormHelpAbout.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:Bombardier.PTU.Forms.FormHelpAbout.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="M:Bombardier.PTU.Forms.FormHelpAbout.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the form.
+            </summary>
+            <param name="productName">The product name, this can be either 'Portable Test Unit' or 'Portable Test Equipment'.</param>
+        </member>
+        <member name="M:Bombardier.PTU.Forms.FormHelpAbout.Cleanup(System.Boolean)">
+            <summary>
+            Clean up the resources used by the form.
+            </summary>
+            <param name="disposing">True to release both managed and unmanaged resources; false to release only unmanaged resources.</param>
+        </member>
+        <member name="M:Bombardier.PTU.Forms.FormHelpAbout.m_ButtonOK_Click(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the OK button. Closes the form.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Bombardier.PTU.Forms.FormHelpAbout.m_LinkLabelBombardierTransportation_LinkClicked(System.Object,System.Windows.Forms.LinkLabelLinkClickedEventArgs)">
+            <summary>
+            Event handler for the LinkLabel 'LinkClicked' event. Starts the browser specified in the user settings using the parameter (URL) specified in the 
+            assembly resource file.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+        <member name="M:Bombardier.PTU.Forms.FormHelpAbout.m_LinkLabelReleaseNotes_LinkClicked(System.Object,System.Windows.Forms.LinkLabelLinkClickedEventArgs)">
+            <summary>
+            Event handler for the 'Release Notes' 'LinkClicked' event. Shows the 'Portable Test Unit - Software User Manual.pdf' file.
+            </summary>
+            <param name="sender">Reference to the object that raised the event.</param>
+            <param name="e">Parameter passed from the object that raised the event.</param>
+        </member>
+    </members>
+</doc>

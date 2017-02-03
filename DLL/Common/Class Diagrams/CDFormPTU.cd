@@ -1,0 +1,158 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
+  <Class Name="Common.Forms.FormPTU">
+    <Position X="0.5" Y="2" Width="4.75" />
+    <Members>
+      <Field Name="m_CalledFrom" Hidden="true" />
+      <Field Name="m_MainWindow" Hidden="true" />
+      <Field Name="m_OpenedDialogBoxList" Hidden="true" />
+      <Field Name="m_ScreenCaptureType" Hidden="true" />
+      <Field Name="m_Security" Hidden="true" />
+      <Field Name="m_ToolStripItemCollectionCalledFrom" Hidden="true" />
+    </Members>
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <InheritanceLine Type="System.Windows.Forms.Form" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="0.875" Y="1.191" />
+        <Point X="0.875" Y="2" />
+      </Path>
+    </InheritanceLine>
+    <AssociationLine Name="Security" Type="Common.Security">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.266" Y="-0.065" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="m_ToolStripMenuItemEnabledList" Type="Common.Forms.ToolStripMenuItemEnabled_t">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.266" Y="-0.065" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="MainWindow" Type="Common.IMainWindow">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.256" Y="-0.075" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="ScreenCaptureType" Type="Common.Forms.ScreenCaptureType">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.287" Y="-0.086" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="OpenedDialogBoxList" Type="System.Windows.Forms.Form">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-2.638" Y="0.36" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="ToolStripItemCollectionCalledFrom" Type="System.Windows.Forms.ToolStripItem" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="5.25" Y="10.625" />
+        <Point X="8.75" Y="10.625" />
+        <Point X="8.75" Y="10.191" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true" ManuallySized="true">
+        <Position X="0.685" Y="0.339" Height="0.182" Width="2.379" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="LastKeyEventArgs" Type="System.Windows.Forms.KeyEventArgs" FixedToPoint="true">
+      <Path>
+        <Point X="5.25" Y="2.875" />
+        <Point X="8" Y="2.875" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.256" Y="-0.065" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="CalledFrom" Type="System.Windows.Forms.Form">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.31" Y="0.35" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="m_ToolStripItemCollectionCurrent" Type="System.Windows.Forms.ToolStripItem">
+      <MemberNameLabel ManuallyPlaced="true" ManuallySized="true">
+        <Position X="0.391" Y="-0.075" Height="0.182" Width="2.318" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="m_KeyEventArgs" Type="System.Windows.Forms.KeyEventArgs">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.329" Y="-0.096" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>GgRCMFgRhaSAjBYNUArEuB/2iiRAgBiCKQAP3uXBdBU=</HashCode>
+      <FileName>Forms\FormPTU.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="m_MainWindow" />
+      <Field Name="m_ScreenCaptureType" />
+      <Field Name="m_ToolStripItemCollectionCalledFrom" />
+      <Field Name="m_OpenedDialogBoxList" />
+      <Field Name="m_Security" />
+      <Field Name="m_KeyEventArgs" />
+      <Field Name="m_CalledFrom" />
+      <Property Name="Security" />
+      <Property Name="MainWindow" />
+      <Property Name="ScreenCaptureType" />
+      <Property Name="LastKeyEventArgs" />
+      <Property Name="CalledFrom" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Field Name="m_ToolStripMenuItemEnabledList" />
+      <Field Name="m_ToolStripItemCollectionCurrent" />
+      <Property Name="OpenedDialogBoxList" />
+      <Property Name="ToolStripItemCollectionCalledFrom" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="Common.Security" Collapsed="true">
+    <Position X="8" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACABAAAIAQQgQQAIgABTAAIAAIAAiKAEAIACQFJAiAA=</HashCode>
+      <FileName>Security.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="System.Windows.Forms.Form" Collapsed="true">
+    <Position X="0.5" Y="0.5" Width="3" />
+    <NestedTypes>
+      <Class Name="System.Windows.Forms.Form.ControlCollection" Collapsed="true">
+        <TypeIdentifier />
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier />
+  </Class>
+  <Class Name="System.Windows.Forms.ToolStripItem" Collapsed="true">
+    <Position X="8" Y="9.5" Width="1.5" />
+    <NestedTypes>
+      <Class Name="System.Windows.Forms.ToolStripItem.ToolStripItemAccessibleObject" Collapsed="true">
+        <TypeIdentifier />
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="System.Windows.Forms.KeyEventArgs" Collapsed="true">
+    <Position X="8" Y="2.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Struct Name="Common.Forms.ToolStripMenuItemEnabled_t">
+    <Position X="8" Y="7" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAEAAAQAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Forms\FormPTU.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Interface Name="Common.IMainWindow" Collapsed="true">
+    <Position X="8" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IIQQBwCQAYAAAgJAAAAAAiEQAAMAgCACAAACAICOBEA=</HashCode>
+      <FileName>Interfaces\IMainWindow.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="Common.Forms.ScreenCaptureType">
+    <Position X="8" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAgAAAAAIAAAAgAAAAAAAQAEAAAAACA=</HashCode>
+      <FileName>Forms\FormPTU.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

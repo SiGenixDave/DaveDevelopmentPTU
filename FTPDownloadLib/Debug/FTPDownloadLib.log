@@ -1,0 +1,121 @@
+﻿C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\Microsoft.CppBuild.targets(299,5): warning MSB8004: Output Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Output Directory.
+  RtdmFileIO.c
+c:\customerprojects\bombardier\nse_ptu\branches\davedevelopment\ftpdownloadlib\rtdmfileio.c(204): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
+c:\customerprojects\bombardier\nse_ptu\branches\davedevelopment\ftpdownloadlib\rtdmfileio.c(212): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
+c:\customerprojects\bombardier\nse_ptu\branches\davedevelopment\ftpdownloadlib\rtdmfileio.c(213): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files (x86)\microsoft visual studio 10.0\vc\include\stdio.h(371) : see declaration of 'sprintf'
+c:\customerprojects\bombardier\nse_ptu\branches\davedevelopment\ftpdownloadlib\rtdmfileio.c(214): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(110) : see declaration of 'strcat'
+c:\customerprojects\bombardier\nse_ptu\branches\davedevelopment\ftpdownloadlib\rtdmfileio.c(223): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
+c:\customerprojects\bombardier\nse_ptu\branches\davedevelopment\ftpdownloadlib\rtdmfileio.c(231): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
+c:\customerprojects\bombardier\nse_ptu\branches\davedevelopment\ftpdownloadlib\rtdmfileio.c(232): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files (x86)\microsoft visual studio 10.0\vc\include\stdio.h(371) : see declaration of 'sprintf'
+c:\customerprojects\bombardier\nse_ptu\branches\davedevelopment\ftpdownloadlib\rtdmfileio.c(233): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(110) : see declaration of 'strcat'
+c:\customerprojects\bombardier\nse_ptu\branches\davedevelopment\ftpdownloadlib\rtdmfileio.c(242): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
+c:\customerprojects\bombardier\nse_ptu\branches\davedevelopment\ftpdownloadlib\rtdmfileio.c(250): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
+c:\customerprojects\bombardier\nse_ptu\branches\davedevelopment\ftpdownloadlib\rtdmfileio.c(251): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files (x86)\microsoft visual studio 10.0\vc\include\stdio.h(371) : see declaration of 'sprintf'
+c:\customerprojects\bombardier\nse_ptu\branches\davedevelopment\ftpdownloadlib\rtdmfileio.c(252): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(110) : see declaration of 'strcat'
+c:\customerprojects\bombardier\nse_ptu\branches\davedevelopment\ftpdownloadlib\rtdmfileio.c(258): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
+c:\customerprojects\bombardier\nse_ptu\branches\davedevelopment\ftpdownloadlib\rtdmfileio.c(266): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
+c:\customerprojects\bombardier\nse_ptu\branches\davedevelopment\ftpdownloadlib\rtdmfileio.c(267): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files (x86)\microsoft visual studio 10.0\vc\include\stdio.h(371) : see declaration of 'sprintf'
+c:\customerprojects\bombardier\nse_ptu\branches\davedevelopment\ftpdownloadlib\rtdmfileio.c(268): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(110) : see declaration of 'strcat'
+c:\customerprojects\bombardier\nse_ptu\branches\davedevelopment\ftpdownloadlib\rtdmfileio.c(278): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
+c:\customerprojects\bombardier\nse_ptu\branches\davedevelopment\ftpdownloadlib\rtdmfileio.c(279): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files (x86)\microsoft visual studio 10.0\vc\include\stdio.h(371) : see declaration of 'sprintf'
+c:\customerprojects\bombardier\nse_ptu\branches\davedevelopment\ftpdownloadlib\rtdmfileio.c(280): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(110) : see declaration of 'strcat'
+c:\customerprojects\bombardier\nse_ptu\branches\davedevelopment\ftpdownloadlib\rtdmfileio.c(290): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
+c:\customerprojects\bombardier\nse_ptu\branches\davedevelopment\ftpdownloadlib\rtdmfileio.c(291): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files (x86)\microsoft visual studio 10.0\vc\include\stdio.h(371) : see declaration of 'sprintf'
+c:\customerprojects\bombardier\nse_ptu\branches\davedevelopment\ftpdownloadlib\rtdmfileio.c(292): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(110) : see declaration of 'strcat'
+c:\customerprojects\bombardier\nse_ptu\branches\davedevelopment\ftpdownloadlib\rtdmfileio.c(300): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
+c:\customerprojects\bombardier\nse_ptu\branches\davedevelopment\ftpdownloadlib\rtdmfileio.c(335): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
+c:\customerprojects\bombardier\nse_ptu\branches\davedevelopment\ftpdownloadlib\rtdmfileio.c(336): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files (x86)\microsoft visual studio 10.0\vc\include\stdio.h(371) : see declaration of 'sprintf'
+c:\customerprojects\bombardier\nse_ptu\branches\davedevelopment\ftpdownloadlib\rtdmfileio.c(337): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(110) : see declaration of 'strcat'
+c:\customerprojects\bombardier\nse_ptu\branches\davedevelopment\ftpdownloadlib\rtdmfileio.c(343): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
+c:\customerprojects\bombardier\nse_ptu\branches\davedevelopment\ftpdownloadlib\rtdmfileio.c(654): warning C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(197) : see declaration of 'strtok'
+c:\customerprojects\bombardier\nse_ptu\branches\davedevelopment\ftpdownloadlib\rtdmfileio.c(655): warning C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(197) : see declaration of 'strtok'
+c:\customerprojects\bombardier\nse_ptu\branches\davedevelopment\ftpdownloadlib\rtdmfileio.c(656): warning C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(197) : see declaration of 'strtok'
+c:\customerprojects\bombardier\nse_ptu\branches\davedevelopment\ftpdownloadlib\rtdmfileio.c(657): warning C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(197) : see declaration of 'strtok'
+c:\customerprojects\bombardier\nse_ptu\branches\davedevelopment\ftpdownloadlib\rtdmfileio.c(658): warning C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(197) : see declaration of 'strtok'
+c:\customerprojects\bombardier\nse_ptu\branches\davedevelopment\ftpdownloadlib\rtdmfileio.c(659): warning C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(197) : see declaration of 'strtok'
+c:\customerprojects\bombardier\nse_ptu\branches\davedevelopment\ftpdownloadlib\rtdmfileio.c(669): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(110) : see declaration of 'strcat'
+c:\customerprojects\bombardier\nse_ptu\branches\davedevelopment\ftpdownloadlib\rtdmfileio.c(670): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(110) : see declaration of 'strcat'
+c:\customerprojects\bombardier\nse_ptu\branches\davedevelopment\ftpdownloadlib\rtdmfileio.c(671): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(110) : see declaration of 'strcat'
+c:\customerprojects\bombardier\nse_ptu\branches\davedevelopment\ftpdownloadlib\rtdmfileio.c(672): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(110) : see declaration of 'strcat'
+c:\customerprojects\bombardier\nse_ptu\branches\davedevelopment\ftpdownloadlib\rtdmfileio.c(673): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(110) : see declaration of 'strcat'
+c:\customerprojects\bombardier\nse_ptu\branches\davedevelopment\ftpdownloadlib\rtdmfileio.c(674): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(110) : see declaration of 'strcat'
+c:\customerprojects\bombardier\nse_ptu\branches\davedevelopment\ftpdownloadlib\rtdmfileio.c(675): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(110) : see declaration of 'strcat'
+c:\customerprojects\bombardier\nse_ptu\branches\davedevelopment\ftpdownloadlib\rtdmfileio.c(676): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(110) : see declaration of 'strcat'
+c:\customerprojects\bombardier\nse_ptu\branches\davedevelopment\ftpdownloadlib\rtdmfileio.c(845): warning C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(197) : see declaration of 'strtok'
+c:\customerprojects\bombardier\nse_ptu\branches\davedevelopment\ftpdownloadlib\rtdmfileio.c(846): warning C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(197) : see declaration of 'strtok'
+c:\customerprojects\bombardier\nse_ptu\branches\davedevelopment\ftpdownloadlib\rtdmfileio.c(847): warning C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(197) : see declaration of 'strtok'
+c:\customerprojects\bombardier\nse_ptu\branches\davedevelopment\ftpdownloadlib\rtdmfileio.c(848): warning C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(197) : see declaration of 'strtok'
+c:\customerprojects\bombardier\nse_ptu\branches\davedevelopment\ftpdownloadlib\rtdmfileio.c(849): warning C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(197) : see declaration of 'strtok'
+c:\customerprojects\bombardier\nse_ptu\branches\davedevelopment\ftpdownloadlib\rtdmfileio.c(850): warning C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(197) : see declaration of 'strtok'
+c:\customerprojects\bombardier\nse_ptu\branches\davedevelopment\ftpdownloadlib\rtdmfileio.c(871): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
+c:\customerprojects\bombardier\nse_ptu\branches\davedevelopment\ftpdownloadlib\rtdmfileio.c(872): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
+c:\customerprojects\bombardier\nse_ptu\branches\davedevelopment\ftpdownloadlib\rtdmfileio.c(873): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
+c:\customerprojects\bombardier\nse_ptu\branches\davedevelopment\ftpdownloadlib\rtdmfileio.c(1188): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(110) : see declaration of 'strcat'
+c:\customerprojects\bombardier\nse_ptu\branches\davedevelopment\ftpdownloadlib\rtdmfileio.c(1189): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(110) : see declaration of 'strcat'
+c:\customerprojects\bombardier\nse_ptu\branches\davedevelopment\ftpdownloadlib\rtdmfileio.c(1192): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files (x86)\microsoft visual studio 10.0\vc\include\stdio.h(371) : see declaration of 'sprintf'
+c:\customerprojects\bombardier\nse_ptu\branches\davedevelopment\ftpdownloadlib\rtdmfileio.c(1199): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(110) : see declaration of 'strcat'
+  RtdmCrc32.c
+  MyFuncs.c
+c:\customerprojects\bombardier\nse_ptu\branches\davedevelopment\ftpdownloadlib\myfuncs.c(16): warning C4996: 'localtime': This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files (x86)\microsoft visual studio 10.0\vc\include\time.inl(112) : see declaration of 'localtime'
+c:\customerprojects\bombardier\nse_ptu\branches\davedevelopment\ftpdownloadlib\myfuncs.c(24): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files (x86)\microsoft visual studio 10.0\vc\include\stdio.h(234) : see declaration of 'fopen'
+c:\customerprojects\bombardier\nse_ptu\branches\davedevelopment\ftpdownloadlib\myfuncs.c(45): warning C4244: '=' : conversion from 'time_t' to 'UINT32', possible loss of data
+  Generating Code...
+     Creating library ..\FTPDownloadRTDM\bin\Debug\BuildDanFileLib.lib and object ..\FTPDownloadRTDM\bin\Debug\BuildDanFileLib.exp
+     Creating library ..\FTPDownloadRTDM\bin\Debug\BuildDanFileLib.lib and object ..\FTPDownloadRTDM\bin\Debug\BuildDanFileLib.exp
+  FTPDownloadLib.vcxproj -> C:\CustomerProjects\Bombardier\NSE_PTU\branches\DaveDevelopment\FTPDownloadLib\..\FTPDownloadRTDM\bin\Debug\BuildDanFileLib.dll

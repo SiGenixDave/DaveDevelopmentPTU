@@ -1,0 +1,5 @@
+C:\CustomerProjects\Bombardier\NSE_PTU\branches\DaveDevelopment\DLL\VcuComm\bin\Debug\VcuComm.XML
+C:\CustomerProjects\Bombardier\NSE_PTU\branches\DaveDevelopment\DLL\VcuComm\bin\Debug\VcuComm.dll
+C:\CustomerProjects\Bombardier\NSE_PTU\branches\DaveDevelopment\DLL\VcuComm\bin\Debug\VcuComm.pdb
+C:\CustomerProjects\Bombardier\NSE_PTU\branches\DaveDevelopment\DLL\VcuComm\obj\Debug\VcuComm.dll
+C:\CustomerProjects\Bombardier\NSE_PTU\branches\DaveDevelopment\DLL\VcuComm\obj\Debug\VcuComm.pdb
