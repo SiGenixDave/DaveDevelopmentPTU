@@ -388,6 +388,13 @@ namespace Common.Configuration
         private static bool m_Use4DigitYearCode = false;
 
         /// <summary>
+        /// A flag to indicate whether or not a communication watchdog is enabled during self test, even during
+        /// "dead" times. Code will need to be added to the VCU in order to support this feature. It will
+        /// also detect when the VCU has exited self test on its own.
+        /// </summary>
+        private static bool m_EnableSTCommWatchdog = false;
+
+        /// <summary>
         /// <para>A bitmask used to specify which programmable function options are to be used.</para>
         /// Bit 7   -   Not Used.
         /// Bit 6   -   Not Used.
@@ -532,8 +539,8 @@ namespace Common.Configuration
             // .
             // .
             // .
-            // Bit 3   -   Not Used.
-            // Bit 2   -   Not Used. 
+            // Bit 3   -   EnableSTCommWatchdog - If set, a Self Test comm watchdog is enabled.
+            // Bit 2   -   GenerateCSV -  generate CSV event log file when saving logs. 
             // Bit 1   -   ShowLogName - Flag to specify whether the event log name field is to be shown when saved event logs are displayed. True, if the
             //             log name is to be displayed; otherwise, false.
             // Bit 0   -   Use4DigitYearCode - Flag to specify whether the project VCU uses a 2 or 4 digit year code. True, if the project uses a 4 digit year code;
@@ -545,6 +552,7 @@ namespace Common.Configuration
             m_GenerateCSV = false;
             m_ShowLogName = false;
             m_Use4DigitYearCode = false;
+            m_EnableSTCommWatchdog = false;
 
             // --------------------
             // Recorded Watch Data
@@ -616,9 +624,11 @@ namespace Common.Configuration
             try
             {
                 m_FunctionFlags = dataDictionary.CONFIGUREPTU[0].FunctionFlags;
+
                 m_Use4DigitYearCode =   ((m_FunctionFlags & CommonConstants.MaskBit0) == CommonConstants.MaskBit0) ? true : false;
                 m_ShowLogName =         ((m_FunctionFlags & CommonConstants.MaskBit1) == CommonConstants.MaskBit1) ? true : false;
-                m_GenerateCSV =         ((m_FunctionFlags & CommonConstants.MaskBit2) == CommonConstants.MaskBit2) ? true : false;
+                m_GenerateCSV = ((m_FunctionFlags & CommonConstants.MaskBit2) == CommonConstants.MaskBit2) ? true : false;
+                m_EnableSTCommWatchdog = ((m_FunctionFlags & CommonConstants.MaskBit3) == CommonConstants.MaskBit3) ? true : false;
             }
             catch (Exception)
             {
@@ -776,6 +786,16 @@ namespace Common.Configuration
 
         #region --- Properties ---
         #region - [Data Dictionary Defined] -
+        /// <summary>
+        /// Get the flag that specifies whether a Self Test communication watchdog is enabled. True if watchdog is enabled
+        /// otherwise false.
+        /// </summary>
+        public static bool EnableSTCommWatchdog
+        {
+            get { return m_EnableSTCommWatchdog; }
+        }
+
+
         /// <summary>
         /// Get the flag that specifies whether the event log is to be saved as a CSV file as well as an XML file. True, if a CSV file of the event log is to be created;
         /// otherwise, false.

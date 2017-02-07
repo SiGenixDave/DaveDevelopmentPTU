@@ -164,7 +164,7 @@
  *                                          CommunicationInterface.GetSelfTestResult() to avoid flooding the windows UI queue with timer events. It is reenabled after
  *                                          communication (successful or unsuccessful) with the VCU has completed.
  */
-#endregion - [1.13] -
+#endregion - [1.14] -
 
 #endregion --- Revision History ---
 
@@ -520,6 +520,26 @@ namespace SelfTest.Forms
         #endregion - [Loop Count] -
         #endregion --- Member Variables ---
 
+#if !DAS
+        private delegate void ServiceBlinkIcon();
+
+        private void BlinkIcon()
+        {
+            if (MainWindow != null)
+            {
+                MainWindow.BlinkUpdateIcon();
+            }
+        }
+
+        private void NoBlinkIcon()
+        {
+            // Intentionally do nothing
+        }
+
+        private ServiceBlinkIcon m_ServiceBlinkIcon; 
+
+#endif
+
         #region --- Constructors ---
         /// <summary>
         /// Initialize a new instance of the class. Zero parameter constructor.
@@ -555,6 +575,15 @@ namespace SelfTest.Forms
 
             MainWindow = mainWindow;
             Debug.Assert(mainWindow != null, "FormViewTestResults.Ctor() - [mainWindow != null]");
+
+            if (Parameter.EnableSTCommWatchdog)
+            {
+                m_ServiceBlinkIcon = new ServiceBlinkIcon(NoBlinkIcon);
+            }
+            else
+            {
+                m_ServiceBlinkIcon = new ServiceBlinkIcon(BlinkIcon);
+            }
 
             // If the hardware is anything other than the COM-C unit that is used on the NYCT project, issue a request to 
             // exit the self test task, just in case it may be running. If this call is made while connected to a COM-C unit 
@@ -623,10 +652,12 @@ namespace SelfTest.Forms
             m_TimerGetResults.Enabled = false;
             m_TimerGetResults.Tick += new EventHandler(m_TimerGetResults_Tick);
 
-            m_TimerCommWatchdog.Interval = IntervalMsTimerCommWatchdog;
-            m_TimerCommWatchdog.Enabled = true;
-            m_TimerCommWatchdog.Tick += new EventHandler(m_TimerCommWatchdog_Tick);
-
+            if (Parameter.EnableSTCommWatchdog)
+            {
+                m_TimerCommWatchdog.Interval = IntervalMsTimerCommWatchdog;
+                m_TimerCommWatchdog.Enabled = true;
+                m_TimerCommWatchdog.Tick += new EventHandler(m_TimerCommWatchdog_Tick);
+            }
             #endregion - [Timer] -
 
             // Select the default test list record.
@@ -682,7 +713,7 @@ namespace SelfTest.Forms
                         m_TimerGetResults.Dispose();
                     }
 
-                    if (m_TimerCommWatchdog != null)
+                    if ((m_TimerCommWatchdog != null) && (Parameter.EnableSTCommWatchdog))
                     {
                         // Detach the event handler method.
                         m_TimerCommWatchdog.Tick -= new EventHandler(m_TimerCommWatchdog_Tick);
@@ -713,6 +744,7 @@ namespace SelfTest.Forms
                 m_UserDefinedTestListRecord = null;
                 m_TimerGetResults = null;
                 m_TimerCommWatchdog = null;
+                m_ServiceBlinkIcon = null;
 
                 #region - [Detach the event handler methods.] -
                 this.m_ToolStripButtonInteractiveTestContinue.Click -= new EventHandler(this.F6_Click);
@@ -765,15 +797,15 @@ namespace SelfTest.Forms
             }
 
             // Only start polling and timer update if the communication interface has been specified.
-            if (CommunicationInterface != null)
+            if ((CommunicationInterface != null) && (Parameter.EnableSTCommWatchdog))
             {
                 StartPolling();
             }
 
-#if !DAS
+
             SetMenuEnabled(CommonConstants.KeyMenuItemFileOpen, false);
-            //SetMenuEnabled(CommonConstants.KeyMenuItemView, false);
-            //SetMenuEnabled(CommonConstants.KeyMenuItemDiagnostics, false);
+            //DAS SetMenuEnabled(CommonConstants.KeyMenuItemView, false);
+            //DAS SetMenuEnabled(CommonConstants.KeyMenuItemDiagnostics, false);
             SetMenuEnabled(CommonConstants.KeyMenuItemConfigureWorksetsWatchWindow, false);
             SetMenuEnabled(CommonConstants.KeyMenuItemConfigureWorksetsChartRecorder, false);
             SetMenuEnabled(CommonConstants.KeyMenuItemConfigureRealTimeClock, false);
@@ -782,7 +814,7 @@ namespace SelfTest.Forms
             SetMenuEnabled(CommonConstants.KeyMenuItemConfigureDataStream, false);
             SetMenuEnabled(CommonConstants.KeyMenuItemConfigureChartRecorder, false);
             SetMenuEnabled(CommonConstants.KeyMenuItemTools, false);
-#endif
+
 
             #region - [Panels] -
             m_GroupBoxInteractiveTest.Width = m_SelfTestVariableControlSize.Size.Width + WidthScrollBar;
@@ -1588,12 +1620,9 @@ namespace SelfTest.Forms
                 CommunicationInterface.GetSelfTestResult(out resultAvailable, out messageMode, out messageIdentifier, out testCase, out testResult, out truckInformation,
                                                          out variableCount, out interactiveResults);
 
-#if DAS
-                if (MainWindow != null)
-                {
-                    MainWindow.BlinkUpdateIcon();
-                }
-#endif
+                // If self test comm watchdog is disabled, the icon will blink
+                m_ServiceBlinkIcon();
+
                 if (resultAvailable == ResultAvailable)
                 {
                     // Now that the first result is available set the cursor to the default cursor.
@@ -1640,7 +1669,10 @@ namespace SelfTest.Forms
                 m_TestsActive = false;
                 MainWindow.ShowBusyAnimation = false;
 
-                //DAS MessageBox.Show(Resources.MBTSTResultFailed, Resources.MBCaptionError, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (!Parameter.EnableSTCommWatchdog)
+                {
+                    MessageBox.Show(Resources.MBTSTResultFailed, Resources.MBCaptionError, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
                 return;
             }
             //DAS finally
@@ -1913,12 +1945,9 @@ namespace SelfTest.Forms
                 return;
             }
 
-#if DAS
-            if (MainWindow != null)
-            {
-                MainWindow.BlinkUpdateIcon();
-            }
-#endif
+            // If self test comm watchdog is disabled, the icon will blink
+            m_ServiceBlinkIcon();
+
             // Disable the F6-Continue key.
             F6.Enabled = false;
 
@@ -2102,12 +2131,9 @@ namespace SelfTest.Forms
                 return;
             }
 
-#if DAS
-            if (MainWindow != null)
-            {
-                MainWindow.BlinkUpdateIcon();
-            }
-#endif
+            // If self test comm watchdog is disabled, the icon will blink
+            m_ServiceBlinkIcon();
+
             // If the help window is on display then hide it.
             WinHlp32.HideHelpWindow(this.Handle.ToInt32());
 
@@ -2716,7 +2742,8 @@ namespace SelfTest.Forms
             try
             {
                 CommunicationInterface.UpdateSTMode(SelfTestMode.Engineering);
-                //DAS MainWindow.BlinkUpdateIcon();
+                // If self test comm watchdog is disabled, the icon will blink
+                m_ServiceBlinkIcon();
             }
             catch (CommunicationException)
             {
@@ -2729,7 +2756,8 @@ namespace SelfTest.Forms
             try
             {
                 CommunicationInterface.UpdateSTTestList((short)selectedTests.Length, selectedTests);
-                //DAS MainWindow.BlinkUpdateIcon();
+                // If self test comm watchdog is disabled, the icon will blink
+                m_ServiceBlinkIcon();
             }
             catch (CommunicationException)
             {
@@ -2740,7 +2768,8 @@ namespace SelfTest.Forms
             try
             {
                 CommunicationInterface.UpdateSTLoopCount(m_LoopCount);
-                //DAS MainWindow.BlinkUpdateIcon();
+                // If self test comm watchdog is disabled, the icon will blink
+                m_ServiceBlinkIcon();
             }
             catch (CommunicationException)
             {
@@ -2751,7 +2780,8 @@ namespace SelfTest.Forms
             try
             {
                 CommunicationInterface.ExecuteSTTestList(TruckInformation.XY);
-                //DAS MainWindow.BlinkUpdateIcon();
+                // If self test comm watchdog is disabled, the icon will blink
+                m_ServiceBlinkIcon();
             }
             catch (CommunicationException)
             {
@@ -2784,7 +2814,8 @@ namespace SelfTest.Forms
             try
             {
                 CommunicationInterface.StartSelfTestTask(out result, out reason);
-                //DAS MainWindow.BlinkUpdateIcon();
+                // If self test comm watchdog is disabled, the icon will blink
+                m_ServiceBlinkIcon();
                 if (result != ResultSuccess)
                 {
                     string message = GetSelfTestMessage(result, reason);
@@ -2798,7 +2829,8 @@ namespace SelfTest.Forms
                 else
                 {
                     // Let the user know that the PTU has entered Self Test mode.
-                    //DAS MainWindow.SetMode(Mode.SelfTest);
+                    // If self test comm watchdog is disabled, the icon will blink
+                    m_ServiceBlinkIcon();
                 }
             }
             catch (CommunicationException)
@@ -2825,12 +2857,16 @@ namespace SelfTest.Forms
             try
             {
                 CommunicationInterface.AbortSTSequence();
-                //DAS MainWindow.BlinkUpdateIcon();
+                // If self test comm watchdog is disabled, the icon will blink
+                m_ServiceBlinkIcon();
             }
             catch (CommunicationException communicationException)
             {
-                //DAS MessageBox.Show(Resources.MBTAbortSTSequenceFailed + CommonConstants.NewLine + CommonConstants.NewLine +
-                //DAS                communicationException.CommunicationError, Resources.MBCaptionError, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (!Parameter.EnableSTCommWatchdog)
+                {
+                    MessageBox.Show(Resources.MBTAbortSTSequenceFailed + CommonConstants.NewLine + CommonConstants.NewLine +
+                                    communicationException.CommunicationError, Resources.MBCaptionError, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
 
@@ -2848,7 +2884,8 @@ namespace SelfTest.Forms
             try
             {
                 CommunicationInterface.SendOperatorAcknowledge();
-                //DAS MainWindow.BlinkUpdateIcon();
+                // If self test comm watchdog is disabled, the icon will blink
+                m_ServiceBlinkIcon();
             }
             catch (CommunicationException communicationException)
             {
@@ -2887,7 +2924,8 @@ namespace SelfTest.Forms
             try
             {
                 CommunicationInterface.ExitSelfTestTask(out result, out reason);
-                //DAS MainWindow.BlinkUpdateIcon();
+                // If self test comm watchdog is disabled, the icon will blink
+                m_ServiceBlinkIcon();
             }
             catch (CommunicationException)
             {
