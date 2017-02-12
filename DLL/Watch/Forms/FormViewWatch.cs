@@ -329,6 +329,17 @@
  *                                  1.  Modified the Text property of the m_ToolStripLegendComboBox1 ToolStripLabel to be 'Watch Window Configuration :'.
  */
 #endregion - [1.15] -
+
+#region - [1.16] -
+/*
+ *  07/28/15    1.16    D.Smail     Modifications
+ *                                  1.  Disable buttons on both Main Screen as well as the Watch screen if valid communication
+ *                                      is lost between the PTU and the target hardware. After returning to the Main screen,
+ *                                      the user will need to re-esatblish a valid communication link between the PTU and
+ *                                      the target hardware.
+ *                                     
+ */
+#endregion - [1.16] -
 #endregion --- Revision History ---
 
 using System;
@@ -816,8 +827,10 @@ namespace Watch.Forms
             Cursor = Cursors.WaitCursor;
 
             // Update the form specific changes to the main menu options.
-#if !DAS
+
             SetMenuEnabled(CommonConstants.KeyMenuItemFileOpen, false);
+            // Intentionally comment the following 2 lines so that if communication is lost
+            // the main menu buttons (System SW version, Watch, Test, Events) will be grayed when returning to Home screen
             //SetMenuEnabled(CommonConstants.KeyMenuItemView, false);
             //SetMenuEnabled(CommonConstants.KeyMenuItemDiagnostics, false);
             SetMenuEnabled(CommonConstants.KeyMenuItemConfigureWorksetsWatchWindow, false);
@@ -828,7 +841,6 @@ namespace Watch.Forms
             SetMenuEnabled(CommonConstants.KeyMenuItemConfigureDataStream, false);
             SetMenuEnabled(CommonConstants.KeyMenuItemConfigureChartRecorder, false);
             SetMenuEnabled(CommonConstants.KeyMenuItemTools, false);
-#endif
 
             // Initialize the ProgressBar.
             m_ProgressBar.Maximum = CyclicQueueSizeRecord;
@@ -1345,6 +1357,7 @@ namespace Watch.Forms
                     MainWindow.WriteStatusMessage(Resources.SMCommunicationFaultReadTimeout, Color.Red, Color.Black);
                     WatchControl.InvalidValue = true;
 
+                    // Disable the buttons at the top of the Watch screen if Comm is lost 
                     F1.Enabled = false;
                     F2.Enabled = false;
                     F3.Enabled = false;

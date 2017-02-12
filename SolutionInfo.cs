@@ -288,7 +288,7 @@
  *                                              the event index value that is returned from the call instead as this value is correct. 
  * 
  *                                              The bug fix is implemented by adding an EventIndex property to the Event.FormViewEventLog class in conjunction with a 
- *                                              modification to the Run() method of the Event.ThreadCommWatchdog class.
+ *                                              modification to the Run() method of the Event.ThreadPollEvent class.
  * 
  *  01/17/11    6.4.4       K.McD           1.  Bug fix - SNCR001.86. Under the previous implementation, if a workset contained less than WatchSize watch variables, 
  *                                              there was a possibility that the display values associated with one or more watch variables would, under certain 
@@ -1151,7 +1151,7 @@
  *                                              
  *  08/01/13    6.7.5   K.McD       1.  Updated Watch.dll to version 1.22.2. Modified the Run() method of the ThreadPollWatch class to close the communication port as
  *                                      soon as the communication fault flag is asserted.
- *                                  2.  Updated the Event.dll class to version 1.17.4. Modified the Run() method of the ThreadCommWatchdog class to close the communication
+ *                                  2.  Updated the Event.dll class to version 1.17.4. Modified the Run() method of the ThreadPollEvent class to close the communication
  *                                      port as soon as the communication fault flag is asserted so that it is consistent with the Watch.ThreadPollWatch class.
  *                                      
  *  08/02/13    6.7.6   K.McD       1.  Updated Common.dll to version 1.18.4. Increased the width, in pixels, of the name field associated with the watch control from 200
@@ -1906,7 +1906,7 @@
  *  DLL/Event/Event.csproj                                      Modified	
  *  DLL/Event/Forms/FormViewEventLog.cs                         Modified	
  *  DLL/Event/Properties/AssemblyInfo.cs                        Modified	
- *  DLL/Event/ThreadCommWatchdog.cs                                Modified	
+ *  DLL/Event/ThreadPollEvent.cs                                Modified	
  *  DLL/SelfTest/Communication/CommunicationSelfTest.cs         Modified	
  *  DLL/SelfTest/Properties/AssemblyInfo.cs                     Modified	
  *  DLL/SelfTest/SelfTest.csproj                                Modified	
@@ -2029,8 +2029,8 @@
  *                                          at Event.Communication.CommunicationEvent.CheckFaultLogger(Int16& eventCount, UInt32& newIndex, UInt32& newEventsLogged) in
  *                                          \\psf\Home\Documents\Contracts\Bombardier PTU\Working\Visual Studio Solutions\Portable Test Unit\DLL\Event\Communication
  *                                          \CommunicationEvent.cs:line 908
- *                                          at Event.ThreadCommWatchdog.Run() in \\psf\Home\Documents\Contracts\Bombardier PTU\Working\Visual Studio Solutions\Portable
- *                                          Test Unit\DLL\Event\ThreadCommWatchdog.cs:line 235
+ *                                          at Event.ThreadPollEvent.Run() in \\psf\Home\Documents\Contracts\Bombardier PTU\Working\Visual Studio Solutions\Portable
+ *                                          Test Unit\DLL\Event\ThreadPollEvent.cs:line 235
  *                                          .
  *                                          .
  *                                          .

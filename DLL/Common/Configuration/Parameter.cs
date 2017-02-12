@@ -164,6 +164,10 @@
  *                                  2.  Modified the Initialize() method to set the GenerateCSV member variable flag to the state of bit 2 of the FunctionFlags
  *                                      bitmask.
  *                                  3.  Modified the SetToDefault() method set the GenerateCSV flag to the default state i.e. clear.
+ *                                  
+ *  02/10/2017  1.15    D.Smail     Modifications
+ *                                  1.  Added EnableSTCommWatchdog static property and the associated static member variable that supports
+ *                                      the ability for the PTU to perform continuous watchdog checks during self test.
  */
 #endregion --- Revision History ---
 
@@ -400,8 +404,9 @@ namespace Common.Configuration
         /// Bit 6   -   Not Used.
         /// Bit 5   -   Not Used.
         /// Bit 4   -   Not Used.
-        /// Bit 3   -   Not Used.
-        /// Bit 2   -   GenerateCSF - Flag to specify whether the event log is to be saved as a CSV file as well as an XML file. True, if a CSV file of the event log is
+        /// Bit 3   -   EnableSTCommWatchdog - Flag indicates whether a continuous communication watchdog check is enabled during self test, even
+        ///                                    during times when no self test is active.
+        /// Bit 2   -   GenerateCSV - Flag to specify whether the event log is to be saved as a CSV file as well as an XML file. True, if a CSV file of the event log is
         ///                           to be created.
         /// <para>
         /// Bit 1   -   ShowLogName - Flag to specify whether the event log name field is to be shown when saved event logs are displayed. True, if the
@@ -787,7 +792,7 @@ namespace Common.Configuration
         #region --- Properties ---
         #region - [Data Dictionary Defined] -
         /// <summary>
-        /// Get the flag that specifies whether a Self Test communication watchdog is enabled. True if watchdog is enabled
+        /// Get the flag that specifies whether a Self Test communication watchdog is enabled. True if watchdog is enabled,
         /// otherwise false.
         /// </summary>
         public static bool EnableSTCommWatchdog

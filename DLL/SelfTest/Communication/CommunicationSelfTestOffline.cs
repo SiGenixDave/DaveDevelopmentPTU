@@ -19,6 +19,10 @@
  *  08/10/11    1.0     Sean.D          1.  First entry into TortoiseSVN.
  *  
  *  08/24/11    1.1     K.McD           1.  Removed support for debug mode to be consistent with other sub-systems.
+ *  
+ *  02/12/17    1.2     D.Smail         1.  Added CommunicationWatchdog method to the interface.
+ *                                      2.  Removed all references to PTUDLL32 in method descriptions.
+ *    
  *                                          
  * 
  */
@@ -35,7 +39,7 @@ using Common.Configuration;
 namespace SelfTest.Communication
 {
     /// <summary>
-    ///Class to simulate communication with the target hardare with respect to the diagnostic self-test sub-system.
+    ///Class to simulate communication with the target hardware with respect to the diagnostic self-test sub-system.
     /// </summary>
     public class CommunicationSelfTestOffline : CommunicationParentOffline, ICommunicationSelfTest
     {
@@ -101,7 +105,7 @@ namespace SelfTest.Communication
         /// <param name="reason">A value of 1 represents success; otherwise, the value is mapped to the <c>ERRID</c> field of the <c>SELFTESTERRMESS
         /// </c> table 
         /// of the data dictionary in order to determine the error message returned from the VCU.</param>
-        /// <exception cref="CommunicationException">Thrown if the error code returned from the call to the PTUDLL32.GetSelfTestSpecialMessage() method
+        /// <exception cref="CommunicationException">Thrown if the error code returned from the call to the GetSelfTestSpecialMessage() method
         /// is not CommunicationError.Success.</exception>
         public void GetSelfTestSpecialMessage(out short result, out short reason)
         {
@@ -119,7 +123,7 @@ namespace SelfTest.Communication
         /// <param name="reason">A value of 1 represents success; otherwise, the value is mapped to the <c>ERRID</c> field of the
         /// <c>SELFTESTERRMESS</c> table 
         /// of the data dictionary in order to determine the error message returned from the VCU.</param>
-        /// <exception cref="CommunicationException">Thrown if the error code returned from the call to the PTUDLL32.StartSelfestTask() method is not 
+        /// <exception cref="CommunicationException">Thrown if the error code returned from the call to the StartSelfestTask() method is not 
         /// CommunicationError.Success.</exception>
         public void StartSelfTestTask(out short result, out short reason)
         {
@@ -140,7 +144,7 @@ namespace SelfTest.Communication
         /// <param name="reason">A value of 1 represents success; otherwise, the value is mapped to the <c>ERRID</c> field of the
         /// <c>SELFTESTERRMESS</c> table 
         /// of the data dictionary in order to determine the error message returned from the VCU.</param>
-        /// <exception cref="CommunicationException">Thrown if the error code returned from the call to the PTUDLL32.ExitSelfestTask() method is not 
+        /// <exception cref="CommunicationException">Thrown if the error code returned from the call to the ExitSelfestTask() method is not 
         /// CommunicationError.Success.</exception>
         public void ExitSelfTestTask(out short result, out short reason)
         {
@@ -152,7 +156,7 @@ namespace SelfTest.Communication
         /// Abort the self test sequence.
         /// </summary>
         /// <remarks>This request will stop the execution of the self-test process on the VCU and return control to the propulsion software.</remarks>
-        /// <exception cref="CommunicationException">Thrown if the error code returned from the call to the PTUDLL32.AbortSTSequence() method is not 
+        /// <exception cref="CommunicationException">Thrown if the error code returned from the call to the AbortSTSequence() method is not 
         /// CommunicationError.Success.</exception>
         public void AbortSTSequence()
         {
@@ -176,7 +180,7 @@ namespace SelfTest.Communication
         /// Send an operator acknowledge message.
         /// </summary>
         /// <remarks>This request allows the operator to move to the next step of an interactive test.</remarks>
-        /// <exception cref="CommunicationException">Thrown if the error code returned from the call to the PTUDLL32.SendOperatorAcknowledge() method
+        /// <exception cref="CommunicationException">Thrown if the error code returned from the call to the SendOperatorAcknowledge() method
         /// is not CommunicationError.Success.</exception>
         public void SendOperatorAcknowledge()
         {
@@ -189,7 +193,7 @@ namespace SelfTest.Communication
         /// are defined using the self test identifiers defined in the data dictionary.</remarks>
         /// <param name="testCount">The number of tests in the list.</param>
         /// <param name="tests">A list of the selfTestIdentifiers.</param>
-        /// <exception cref="CommunicationException">Thrown if the error code returned from the call to the PTUDLL32.UpdateSTTestList() method is not 
+        /// <exception cref="CommunicationException">Thrown if the error code returned from the call to the UpdateSTTestList() method is not 
         /// CommunicationError.Success.</exception>
         public void UpdateSTTestList(short testCount, short[] tests)
         {
@@ -201,7 +205,7 @@ namespace SelfTest.Communication
         /// Run the predefined self tests associated with the specified test list identifier, these tests are defined in the data dictionary. 
         /// </summary>
         /// <param name="testListIdentifier">The test list identifier of the predefined self tests that are to be executed.</param>
-        /// <exception cref="CommunicationException">Thrown if the error code returned from the call to the PTUDLL32.RunPredefinedSTTests() method is
+        /// <exception cref="CommunicationException">Thrown if the error code returned from the call to the RunPredefinedSTTests() method is
         /// not CommunicationError.Success.</exception>
         public void RunPredefinedSTTests(short testListIdentifier)
         {
@@ -215,7 +219,7 @@ namespace SelfTest.Communication
         /// Update the number of times that the selected tests are to be run.
         /// </summary>
         /// <param name="loopCount">The number of cycles/loops of the defined tests that are to be performed.</param>
-        /// <exception cref="CommunicationException">Thrown if the error code returned from the call to the PTUDLL32.UpdateSTLoopCount() method is not 
+        /// <exception cref="CommunicationException">Thrown if the error code returned from the call to the UpdateSTLoopCount() method is not 
         /// CommunicationError.Success.</exception>
         public void UpdateSTLoopCount(short loopCount)
         {
@@ -227,7 +231,7 @@ namespace SelfTest.Communication
         /// </summary>
         /// <param name="truckInformation">The truck to which the self tests apply. This does not apply on the CTA project as separate self-tests are
         /// set up for each truck.</param>
-        /// <exception cref="CommunicationException">Thrown if the error code returned from the call to the PTUDLL32.ExecuteSTTestList() method is not 
+        /// <exception cref="CommunicationException">Thrown if the error code returned from the call to the ExecuteSTTestList() method is not 
         /// CommunicationError.Success.</exception>
         public void ExecuteSTTestList(TruckInformation truckInformation)
         {
@@ -250,10 +254,10 @@ namespace SelfTest.Communication
         /// <param name="variableCount">The number of variables associated with the message.</param>
         /// <param name="results">An array of <see cref="InteractiveResults_t"/> structures containing the value of each self test variable associated
         /// with the current interactive test.</param>
-        /// <exception cref="CommunicationException">Thrown if the error code returned from the call to the PTUDLL32.GetSelfTestResult() method is not 
+        /// <exception cref="CommunicationException">Thrown if the error code returned from the call to the GetSelfTestResult() method is not 
         /// CommunicationError.Success.</exception>
         /// <remarks>In C# the sizeof the InteractiveResults_t structure is 16 bytes as the size is rounded up to the nearest quad word. This is 
-        /// inconsistent with the size of the InteractiveResults_t structure used in PTUDLL32.dll - 12 bytes. To ensure that the results are 
+        /// inconsistent with the size of the InteractiveResults_t structure - 12 bytes. To ensure that the results are 
         /// interpreted correctly the results are passed as a byte array which is then mapped to an array of InteractiveResults structures.</remarks>
         public unsafe void GetSelfTestResult(out short resultAvailable, out MessageMode messageMode, out short testIdentifier, out short testCase,
                                              out short testResult, out TruckInformation truckInformation, out short variableCount,
@@ -322,7 +326,7 @@ namespace SelfTest.Communication
         /// </summary>
         /// <remarks>This call is used to check whether communication with the VCU has been lost.</remarks>
         /// <param name="selfTestMode">The required self test mode.</param>
-        /// <exception cref="CommunicationException">Thrown if the error code returned from the call to the PTUDLL32.UpdateSTMode() method is not 
+        /// <exception cref="CommunicationException">Thrown if the error code returned from the call to the UpdateSTMode() method is not 
         /// CommunicationError.Success.</exception>
         public void UpdateSTMode(SelfTestMode selfTestMode)
         {

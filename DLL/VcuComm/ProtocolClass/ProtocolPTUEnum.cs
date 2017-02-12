@@ -19,6 +19,8 @@
  *  Date        Version Author       Comments
  *  03/01/2016  1.0     D.Smail      First Release.
  *
+ *  02/12/2017  1.1     D.Smail      Addition
+ *                                   1.  Added new enumeration to support the new self test watchdog message.
  */
 #endregion --- Revision History ---
 

@@ -166,6 +166,23 @@
  */
 #endregion - [1.14] -
 
+#region - [1.15] -
+/*
+ *  02/12/2017  1.15    D.Smail         References
+ *                                      1.  Support Loss of Comm detection while in Self test.
+ *                                      
+ *                                      Modifications
+ *                                      1.  Add support for systems where a loss of communication with target hardware is desired in self test
+ *                                          mode even when no "normal" self test communication is active. This requires adding a new message
+ *                                          to the target hardware that is responsible for responding to the new self test watchdog message.
+ *                                          A new thread is created specifically to handle this communication watchdog. The responsibilty
+ *                                          of blinking the LED icon now falls upon the watchdog message. Backward compatibilty still exists
+ *                                          with systems that don't support this new communication watchdog
+ *                                      2.  Fix issue with systems that don't support the new communication watchdog that allows the user to return 
+ *                                          to the Main screen when a communication error occurs.
+ */
+#endregion - [1.15] -
+
 #endregion --- Revision History ---
 
 using System;
@@ -391,7 +408,7 @@ namespace SelfTest.Forms
 
         #region - [Widths] -
         /// <summary>
-        /// The width to allow for a verical scrollbar.
+        /// The width to allow for a vertical scrollbar.
         /// </summary>
         public const int WidthScrollBar = 28;
 
@@ -419,7 +436,7 @@ namespace SelfTest.Forms
 
         #region --- Member Variables ---
         /// <summary>
-        /// A flag to indicate whether the PTU is in online or offline mode. True, if the PTU is in online mode; otherise, false.
+        /// A flag to indicate whether the PTU is in on-line or off-line mode. True, if the PTU is in on-line mode; otherwise, false.
         /// </summary>
         private bool m_IsOnline = false;
 
@@ -518,11 +535,71 @@ namespace SelfTest.Forms
         /// </summary>
         private bool m_CheckBoxLoopForeverEnabledState;
         #endregion - [Loop Count] -
+
+        #region - [Watchdog] -
+        /// <summary>
+        /// A record of the watchdog count. Used to determine if the thread on which the polling is carried out has locked.
+        /// </summary>
+        private int m_Watchdog;
+
+        /// <summary>
+        /// A flag that indicates whether a watchdog trip has occurred.
+        /// </summary>
+        private bool m_WatchdogTrip;
+
+        /// <summary>
+        /// The countdown to the watchdog trip.
+        /// </summary>
+        private int m_WatchdogTripCountdown;
+
+        /// <summary>
+        /// A record of the packet count. Used to determine if polling is active so that the packet received icon can be blinked in a thread-safe way.
+        /// </summary>
+        private long m_ResponseCount;
+
+        /// <summary>
+        /// A flag to control the display update. True, stops the display update i.e pauses the display; false, re-starts the display update.
+        /// </summary>
+        private bool m_Pause = false;
+        #endregion - [Watchdog] -
+
+        #region - [Watchdog Thread] -
+        /// <summary>
+        /// The countdown value associated the watchdog trip. Value: 3.
+        /// </summary>
+        private int WatchdogTripCountdown = 10;
+
+
+        /// <summary>
+        /// A flag that indicates whether a communication fault has been detected.
+        /// </summary>
+        private bool m_CommunicationFault;
+
+        /// <summary>
+        /// Reference to the class responsible for polling the target hardware.
+        /// </summary>
+        private ThreadCommWatchdog m_ThreadCommWatchdog;
+        #endregion - [Watchdog Thread] -
         #endregion --- Member Variables ---
 
-#if !DAS
+        #region --- Blink Icon Control ---
+        /// <summary>
+        /// Function prototype for blinking or not blinking the icon in the bottom right hand corner
+        /// </summary>
         private delegate void ServiceBlinkIcon();
 
+        /// <summary>
+        /// Contains a method to either blink or not blink the icon. Contains the "blink" function
+        /// when the communication watchdog is not used during self test. This maintains backward compatibility
+        /// with versions of the target hardware that don't support the self test watchdog.
+        /// </summary>
+        private ServiceBlinkIcon m_ServiceBlinkIcon;
+
+        /// <summary>
+        /// Blinks the LED icon to indication communications with the target hardware is OK. This method 
+        /// is copied to m_ServiceBlinkIcon to support original functionality (no self test watchdog is supported
+        /// in the target hardware).
+        /// </summary>
         private void BlinkIcon()
         {
             if (MainWindow != null)
@@ -531,14 +608,17 @@ namespace SelfTest.Forms
             }
         }
 
+        /// <summary>
+        /// Method intentionally does nothing. This method is copied to m_ServiceBlinkIcon to support new functionality 
+        /// (self test watchdog is supported in the target hardware). In this case, the communication watchdog is used
+        /// exclusively to blink the icon.
+        /// </summary>
         private void NoBlinkIcon()
         {
             // Intentionally do nothing
         }
 
-        private ServiceBlinkIcon m_ServiceBlinkIcon; 
-
-#endif
+        #endregion --- Blink Icon Control ---
 
         #region --- Constructors ---
         /// <summary>
@@ -576,6 +656,9 @@ namespace SelfTest.Forms
             MainWindow = mainWindow;
             Debug.Assert(mainWindow != null, "FormViewTestResults.Ctor() - [mainWindow != null]");
 
+            // Update the delegate (function pointer) with the appropriate method. If the communication watchdog is supported
+            // (Parameter.EnableSTCommWatchdog == true), then don't blink the icon during self test transactions. In this case
+            // only the communication watchdog is responsible for blinking the icon.
             if (Parameter.EnableSTCommWatchdog)
             {
                 m_ServiceBlinkIcon = new ServiceBlinkIcon(NoBlinkIcon);
@@ -652,6 +735,7 @@ namespace SelfTest.Forms
             m_TimerGetResults.Enabled = false;
             m_TimerGetResults.Tick += new EventHandler(m_TimerGetResults_Tick);
 
+            // Enable the communication watchdog if it is supported (i.e. bit 3 of FunctionFlags set in XML config file)
             if (Parameter.EnableSTCommWatchdog)
             {
                 m_TimerCommWatchdog.Interval = IntervalMsTimerCommWatchdog;
@@ -804,8 +888,10 @@ namespace SelfTest.Forms
 
 
             SetMenuEnabled(CommonConstants.KeyMenuItemFileOpen, false);
-            //DAS SetMenuEnabled(CommonConstants.KeyMenuItemView, false);
-            //DAS SetMenuEnabled(CommonConstants.KeyMenuItemDiagnostics, false);
+            // Intentionally comment out the following 2 lines. If communication is lost with the target hardware,
+            // upon return to the Main screen, the system buttons will be disabled
+            //SetMenuEnabled(CommonConstants.KeyMenuItemView, false);
+            //SetMenuEnabled(CommonConstants.KeyMenuItemDiagnostics, false);
             SetMenuEnabled(CommonConstants.KeyMenuItemConfigureWorksetsWatchWindow, false);
             SetMenuEnabled(CommonConstants.KeyMenuItemConfigureWorksetsChartRecorder, false);
             SetMenuEnabled(CommonConstants.KeyMenuItemConfigureRealTimeClock, false);
@@ -1277,33 +1363,7 @@ namespace SelfTest.Forms
         }
         #endregion - [DataGridView] -
 
-        #region DAS
-        #region - [Watchdog] -
-        /// <summary>
-        /// A record of the watchdog count. Used to determine if the thread on which the polling is carried out has locked.
-        /// </summary>
-        private int m_Watchdog;
-
-        /// <summary>
-        /// A flag that indicates whether a watchdog trip has occurred.
-        /// </summary>
-        private bool m_WatchdogTrip;
-
-        /// <summary>
-        /// The countdown to the watchdog trip.
-        /// </summary>
-        private int m_WatchdogTripCountdown;
-        #endregion - [Watchdog] -
-
-        /// <summary>
-        /// A record of the packet count. Used to determine if polling is active so that the packet received icon can be blinked in a thread-safe way.
-        /// </summary>
-        private long m_ResponseCount;
-
-        /// <summary>
-        /// A flag to control the display update. True, stops the display update i.e pauses the display; false, re-starts the display update.
-        /// </summary>
-        private bool m_Pause = false;
+        #region --- Communication Watchdog Thread ---
 
         /// <summary>
         /// Gets or sets the flag that controls the polling of the target hardware. True, inhibits polling of the target hardware; otherwise, false,
@@ -1448,22 +1508,6 @@ namespace SelfTest.Forms
         }
 
         /// <summary>
-        /// The countdown value associated the watchdog trip. Value: 3.
-        /// </summary>
-        private int WatchdogTripCountdown = 10;
-
-
-        /// <summary>
-        /// A flag that indicates whether a communication fault has been detected.
-        /// </summary>
-        private bool m_CommunicationFault;
-
-        /// <summary>
-        /// Reference to the class responsible for polling the target hardware.
-        /// </summary>
-        private ThreadCommWatchdog m_ThreadCommWatchdog;
-
-        /// <summary>
         /// Event handler for the timer <c>Tick</c> event. Check whether Propulsion system is still in self test.
         /// </summary>
         private void m_TimerCommWatchdog_Tick(object sender, EventArgs e)
@@ -1518,10 +1562,7 @@ namespace SelfTest.Forms
             {
                 if (watchdogTrip == true)
                 {
-                    MainWindow.WriteStatusMessage("CommunicationFault Port Locked", Color.Red, Color.Black);
-                    //TODO Add messagee to resource
-                    //MainWindow.WriteStatusMessage(Resources.SMCommunicationFaultPortLocked, Color.Red, Color.Black);
-                    //AbortSelfTests();
+                    MainWindow.WriteStatusMessage(Resources.EMCommunicationLost, Color.Red, Color.Black);
                     Escape.Enabled = true;
                     F1.Enabled = false;
                     F2.Enabled = false;
@@ -1530,10 +1571,11 @@ namespace SelfTest.Forms
                     F5.Enabled = false;
                     Cursor = Cursors.Default;
 
+                    // Disable the Abort/Continue buttons
+                    m_ToolStripInteractiveTestVCUCommands.Enabled = false;
+
                     m_TimerCommWatchdog.Stop();
 
-                    // Disable the display until the fault has been cleared.
-                    // WatchControl.InvalidValue = true;
                 }
                 else
                 {
@@ -1553,12 +1595,8 @@ namespace SelfTest.Forms
                 if (communicationFault == true)
                 {
                     // Disable the display until the fault has been cleared.
-                    MainWindow.WriteStatusMessage("CommunicationFault Read Timeout", Color.Red, Color.Black);
-                    //TODO Add message to resource 
-                    // MainWindow.WriteStatusMessage(Resources.SMCommunicationFaultReadTimeout, Color.Red, Color.Black);
-                    ///WatchControl.InvalidValue = true;
-                    ///
-                    //AbortSelfTests();
+                    MainWindow.WriteStatusMessage(Resources.EMCommunicationLost, Color.Red, Color.Black);
+
                     Escape.Enabled = true;
                     F1.Enabled = false;
                     F2.Enabled = false;
@@ -1566,6 +1604,9 @@ namespace SelfTest.Forms
                     F4.Enabled = false;
                     F5.Enabled = false;
                     Cursor = Cursors.Default;
+
+                    // Disable the Abort/Continue buttons
+                    m_ToolStripInteractiveTestVCUCommands.Enabled = false;
 
                     m_TimerCommWatchdog.Stop();
 
@@ -1589,8 +1630,7 @@ namespace SelfTest.Forms
             }
         }
 
-
-        #endregion DAS
+        #endregion --- Communication Watchdog Thread ---
 
         #region - [Timer] -
         /// <summary>
@@ -1675,9 +1715,6 @@ namespace SelfTest.Forms
                 }
                 return;
             }
-            //DAS finally
-            //DAS {
-            // AD}
         }
         #endregion - [Timer] -
 
@@ -1736,6 +1773,7 @@ namespace SelfTest.Forms
                 if (m_CommunicationFault == true || m_WatchdogTrip == true)
                 {
                     CommunicationInterface.CloseCommunication(CommunicationInterface.CommunicationSetting.Protocol);
+                    // This resets the main screen so that the user has to reconnect to target hardware
                     MainWindow.SetMode(Mode.Configuration);
                 }
                 else
@@ -1750,7 +1788,6 @@ namespace SelfTest.Forms
                     }
                 }
             }
-
 
             Escape.Checked = false;
 
@@ -1781,11 +1818,6 @@ namespace SelfTest.Forms
             // Escape key.
             Escape.Enabled = state;
 
-// Rev. 1.13.
-#if DAS
-            // Help key.
-            F1.Enabled = state;
-#endif
             // Print key.
             F2.Enabled = state;
 
@@ -2910,17 +2942,6 @@ namespace SelfTest.Forms
 
             short result, reason;
 
-#if DAS
-            // Set the Mode status label back to its initial value.
-            if (m_IsOnline == true)
-            {
-                MainWindow.SetMode(Mode.Online);
-            }
-            else
-            {
-                MainWindow.SetMode(Mode.Offline);
-            }
-#endif 
             try
             {
                 CommunicationInterface.ExitSelfTestTask(out result, out reason);

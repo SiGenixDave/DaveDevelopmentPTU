@@ -946,8 +946,6 @@ namespace Bombardier.PTU
             // disabled.
             m_ButtonViewSystemInformation.Enabled = ((m_ToolStripMenuItemView.Enabled == true) &&
                                                      (m_ToolStripMenuItemViewSystemInformation.Enabled == true)) ? true : false;
-
-            Console.WriteLine("DAS: m_ButtonViewSystemInformation.Enabled = " + m_ButtonViewSystemInformation.Enabled.ToString()); ;
         }
         #endregion - [View] -
 

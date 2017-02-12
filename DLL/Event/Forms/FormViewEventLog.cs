@@ -499,6 +499,23 @@
  * 
  */
 #endregion - [2.5] -
+
+#region - [2.6] -
+/*
+ *  02/10/17    2.6     D.Smail     Modifications
+ *                                  1.  Made changes to the form so that when communication is lost between the PTU and VCU, all buttons are disabled
+ *                                      (besides Home) to indicate to the user that he/she must go back to the Home Screen and attempt to reconnect to
+ *                                      the VCU. 
+ *                                  
+ *                                  Bug Fix
+ *                                  1.  When navigating back to the Home screen, all buttons will now be disabled on the Home 
+ *                                      Screen when communications is lost. Prior to this change, the Home Screen still had Watch, Event,
+ *                                      Test, and Sys Info buttons enabled even after communications was lost.
+ *
+ * 
+ */
+#endregion - [2.6] -
+
 #endregion --- Revision History ---
 
 using System;
@@ -1093,8 +1110,10 @@ namespace Event.Forms
             m_PanelEventVariables.Visible = true;
 
             // Update the form specific changes to the main menu options.
-#if !DAS            
             SetMenuEnabled(CommonConstants.KeyMenuItemFileOpen, false);
+            // Intentionally comment out the following 2 lines of code. This is done in case a communications failure 
+            // occurs while on the event log screen. We want the main buttons (Watch, Event, Test, Sys Info, etc.) to be grayed upon return
+            // to the home screen
             //SetMenuEnabled(CommonConstants.KeyMenuItemView, false);
             //SetMenuEnabled(CommonConstants.KeyMenuItemDiagnostics, false);
             SetMenuEnabled(CommonConstants.KeyMenuItemConfigureWorksetsWatchWindow, false);
@@ -1105,7 +1124,6 @@ namespace Event.Forms
             SetMenuEnabled(CommonConstants.KeyMenuItemConfigureDataStream, false);
             SetMenuEnabled(CommonConstants.KeyMenuItemConfigureChartRecorder, false);
             SetMenuEnabled(CommonConstants.KeyMenuItemTools, false);
-#endif
             // Register the event handler for the MainWindow.MenuUpdated event.
             MainWindow.MenuUpdated += new EventHandler(SecurityChanged);
 
@@ -1750,6 +1768,7 @@ namespace Event.Forms
                     MainWindow.WriteStatusMessage(Resources.SMCommunicationFaultPortLocked, Color.Red, Color.Black);
                     WatchControl.InvalidValue = true;
 
+                    // Disable all buttons except the Home button when communication fails
                     F1.Enabled = false;
                     F2.Enabled = false;
                     F3.Enabled = false;
@@ -1778,6 +1797,7 @@ namespace Event.Forms
                     MainWindow.WriteStatusMessage(Resources.SMCommunicationFaultReadTimeout, Color.Red, Color.Black);
                     WatchControl.InvalidValue = true;
 
+                    // Disable all buttons except the Home button when communication fails
                     F1.Enabled = false;
                     F2.Enabled = false;
                     F3.Enabled = false;
@@ -1786,7 +1806,6 @@ namespace Event.Forms
                     F6.Enabled = false;
                     F7.Enabled = false;
                     F8.Enabled = false;
-
                 }
                 else
                 {

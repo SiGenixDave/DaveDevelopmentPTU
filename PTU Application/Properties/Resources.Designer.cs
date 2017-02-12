@@ -881,7 +881,7 @@ namespace Bombardier.PTU.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to (C) 2010 - 2015  Bombardier Transportation (Holdings) USA Inc..
+        ///   Looks up a localized string similar to (C) 2010 - 2017  Bombardier Transportation (Holdings) USA Inc..
         /// </summary>
         internal static string LegendCopyright {
             get {

@@ -238,4 +238,7 @@
   <data name="LegendItems" xml:space="preserve">
     <value>Item(s)</value>
   </data>
+  <data name="EMCommunicationLost" xml:space="preserve">
+    <value>Loss of Communications</value>
+  </data>
 </root>

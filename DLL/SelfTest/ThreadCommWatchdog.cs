@@ -20,7 +20,7 @@
 /* 
  *  Date        Version Author          Comments
  *                                      
- *  01/31/2017  1.0     DAS             References
+ *  01/31/2017  1.0     D.Smail         References
  *                                      1.  Copy and paste from ThreadPollEvent.cs. Used to perform periodic communication watchdog checks
  *                                          while in self test (no checks exist prior to this change)
  *                                          
@@ -41,8 +41,8 @@ using VcuComm;
 namespace SelfTest
 {
     /// <summary>
-    /// Polls the target hardware for watch values and logs the retrieved values to a cyclic buffer. Also records the values to a second, larger, cyclic buffer if
-    /// the <c>Record</c> property is asserted.
+    /// Polls the target hardware while in self test to determine if a valid communication link still exists. The link could be
+    /// dropped due to a pulled cable, a target hardware reset or power cycle, etc.
     /// </summary>
     class ThreadCommWatchdog : WorkerThread
     {

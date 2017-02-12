@@ -20,6 +20,8 @@
  *  
  *  07/25/11    1.1     K.McD           1.  Modified the Tag definition in the InteractiveResults_t structure to be an int rather than short.
  *                                      2.  Modified the XML tag associated with the results parameter of the GetSelfTestResult() method.
+ *                                      
+ *  02/10/17    1.2     D.Smail         1. Added CommunicationWatchdog() to support watchdog communication checks during self test
  * 
  */
 #endregion --- Revision History ---

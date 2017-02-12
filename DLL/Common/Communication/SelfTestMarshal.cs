@@ -26,6 +26,9 @@
  *                                  Modifications
  *                                  1.  Fixed issue with extracting "Reason" from GetSelftestSpecialMessage(). It's stored as a byte in the stream but returned as
  *                                      an 'out UINT16' so this had to be fixed.
+ *                                      
+ *  02/10/2017  1.2     D.Smail     Modifications
+ *                                  1.  Added CommunicationWatchdog() method to support communication checks with VCU during self test.
  *
  */
 #endregion --- Revision History ---
