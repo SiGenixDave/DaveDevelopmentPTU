@@ -1335,6 +1335,12 @@ namespace Watch.Forms
                     F3.Enabled = false;
                     F5.Enabled = false;
 
+                    if (m_Record)
+                    {
+                        SaveRecordedWatchData(m_FullyQualifiedFilename, m_WatchFileRecordedData);
+                        ReportRecordingStatus(false);
+                    }
+
                 }
                 else
                 {
@@ -1362,6 +1368,12 @@ namespace Watch.Forms
                     F2.Enabled = false;
                     F3.Enabled = false;
                     F5.Enabled = false;
+
+                    if (m_Record)
+                    {
+                        SaveRecordedWatchData(m_FullyQualifiedFilename, m_WatchFileRecordedData);
+                        ReportRecordingStatus(false);
+                    }
                 }
                 else
                 {
