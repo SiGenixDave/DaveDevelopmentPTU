@@ -89,6 +89,11 @@
  *                                      
  *                                      Modifications
  *                                      1.  Automatic update resulting from changing the name of the 'Car Identifier' Label to m_LabelCarNumber.
+ *                                      
+ *  02/13/17    1.13     D.Smail        Modifications
+ *                                      1.  When communications loss occurs, reset all buttons to "Configuration/Unconnected" state
+ *                                          on the home screen.
+ *    
  *                                          
  */
 #endregion --- Revision History ---
@@ -101,6 +106,7 @@ using Bombardier.PTU.Properties;
 using Common.Communication;
 using Common.Configuration;
 using Common.Forms;
+using Common;
 
 namespace Bombardier.PTU.Forms
 {
@@ -274,6 +280,9 @@ namespace Bombardier.PTU.Forms
             {
                 MessageBox.Show(communicationException.Message, Resources.MBCaptionError, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 MainWindow.WriteStatusMessage(string.Empty);
+                CommunicationInterface.CloseCommunication(CommunicationInterface.CommunicationSetting.Protocol);
+                // This resets the main screen so that the user has to reconnect to target hardware
+                MainWindow.SetMode(Mode.Configuration);
                 Close();
                 return;
             }
@@ -316,6 +325,11 @@ namespace Bombardier.PTU.Forms
                 m_TimerDisplayUpdate.Stop();
                 MessageBox.Show(Resources.MBTDateTimeGetFailed, Resources.MBCaptionError, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 MainWindow.WriteStatusMessage(string.Empty);
+                
+                CommunicationInterface.CloseCommunication(CommunicationInterface.CommunicationSetting.Protocol);
+                // This resets the main screen so that the user has to reconnect to target hardware
+                MainWindow.SetMode(Mode.Configuration);
+
                 Close();
                 return;
             }
