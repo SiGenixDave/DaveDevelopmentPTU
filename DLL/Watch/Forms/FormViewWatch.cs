@@ -340,6 +340,15 @@
  *                                     
  */
 #endregion - [1.16] -
+
+#region - [1.17] -
+/*
+ *  02/13/17    1.17    D.Smail     Modifications
+ *                                  1.  If recording data and communications is lost, then save the existing
+ *                                      information to the file and "kill" the recording information panel.
+ *                                     
+ */
+#endregion - [1.17] -
 #endregion --- Revision History ---
 
 using System;

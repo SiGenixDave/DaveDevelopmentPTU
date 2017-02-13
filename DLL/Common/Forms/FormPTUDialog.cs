@@ -51,6 +51,11 @@
  *                                          
  *  08/24/11    1.10.1  K.McD           1.  Modified to accommodate the changes to the signature of the IPollTarget.SetPauseAndWait() method.
  *
+ *  02/13/17    1.11    D.Smail         1.  Modified because watch variable polling wouldn't resume after trying to configure
+ *                                          worksets in the Data Monitoring window. Because the dialog wasn't invoked from 
+ *                                          the main window, main window was being set to null prior to the call to 
+ *                                          resume the data variable polling
+ * 
  */
 #endregion --- Revision History ---
 
@@ -181,7 +186,10 @@ namespace Common.Forms
             }
 
             // If the CalledFrom property has been set, cast to IMainWindow. If the calling form was not derived from IMainWindow, the MainWindow property will remain null.
-            m_MainWindow = CalledFrom as IMainWindow;
+            if ((CalledFrom as IMainWindow) != null)
+            {
+                m_MainWindow = CalledFrom as IMainWindow;
+            }
         }
 
         /// <summary>
