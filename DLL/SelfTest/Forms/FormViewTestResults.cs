@@ -189,6 +189,9 @@
  *                                          (except the "Home" button), all threads and polling are stopped, and the user must go back to the Main 
  *                                          screen. NOTE: The system will not detect a loss of communications because the self test watchdog is disabled
  *                                          and the connection is assumed to still be ACTIVE.
+ *                                      2.  Fix issue with "non Self test watchdog" code that gracefully exists self test when a loss of communication
+ *                                          is detected. Instead of MessageBox pop-up, the software now displays a loss of comm message and disables 
+ *                                          all buttons except "Home".
  * 
  * 
  * 
@@ -1752,7 +1755,21 @@ namespace SelfTest.Forms
 
                 if (!Parameter.EnableSTCommWatchdog)
                 {
-                    MessageBox.Show(Resources.MBTSTResultFailed, Resources.MBCaptionError, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MainWindow.WriteStatusMessage(Resources.EMCommunicationLost, Color.Red, Color.Black);
+                    Escape.Enabled = true;
+                    F1.Enabled = false;
+                    F2.Enabled = false;
+                    F3.Enabled = false;
+                    F4.Enabled = false;
+                    F5.Enabled = false;
+                    Cursor = Cursors.Default;
+
+                    // Disable the Abort/Continue buttons
+                    m_ToolStripInteractiveTestVCUCommands.Enabled = false;
+
+                    // Set this flag so that when returning to the Main screen, the Main buttons that would normally be enabled 
+                    // (i.e. connection still exists) will be disabled
+                    m_CommunicationFault = true;
                 }
                 return;
             }

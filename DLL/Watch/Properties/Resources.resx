@@ -175,7 +175,7 @@
     <value>PC Time:</value>
   </data>
   <data name="SMCommunicationFaultReadTimeout" xml:space="preserve">
-    <value>Communication Fault - Read Timeout.</value>
+    <value>Loss Of Communications</value>
   </data>
   <data name="EMSetWatchElementsFailed" xml:space="preserve">
     <value>Unable to map the watch identifiers to the watch elements.</value>
@@ -253,7 +253,7 @@
     <value>Data entry error - The specified value did not represent a valid 32 bit hexadecimal value.</value>
   </data>
   <data name="SMCommunicationFaultPortLocked" xml:space="preserve">
-    <value>Communication Fault - Port Locked.</value>
+    <value>Loss Of Communications</value>
   </data>
   <data name="SMFunctionKeyPause" xml:space="preserve">
     <value>Paused.</value>
