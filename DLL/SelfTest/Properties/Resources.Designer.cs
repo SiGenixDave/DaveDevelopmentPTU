@@ -334,6 +334,15 @@ namespace SelfTest.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Target hardware autonomously aborted self test..
+        /// </summary>
+        internal static string MBTTargetHwAbortSelfTest {
+            get {
+                return ResourceManager.GetString("MBTTargetHwAbortSelfTest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This feature is not available for multiple selections..
         /// </summary>
         internal static string MBTWorksetDefineMultipleSelection {

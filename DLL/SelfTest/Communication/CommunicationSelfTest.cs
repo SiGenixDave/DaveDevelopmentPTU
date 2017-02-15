@@ -108,9 +108,15 @@
 
 #region - [1.4] -
 /*
- *  02/12/2017  1.4     DAS             Modifications
+ *  02/12/2017  1.4.1   D.Smail         Modifications
  *                                      1.  Add method CommunicationWatchdog() to support watchdog checks with the VCU during self test
  *                                      2.  Remove all references in method headers to PTUDLL32.
+ *                                      
+ *  02/15/2017  1.4.2   D.Smail         Modifications
+ *                                      1.  Added a reference parameter to CommunicationWatchdog() method that is updated to indicate
+ *                                          whether or not the target hardware is in self test.
+ *                                      
+ * 
  */
 #endregion - [1.4] -
 #endregion --- Revision History ---
@@ -368,8 +374,10 @@ namespace SelfTest.Communication
         /// is taken in the VCU side. </remarks>
         /// <exception cref="CommunicationException">Thrown if the error code returned from the call to m_SelfTestMarshal.CommunicationWatchdog() method is not 
         /// CommunicationError.Success.</exception>
-        public void CommunicationWatchdog()
+        /// <param name="InSelfTest">true if target hardware is in self test mode; false otherwise</param>
+        public void CommunicationWatchdog(ref Boolean InSelfTest)
         {
+
             Debug.Assert(m_MutexCommuncationInterface != null,
                          "CommunicationSelfTest.CommunicationWatchdog() - [m_MutexCommuncationInterface != null]");
 
@@ -377,7 +385,7 @@ namespace SelfTest.Communication
             try
             {
                 m_MutexCommuncationInterface.WaitOne(DefaultMutexWaitDurationMs, false);
-                errorCode = m_SelfTestMarshal.CommunicationWatchdog();
+                errorCode = m_SelfTestMarshal.CommunicationWatchdog(ref InSelfTest);
             }
             catch (Exception)
             {

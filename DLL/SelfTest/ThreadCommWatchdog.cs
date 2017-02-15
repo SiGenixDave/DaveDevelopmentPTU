@@ -20,10 +20,16 @@
 /* 
  *  Date        Version Author          Comments
  *                                      
- *  01/31/2017  1.0     D.Smail         References
+ *  01/31/2017  1.0.1   D.Smail         References
  *                                      1.  Copy and paste from ThreadPollEvent.cs. Used to perform periodic communication watchdog checks
  *                                          while in self test (no checks exist prior to this change)
  *                                          
+ *  01/31/2017  1.0.2   D.Smail         Modifications
+ *                                      1.  Added code that supports a response from the target hardware which indicates whether or not
+ *                                          the target hardware is in self test. Depending on system conditions, the target hardware can
+ *                                          exit self test autonomously. 
+ * 
+ * 
  */
 #endregion --- Revision History ---
 
@@ -91,6 +97,11 @@ namespace SelfTest
         private bool m_CommunicationFault;
 
         /// <summary>
+        /// Flag used to indicate whether the target hardware is in self test mode. True, indicates that the target hardware is in self test mode; otherwise, false, indicates that communication is OK.
+        /// </summary>
+        private bool m_InSelfTestWatchdogResponse;
+
+        /// <summary>
         /// The number of response that have been received since the class was instantiated;
         /// </summary>
         /// <remarks> 
@@ -155,6 +166,9 @@ namespace SelfTest
             m_ResponseCount = 0;
             m_PollScheduler = new PollScheduler();
             m_ReadTimeoutCountdown = ReadTimeoutCountdown;
+
+            m_InSelfTestWatchdogResponse = true;
+
         }
         #endregion - [Constructors] -
 
@@ -184,7 +198,7 @@ namespace SelfTest
                         try
                         {
                             m_Watchdog++;
-                            m_CommunicationInterface.CommunicationWatchdog();
+                            m_CommunicationInterface.CommunicationWatchdog(ref m_InSelfTestWatchdogResponse);
                             m_ReadTimeoutCountdown = ReadTimeoutCountdown;
                         }
                         catch(CommunicationException)
@@ -243,13 +257,18 @@ namespace SelfTest
         /// <summary>
         /// Gets or sets the communication interface that is to be used to communicate with the VCU.
         /// </summary>
-        /// <summary>
-        /// Gets or sets the communication interface that is to be used to communicate with the VCU.
-        /// </summary>
         public ICommunicationSelfTest CommunicationInterface
         {
             get { return m_CommunicationInterface; }
             set { m_CommunicationInterface = value; }
+        }
+
+        /// <summary>
+        /// Gets the Self Test state of the target hardware. true if in self test; false otherwise
+        /// </summary>
+        public Boolean InSelfTest
+        {
+            get { return m_InSelfTestWatchdogResponse; }
         }
 
         /// <summary>

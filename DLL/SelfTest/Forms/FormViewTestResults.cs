@@ -168,18 +168,30 @@
 
 #region - [1.15] -
 /*
- *  02/12/2017  1.15    D.Smail         References
+ *  02/12/2017  1.15.1  D.Smail         References
  *                                      1.  Support Loss of Comm detection while in Self test.
  *                                      
  *                                      Modifications
  *                                      1.  Add support for systems where a loss of communication with target hardware is desired in self test
  *                                          mode even when no "normal" self test communication is active. This requires adding a new message
  *                                          to the target hardware that is responsible for responding to the new self test watchdog message.
- *                                          A new thread is created specifically to handle this communication watchdog. The responsibilty
- *                                          of blinking the LED icon now falls upon the watchdog message. Backward compatibilty still exists
+ *                                          A new thread is created specifically to handle this communication watchdog. The responsibility
+ *                                          of blinking the LED icon now falls upon the watchdog message. Backward compatibility still exists
  *                                          with systems that don't support this new communication watchdog
  *                                      2.  Fix issue with systems that don't support the new communication watchdog that allows the user to return 
  *                                          to the Main screen when a communication error occurs.
+ *
+ * 
+ *  02/15/2017  1.15.2  D.Smail         Modifications
+ *                                      1.  Now that self test watchdog message response from target hardware includes a byte which indicates
+ *                                          whether the target hardware is in self test or not, a check was added and error message will be displayed in 
+ *                                          the status bar to indicate that the target system autonomously left self test. All buttons are disabled,
+ *                                          (except the "Home" button), all threads and polling are stopped, and the user must go back to the Main 
+ *                                          screen. NOTE: The system will not detect a loss of communications because the self test watchdog is disabled
+ *                                          and the connection is assumed to still be ACTIVE.
+ * 
+ * 
+ * 
  */
 #endregion - [1.15] -
 
@@ -888,10 +900,12 @@ namespace SelfTest.Forms
 
 
             SetMenuEnabled(CommonConstants.KeyMenuItemFileOpen, false);
+            
             // Intentionally comment out the following 2 lines. If communication is lost with the target hardware,
             // upon return to the Main screen, the system buttons will be disabled
             //SetMenuEnabled(CommonConstants.KeyMenuItemView, false);
             //SetMenuEnabled(CommonConstants.KeyMenuItemDiagnostics, false);
+            
             SetMenuEnabled(CommonConstants.KeyMenuItemConfigureWorksetsWatchWindow, false);
             SetMenuEnabled(CommonConstants.KeyMenuItemConfigureWorksetsChartRecorder, false);
             SetMenuEnabled(CommonConstants.KeyMenuItemConfigureRealTimeClock, false);
@@ -1579,9 +1593,6 @@ namespace SelfTest.Forms
                 }
                 else
                 {
-                    // Restore the display.
-                    //WatchControl.InvalidValue = false;
-
                     MainWindow.WriteStatusMessage(string.Empty);
                 }
                 m_WatchdogTrip = watchdogTrip;
@@ -1615,11 +1626,41 @@ namespace SelfTest.Forms
                 {
                     // Restore the display.
                     MainWindow.WriteStatusMessage(string.Empty);
-                    //WatchControl.InvalidValue = false;
                 }
                 m_CommunicationFault = communicationFault;
             }
             #endregion - [ReadTimeout] -
+
+            #region - [Self Test Mode]
+            if (!ThreadCommWatchdog.InSelfTest)
+            {
+                // Disable the display until the fault has been cleared.
+                MainWindow.WriteStatusMessage("Target Hardware autonomously aborted self test", Color.Red, Color.Black);
+
+                SetPauseAndWait(CommonConstants.TimeoutMsPauseFeedback);
+                StopPolling(); 
+
+                // In case we're running a self test when the target aborted on its own, stop polling for results
+                GetResultsStop();
+
+                Escape.Enabled = true;
+                F1.Enabled = false;
+                F2.Enabled = false;
+                F3.Enabled = false;
+                F4.Enabled = false;
+                F5.Enabled = false;
+                Cursor = Cursors.Default;
+
+                // Disable the Abort/Continue buttons
+                m_ToolStripInteractiveTestVCUCommands.Enabled = false;
+
+                MainWindow.ShowBusyAnimation = false;
+
+                m_TimerCommWatchdog.Stop();
+
+            }
+            #endregion - [Self Test Mode]
+
 
 
             // Blink the icon to show that watch data is being updated.
@@ -1805,12 +1846,6 @@ namespace SelfTest.Forms
             if (IsDisposed)
             {
                 return;
-            }
-
-            // Main menu options.
-            if (MainWindow != null)
-            {
-                MainWindow.MenuStrip.Enabled = state;
             }
 
             m_ComboBoxTestList.Enabled = state;

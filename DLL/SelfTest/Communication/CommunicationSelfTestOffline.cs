@@ -20,11 +20,12 @@
  *  
  *  08/24/11    1.1     K.McD           1.  Removed support for debug mode to be consistent with other sub-systems.
  *  
- *  02/12/17    1.2     D.Smail         1.  Added CommunicationWatchdog method to the interface.
+ *  02/12/17    1.2.1   D.Smail         1.  Added CommunicationWatchdog method to the interface.
  *                                      2.  Removed all references to PTUDLL32 in method descriptions.
  *    
- *                                          
- * 
+ *  02/15/2017  1.2.2   D.Smail         Modifications
+ *                                      1.  Added a reference parameter to CommunicationWatchdog() method that is updated to indicate
+ *                                          whether or not the target hardware is in self test.
  */
 #endregion --- Revision History ---
 
@@ -172,8 +173,10 @@ namespace SelfTest.Communication
         /// <remarks>This request checks that the Propulsion System is still in self test mode</remarks>
         /// <exception cref="CommunicationException">Thrown if the error code returned from the call to SelfTestMarshal the CommunicationWatchdog() method is not 
         /// CommunicationError.Success.</exception>
-        public void CommunicationWatchdog()
+        /// <param name="InSelfTest">true if target hardware is in self test mode; false otherwise</param>
+        public void CommunicationWatchdog(ref Boolean InSelfTest)
         {
+            InSelfTest = true;
         }
 
         /// <summary>

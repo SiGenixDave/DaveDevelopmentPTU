@@ -27,8 +27,12 @@
  *                                  1.  Fixed issue with extracting "Reason" from GetSelftestSpecialMessage(). It's stored as a byte in the stream but returned as
  *                                      an 'out UINT16' so this had to be fixed.
  *                                      
- *  02/10/2017  1.2     D.Smail     Modifications
+ *  02/10/2017  1.2.1   D.Smail     Modifications
  *                                  1.  Added CommunicationWatchdog() method to support communication checks with VCU during self test.
+ *                                  
+ *  02/15/2017  1.2.2   D.Smail     Modifications
+ *                                  1.  Added a reference parameter to CommunicationWatchdog() method that is updated to indicate
+ *                                      whether or not the target hardware is in self test.
  *
  */
 #endregion --- Revision History ---
@@ -344,12 +348,20 @@ namespace Common.Communication
         /// <summary>
         /// Communication Watchdog while in self test.
         /// </summary>
+        /// <param name="InSelfTest">true if target hardware is currently in self test mode</param>
         /// <remarks>This call is used to check whether communication with the VCU has been lost.</remarks>
         /// <returns>Success, if the communication request was successful; otherwise, an error code.</returns>
-        public CommunicationError CommunicationWatchdog()
+        public CommunicationError CommunicationWatchdog(ref Boolean InSelfTest)
         {
             // Initiate transaction with embedded target
-            CommunicationError commError = m_PtuTargetCommunication.SendCommandToEmbedded(m_CommDevice, ProtocolPTU.PacketType.SELF_TEST_COMM_WATCHDOG);
+            CommunicationError commError = m_PtuTargetCommunication.SendDataRequestToEmbedded(m_CommDevice, 
+                                                                                              ProtocolPTU.PacketType.SELF_TEST_COMM_WATCHDOG,
+                                                                                              m_RxMessage);
+
+            if (commError == CommunicationError.Success)
+            {
+                InSelfTest = (m_RxMessage[8] != 1) ? false : true;
+            }
 
             return commError;
         }

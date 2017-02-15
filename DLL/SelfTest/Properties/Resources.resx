@@ -241,4 +241,7 @@
   <data name="EMCommunicationLost" xml:space="preserve">
     <value>Loss of Communications</value>
   </data>
+  <data name="MBTTargetHwAbortSelfTest" xml:space="preserve">
+    <value>Target hardware autonomously aborted self test.</value>
+  </data>
 </root>

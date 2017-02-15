@@ -21,7 +21,11 @@
  *  07/25/11    1.1     K.McD           1.  Modified the Tag definition in the InteractiveResults_t structure to be an int rather than short.
  *                                      2.  Modified the XML tag associated with the results parameter of the GetSelfTestResult() method.
  *                                      
- *  02/10/17    1.2     D.Smail         1. Added CommunicationWatchdog() to support watchdog communication checks during self test
+ *  02/10/17    1.2.1   D.Smail         1. Added CommunicationWatchdog() to support watchdog communication checks during self test
+ *  
+ *  02/15/17    1.2.2   D.Smail         Modifications
+ *                                      1.  Added a reference parameter to CommunicationWatchdog() method that is updated to indicate
+ *                                          whether or not the target hardware is in self test. 
  * 
  */
 #endregion --- Revision History ---
@@ -230,7 +234,8 @@ namespace Common.Communication
         /// <remarks>This request checks that the Propulsion System is still in self test mode</remarks>
         /// <exception cref="CommunicationException">Thrown if the error code returned from the call to the PTUDLL32.AbortSTSequence() method is not 
         /// CommunicationError.Success.</exception>
-        void CommunicationWatchdog();
+        /// <param name="InSelfTest">true if target hardware is in self test mode; false otherwise</param>
+        void CommunicationWatchdog(ref bool InSelfTest);
 
         /// <summary>
         /// Send an operator acknowledge message.
