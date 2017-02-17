@@ -181,9 +181,7 @@ namespace SelfTest.Forms
             // 
             this.m_TabPage1.Controls.Add(this.m_PanelWindowsHelpTestList);
             this.m_TabPage1.Controls.Add(this.m_PanelDataGridViewTestList);
-            this.m_TabPage1.Location = new System.Drawing.Point(4, 25);
             this.m_TabPage1.Padding = new System.Windows.Forms.Padding(12);
-            this.m_TabPage1.Size = new System.Drawing.Size(1192, 581);
             this.m_TabPage1.Text = "Selected Tests";
             // 
             // m_TabPageListResult
@@ -192,10 +190,10 @@ namespace SelfTest.Forms
             this.m_TabPageListResult.BackColor = System.Drawing.SystemColors.Window;
             this.m_TabPageListResult.Controls.Add(this.m_PanelWindowsHelpListResult);
             this.m_TabPageListResult.Controls.Add(this.m_PanelDataGridViewListResult);
-            this.m_TabPageListResult.Location = new System.Drawing.Point(4, 25);
+            this.m_TabPageListResult.Location = new System.Drawing.Point(4, 22);
             this.m_TabPageListResult.Name = "m_TabPageListResult";
             this.m_TabPageListResult.Padding = new System.Windows.Forms.Padding(12);
-            this.m_TabPageListResult.Size = new System.Drawing.Size(1192, 581);
+            this.m_TabPageListResult.Size = new System.Drawing.Size(1192, 584);
             this.m_TabPageListResult.TabIndex = 1;
             this.m_TabPageListResult.Text = "Result [List Format]";
             // 
@@ -206,7 +204,7 @@ namespace SelfTest.Forms
             this.m_PanelWindowsHelpListResult.Location = new System.Drawing.Point(492, 12);
             this.m_PanelWindowsHelpListResult.Name = "m_PanelWindowsHelpListResult";
             this.m_PanelWindowsHelpListResult.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.m_PanelWindowsHelpListResult.Size = new System.Drawing.Size(362, 557);
+            this.m_PanelWindowsHelpListResult.Size = new System.Drawing.Size(362, 560);
             this.m_PanelWindowsHelpListResult.TabIndex = 1;
             // 
             // m_GroupBoxInteractiveTest
@@ -219,7 +217,7 @@ namespace SelfTest.Forms
             this.m_GroupBoxInteractiveTest.ForeColor = System.Drawing.SystemColors.WindowText;
             this.m_GroupBoxInteractiveTest.Location = new System.Drawing.Point(10, 0);
             this.m_GroupBoxInteractiveTest.Name = "m_GroupBoxInteractiveTest";
-            this.m_GroupBoxInteractiveTest.Size = new System.Drawing.Size(350, 557);
+            this.m_GroupBoxInteractiveTest.Size = new System.Drawing.Size(350, 560);
             this.m_GroupBoxInteractiveTest.TabIndex = 0;
             this.m_GroupBoxInteractiveTest.TabStop = false;
             this.m_GroupBoxInteractiveTest.Visible = false;
@@ -229,9 +227,9 @@ namespace SelfTest.Forms
             this.m_PanelInteractiveTestVariableList.AutoScroll = true;
             this.m_PanelInteractiveTestVariableList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.m_PanelInteractiveTestVariableList.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.m_PanelInteractiveTestVariableList.Location = new System.Drawing.Point(3, 245);
+            this.m_PanelInteractiveTestVariableList.Location = new System.Drawing.Point(3, 243);
             this.m_PanelInteractiveTestVariableList.Name = "m_PanelInteractiveTestVariableList";
-            this.m_PanelInteractiveTestVariableList.Size = new System.Drawing.Size(344, 259);
+            this.m_PanelInteractiveTestVariableList.Size = new System.Drawing.Size(344, 264);
             this.m_PanelInteractiveTestVariableList.TabIndex = 0;
             // 
             // m_PanelInteractiveTestVCUCommands
@@ -239,7 +237,7 @@ namespace SelfTest.Forms
             this.m_PanelInteractiveTestVCUCommands.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.m_PanelInteractiveTestVCUCommands.Controls.Add(this.m_ToolStripInteractiveTestVCUCommands);
             this.m_PanelInteractiveTestVCUCommands.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.m_PanelInteractiveTestVCUCommands.Location = new System.Drawing.Point(3, 504);
+            this.m_PanelInteractiveTestVCUCommands.Location = new System.Drawing.Point(3, 507);
             this.m_PanelInteractiveTestVCUCommands.Name = "m_PanelInteractiveTestVCUCommands";
             this.m_PanelInteractiveTestVCUCommands.Padding = new System.Windows.Forms.Padding(1);
             this.m_PanelInteractiveTestVCUCommands.Size = new System.Drawing.Size(344, 50);
@@ -309,7 +307,7 @@ namespace SelfTest.Forms
             this.m_PanelInteractiveTestVariableHeader.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.m_PanelInteractiveTestVariableHeader.Controls.Add(this.m_LegendSelfTestVariableValues);
             this.m_PanelInteractiveTestVariableHeader.Dock = System.Windows.Forms.DockStyle.Top;
-            this.m_PanelInteractiveTestVariableHeader.Location = new System.Drawing.Point(3, 218);
+            this.m_PanelInteractiveTestVariableHeader.Location = new System.Drawing.Point(3, 216);
             this.m_PanelInteractiveTestVariableHeader.Name = "m_PanelInteractiveTestVariableHeader";
             this.m_PanelInteractiveTestVariableHeader.Size = new System.Drawing.Size(344, 27);
             this.m_PanelInteractiveTestVariableHeader.TabIndex = 0;
@@ -328,7 +326,7 @@ namespace SelfTest.Forms
             // m_PanelInteractiveTestHelp
             // 
             this.m_PanelInteractiveTestHelp.Dock = System.Windows.Forms.DockStyle.Top;
-            this.m_PanelInteractiveTestHelp.Location = new System.Drawing.Point(3, 18);
+            this.m_PanelInteractiveTestHelp.Location = new System.Drawing.Point(3, 16);
             this.m_PanelInteractiveTestHelp.Name = "m_PanelInteractiveTestHelp";
             this.m_PanelInteractiveTestHelp.Size = new System.Drawing.Size(344, 200);
             this.m_PanelInteractiveTestHelp.TabIndex = 0;
@@ -341,7 +339,7 @@ namespace SelfTest.Forms
             this.m_PanelDataGridViewListResult.Dock = System.Windows.Forms.DockStyle.Left;
             this.m_PanelDataGridViewListResult.Location = new System.Drawing.Point(12, 12);
             this.m_PanelDataGridViewListResult.Name = "m_PanelDataGridViewListResult";
-            this.m_PanelDataGridViewListResult.Size = new System.Drawing.Size(480, 557);
+            this.m_PanelDataGridViewListResult.Size = new System.Drawing.Size(480, 560);
             this.m_PanelDataGridViewListResult.TabIndex = 0;
             // 
             // m_DataGridViewListResult
@@ -390,7 +388,7 @@ namespace SelfTest.Forms
             this.m_DataGridViewListResult.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.m_DataGridViewListResult.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.m_DataGridViewListResult.ShowCellToolTips = false;
-            this.m_DataGridViewListResult.Size = new System.Drawing.Size(478, 555);
+            this.m_DataGridViewListResult.Size = new System.Drawing.Size(478, 558);
             this.m_DataGridViewListResult.StandardTab = true;
             this.m_DataGridViewListResult.TabIndex = 1;
             this.m_DataGridViewListResult.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.m_DataGridViewListResult_CellContentDoubleClick);
@@ -475,21 +473,21 @@ namespace SelfTest.Forms
             this.m_ToolStripMenuItemListResultShowDefinition,
             this.m_ToolStripMenuItemListResultFaultSummary});
             this.m_ContextMenuStripDataGridViewListResult.Name = "m_ContextMenuStripDataGridView";
-            this.m_ContextMenuStripDataGridViewListResult.Size = new System.Drawing.Size(215, 52);
+            this.m_ContextMenuStripDataGridViewListResult.Size = new System.Drawing.Size(184, 48);
             this.m_ContextMenuStripDataGridViewListResult.Opened += new System.EventHandler(this.m_ContextMenuStripDataGridViewListResult_Opened);
             // 
             // m_ToolStripMenuItemListResultShowDefinition
             // 
             this.m_ToolStripMenuItemListResultShowDefinition.Image = global::SelfTest.Properties.Resources.Help;
             this.m_ToolStripMenuItemListResultShowDefinition.Name = "m_ToolStripMenuItemListResultShowDefinition";
-            this.m_ToolStripMenuItemListResultShowDefinition.Size = new System.Drawing.Size(214, 24);
+            this.m_ToolStripMenuItemListResultShowDefinition.Size = new System.Drawing.Size(183, 22);
             this.m_ToolStripMenuItemListResultShowDefinition.Text = "Show Test &Definition";
             this.m_ToolStripMenuItemListResultShowDefinition.Click += new System.EventHandler(this.m_ToolStripMenuItemListResultShowDefinition_Click);
             // 
             // m_ToolStripMenuItemListResultFaultSummary
             // 
             this.m_ToolStripMenuItemListResultFaultSummary.Name = "m_ToolStripMenuItemListResultFaultSummary";
-            this.m_ToolStripMenuItemListResultFaultSummary.Size = new System.Drawing.Size(214, 24);
+            this.m_ToolStripMenuItemListResultFaultSummary.Size = new System.Drawing.Size(183, 22);
             this.m_ToolStripMenuItemListResultFaultSummary.Text = "&Fault Summary";
             this.m_ToolStripMenuItemListResultFaultSummary.Click += new System.EventHandler(this.m_ToolStripMenuItemListResultTestCaseAnalysis_Click);
             // 
@@ -507,7 +505,7 @@ namespace SelfTest.Forms
             0,
             0});
             this.m_NumericUpDownLoopCount.Name = "m_NumericUpDownLoopCount";
-            this.m_NumericUpDownLoopCount.Size = new System.Drawing.Size(44, 22);
+            this.m_NumericUpDownLoopCount.Size = new System.Drawing.Size(44, 20);
             this.m_NumericUpDownLoopCount.TabIndex = 0;
             this.m_NumericUpDownLoopCount.TabStop = false;
             this.m_NumericUpDownLoopCount.Value = new decimal(new int[] {
@@ -522,7 +520,7 @@ namespace SelfTest.Forms
             this.m_LegendLoopCount.BackColor = System.Drawing.Color.Transparent;
             this.m_LegendLoopCount.Location = new System.Drawing.Point(0, 9);
             this.m_LegendLoopCount.Name = "m_LegendLoopCount";
-            this.m_LegendLoopCount.Size = new System.Drawing.Size(81, 17);
+            this.m_LegendLoopCount.Size = new System.Drawing.Size(62, 13);
             this.m_LegendLoopCount.TabIndex = 0;
             this.m_LegendLoopCount.Text = "Loo&p Count";
             // 
@@ -532,7 +530,7 @@ namespace SelfTest.Forms
             this.m_CheckBoxLoopForever.BackColor = System.Drawing.Color.Transparent;
             this.m_CheckBoxLoopForever.Location = new System.Drawing.Point(150, 8);
             this.m_CheckBoxLoopForever.Name = "m_CheckBoxLoopForever";
-            this.m_CheckBoxLoopForever.Size = new System.Drawing.Size(115, 21);
+            this.m_CheckBoxLoopForever.Size = new System.Drawing.Size(89, 17);
             this.m_CheckBoxLoopForever.TabIndex = 0;
             this.m_CheckBoxLoopForever.TabStop = false;
             this.m_CheckBoxLoopForever.Text = "Loop Fore&ver";
@@ -545,10 +543,10 @@ namespace SelfTest.Forms
             this.m_TabPagePassFailResult.BackColor = System.Drawing.SystemColors.Window;
             this.m_TabPagePassFailResult.Controls.Add(this.m_PanelWindowsHelpPassFailResult);
             this.m_TabPagePassFailResult.Controls.Add(this.m_PanelDataGridViewPassFailResult);
-            this.m_TabPagePassFailResult.Location = new System.Drawing.Point(4, 25);
+            this.m_TabPagePassFailResult.Location = new System.Drawing.Point(4, 22);
             this.m_TabPagePassFailResult.Name = "m_TabPagePassFailResult";
             this.m_TabPagePassFailResult.Padding = new System.Windows.Forms.Padding(12);
-            this.m_TabPagePassFailResult.Size = new System.Drawing.Size(1192, 581);
+            this.m_TabPagePassFailResult.Size = new System.Drawing.Size(1192, 584);
             this.m_TabPagePassFailResult.TabIndex = 2;
             this.m_TabPagePassFailResult.Text = "Result [Pass/Fail Format]";
             // 
@@ -557,7 +555,7 @@ namespace SelfTest.Forms
             this.m_PanelWindowsHelpPassFailResult.Dock = System.Windows.Forms.DockStyle.Left;
             this.m_PanelWindowsHelpPassFailResult.Location = new System.Drawing.Point(492, 12);
             this.m_PanelWindowsHelpPassFailResult.Name = "m_PanelWindowsHelpPassFailResult";
-            this.m_PanelWindowsHelpPassFailResult.Size = new System.Drawing.Size(400, 557);
+            this.m_PanelWindowsHelpPassFailResult.Size = new System.Drawing.Size(400, 560);
             this.m_PanelWindowsHelpPassFailResult.TabIndex = 0;
             // 
             // m_PanelDataGridViewPassFailResult
@@ -568,7 +566,7 @@ namespace SelfTest.Forms
             this.m_PanelDataGridViewPassFailResult.Dock = System.Windows.Forms.DockStyle.Left;
             this.m_PanelDataGridViewPassFailResult.Location = new System.Drawing.Point(12, 12);
             this.m_PanelDataGridViewPassFailResult.Name = "m_PanelDataGridViewPassFailResult";
-            this.m_PanelDataGridViewPassFailResult.Size = new System.Drawing.Size(480, 557);
+            this.m_PanelDataGridViewPassFailResult.Size = new System.Drawing.Size(480, 560);
             this.m_PanelDataGridViewPassFailResult.TabIndex = 3;
             // 
             // m_DataGridViewPassFailResult
@@ -617,7 +615,7 @@ namespace SelfTest.Forms
             this.m_DataGridViewPassFailResult.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.m_DataGridViewPassFailResult.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.m_DataGridViewPassFailResult.ShowCellToolTips = false;
-            this.m_DataGridViewPassFailResult.Size = new System.Drawing.Size(478, 555);
+            this.m_DataGridViewPassFailResult.Size = new System.Drawing.Size(478, 558);
             this.m_DataGridViewPassFailResult.StandardTab = true;
             this.m_DataGridViewPassFailResult.TabIndex = 2;
             this.m_DataGridViewPassFailResult.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.m_DataGridViewPassFailResult_CellContentDoubleClick);
@@ -701,13 +699,13 @@ namespace SelfTest.Forms
             this.m_ContextMenuStripDataGridViewPassFailResult.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.m_ToolStripMenuItemPassFailResultShowDefinition});
             this.m_ContextMenuStripDataGridViewPassFailResult.Name = "m_ContextMenuStripDataGridView";
-            this.m_ContextMenuStripDataGridViewPassFailResult.Size = new System.Drawing.Size(215, 28);
+            this.m_ContextMenuStripDataGridViewPassFailResult.Size = new System.Drawing.Size(184, 48);
             // 
             // m_ToolStripMenuItemPassFailResultShowDefinition
             // 
             this.m_ToolStripMenuItemPassFailResultShowDefinition.Image = global::SelfTest.Properties.Resources.Help;
             this.m_ToolStripMenuItemPassFailResultShowDefinition.Name = "m_ToolStripMenuItemPassFailResultShowDefinition";
-            this.m_ToolStripMenuItemPassFailResultShowDefinition.Size = new System.Drawing.Size(214, 24);
+            this.m_ToolStripMenuItemPassFailResultShowDefinition.Size = new System.Drawing.Size(183, 22);
             this.m_ToolStripMenuItemPassFailResultShowDefinition.Text = "Show Test &Definition";
             this.m_ToolStripMenuItemPassFailResultShowDefinition.Click += new System.EventHandler(this.m_ToolStripMenuItemPassFailResultShowDefinition_Click);
             // 
@@ -719,7 +717,7 @@ namespace SelfTest.Forms
             this.m_PanelDataGridViewTestList.Dock = System.Windows.Forms.DockStyle.Left;
             this.m_PanelDataGridViewTestList.Location = new System.Drawing.Point(12, 12);
             this.m_PanelDataGridViewTestList.Name = "m_PanelDataGridViewTestList";
-            this.m_PanelDataGridViewTestList.Size = new System.Drawing.Size(480, 557);
+            this.m_PanelDataGridViewTestList.Size = new System.Drawing.Size(480, 560);
             this.m_PanelDataGridViewTestList.TabIndex = 0;
             // 
             // m_DataGridViewTestList
@@ -768,7 +766,7 @@ namespace SelfTest.Forms
             this.m_DataGridViewTestList.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.m_DataGridViewTestList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.m_DataGridViewTestList.ShowCellToolTips = false;
-            this.m_DataGridViewTestList.Size = new System.Drawing.Size(478, 555);
+            this.m_DataGridViewTestList.Size = new System.Drawing.Size(478, 558);
             this.m_DataGridViewTestList.StandardTab = true;
             this.m_DataGridViewTestList.TabIndex = 1;
             this.m_DataGridViewTestList.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.m_DataGridViewTestList_CellContentDoubleClick);
@@ -854,13 +852,13 @@ namespace SelfTest.Forms
             this.m_ContextMenuStripDataGridViewTestList.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.m_ToolStripMenuItemTestListShowDefinition});
             this.m_ContextMenuStripDataGridViewTestList.Name = "m_ContextMenuStripDataGridView";
-            this.m_ContextMenuStripDataGridViewTestList.Size = new System.Drawing.Size(215, 28);
+            this.m_ContextMenuStripDataGridViewTestList.Size = new System.Drawing.Size(184, 26);
             // 
             // m_ToolStripMenuItemTestListShowDefinition
             // 
             this.m_ToolStripMenuItemTestListShowDefinition.Image = global::SelfTest.Properties.Resources.Help;
             this.m_ToolStripMenuItemTestListShowDefinition.Name = "m_ToolStripMenuItemTestListShowDefinition";
-            this.m_ToolStripMenuItemTestListShowDefinition.Size = new System.Drawing.Size(214, 24);
+            this.m_ToolStripMenuItemTestListShowDefinition.Size = new System.Drawing.Size(183, 22);
             this.m_ToolStripMenuItemTestListShowDefinition.Text = "Show Test &Definition";
             this.m_ToolStripMenuItemTestListShowDefinition.Click += new System.EventHandler(this.m_ToolStripMenuItemTestListShowDefinition_Click);
             // 
@@ -869,7 +867,7 @@ namespace SelfTest.Forms
             this.m_PanelWindowsHelpTestList.Dock = System.Windows.Forms.DockStyle.Left;
             this.m_PanelWindowsHelpTestList.Location = new System.Drawing.Point(492, 12);
             this.m_PanelWindowsHelpTestList.Name = "m_PanelWindowsHelpTestList";
-            this.m_PanelWindowsHelpTestList.Size = new System.Drawing.Size(400, 557);
+            this.m_PanelWindowsHelpTestList.Size = new System.Drawing.Size(400, 560);
             this.m_PanelWindowsHelpTestList.TabIndex = 0;
             // 
             // m_ComboBoxTestList
@@ -878,7 +876,7 @@ namespace SelfTest.Forms
             this.m_ComboBoxTestList.FormattingEnabled = true;
             this.m_ComboBoxTestList.Location = new System.Drawing.Point(963, 5);
             this.m_ComboBoxTestList.Name = "m_ComboBoxTestList";
-            this.m_ComboBoxTestList.Size = new System.Drawing.Size(200, 24);
+            this.m_ComboBoxTestList.Size = new System.Drawing.Size(200, 21);
             this.m_ComboBoxTestList.TabIndex = 1;
             // 
             // m_LegendTestList
@@ -888,7 +886,7 @@ namespace SelfTest.Forms
             this.m_LegendTestList.BackColor = System.Drawing.Color.Transparent;
             this.m_LegendTestList.Location = new System.Drawing.Point(908, 8);
             this.m_LegendTestList.Name = "m_LegendTestList";
-            this.m_LegendTestList.Size = new System.Drawing.Size(66, 17);
+            this.m_LegendTestList.Size = new System.Drawing.Size(50, 13);
             this.m_LegendTestList.TabIndex = 0;
             this.m_LegendTestList.Text = "Test List:";
             // 

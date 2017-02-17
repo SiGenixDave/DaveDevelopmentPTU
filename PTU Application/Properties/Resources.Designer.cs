@@ -187,6 +187,15 @@ namespace Bombardier.PTU.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Loss Of Communications.
+        /// </summary>
+        internal static string EMCommunicationsLoss {
+            get {
+                return ResourceManager.GetString("EMCommunicationsLoss", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
         internal static string Empty {

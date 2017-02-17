@@ -502,7 +502,7 @@
 
 #region - [2.6] -
 /*
- *  02/10/17    2.6     D.Smail     Modifications
+ *  02/10/17    2.6.1   D.Smail     Modifications
  *                                  1.  Made changes to the form so that when communication is lost between the PTU and VCU, all buttons are disabled
  *                                      (besides Home) to indicate to the user that he/she must go back to the Home Screen and attempt to reconnect to
  *                                      the VCU. 
@@ -512,6 +512,12 @@
  *                                      Screen when communications is lost. Prior to this change, the Home Screen still had Watch, Event,
  *                                      Test, and Sys Info buttons enabled even after communications was lost.
  *
+ *  02/17/17    2.6.2   D.Smail     Modifications
+ *                                  1.  When communication is lost to the target hardware, disable all controls
+ *                                      except the "Home" button. This includes the ability to select the Data Dictionary as well as 
+ *                                      the ability to sort previously downloaded events (the reason being is the message bar is updated when
+ *                                      sorting and the "Loss oF Communications" is removed).
+ *                                      the Watch Variables.
  * 
  */
 #endregion - [2.6] -
@@ -1777,6 +1783,11 @@ namespace Event.Forms
                     F6.Enabled = false;
                     F7.Enabled = false;
                     F8.Enabled = false;
+
+                    m_ToolStripComboBox1.Enabled = false;
+                    m_PanelInformation.Enabled = false;
+                    m_DataGridViewEventLog.Enabled = false;
+                    m_PanelEventVariables.Enabled = false;
                 }
                 else
                 {
@@ -1806,6 +1817,11 @@ namespace Event.Forms
                     F6.Enabled = false;
                     F7.Enabled = false;
                     F8.Enabled = false;
+
+                    m_ToolStripComboBox1.Enabled = false;
+                    m_PanelInformation.Enabled = false;
+                    m_DataGridViewEventLog.Enabled = false;
+                    m_PanelEventVariables.Enabled = false;
                 }
                 else
                 {

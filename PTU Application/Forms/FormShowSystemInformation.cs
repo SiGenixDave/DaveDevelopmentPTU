@@ -90,9 +90,13 @@
  *                                      Modifications
  *                                      1.  Automatic update resulting from changing the name of the 'Car Identifier' Label to m_LabelCarNumber.
  *                                      
- *  02/13/17    1.13     D.Smail        Modifications
+ *  02/13/17    1.13.1   D.Smail        Modifications
  *                                      1.  When communications loss occurs, reset all buttons to "Configuration/Unconnected" state
  *                                          on the home screen.
+ *    
+ *  02/16/17    1.13.2   D.Smail        Modifications
+ *                                      1.  When communications loss occurs, instead of displaying pop-up MessageBox, indicate loss of 
+ *                                          communications in the status bar.
  *    
  *                                          
  */
@@ -107,6 +111,7 @@ using Common.Communication;
 using Common.Configuration;
 using Common.Forms;
 using Common;
+using System.Drawing;
 
 namespace Bombardier.PTU.Forms
 {
@@ -276,14 +281,12 @@ namespace Bombardier.PTU.Forms
             {
                 CommunicationInterface.GetEmbeddedInformation(out targetConfiguration);
             }
-            catch (CommunicationException communicationException)
+            catch (CommunicationException)
             {
-                MessageBox.Show(communicationException.Message, Resources.MBCaptionError, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                MainWindow.WriteStatusMessage(string.Empty);
+                MainWindow.WriteStatusMessage(Resources.EMCommunicationsLoss, Color.Red, Color.Black);
                 CommunicationInterface.CloseCommunication(CommunicationInterface.CommunicationSetting.Protocol);
                 // This resets the main screen so that the user has to reconnect to target hardware
                 MainWindow.SetMode(Mode.Configuration);
-                Close();
                 return;
             }
 
@@ -323,15 +326,12 @@ namespace Bombardier.PTU.Forms
             catch (CommunicationException)
             {
                 m_TimerDisplayUpdate.Stop();
-                MessageBox.Show(Resources.MBTDateTimeGetFailed, Resources.MBCaptionError, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                MainWindow.WriteStatusMessage(string.Empty);
+                MainWindow.WriteStatusMessage(Resources.EMCommunicationsLoss, Color.Red, Color.Black);
                 
                 CommunicationInterface.CloseCommunication(CommunicationInterface.CommunicationSetting.Protocol);
                 // This resets the main screen so that the user has to reconnect to target hardware
                 MainWindow.SetMode(Mode.Configuration);
 
-                Close();
-                return;
             }
 
             MainWindow.BlinkUpdateIcon();

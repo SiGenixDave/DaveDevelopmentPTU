@@ -703,4 +703,7 @@
   <data name="FilenameSoftwareUserManualPTUBart" xml:space="preserve">
     <value>PTU-SoftwareUserManual.chm</value>
   </data>
+  <data name="EMCommunicationsLoss" xml:space="preserve">
+    <value>Loss Of Communications</value>
+  </data>
 </root>

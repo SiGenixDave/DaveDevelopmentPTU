@@ -2423,7 +2423,7 @@ using System.Resources;
 // information associated with an assembly.
 [assembly: AssemblyCompany("Bombardier Transportation (Holdings) USA Inc.")]
 [assembly: AssemblyProduct("Portable Test Application")]
-[assembly: AssemblyCopyright("(C) 2010 - 2016 Bombardier Transportation (Holdings) USA Inc.")]
+[assembly: AssemblyCopyright("(C) 2010 - 2017 Bombardier Transportation (Holdings) USA Inc.")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 [assembly: NeutralResourcesLanguageAttribute("")]
@@ -2437,4 +2437,4 @@ using System.Resources;
 //
 // You can specify all the values or you can default the Revision and Build Numbers by using the '*'.
 
-[assembly: AssemblyVersion("6.18.5.0")]
+[assembly: AssemblyVersion("6.18.5.1")]

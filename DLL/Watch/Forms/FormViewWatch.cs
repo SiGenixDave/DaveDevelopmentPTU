@@ -343,9 +343,14 @@
 
 #region - [1.17] -
 /*
- *  02/13/17    1.17    D.Smail     Modifications
+ *  02/13/17    1.17.1  D.Smail     Modifications
  *                                  1.  If recording data and communications is lost, then save the existing
  *                                      information to the file and "kill" the recording information panel.
+ *                                     
+ *  02/17/17    1.17.2  D.Smail     Modifications
+ *                                  1.  When communication is lost to the target hardware, disable all controls
+ *                                      except the "Home" button. This includes the ability to select the Workset and
+ *                                      the Watch Variables.
  *                                     
  */
 #endregion - [1.17] -
@@ -1344,6 +1349,10 @@ namespace Watch.Forms
                     F3.Enabled = false;
                     F5.Enabled = false;
 
+                    m_ToolStripComboBox1.Enabled = false;
+                    m_PanelInformation.Enabled = false;
+                    m_TabControl.Enabled = false;
+
                     if (m_Record)
                     {
                         SaveRecordedWatchData(m_FullyQualifiedFilename, m_WatchFileRecordedData);
@@ -1377,6 +1386,10 @@ namespace Watch.Forms
                     F2.Enabled = false;
                     F3.Enabled = false;
                     F5.Enabled = false;
+
+                    m_ToolStripComboBox1.Enabled = false;
+                    m_PanelInformation.Enabled = false;
+                    m_TabControl.Enabled = false;
 
                     if (m_Record)
                     {

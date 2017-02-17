@@ -192,7 +192,11 @@
  *                                      2.  Fix issue with "non Self test watchdog" code that gracefully exists self test when a loss of communication
  *                                          is detected. Instead of MessageBox pop-up, the software now displays a loss of comm message and disables 
  *                                          all buttons except "Home".
- * 
+ *                                          
+ *  02/17/2017  1.15.2  D.Smail         Modifications
+ *                                      1.  When communication is lost to the target hardware, disable all controls
+ *                                          except the "Home" button. This includes the ability to select self test lists
+ *                                          as well "de-blueing" previously selected buttons (Enum and Execute).
  * 
  * 
  */
@@ -926,6 +930,7 @@ namespace SelfTest.Forms
             m_PanelWindowsHelpListResult.Width = m_GroupBoxInteractiveTest.Width + WidthBorder;
             m_PanelWindowsHelpPassFailResult.Width = m_SelfTestVariableControlSize.Size.Width;
             #endregion - [Panels] -
+
         }
         #endregion - [Form] -
 
@@ -1035,6 +1040,8 @@ namespace SelfTest.Forms
             }
 
             F3.Checked = true;
+            
+            
             SetEnabled(false);
 
             // Display the tab page that shows the results in list format.
@@ -1586,12 +1593,19 @@ namespace SelfTest.Forms
                     F3.Enabled = false;
                     F4.Enabled = false;
                     F5.Enabled = false;
+                    
+                    // Eliminate "blue" checked color
+                    F1.Checked = false;
+                    F3.Checked = false;
+
                     Cursor = Cursors.Default;
 
                     // Disable the Abort/Continue buttons
                     m_ToolStripInteractiveTestVCUCommands.Enabled = false;
-
+                    m_PanelInformation.Enabled = false;
+                    MainWindow.ShowBusyAnimation = false;
                     m_TimerCommWatchdog.Stop();
+
 
                 }
                 else
@@ -1617,11 +1631,17 @@ namespace SelfTest.Forms
                     F3.Enabled = false;
                     F4.Enabled = false;
                     F5.Enabled = false;
+
+                    // Eliminate "blue" checked color
+                    F1.Checked = false;
+                    F3.Checked = false;
+
                     Cursor = Cursors.Default;
 
                     // Disable the Abort/Continue buttons
                     m_ToolStripInteractiveTestVCUCommands.Enabled = false;
-
+                    m_PanelInformation.Enabled = false;
+                    MainWindow.ShowBusyAnimation = false;
                     m_TimerCommWatchdog.Stop();
 
                 }
@@ -1656,10 +1676,10 @@ namespace SelfTest.Forms
 
                 // Disable the Abort/Continue buttons
                 m_ToolStripInteractiveTestVCUCommands.Enabled = false;
-
+                m_PanelInformation.Enabled = false;
                 MainWindow.ShowBusyAnimation = false;
-
                 m_TimerCommWatchdog.Stop();
+
 
             }
             #endregion - [Self Test Mode]
@@ -1762,14 +1782,23 @@ namespace SelfTest.Forms
                     F3.Enabled = false;
                     F4.Enabled = false;
                     F5.Enabled = false;
+
+                    // Eliminate "blue" checked color
+                    F1.Checked = false;
+                    F3.Checked = false;
+
                     Cursor = Cursors.Default;
 
                     // Disable the Abort/Continue buttons
                     m_ToolStripInteractiveTestVCUCommands.Enabled = false;
+                    m_PanelInformation.Enabled = false;
+                    MainWindow.ShowBusyAnimation = false;
 
                     // Set this flag so that when returning to the Main screen, the Main buttons that would normally be enabled 
                     // (i.e. connection still exists) will be disabled
                     m_CommunicationFault = true;
+
+
                 }
                 return;
             }

@@ -50,7 +50,7 @@ namespace Watch.Forms
             // 
             this.m_LabelProgressBar.ForeColor = System.Drawing.Color.Red;
             this.m_LabelProgressBar.Location = new System.Drawing.Point(616, 8);
-            this.m_LabelProgressBar.Size = new System.Drawing.Size(77, 17);
+            this.m_LabelProgressBar.Size = new System.Drawing.Size(59, 13);
             this.m_LabelProgressBar.Text = "Recording:";
             // 
             // m_ProgressBar
@@ -68,8 +68,6 @@ namespace Watch.Forms
             // 
             // m_TabPage1
             // 
-            this.m_TabPage1.Location = new System.Drawing.Point(4, 25);
-            this.m_TabPage1.Size = new System.Drawing.Size(1192, 581);
             this.m_TabPage1.Click += new System.EventHandler(this.TabPage_Click);
             // 
             // FormViewWatch
