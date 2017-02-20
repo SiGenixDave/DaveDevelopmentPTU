@@ -423,7 +423,7 @@
  */
 
 /* 
- *  02/03/16    2.4     DAS         References
+ *  02/03/16    2.4     D.Smail     References
  *                                  1.  Bug Fix - SNCR - R188 [20-Mar215] Item 37. Fixed issues associated with logging and displaying real time events while
  *                                      displaying the event viewer. Updated the events sub-system to support real time events (events that occur while viewing the
  *                                      event viewer) and give the ability to add and remove events. The ability to remove events from the display is needed when
@@ -434,6 +434,7 @@
  *                                  2.  Added the m_OldEventIndex member variable and OldEventIndex property.
  *                                  3   Changed the signature of the AddList() method to include the eventsToRemove parameter and updated any calls to AddList()
  *                                      to include this new parameter.
+ *                                      
  *                                      
  * 
  */
@@ -518,6 +519,11 @@
  *                                      the ability to sort previously downloaded events (the reason being is the message bar is updated when
  *                                      sorting and the "Loss oF Communications" is removed).
  *                                      the Watch Variables.
+ *                                  2. When communication is lost when trying to save event logs, the code now
+ *                                     does not try to re-establish communication with the target hardware. It just 
+ *                                     flags the error with a Message Box an if the polling for new events fails
+ *                                     because of a communication error, then the user will be informed with
+ *                                     a message in the Message status and all controls will be disabled.
  * 
  */
 #endregion - [2.6] -
@@ -3248,10 +3254,6 @@ namespace Event.Forms
                                 MessageBox.Show(string.Format(Resources.MBTSaveDataStreamsFailed, eventRecord.Description), Resources.MBCaptionError,
                                                 MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-                                // Reset the communication port.
-                                CommunicationInterface.CloseCommunication(CommunicationInterface.CommunicationSetting.Protocol);
-                                CommunicationInterface.InitCommunication(CommunicationInterface.CommunicationSetting);
-
                                 userCancelled = true;
                                 return userCancelled;
                             }
@@ -3262,8 +3264,8 @@ namespace Event.Forms
                                             MessageBoxIcon.Error);
 
                             // Reset the communication port.
-                            CommunicationInterface.CloseCommunication(CommunicationInterface.CommunicationSetting.Protocol);
-                            CommunicationInterface.InitCommunication(CommunicationInterface.CommunicationSetting);
+                            //DAS CommunicationInterface.CloseCommunication(CommunicationInterface.CommunicationSetting.Protocol);
+                            //DAS CommunicationInterface.InitCommunication(CommunicationInterface.CommunicationSetting);
                             continue;
                         }
                         finally

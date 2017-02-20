@@ -301,7 +301,10 @@ namespace Watch
                                 // Close the communication Port.
                                 m_CommunicationInterface.CloseCommunication(m_CommunicationInterface.CommunicationSetting.Protocol);
 
-                                // Keep the watchdog ticking over so that the client can deteremine whether the port has locked. 
+                                // Keep the watchdog ticking over so that the client can determine whether the port has locked. 
+
+                                //DAS TODO when a comm fault occurs this loop never exits and the thread runs forever and is 
+                                //not properly disposed. Will need to fix and other similar classes
                                 do
                                 {
                                     m_Watchdog++;
