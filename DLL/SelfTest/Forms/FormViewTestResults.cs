@@ -197,7 +197,11 @@
  *                                      1.  When communication is lost to the target hardware, disable all controls
  *                                          except the "Home" button. This includes the ability to select self test lists
  *                                          as well "de-blueing" previously selected buttons (Enum and Execute).
- * 
+ *                                          
+ *  02/17/2017  1.15.2  D.Smail         Modifications
+ *                                      1.  When communication is lost to the target hardware or the target hardware exits
+ *                                          self test on its own, disable the self test tab control so that the user can't
+ *                                          select any test. 
  * 
  */
 #endregion - [1.15] -
@@ -1598,6 +1602,9 @@ namespace SelfTest.Forms
                     F1.Checked = false;
                     F3.Checked = false;
 
+                    m_TabControl.Enabled = false;
+
+
                     Cursor = Cursors.Default;
 
                     // Disable the Abort/Continue buttons
@@ -1635,6 +1642,8 @@ namespace SelfTest.Forms
                     // Eliminate "blue" checked color
                     F1.Checked = false;
                     F3.Checked = false;
+
+                    m_TabControl.Enabled = false;
 
                     Cursor = Cursors.Default;
 
@@ -1786,6 +1795,9 @@ namespace SelfTest.Forms
                     // Eliminate "blue" checked color
                     F1.Checked = false;
                     F3.Checked = false;
+
+                    m_TabControl.Enabled = false;
+
 
                     Cursor = Cursors.Default;
 

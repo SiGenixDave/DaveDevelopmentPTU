@@ -473,21 +473,21 @@ namespace SelfTest.Forms
             this.m_ToolStripMenuItemListResultShowDefinition,
             this.m_ToolStripMenuItemListResultFaultSummary});
             this.m_ContextMenuStripDataGridViewListResult.Name = "m_ContextMenuStripDataGridView";
-            this.m_ContextMenuStripDataGridViewListResult.Size = new System.Drawing.Size(184, 48);
+            this.m_ContextMenuStripDataGridViewListResult.Size = new System.Drawing.Size(215, 52);
             this.m_ContextMenuStripDataGridViewListResult.Opened += new System.EventHandler(this.m_ContextMenuStripDataGridViewListResult_Opened);
             // 
             // m_ToolStripMenuItemListResultShowDefinition
             // 
             this.m_ToolStripMenuItemListResultShowDefinition.Image = global::SelfTest.Properties.Resources.Help;
             this.m_ToolStripMenuItemListResultShowDefinition.Name = "m_ToolStripMenuItemListResultShowDefinition";
-            this.m_ToolStripMenuItemListResultShowDefinition.Size = new System.Drawing.Size(183, 22);
+            this.m_ToolStripMenuItemListResultShowDefinition.Size = new System.Drawing.Size(214, 24);
             this.m_ToolStripMenuItemListResultShowDefinition.Text = "Show Test &Definition";
             this.m_ToolStripMenuItemListResultShowDefinition.Click += new System.EventHandler(this.m_ToolStripMenuItemListResultShowDefinition_Click);
             // 
             // m_ToolStripMenuItemListResultFaultSummary
             // 
             this.m_ToolStripMenuItemListResultFaultSummary.Name = "m_ToolStripMenuItemListResultFaultSummary";
-            this.m_ToolStripMenuItemListResultFaultSummary.Size = new System.Drawing.Size(183, 22);
+            this.m_ToolStripMenuItemListResultFaultSummary.Size = new System.Drawing.Size(214, 24);
             this.m_ToolStripMenuItemListResultFaultSummary.Text = "&Fault Summary";
             this.m_ToolStripMenuItemListResultFaultSummary.Click += new System.EventHandler(this.m_ToolStripMenuItemListResultTestCaseAnalysis_Click);
             // 
@@ -520,7 +520,7 @@ namespace SelfTest.Forms
             this.m_LegendLoopCount.BackColor = System.Drawing.Color.Transparent;
             this.m_LegendLoopCount.Location = new System.Drawing.Point(0, 9);
             this.m_LegendLoopCount.Name = "m_LegendLoopCount";
-            this.m_LegendLoopCount.Size = new System.Drawing.Size(62, 13);
+            this.m_LegendLoopCount.Size = new System.Drawing.Size(70, 15);
             this.m_LegendLoopCount.TabIndex = 0;
             this.m_LegendLoopCount.Text = "Loo&p Count";
             // 
@@ -530,7 +530,7 @@ namespace SelfTest.Forms
             this.m_CheckBoxLoopForever.BackColor = System.Drawing.Color.Transparent;
             this.m_CheckBoxLoopForever.Location = new System.Drawing.Point(150, 8);
             this.m_CheckBoxLoopForever.Name = "m_CheckBoxLoopForever";
-            this.m_CheckBoxLoopForever.Size = new System.Drawing.Size(89, 17);
+            this.m_CheckBoxLoopForever.Size = new System.Drawing.Size(101, 19);
             this.m_CheckBoxLoopForever.TabIndex = 0;
             this.m_CheckBoxLoopForever.TabStop = false;
             this.m_CheckBoxLoopForever.Text = "Loop Fore&ver";
@@ -699,13 +699,13 @@ namespace SelfTest.Forms
             this.m_ContextMenuStripDataGridViewPassFailResult.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.m_ToolStripMenuItemPassFailResultShowDefinition});
             this.m_ContextMenuStripDataGridViewPassFailResult.Name = "m_ContextMenuStripDataGridView";
-            this.m_ContextMenuStripDataGridViewPassFailResult.Size = new System.Drawing.Size(184, 48);
+            this.m_ContextMenuStripDataGridViewPassFailResult.Size = new System.Drawing.Size(215, 28);
             // 
             // m_ToolStripMenuItemPassFailResultShowDefinition
             // 
             this.m_ToolStripMenuItemPassFailResultShowDefinition.Image = global::SelfTest.Properties.Resources.Help;
             this.m_ToolStripMenuItemPassFailResultShowDefinition.Name = "m_ToolStripMenuItemPassFailResultShowDefinition";
-            this.m_ToolStripMenuItemPassFailResultShowDefinition.Size = new System.Drawing.Size(183, 22);
+            this.m_ToolStripMenuItemPassFailResultShowDefinition.Size = new System.Drawing.Size(214, 24);
             this.m_ToolStripMenuItemPassFailResultShowDefinition.Text = "Show Test &Definition";
             this.m_ToolStripMenuItemPassFailResultShowDefinition.Click += new System.EventHandler(this.m_ToolStripMenuItemPassFailResultShowDefinition_Click);
             // 
@@ -852,13 +852,13 @@ namespace SelfTest.Forms
             this.m_ContextMenuStripDataGridViewTestList.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.m_ToolStripMenuItemTestListShowDefinition});
             this.m_ContextMenuStripDataGridViewTestList.Name = "m_ContextMenuStripDataGridView";
-            this.m_ContextMenuStripDataGridViewTestList.Size = new System.Drawing.Size(184, 26);
+            this.m_ContextMenuStripDataGridViewTestList.Size = new System.Drawing.Size(215, 28);
             // 
             // m_ToolStripMenuItemTestListShowDefinition
             // 
             this.m_ToolStripMenuItemTestListShowDefinition.Image = global::SelfTest.Properties.Resources.Help;
             this.m_ToolStripMenuItemTestListShowDefinition.Name = "m_ToolStripMenuItemTestListShowDefinition";
-            this.m_ToolStripMenuItemTestListShowDefinition.Size = new System.Drawing.Size(183, 22);
+            this.m_ToolStripMenuItemTestListShowDefinition.Size = new System.Drawing.Size(214, 24);
             this.m_ToolStripMenuItemTestListShowDefinition.Text = "Show Test &Definition";
             this.m_ToolStripMenuItemTestListShowDefinition.Click += new System.EventHandler(this.m_ToolStripMenuItemTestListShowDefinition_Click);
             // 
@@ -886,7 +886,7 @@ namespace SelfTest.Forms
             this.m_LegendTestList.BackColor = System.Drawing.Color.Transparent;
             this.m_LegendTestList.Location = new System.Drawing.Point(908, 8);
             this.m_LegendTestList.Name = "m_LegendTestList";
-            this.m_LegendTestList.Size = new System.Drawing.Size(50, 13);
+            this.m_LegendTestList.Size = new System.Drawing.Size(55, 15);
             this.m_LegendTestList.TabIndex = 0;
             this.m_LegendTestList.Text = "Test List:";
             // 
