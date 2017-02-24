@@ -1651,6 +1651,7 @@ namespace SelfTest.Forms
                     m_ToolStripInteractiveTestVCUCommands.Enabled = false;
                     m_PanelInformation.Enabled = false;
                     MainWindow.ShowBusyAnimation = false;
+                    MainWindow.CommunicationInterface = null;
                     m_TimerCommWatchdog.Stop();
 
                 }
@@ -1667,6 +1668,7 @@ namespace SelfTest.Forms
             if (!ThreadCommWatchdog.InSelfTest)
             {
                 // Disable the display until the fault has been cleared.
+                // TODO - Add Resource
                 MainWindow.WriteStatusMessage("Target Hardware autonomously aborted self test", Color.Red, Color.Black);
 
                 SetPauseAndWait(CommonConstants.TimeoutMsPauseFeedback);
@@ -1687,9 +1689,8 @@ namespace SelfTest.Forms
                 m_ToolStripInteractiveTestVCUCommands.Enabled = false;
                 m_PanelInformation.Enabled = false;
                 MainWindow.ShowBusyAnimation = false;
+                MainWindow.CommunicationInterface = null;
                 m_TimerCommWatchdog.Stop();
-
-
             }
             #endregion - [Self Test Mode]
 
@@ -1874,6 +1875,7 @@ namespace SelfTest.Forms
                     CommunicationInterface.CloseCommunication(CommunicationInterface.CommunicationSetting.Protocol);
                     // This resets the main screen so that the user has to reconnect to target hardware
                     MainWindow.SetMode(Mode.Configuration);
+                    MainWindow.CommunicationInterface = null;
                 }
                 else
                 {
@@ -1889,7 +1891,7 @@ namespace SelfTest.Forms
             }
 
             Escape.Checked = false;
-
+            MainWindow.ResumePollingTargetHardware();
             base.Exit();
             Cursor.Current = Cursors.Default;
         }

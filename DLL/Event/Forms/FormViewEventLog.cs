@@ -2215,6 +2215,7 @@ namespace Event.Forms
                         {
                             CommunicationInterface.CloseCommunication(CommunicationInterface.CommunicationSetting.Protocol);
                             MainWindow.SetMode(Mode.Configuration);
+                            MainWindow.CommunicationInterface = null;
                         }
                     }
                     catch (CommunicationException)
@@ -2239,6 +2240,7 @@ namespace Event.Forms
                 this.PerformLayout();
 
                 Escape.Checked = false;
+                MainWindow.ResumePollingTargetHardware();
                 base.Exit();
                 Cursor.Current = Cursors.Default;
             }

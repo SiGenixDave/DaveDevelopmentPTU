@@ -797,6 +797,20 @@ namespace Bombardier.PTU
                         m_TimerWibuBox.Tick -= new EventHandler(WibuBoxCheck);
                         m_TimerWibuBox.Dispose();
                     }
+
+                    if (m_CommTimer != null)
+                    {
+                        m_CommTimer.Stop();
+                        m_CommTimer.Enabled = false;
+                        m_CommTimer.Tick -= new EventHandler(m_CommTimer_Tick);
+                        m_CommTimer.Dispose();
+                    }
+
+                    if (m_ThreadCommTarget != null)
+                    {
+                        m_ThreadCommTarget.Kill();
+                        m_ThreadCommTarget = null;
+                    }
                 }
 
                 // Whether called by consumer code or the garbage collector free all unmanaged resources and set the value of managed data 
@@ -1188,6 +1202,7 @@ namespace Bombardier.PTU
         /// <param name="e">Parameter passed from the object that raised the event.</param>
         private void m_MenuItemViewSystemInformation_Click(object sender, EventArgs e)
         {
+            PauseCommThread();
             m_MenuInterfaceApplication.ShowSystemInformation();
         }
         #endregion - [VIEW] -
@@ -1442,6 +1457,8 @@ namespace Bombardier.PTU
 				try
 				{
 					this.Cursor = Cursors.WaitCursor;
+                    //TODO 
+                    WriteStatusMessage("Disconnected from Target Hardware");
 					CommunicationInterface.CloseCommunication(CommunicationInterface.CommunicationSetting.Protocol);
 				}
 				catch (CommunicationException ex)
@@ -1477,6 +1494,9 @@ namespace Bombardier.PTU
                 return;
             }
 
+            //TODO
+            WriteStatusMessage("Polling for Target Hardware");
+
             // ---------------------------------------------------------
             // Show the form to allow the user to select a valid target.
             // ---------------------------------------------------------
@@ -1488,6 +1508,8 @@ namespace Bombardier.PTU
             // Skip, if no target logic was selected.
             if (formSelectTarget.TargetSelected != true)
             {
+                //TODO
+                WriteStatusMessage(string.Empty);
                 this.Cursor = Cursors.Default;
                 return;
             }
@@ -1526,6 +1548,9 @@ namespace Bombardier.PTU
                 FileHeader.HeaderCurrent = header;
 
                 SetMode(Mode.Online);
+
+                //TODO 
+                WriteStatusMessage("Successfully Connected to target hardware");
 
                 // Check whether the most recently downloaded event log was saved to disk and update the LogStatus StatusStrip.
                 LogStatus = EventLogSavedStatus.Unknown;
@@ -1586,6 +1611,9 @@ namespace Bombardier.PTU
 
                 // Update the LogStatus StatusStrip.
                 LogStatus = EventLogSavedStatus.NotApplicable;
+
+                //TODO
+                WriteStatusMessage("Disconnected from Target Simulation");
                 #endregion - [Return to Configuration Mode] -
                 return;
             }
@@ -1619,6 +1647,11 @@ namespace Bombardier.PTU
             {
                 m_MenuInterfaceWatch.ViewWatchWindow();
             }
+
+            //TODO 
+            WriteStatusMessage("Connected to Target Simulation");
+
+
             #endregion - [Go Offline] -
             this.Cursor = Cursors.Default;
         }
@@ -2140,6 +2173,8 @@ namespace Bombardier.PTU
             set { m_DisplayQueryExit = value; }
         }
         #endregion - [IMainWindow] -
+
         #endregion --- Properties ---
+
     }
 }

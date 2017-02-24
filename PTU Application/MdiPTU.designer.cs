@@ -635,7 +635,7 @@ namespace Bombardier.PTU
             this.m_DigitalControlPacketReceived.BackColorOff = System.Drawing.SystemColors.Window;
             this.m_DigitalControlPacketReceived.BackColorOn = System.Drawing.Color.Orange;
             this.m_DigitalControlPacketReceived.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.m_DigitalControlPacketReceived.DigitalControlText = global::Bombardier.PTU.Properties.Resources.Empty;
+            this.m_DigitalControlPacketReceived.DigitalControlText = global::Bombardier.PTU.Properties.Resources.LabelModeDiagnostic;
             this.m_DigitalControlPacketReceived.ForeColorOff = System.Drawing.SystemColors.ControlText;
             this.m_DigitalControlPacketReceived.ForeColorOn = System.Drawing.SystemColors.ControlText;
             this.m_DigitalControlPacketReceived.IntervalBlinkMs = 100;

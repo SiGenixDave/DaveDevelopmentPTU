@@ -1352,6 +1352,7 @@ namespace Watch.Forms
                     m_ToolStripComboBox1.Enabled = false;
                     m_PanelInformation.Enabled = false;
                     m_TabControl.Enabled = false;
+                    MainWindow.CommunicationInterface = null;
 
                     if (m_Record)
                     {
@@ -1390,6 +1391,7 @@ namespace Watch.Forms
                     m_ToolStripComboBox1.Enabled = false;
                     m_PanelInformation.Enabled = false;
                     m_TabControl.Enabled = false;
+                    MainWindow.CommunicationInterface = null;
 
                     if (m_Record)
                     {
@@ -1675,15 +1677,17 @@ namespace Watch.Forms
                 {
                     CommunicationInterface.CloseCommunication(CommunicationInterface.CommunicationSetting.Protocol);
                     MainWindow.SetMode(Mode.Configuration);
+                    MainWindow.CommunicationInterface = null;
                 }
             }
 
+            MainWindow.ResumePollingTargetHardware();
             base.Exit();
         }
 
         /// <summary>
         /// Process any form specific changes to the menu system or function keys resulting from a change in the security level of the user. Check
-        /// whether the new securitly level allows the user to edit the current workset.
+        /// whether the new security level allows the user to edit the current workset.
         /// </summary>
         /// <param name="security">Reference to the security class.</param>
         public override void UpdateMenu(Security security)

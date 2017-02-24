@@ -478,6 +478,7 @@ using Common.Configuration;
 using Common.Forms;
 using Watch;
 using WibuKey;
+using Common.Communication;
 
 namespace Bombardier.PTU
 {
@@ -665,6 +666,10 @@ namespace Bombardier.PTU
             {
                 return;
             }
+
+            // When showing a child form (sys info, watch, self test and event) pause the polling of the target
+            // hardware
+            PauseCommThread();
 
             childForm.MdiParent = this;
             childForm.Show();
@@ -1112,7 +1117,11 @@ namespace Bombardier.PTU
             // Ensure that the application terminates when the Close() method is called. If this flag is asserted, the application automatically restarts when the
             // Close() method exits.
             m_Restart = false;
+
+            // Start Target communication timer and thread
+            InitCommTimer();
         }
+
 
         /// <summary>
         /// Load all workset collections associated with the specified project identifier from disk. The filename of the file containing the workset collection is 

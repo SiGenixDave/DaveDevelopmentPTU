@@ -283,6 +283,11 @@ namespace Common
         void BlinkUpdateIcon();
 
         /// <summary>
+        /// Called when watch, event or self test "Escape" key clicked and MainWindow will be executing.
+        /// </summary>
+        void ResumePollingTargetHardware();
+
+        /// <summary>
         /// Show that the security clearance has been updated by modifying the: (a) Login/Logout text associated with the menu and button; (b) status line text 
         /// and (c) menu options to reflect the new clearance level.
         /// </summary>
@@ -316,7 +321,7 @@ namespace Common
         DialogResult ShowDialog(FormPTUDialog dialogForm);
 
         /// <summary>
-        /// Configures the PTU appplication using the specified data dictionary. (1) Updates the <c>Parameter</c> class; (2) Updates the <c>WatchVariableTable</c> class; 
+        /// Configures the PTU application using the specified data dictionary. (1) Updates the <c>Parameter</c> class; (2) Updates the <c>WatchVariableTable</c> class; 
         /// (3) Creates the application data sub-directories, if they do not exist; (4) Updates the main menu options to reflect the current project; (5) Loads the
         /// default workset associated with the specified data dictionary, if it exists; (6) Updates the form title and (7) Updates the file header information.
         /// </summary>
@@ -388,7 +393,7 @@ namespace Common
         /// <summary>
         /// Gets or sets the communication interface that is to be used to communicate with the target.
         /// </summary>
-        ICommunicationParent CommunicationInterface { get;}
+        ICommunicationParent CommunicationInterface { get; set; }
 
         /// <summary>
         /// Gets or sets the cursor associated with the main window.

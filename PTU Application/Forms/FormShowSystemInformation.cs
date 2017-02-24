@@ -287,6 +287,7 @@ namespace Bombardier.PTU.Forms
                 CommunicationInterface.CloseCommunication(CommunicationInterface.CommunicationSetting.Protocol);
                 // This resets the main screen so that the user has to reconnect to target hardware
                 MainWindow.SetMode(Mode.Configuration);
+                MainWindow.CommunicationInterface = null;
                 return;
             }
 
@@ -331,7 +332,7 @@ namespace Bombardier.PTU.Forms
                 CommunicationInterface.CloseCommunication(CommunicationInterface.CommunicationSetting.Protocol);
                 // This resets the main screen so that the user has to reconnect to target hardware
                 MainWindow.SetMode(Mode.Configuration);
-
+                MainWindow.CommunicationInterface = null;
             }
 
             MainWindow.BlinkUpdateIcon();
@@ -355,6 +356,7 @@ namespace Bombardier.PTU.Forms
             }
 
             MainWindow.WriteStatusMessage(string.Empty);
+            MainWindow.ResumePollingTargetHardware();
             Close();
         }
         #endregion - [Buttons] -
