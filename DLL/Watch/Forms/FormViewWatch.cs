@@ -351,7 +351,12 @@
  *                                  1.  When communication is lost to the target hardware, disable all controls
  *                                      except the "Home" button. This includes the ability to select the Workset and
  *                                      the Watch Variables.
- *                                     
+ *                                      
+ *  02/25/17    1.17.3  D.Smail     Modifications
+ *                                  1.  When communication is lost to the target hardware, inform the Main Window of 
+ *                                      this event by making the Main Window's Communication Interface = null.
+ *                                  2.  Upon exiting the Watch Form, inform the Main Window to resume polling the 
+ *                                      target hardware.                                     
  */
 #endregion - [1.17] -
 #endregion --- Revision History ---

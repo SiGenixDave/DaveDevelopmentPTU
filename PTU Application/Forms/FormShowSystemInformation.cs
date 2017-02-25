@@ -97,7 +97,12 @@
  *  02/16/17    1.13.2   D.Smail        Modifications
  *                                      1.  When communications loss occurs, instead of displaying pop-up MessageBox, indicate loss of 
  *                                          communications in the status bar.
- *    
+ *                                          
+ *  02/25/17    1.13.3   D.Smail        Modifications
+ *                                      1.  When communication is lost to the target hardware, inform the Main Window of 
+ *                                          this event by making the Main Window's Communication Interface = null.
+ *                                      2.  Upon exiting the Sys Info Form, inform the Main Window to resume polling the 
+ *                                          target hardware.
  *                                          
  */
 #endregion --- Revision History ---

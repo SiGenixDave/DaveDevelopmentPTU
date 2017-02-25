@@ -244,4 +244,7 @@
   <data name="MBTTargetHwAbortSelfTest" xml:space="preserve">
     <value>Target hardware autonomously aborted self test.</value>
   </data>
+  <data name="EMSelfTestAbortByTarget" xml:space="preserve">
+    <value>Target Hardware autonomously aborted self test</value>
+  </data>
 </root>

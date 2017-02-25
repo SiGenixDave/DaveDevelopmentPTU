@@ -149,6 +149,15 @@ namespace Bombardier.PTU.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Successfully Connected to target hardware.
+        /// </summary>
+        internal static string ConnectedToTarget {
+            get {
+                return ResourceManager.GetString("ConnectedToTarget", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap DataStream {
@@ -192,6 +201,15 @@ namespace Bombardier.PTU.Properties {
         internal static string EMCommunicationsLoss {
             get {
                 return ResourceManager.GetString("EMCommunicationsLoss", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Loss Of Communications.
+        /// </summary>
+        internal static string EMLossOfComm {
+            get {
+                return ResourceManager.GetString("EMLossOfComm", resourceCulture);
             }
         }
         
@@ -1627,6 +1645,15 @@ namespace Bombardier.PTU.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Polling for Target Hardware.
+        /// </summary>
+        internal static string PollingForTargets {
+            get {
+                return ResourceManager.GetString("PollingForTargets", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Portable Test Equipment (PTE).
         /// </summary>
         internal static string ProductNamePTE {
@@ -1679,6 +1706,33 @@ namespace Bombardier.PTU.Properties {
             get {
                 object obj = ResourceManager.GetObject("SelfTest", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Disconnected from Target Hardware.
+        /// </summary>
+        internal static string TargetHwDisconnected {
+            get {
+                return ResourceManager.GetString("TargetHwDisconnected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Connected to Target Simulation.
+        /// </summary>
+        internal static string TargetSimConnected {
+            get {
+                return ResourceManager.GetString("TargetSimConnected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Disconnected from Target Simulation.
+        /// </summary>
+        internal static string TargetSimDisconnected {
+            get {
+                return ResourceManager.GetString("TargetSimDisconnected", resourceCulture);
             }
         }
         

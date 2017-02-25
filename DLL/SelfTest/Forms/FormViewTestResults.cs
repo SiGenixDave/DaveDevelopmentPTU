@@ -193,16 +193,21 @@
  *                                          is detected. Instead of MessageBox pop-up, the software now displays a loss of comm message and disables 
  *                                          all buttons except "Home".
  *                                          
- *  02/17/2017  1.15.2  D.Smail         Modifications
+ *  02/17/2017  1.15.3  D.Smail         Modifications
  *                                      1.  When communication is lost to the target hardware, disable all controls
  *                                          except the "Home" button. This includes the ability to select self test lists
  *                                          as well "de-blueing" previously selected buttons (Enum and Execute).
  *                                          
- *  02/17/2017  1.15.2  D.Smail         Modifications
+ *  02/17/2017  1.15.4  D.Smail         Modifications
  *                                      1.  When communication is lost to the target hardware or the target hardware exits
  *                                          self test on its own, disable the self test tab control so that the user can't
  *                                          select any test. 
  * 
+ *  02/25/17    1.15.5  D.Smail         Modifications
+ *                                      1.  When communication is lost to the target hardware, inform the Main Window of 
+ *                                          this event by making the Main Window's Communication Interface = null.
+ *                                      2.  Upon exiting the Self Test Form, inform the Main Window to resume polling the 
+ *                                          target hardware.
  */
 #endregion - [1.15] -
 
@@ -1668,8 +1673,7 @@ namespace SelfTest.Forms
             if (!ThreadCommWatchdog.InSelfTest)
             {
                 // Disable the display until the fault has been cleared.
-                // TODO - Add Resource
-                MainWindow.WriteStatusMessage("Target Hardware autonomously aborted self test", Color.Red, Color.Black);
+                MainWindow.WriteStatusMessage(Resources.EMSelfTestAbortByTarget, Color.Red, Color.Black);
 
                 SetPauseAndWait(CommonConstants.TimeoutMsPauseFeedback);
                 StopPolling(); 

@@ -6,7 +6,7 @@
  *  The reproduction, distribution, utilization or the communication of this document, or any part thereof, without express authorization is strictly prohibited.
  *  Offenders will be held liable for the payment of damages.
  *
- *  (C) 2010    Bombardier Inc. or its subsidiaries. All rights reserved.
+ *  (C) 2017    Bombardier Inc. or its subsidiaries. All rights reserved.
  *
  *  Solution:   Portable Test Unit
  *
@@ -18,12 +18,21 @@
  *  ----------------
  */
 
+#region - [1.0] -
+/*
+ *  Date        Version Author          Comments
+ *  02/25/17    1.0     D.Smail         1.  Created to support cycling "pinging" of hardware target on MainForm.
+ * 
+ */
+#endregion - [1.0] -
+
 #endregion --- Revision History ---
 
 using System;
 using System.Drawing;
 using System.Threading;
 using VcuComm;
+using Bombardier.PTU.Properties;
 
 namespace Bombardier.PTU
 {
@@ -55,12 +64,12 @@ namespace Bombardier.PTU
         #endregion - [Watchdog] -
 
         /// <summary>
-        /// TODO
+        /// Windows timer used to verify target hardware is responding with a valid response when connected 
         /// </summary>
         private System.Windows.Forms.Timer m_CommTimer = new System.Windows.Forms.Timer();
 
         /// <summary>
-        /// TODO
+        /// Background thread used to communicate with target hardware and detect any issues with the communication 
         /// </summary>
         private ThreadCommTarget m_ThreadCommTarget;
 
@@ -70,7 +79,7 @@ namespace Bombardier.PTU
         private int WatchdogTripCountdown = 4;
 
         /// <summary>
-        /// Gets or sets the reference to the class responsible for polling the target hardware and recording the watch values.
+        /// Gets or sets the reference to the class responsible for polling the target hardware.
         /// </summary>
         private ThreadCommTarget ThreadCommTarget
         {
@@ -78,43 +87,57 @@ namespace Bombardier.PTU
             set { m_ThreadCommTarget = value; }
         }
 
-
+        /// <summary>
+        /// Invoked at instantiation to start the windows UI timer and the background thread that
+        /// will "ping" the target hardware when connected. The thread will be "paused" when no target
+        /// hardware is connected or communication is lost. Unlike the other comm threads in the watch,
+        /// self test, and/or event windows, this background is not destroyed until the application
+        /// closes
+        /// </summary>
         private void InitCommTimer()
         {
-
+            // Create the thread and immediately pause it
             ThreadCommTarget = new ThreadCommTarget(this);
             ThreadCommTarget.Start();
             PauseCommThread();
 
-            //TODO
+            // set the interval, event handler when the windows timer expires and start the timer
             m_CommTimer.Interval = 1000;
             m_CommTimer.Tick += new EventHandler(m_CommTimer_Tick);
             m_CommTimer.Start();
-
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private void PauseCommThread()
         {
+            // Request the comm thread to pause and then wait for feedback from it that it is paused
             ThreadCommTarget.Pause = true;
             do
             {
                 Thread.Sleep(50);
             }
             while (!ThreadCommTarget.PauseFeedback);
+            // This flag triggers the state machine to pause the check of the thread communication 
             m_Pause = true;
         }
 
         /// <summary>
-        /// 
+        /// Request the Windows timer to start polling the background thread to determine if there
+        /// is a valid connection with the selected target hardware
         /// </summary>
         public void ResumePollingTargetHardware()
         {
+            // This flag triggers the state machine to resume the check of the thread communication 
             m_Pause = false;
             // Initialize the watchdog trip countdown.
             m_WatchdogTripCountdown = WatchdogTripCountdown;
         }
 
-
+        /// <summary>
+        /// State machine states of the communication status with the target hardware
+        /// </summary>
         private enum CommunicationState
         {
             INIT,
@@ -124,7 +147,12 @@ namespace Bombardier.PTU
 
         private CommunicationState commState = CommunicationState.INIT;
 
-        //TODO
+        /// <summary>
+        /// Invoked periodically to check the state of the communication interface as well as to
+        /// pause and resume polling of the target hardware based on system conditions.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void m_CommTimer_Tick(object sender, EventArgs e)
         {
             // Skip, if the Dispose() method has been called.
@@ -137,10 +165,12 @@ namespace Bombardier.PTU
             {
                 case CommunicationState.INIT:
                 default:
-                    // CommDevice checked because it remains null
+                    // CommDevice is non-null when connected to any target (both actual and simulated)
                     if (m_CommunicationInterface != null)
                     {
-                        // "CommDevice" checked because it remains null if a Simulated Target (F3) connected
+                        // "CommDevice" checked because it remains null if a Simulated Target (F3) connected but is 
+                        // non-null if connected to a real hardware target. Do not want to poll if connected to a 
+                        // simulated target
                         if (m_CommunicationInterface.CommDevice != null)
                         {
                             commState = CommunicationState.POLL;
@@ -151,7 +181,7 @@ namespace Bombardier.PTU
                     break;
 
                 case CommunicationState.POLL:
-                    // Handle case where user disconnects by clicking F2 
+                    // Handle case where user disconnects by clicking F2 after a connection to a hardware target has been made
                     if (m_CommunicationInterface == null)
                     {
                         ThreadCommTarget.Pause = true;
@@ -159,28 +189,35 @@ namespace Bombardier.PTU
                     }
                     else
                     {
-                        // Check if user moved to new form (sys info, watch, events or self test)
+                        // Check if user moved to new form (sys info, watch, events or self test). "m_Pause" will
+                        // be made true if thats the case
                         if (m_Pause)
                         {
                             commState = CommunicationState.PAUSE;
                         }
                         else
                         {
+                            // will return INIT or POLL based on the state of the hardware target (connected returns POLL,
+                            // disconnected returns INIT)
                             commState = PollTarget();
                         }
                     }
                     break;
 
                 case CommunicationState.PAUSE:
+                    // Becomes false when returning from a child form
                     if (!m_Pause)
                     {
+                        // Check if comm still OK. Child form will make null if error in comm occurs
                         if (m_CommunicationInterface != null)
                         {
+                            // All is well, resume polling
                             ThreadCommTarget.Pause = false;
                             commState = CommunicationState.POLL;
                         }
                         else
                         {
+                            // Comm was lost on child form, wait for new connection
                             ThreadCommTarget.Pause = true;
                             commState = CommunicationState.INIT;
                         }
@@ -189,6 +226,11 @@ namespace Bombardier.PTU
             }
         }
 
+        /// <summary>
+        /// Code is used to determine if background thread is successfully communicating with target hardware. This 
+        /// code is similar to code used in other forms.
+        /// </summary>
+        /// <returns>INIT if target hardware communication is determined to be down. POLL if all is good</returns>
         private CommunicationState PollTarget()
         {
             // Update the local variables with the appropriate property values of the thread that is responsible for VCU communications.
@@ -226,8 +268,7 @@ namespace Bombardier.PTU
             if (watchdogTrip || communicationFault)
             {
                 // Update status message
-                WriteStatusMessage("Loss Of Communications",
-                                    Color.Red, Color.Black);
+                WriteStatusMessage(Resources.EMLossOfComm, Color.Red, Color.Black);
                 SetMode(Common.Mode.Configuration);
 
                 // In order to avoid the thread getting locked in infinite loop around the m_watchdog

@@ -462,6 +462,20 @@
  *                                      available on the 'Home' screen in 'Configuration', 'Online' and 'Offline' modes.
  */
 #endregion - [1.27] -
+
+
+#region - [1.28] -
+/*
+ * 02/25/2017   1.28   D.Smail      Modifications
+ *                                  1.  Added code to initialize the new windows time and bacjground thread on the Main Window
+ *                                  2.  Added function call so that when any MDI child form is displayed, the background
+ *                                      communications thread is paused (temporaily pause communications check with
+ *                                      target hardware and hand that responsibility off to the child form
+ *
+ * 
+ */
+#endregion - [1.28] -
+
 #endregion --- Revision History ---
 
 using System;

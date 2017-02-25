@@ -437,6 +437,18 @@
  *                                      to the standard login procedure if the security level desktop parameter is invalid.
  */
 #endregion - [1.23] -
+
+
+#region - [1.24] -
+/*
+ * 02/25/2017   1.24    D.Smail     Modifications
+ *                                  1.  Added code to cleanup windows timer and background communication thread.
+ *                                  2.  Added messages to the status bar when polling, connected, and disconnected from
+ *                                      the target hardware
+ *                                  3.  Added code to pause the background communication thread when displaying the 
+ *                                      System Information dialog.
+ */
+#endregion - [1.24] -
 #endregion --- Revision History ---
 
 using System;
@@ -1457,8 +1469,7 @@ namespace Bombardier.PTU
 				try
 				{
 					this.Cursor = Cursors.WaitCursor;
-                    //TODO 
-                    WriteStatusMessage("Disconnected from Target Hardware");
+                    WriteStatusMessage(Resources.TargetHwDisconnected);
 					CommunicationInterface.CloseCommunication(CommunicationInterface.CommunicationSetting.Protocol);
 				}
 				catch (CommunicationException ex)
@@ -1494,8 +1505,7 @@ namespace Bombardier.PTU
                 return;
             }
 
-            //TODO
-            WriteStatusMessage("Polling for Target Hardware");
+            WriteStatusMessage(Resources.PollingForTargets);
 
             // ---------------------------------------------------------
             // Show the form to allow the user to select a valid target.
@@ -1508,7 +1518,6 @@ namespace Bombardier.PTU
             // Skip, if no target logic was selected.
             if (formSelectTarget.TargetSelected != true)
             {
-                //TODO
                 WriteStatusMessage(string.Empty);
                 this.Cursor = Cursors.Default;
                 return;
@@ -1549,8 +1558,7 @@ namespace Bombardier.PTU
 
                 SetMode(Mode.Online);
 
-                //TODO 
-                WriteStatusMessage("Successfully Connected to target hardware");
+                WriteStatusMessage(Resources.ConnectedToTarget);
 
                 // Check whether the most recently downloaded event log was saved to disk and update the LogStatus StatusStrip.
                 LogStatus = EventLogSavedStatus.Unknown;
@@ -1612,8 +1620,7 @@ namespace Bombardier.PTU
                 // Update the LogStatus StatusStrip.
                 LogStatus = EventLogSavedStatus.NotApplicable;
 
-                //TODO
-                WriteStatusMessage("Disconnected from Target Simulation");
+                WriteStatusMessage(Resources.TargetSimDisconnected);
                 #endregion - [Return to Configuration Mode] -
                 return;
             }
@@ -1648,9 +1655,7 @@ namespace Bombardier.PTU
                 m_MenuInterfaceWatch.ViewWatchWindow();
             }
 
-            //TODO 
-            WriteStatusMessage("Connected to Target Simulation");
-
+            WriteStatusMessage(Resources.TargetSimConnected);
 
             #endregion - [Go Offline] -
             this.Cursor = Cursors.Default;

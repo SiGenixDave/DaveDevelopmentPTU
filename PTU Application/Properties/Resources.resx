@@ -706,4 +706,22 @@
   <data name="EMCommunicationsLoss" xml:space="preserve">
     <value>Loss Of Communications</value>
   </data>
+  <data name="ConnectedToTarget" xml:space="preserve">
+    <value>Successfully Connected to target hardware</value>
+  </data>
+  <data name="EMLossOfComm" xml:space="preserve">
+    <value>Loss Of Communications</value>
+  </data>
+  <data name="PollingForTargets" xml:space="preserve">
+    <value>Polling for Target Hardware</value>
+  </data>
+  <data name="TargetHwDisconnected" xml:space="preserve">
+    <value>Disconnected from Target Hardware</value>
+  </data>
+  <data name="TargetSimDisconnected" xml:space="preserve">
+    <value>Disconnected from Target Simulation</value>
+  </data>
+  <data name="TargetSimConnected" xml:space="preserve">
+    <value>Connected to Target Simulation</value>
+  </data>
 </root>

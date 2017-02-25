@@ -524,6 +524,12 @@
  *                                     flags the error with a Message Box an if the polling for new events fails
  *                                     because of a communication error, then the user will be informed with
  *                                     a message in the Message status and all controls will be disabled.
+ *                                     
+ *  02/25/17    2.6.3   D.Smail     Modifications
+ *                                  1.  When communication is lost to the target hardware, inform the Main Window of 
+ *                                      this event by making the Main Window's Communication Interface = null.
+ *                                  2.  Upon exiting the Event Form, inform the Main Window to resume polling the 
+ *                                      target hardware.
  * 
  */
 #endregion - [2.6] -

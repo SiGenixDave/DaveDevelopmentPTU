@@ -167,6 +167,22 @@
  *                                      close the application.
  */
 #endregion - [1.15] -
+
+#region - [1.16] -
+/*
+ * 
+ *  02/25/2017  1.16    D.Smail     Modifications
+ *                                  1.  Added interface method ResumePollingTargetHardware() so that child MDI
+ *                                      can inform Main Window to resume target hardware polling when child exits.
+ *                                  2.  Added set mutator to CommunicationInterface property so that child MDI
+ *                                      can inform Main Window that communication has been lost with the hardware 
+ *                                      target
+ * 
+ * 
+ */
+#endregion - [1.16] -
+
+
 #endregion --- Revision History ---
 
 using System;

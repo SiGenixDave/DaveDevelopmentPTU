@@ -99,6 +99,15 @@ namespace SelfTest.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Target Hardware autonomously aborted self test.
+        /// </summary>
+        internal static string EMSelfTestAbortByTarget {
+            get {
+                return ResourceManager.GetString("EMSelfTestAbortByTarget", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cannot enter Self Test. An exception was thrown while trying to determine the reason why Self Test cound not be entered..
         /// </summary>
         internal static string EMSelfTestEnterExceptionThrown {
