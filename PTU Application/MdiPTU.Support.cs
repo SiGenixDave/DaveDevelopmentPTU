@@ -466,11 +466,19 @@
 
 #region - [1.28] -
 /*
- * 02/25/2017   1.28   D.Smail      Modifications
- *                                  1.  Added code to initialize the new windows time and bacjground thread on the Main Window
- *                                  2.  Added function call so that when any MDI child form is displayed, the background
- *                                      communications thread is paused (temporaily pause communications check with
- *                                      target hardware and hand that responsibility off to the child form
+ * 02/25/2017   1.28.1   D.Smail        Modifications
+ *                                      1.  Added code to initialize the new windows time and bacjground thread on the Main Window
+ *                                      2.  Added function call so that when any MDI child form is displayed, the background
+ *                                          communications thread is paused (temporaily pause communications check with
+ *                                          target hardware and hand that responsibility off to the child form
+ *                                      
+ * 
+ * 02/27/2017   1.28.2   D.Smail        Modifications
+ *                                      1.  Removed PauseCommThread() and placed in each individual button click because there so much 
+ *                                          CPU resources dedicated to creating/displaying the child form that the CommThread
+ *                                          was "colliding" with the child form's comm thread and thus causing communication
+ *                                          losses. The pausing of the Main Form comm thread couldn't occur prior to the creation
+ *                                          of the child form comm thread in all instances.
  *
  * 
  */
@@ -680,10 +688,6 @@ namespace Bombardier.PTU
             {
                 return;
             }
-
-            // When showing a child form (sys info, watch, self test and event) pause the polling of the target
-            // hardware
-            PauseCommThread();
 
             childForm.MdiParent = this;
             childForm.Show();

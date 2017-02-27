@@ -453,6 +453,11 @@
  *                                     when Communication Loss occurred when selecting a target that was placed in 
  *                                     the possible hardware target list (i.e. cable pulled after select list populated)
  *                                     A Windows Exception was thrown prior to making this change
+ *                                  2. Added PauseCommThread() to each individual button click because there so much 
+ *                                     CPU resources dedicated to creating/displaying the child form that the CommThread
+ *                                     was "colliding" with the child form's comm thread and thus causing communication
+ *                                     losses. The pausing of the Main Form comm thread couldn't occur prior to the creation
+ *                                     of the child form comm thread in all instances.
  */
 #endregion - [1.24] -
 #endregion --- Revision History ---
@@ -1210,6 +1215,9 @@ namespace Bombardier.PTU
         /// <param name="e">Parameter passed from the object that raised the event.</param>
         private void m_MenuItemWatchViewWatchWindow_Click(object sender, EventArgs e)
         {
+            // When showing a child form (sys info, watch, self test and event) pause the polling of the target
+            // hardware
+            PauseCommThread();
             m_MenuInterfaceWatch.ViewWatchWindow();
         }
 
@@ -1233,6 +1241,9 @@ namespace Bombardier.PTU
         /// <param name="e">Parameter passed from the object that raised the event.</param>
         private void m_MenuItemDiagnosticsSelfTests_Click(object sender, EventArgs e)
         {
+            // When showing a child form (sys info, watch, self test and event) pause the polling of the target
+            // hardware
+            PauseCommThread();
             m_MenuInterfaceSelfTest.ConfigureSelfTests();
         }
 
@@ -1243,6 +1254,9 @@ namespace Bombardier.PTU
         /// <param name="e">Parameter passed from the object that raised the event.</param>
         private void m_MenuItemDiagnosticsEventLog_Click(object sender, EventArgs e)
         {
+            // When showing a child form (sys info, watch, self test and event) pause the polling of the target
+            // hardware
+            PauseCommThread();
             m_MenuInterfaceEvent.ViewEventLog();
         }
 
