@@ -441,12 +441,18 @@
 
 #region - [1.24] -
 /*
- * 02/25/2017   1.24    D.Smail     Modifications
+ * 02/25/2017   1.24.1  D.Smail     Modifications
  *                                  1.  Added code to cleanup windows timer and background communication thread.
  *                                  2.  Added messages to the status bar when polling, connected, and disconnected from
  *                                      the target hardware
  *                                  3.  Added code to pause the background communication thread when displaying the 
  *                                      System Information dialog.
+ *                                      
+ * 02/27/2017   1.24.2  D.Smail     Modifications
+ *                                  1. Made the Exception handler generic in m_TSBOnline_Click() to handle the case 
+ *                                     when Communication Loss occurred when selecting a target that was placed in 
+ *                                     the possible hardware target list (i.e. cable pulled after select list populated)
+ *                                     A Windows Exception was thrown prior to making this change
  */
 #endregion - [1.24] -
 #endregion --- Revision History ---
@@ -1541,12 +1547,13 @@ namespace Bombardier.PTU
                     // Initialize the serial communications port associated with the selected target.
                     CommunicationInterface.InitCommunication(CommunicationInterface.CommunicationSetting);
                 }
-                catch (InvalidOperationException)
+                catch (Exception)
                 {
                     // An error occurred trying to initialize the communication port, do not enter online mode.
                     CommunicationInterface = null;
                     this.Cursor = Cursors.Default;
                     MessageBox.Show(Resources.MBTPortInitializationFailed, Resources.MBCaptionError, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    WriteStatusMessage(string.Empty);
                     return;
                 }
 
