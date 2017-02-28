@@ -714,7 +714,7 @@ namespace Bombardier.PTU.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [Disconnect the Vehicle Control Unit].
+        ///   Looks up a localized string similar to Disconnect to the embedded target hardware controller - [ F2 ].
         /// </summary>
         internal static string FunctionKeyToolTipTextDisconnectLogic {
             get {
@@ -723,7 +723,7 @@ namespace Bombardier.PTU.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [Display Screens without Connecting to the Vehicle Control Unit].
+        ///   Looks up a localized string similar to Display Screens without Connecting to the embedded target hardware controller - [F3].
         /// </summary>
         internal static string FunctionKeyToolTipTextOffline {
             get {
@@ -732,7 +732,7 @@ namespace Bombardier.PTU.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [Connect to the Vehicle Control Unit].
+        ///   Looks up a localized string similar to Connect to the embedded target hardware controller - [ F2 ].
         /// </summary>
         internal static string FunctionKeyToolTipTextOnline {
             get {
@@ -741,7 +741,7 @@ namespace Bombardier.PTU.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [Connect to the Vehicle Control Unit].
+        ///   Looks up a localized string similar to Connect to the embedded target hardware controller - [ F2 ].
         /// </summary>
         internal static string FunctionKeyToolTipTextSelectLogic {
             get {
@@ -750,7 +750,7 @@ namespace Bombardier.PTU.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [Exit the Vehicle Control Unit Simulation].
+        ///   Looks up a localized string similar to Exit the target hardware simulation – [ F3 ].
         /// </summary>
         internal static string FunctionKeyToolTipTextSimulationExit {
             get {
@@ -759,7 +759,7 @@ namespace Bombardier.PTU.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [Start the Vehicle Control Unit Simulation].
+        ///   Looks up a localized string similar to Start the target hardware simulation – [ F3 ].
         /// </summary>
         internal static string FunctionKeyToolTipTextSimulationStart {
             get {
@@ -774,6 +774,78 @@ namespace Bombardier.PTU.Properties {
             get {
                 object obj = ResourceManager.GetObject("Help", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Erase all event logs &amp; reset all event triggers to default state.
+        /// </summary>
+        internal static string HomeBtn_ClearEventLog_ToolTip {
+            get {
+                return ResourceManager.GetString("HomeBtn_ClearEventLog_ToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Event/Fault Log Information.
+        /// </summary>
+        internal static string HomeBtn_EventLog_ToolTip {
+            get {
+                return ResourceManager.GetString("HomeBtn_EventLog_ToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Close application.
+        /// </summary>
+        internal static string HomeBtn_Exit_ToolTip {
+            get {
+                return ResourceManager.GetString("HomeBtn_Exit_ToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Software User Manual.
+        /// </summary>
+        internal static string HomeBtn_Help_ToolTip {
+            get {
+                return ResourceManager.GetString("HomeBtn_Help_ToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Configure all user-level passwords.
+        /// </summary>
+        internal static string HomeBtn_PwdManager_ToolTip {
+            get {
+                return ResourceManager.GetString("HomeBtn_PwdManager_ToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Access the Diagnostic Tests.
+        /// </summary>
+        internal static string HomeBtn_SelfTest_ToolTip {
+            get {
+                return ResourceManager.GetString("HomeBtn_SelfTest_ToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Target hardware configuration.
+        /// </summary>
+        internal static string HomeBtn_SystemInformation_ToolTip {
+            get {
+                return ResourceManager.GetString("HomeBtn_SystemInformation_ToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Live Data Monitoring (Watch) Window.
+        /// </summary>
+        internal static string HomeBtn_Watch_ToolTip {
+            get {
+                return ResourceManager.GetString("HomeBtn_Watch_ToolTip", resourceCulture);
             }
         }
         
@@ -872,11 +944,29 @@ namespace Bombardier.PTU.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Release Notes document.
+        /// </summary>
+        internal static string LabelReleaseNotes {
+            get {
+                return ResourceManager.GetString("LabelReleaseNotes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to www.bombardier.com.
         /// </summary>
         internal static string LabelWebAddress {
             get {
                 return ResourceManager.GetString("LabelWebAddress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Link to official Bombardier website.
+        /// </summary>
+        internal static string LabelWebAddressToolTip {
+            get {
+                return ResourceManager.GetString("LabelWebAddressToolTip", resourceCulture);
             }
         }
         
@@ -1600,6 +1690,42 @@ namespace Bombardier.PTU.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Close window without applying any changes.
+        /// </summary>
+        internal static string OptionsWindow_BtnCancel_TooTip {
+            get {
+                return ResourceManager.GetString("OptionsWindow_BtnCancel_TooTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Apply default browser.
+        /// </summary>
+        internal static string OptionsWindow_BtnDefaultApp_TooTip {
+            get {
+                return ResourceManager.GetString("OptionsWindow_BtnDefaultApp_TooTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Apply default font.
+        /// </summary>
+        internal static string OptionsWindow_BtnDefaultFont_TooTip {
+            get {
+                return ResourceManager.GetString("OptionsWindow_BtnDefaultFont_TooTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Apply changes and close window.
+        /// </summary>
+        internal static string OptionsWindow_BtnOK_TooTip {
+            get {
+                return ResourceManager.GetString("OptionsWindow_BtnOK_TooTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to C:\Program Files\Internet Explorer\iexplore.exe.
         /// </summary>
         internal static string PathDefaultBrowser {
@@ -1719,7 +1845,7 @@ namespace Bombardier.PTU.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Connected to Target Simulation.
+        ///   Looks up a localized string similar to Close window.
         /// </summary>
         internal static string TargetSimConnected {
             get {

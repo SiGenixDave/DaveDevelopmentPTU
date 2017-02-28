@@ -1345,7 +1345,9 @@ namespace Bombardier.PTU
         /// <param name="e">Parameter passed from the object that raised the event.</param>
         private void m_MenuItemConfigureChartRecorder_Click(object sender, EventArgs e)
         {
+            PauseCommThread();
             m_MenuInterfaceWatch.ConfigureChartRecorder();
+            ResumePollingTargetHardware();
         }
 
         /// <summary>
@@ -1355,7 +1357,9 @@ namespace Bombardier.PTU
         /// <param name="e">Parameter passed from the object that raised the event.</param>
         private void m_MenuItemConfigureDataStream_Click(object sender, EventArgs e)
         {
+            PauseCommThread();
             m_MenuInterfaceEvent.ConfigureDataStream();
+            ResumePollingTargetHardware();
         }
 
         /// <summary>
@@ -1365,7 +1369,9 @@ namespace Bombardier.PTU
         /// <param name="e">Parameter passed from the object that raised the event.</param>
         private void m_MenuItemConfigureWatchWindow_Click(object sender, EventArgs e)
         {
+            PauseCommThread();
             m_MenuInterfaceWatch.ConfigureWatchWindow();
+            ResumePollingTargetHardware();
         }
         #endregion - [CONFIGURE] -
 

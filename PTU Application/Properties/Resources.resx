@@ -479,22 +479,22 @@
     <value>F2-Online</value>
   </data>
   <data name="FunctionKeyToolTipTextDisconnectLogic" xml:space="preserve">
-    <value>[Disconnect the Vehicle Control Unit]</value>
+    <value>Disconnect to the embedded target hardware controller - [ F2 ]</value>
   </data>
   <data name="FunctionKeyToolTipTextOffline" xml:space="preserve">
-    <value>[Display Screens without Connecting to the Vehicle Control Unit]</value>
+    <value>Display Screens without Connecting to the embedded target hardware controller - [F3]</value>
   </data>
   <data name="FunctionKeyToolTipTextOnline" xml:space="preserve">
-    <value>[Connect to the Vehicle Control Unit]</value>
+    <value>Connect to the embedded target hardware controller - [ F2 ]</value>
   </data>
   <data name="FunctionKeyToolTipTextSelectLogic" xml:space="preserve">
-    <value>[Connect to the Vehicle Control Unit]</value>
+    <value>Connect to the embedded target hardware controller - [ F2 ]</value>
   </data>
   <data name="FunctionKeyToolTipTextSimulationExit" xml:space="preserve">
-    <value>[Exit the Vehicle Control Unit Simulation]</value>
+    <value>Exit the target hardware simulation – [ F3 ]</value>
   </data>
   <data name="FunctionKeyToolTipTextSimulationStart" xml:space="preserve">
-    <value>[Start the Vehicle Control Unit Simulation]</value>
+    <value>Start the target hardware simulation – [ F3 ]</value>
   </data>
   <data name="MBTConfigVCUDownloadStart" xml:space="preserve">
     <value>In order to update the PTU configuration: {0}1. Please disconnect the RS-232 connection and move the PTU up to the cab area. {1}2. Using a M12 to RS-485 Ethernet cable, connect the PTU laptop port (RJ45) to the J4 port (M12) located in the ceiling cabinet directly above the doorway entrance to the cab and locker area. The J4 Ethernet port is located directly to the left of the HV Box RS-232 serial port in this cabinet.{2}3. Move the mouse to the 'virtual machine' down arrow box at the top of the screen. Click the down arrow box once and select 'removable devices'. Click on 'network adapter' and ensure that the text indicates 'disconnect'. If true, no further action is required.  If it indicates 'connect', then click 'connect' and the network adapter will be enabled.{3}4. Once the connection is established, please click 'OK' to begin updating the PTU configuration. Please note that it can take up to 10 minutes to establish a connection.</value>
@@ -723,5 +723,50 @@
   </data>
   <data name="TargetSimConnected" xml:space="preserve">
     <value>Connected to Target Simulation</value>
+  <data name="AboutWindow_BtnOK_TooTip" xml:space="preserve">
+    <value>Close window</value>
+  </data>
+  <data name="HomeBtn_ClearEventLog_ToolTip" xml:space="preserve">
+    <value>Erase all event logs &amp; reset all event triggers to default state</value>
+  </data>
+  <data name="HomeBtn_EventLog_ToolTip" xml:space="preserve">
+    <value>Event/Fault Log Information</value>
+  </data>
+  <data name="HomeBtn_Exit_ToolTip" xml:space="preserve">
+    <value>Close application</value>
+  </data>
+  <data name="HomeBtn_Help_ToolTip" xml:space="preserve">
+    <value>Software User Manual</value>
+  </data>
+  <data name="HomeBtn_PwdManager_ToolTip" xml:space="preserve">
+    <value>Configure all user-level passwords</value>
+  </data>
+  <data name="HomeBtn_SelfTest_ToolTip" xml:space="preserve">
+    <value>Access the Diagnostic Tests</value>
+  </data>
+  <data name="HomeBtn_SystemInformation_ToolTip" xml:space="preserve">
+    <value>Target hardware configuration</value>
+  </data>
+  <data name="HomeBtn_Watch_ToolTip" xml:space="preserve">
+    <value>Live Data Monitoring (Watch) Window</value>
+  </data>
+  <data name="LabelReleaseNotes" xml:space="preserve">
+    <value>Release Notes document</value>
+  </data>
+  <data name="LabelWebAddressToolTip" xml:space="preserve">
+    <value>Link to official Bombardier website</value>
+  </data>
+  <data name="OptionsWindow_BtnCancel_TooTip" xml:space="preserve">
+    <value>Close window without applying any changes</value>
+  </data>
+  <data name="OptionsWindow_BtnDefaultApp_TooTip" xml:space="preserve">
+    <value>Apply default browser</value>
+  </data>
+  <data name="OptionsWindow_BtnDefaultFont_TooTip" xml:space="preserve">
+    <value>Apply default font</value>
+  </data>
+  <data name="OptionsWindow_BtnOK_TooTip" xml:space="preserve">
+    <value>Apply changes and close window</value>
+  </data>
   </data>
 </root>
